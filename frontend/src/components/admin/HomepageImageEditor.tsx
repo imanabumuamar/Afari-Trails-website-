@@ -8,7 +8,6 @@ import { HOMEPAGE_IMAGE_FIELDS } from "@/types/homepage";
 type HomepageImageEditorProps = {
   field: HomepageImageField;
   image: ContentImage;
-  adminSecret: string;
   onUpdated: (image: ContentImage) => void;
   onStatus: (message: string) => void;
 };
@@ -16,7 +15,6 @@ type HomepageImageEditorProps = {
 export function HomepageImageEditor({
   field,
   image,
-  adminSecret,
   onUpdated,
   onStatus,
 }: HomepageImageEditorProps) {
@@ -26,10 +24,6 @@ export function HomepageImageEditor({
 
   async function handleUpload(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!adminSecret) {
-      onStatus("Authenticate before uploading.");
-      return;
-    }
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -41,14 +35,18 @@ export function HomepageImageEditor({
 
     const res = await fetch("/api/admin/content/homepage/upload", {
       method: "POST",
-      headers: { "x-admin-secret": adminSecret },
       body: formData,
     });
 
     setUploading(false);
 
+    if (res.status === 401) {
+      onStatus("Session expired. Sign in again.");
+      return;
+    }
+
     if (!res.ok) {
-      onStatus(`Upload failed for ${meta.label}. Check your secret.`);
+      onStatus(`Upload failed for ${meta.label}.`);
       return;
     }
 
@@ -105,7 +103,7 @@ export function HomepageImageEditor({
         </div>
         <button
           type="submit"
-          disabled={uploading || !adminSecret}
+          disabled={uploading}
           className="bg-charcoal px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
         >
           {uploading ? "Uploading…" : "Save image"}

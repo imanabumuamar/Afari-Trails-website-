@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AdminAuthFields } from "@/components/admin/AdminAuthFields";
 import { HomepageImageEditor } from "@/components/admin/HomepageImageEditor";
 import type { HomepageContent, HomepageImageField } from "@/types/homepage";
 
@@ -13,8 +12,6 @@ const IMAGE_FIELDS: HomepageImageField[] = [
 ];
 
 export default function AdminHomepagePage() {
-  const [secret, setSecret] = useState("");
-  const [savedSecret, setSavedSecret] = useState("");
   const [content, setContent] = useState<HomepageContent | null>(null);
   const [status, setStatus] = useState("");
 
@@ -50,19 +47,11 @@ export default function AdminHomepagePage() {
       <div>
         <h2 className="font-serif text-3xl font-light">Homepage images</h2>
         <p className="mt-3 max-w-xl text-sm text-charcoal/65">
-          All homepage photos are stored in{" "}
-          <code className="text-xs">content/homepage.json</code> and{" "}
-          <code className="text-xs">public/images/</code>. Changes appear on the
-          live site after save.
+          Signed in as admin. Uploads use your session automatically. Files are
+          stored in <code className="text-xs">content/homepage.json</code> and{" "}
+          <code className="text-xs">public/images/</code>.
         </p>
       </div>
-
-      <AdminAuthFields
-        secret={secret}
-        onSecretChange={setSecret}
-        onSaveSecret={() => setSavedSecret(secret)}
-        hasSavedSecret={Boolean(savedSecret)}
-      />
 
       {content && (
         <div className="grid gap-8 md:grid-cols-2">
@@ -74,7 +63,6 @@ export default function AdminHomepagePage() {
                 key={field}
                 field={field}
                 image={image}
-                adminSecret={savedSecret}
                 onUpdated={(img) => handleImageUpdated(field, img)}
                 onStatus={setStatus}
               />

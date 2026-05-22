@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { AdminUnauthorizedError, requireAdminSecret } from "@/services/auth/admin";
+import { AdminAuthError, requireAdminSession } from "@/lib/auth/require-admin";
 import { updateHomepageImage } from "@/services/content/homepage";
 import type { HomepageImageField } from "@/types/homepage";
 import { HOMEPAGE_IMAGE_FIELDS } from "@/types/homepage";
@@ -8,9 +8,9 @@ const VALID_FIELDS = new Set(Object.keys(HOMEPAGE_IMAGE_FIELDS));
 
 export async function POST(request: Request) {
   try {
-    requireAdminSecret(request.headers.get("x-admin-secret"));
+    await requireAdminSession();
   } catch (error) {
-    if (error instanceof AdminUnauthorizedError) {
+    if (error instanceof AdminAuthError) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     throw error;

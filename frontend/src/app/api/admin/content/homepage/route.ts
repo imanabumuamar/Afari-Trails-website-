@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { AdminUnauthorizedError, requireAdminSecret } from "@/services/auth/admin";
+import { AdminAuthError, requireAdminSession } from "@/lib/auth/require-admin";
 import { getHomepage, saveHomepage } from "@/services/content/homepage";
 import type { HomepageContent } from "@/types/homepage";
 
@@ -9,9 +9,9 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   try {
-    requireAdminSecret(request.headers.get("x-admin-secret"));
+    await requireAdminSession();
   } catch (error) {
-    if (error instanceof AdminUnauthorizedError) {
+    if (error instanceof AdminAuthError) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     throw error;
