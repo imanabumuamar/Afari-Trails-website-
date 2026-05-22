@@ -1,0 +1,21 @@
+{
+  "featureCards": {
+    "expeditions": {
+      "src": "/images/home-expeditions-featured.png",
+      "alt": "Lush gorge with a bridge spanning the valley and river below"
+    },
+    "ventures": {
+      "src": "/images/home-ventures-featured.png",
+      "alt": "Saddle-billed storks walking through sunlit grassland"
+    },
+    "store": {
+      "src": "/images/home-store-featured.png",
+      "alt": "Afari Trails safari cap with embroidered logo on stone in the savanna"
+    }
+  },
+  "ourEssence": {
+    "src": "/images/home-our-essence.png",
+    "alt": "Waterbuck standing between trees in sunlit African woodland"
+  },
+  "updatedAt": "2026-05-22T00:00:00.000Z"
+}

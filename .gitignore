@@ -1,0 +1,20 @@
+.DS_Store
+
+# Backend (Express)
+backend/node_modules/
+backend/.env
+
+# Frontend (Next.js)
+frontend/node_modules/
+frontend/.pnp
+frontend/.pnp.*
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env*
+frontend/.vercel
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
