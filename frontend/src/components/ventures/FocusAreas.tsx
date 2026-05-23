@@ -1,8 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ROUTES } from "@/config/routes";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { FocusIcon } from "@/components/ventures/FocusIcon";
 import { focusAreas } from "@/lib/data/ventures";
+
+function focusAreaHref(area: (typeof focusAreas)[number]): string {
+  if ("href" in area && typeof area.href === "string") return area.href;
+  return ROUTES.venturesConnect;
+}
 
 export function FocusAreas() {
   return (
@@ -14,7 +20,7 @@ export function FocusAreas() {
           {focusAreas.map((area) => (
             <Link
               key={area.id}
-              href="/contact"
+              href={focusAreaHref(area)}
               className="hover-zoom group relative min-h-[340px] overflow-hidden bg-charcoal/10 sm:min-h-[400px] lg:min-h-[460px]"
             >
               <Image

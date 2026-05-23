@@ -32,6 +32,7 @@ export const focusAreas = [
     image:
       "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=800&q=85",
     icon: "lodge",
+    href: "/ventures/eco-lodge" as const,
   },
   {
     id: "conservation",
@@ -41,6 +42,7 @@ export const focusAreas = [
     image:
       "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=800&q=85",
     icon: "leaf",
+    href: "/ventures/conservation" as const,
   },
   {
     id: "community",
@@ -50,6 +52,7 @@ export const focusAreas = [
     image:
       "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=800&q=85",
     icon: "people",
+    href: "/ventures/community" as const,
   },
   {
     id: "agriculture",
@@ -59,6 +62,7 @@ export const focusAreas = [
     image:
       "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=85",
     icon: "crop",
+    href: "/ventures/agriculture" as const,
   },
   {
     id: "hospitality",
@@ -68,6 +72,52 @@ export const focusAreas = [
     image:
       "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=85",
     icon: "home",
+    href: "/ventures/hospitality" as const,
+  },
+] as const;
+
+export const venturesProjectsSection = {
+  label: "What We're Building",
+  intro:
+    "Active ventures and initiatives across hospitality, conservation, community, and land.",
+} as const;
+
+export const venturesProjects = [
+  {
+    id: "zambezi-lodge",
+    title: "Zambezi Lodge Development",
+    status: "In Development",
+    category: "Hospitality",
+    href: "/ventures/eco-lodge",
+    featured: true,
+  },
+  {
+    id: "conservation-field",
+    title: "Conservation Field Program",
+    status: "Exploring",
+    category: "Conservation",
+    href: "/ventures/conservation",
+  },
+  {
+    id: "artisan-network",
+    title: "Artisan Supply Network",
+    status: "In Development",
+    category: "Community",
+    href: "/ventures/community",
+  },
+  {
+    id: "regenerative-farm",
+    title: "Regenerative Farm Pilot",
+    status: "Planned",
+    category: "Agriculture",
+    href: "/ventures/agriculture",
+  },
+  {
+    id: "wellness-retreat",
+    title: "Wilderness Wellness Retreat",
+    status: "Concept",
+    category: "Hospitality",
+    href: "/ventures/hospitality",
   },
 ] as const;
 
@@ -77,9 +127,10 @@ export const featuredProject = {
   description:
     "An eco-lodge vision along the Zambezi corridor — low-impact hospitality designed for stillness, river views, and deep connection to the valley.",
   status: "In Development",
+  category: "Hospitality · Eco Lodge",
   image:
-    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1600&q=85",
-  href: "/contact",
+    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+  href: "/ventures/eco-lodge",
 } as const;
 
 export const venturesCta = {

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/ui/Logo";
-import { DARK_HERO_PATHS, navLinks } from "@/config/routes";
+import { DARK_HERO_PATHS, navLinks, ROUTES } from "@/config/routes";
 
 function SearchIcon() {
   return (
@@ -53,7 +53,15 @@ export function Header() {
   const isDarkHero = DARK_HERO_PATHS.includes(pathname);
   const isJournal = pathname === "/journal" || pathname.startsWith("/journal/");
   const isArchive = pathname === "/archive";
+  const isExpeditions = pathname.startsWith("/expeditions");
+  const isVentures = pathname.startsWith("/ventures");
   const useSearchAndMenu = isJournal || isArchive;
+
+  const connectHref = isExpeditions
+    ? ROUTES.expeditionsConnect
+    : isVentures
+      ? ROUTES.venturesConnect
+      : ROUTES.contact;
   const useLightChrome = isDarkHero && !scrolled;
 
   useEffect(() => {
@@ -130,7 +138,7 @@ export function Header() {
             </button>
           ) : (
             <Link
-              href="/contact"
+              href={ROUTES.expeditionsConnect}
               className={`hidden text-[10px] font-medium uppercase tracking-[0.2em] transition-colors sm:inline-block ${
                 useLightChrome
                   ? "border border-ivory/50 px-4 py-2 text-ivory/90 hover:border-ivory hover:text-ivory"
@@ -175,11 +183,15 @@ export function Header() {
             ))}
             <li>
               <Link
-                href="/contact"
+                href={connectHref}
                 className="text-xs uppercase tracking-[0.22em] text-gold"
                 onClick={() => setMobileOpen(false)}
               >
-                {isJournal ? "Plan Your Journey" : "Contact"}
+                {isJournal || isExpeditions
+                  ? "Plan Your Journey"
+                  : isVentures
+                    ? "Ventures Connect"
+                    : "Connect"}
               </Link>
             </li>
           </ul>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ROUTES } from "@/config/routes";
 import { venturesCta } from "@/lib/data/ventures";
 
 export function VenturesCTA() {
@@ -27,10 +28,10 @@ export function VenturesCTA() {
             {venturesCta.body}
           </p>
           <Link
-            href="/contact"
+            href={ROUTES.venturesConnect}
             className="mt-8 inline-block border border-ivory/50 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10"
           >
-            Get in Touch →
+            Connect With Us →
           </Link>
         </div>
       </div>

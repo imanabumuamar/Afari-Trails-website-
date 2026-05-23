@@ -1,7 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { collections, type ArchiveGridCategory } from "@/lib/data/archive";
+import Link from "next/link";
+import { CollectionIcon } from "@/components/archive/CollectionIcon";
+import {
+  collections,
+  collectionsSection,
+  type ArchiveGridCategory,
+} from "@/lib/data/archive";
 
 type FeaturedCollectionsProps = {
   onSelect: (id: ArchiveGridCategory) => void;
@@ -9,42 +15,55 @@ type FeaturedCollectionsProps = {
 
 export function FeaturedCollections({ onSelect }: FeaturedCollectionsProps) {
   return (
-    <section id="collections" className="scroll-mt-24 bg-matte-black">
-      {collections.map((col, i) => (
-        <button
-          key={col.id}
-          type="button"
-          onClick={() => {
-            onSelect(col.id);
-            document.getElementById("grid")?.scrollIntoView({ behavior: "smooth" });
-          }}
-          className="hover-zoom group relative block min-h-[55vh] w-full overflow-hidden text-left lg:min-h-[65vh]"
-        >
-          <Image
-            src={col.image}
-            alt={col.title}
-            fill
-            className="object-cover opacity-90 transition-transform duration-[1.4s] group-hover:scale-[1.03]"
-            sizes="100vw"
-            priority={i < 2}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-matte-black/90 via-matte-black/35 to-matte-black/15 transition-opacity group-hover:from-matte-black/95" />
-          <div className="absolute inset-x-0 bottom-0 p-8 md:p-14 lg:p-16">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-sand">
-              Collection {String(i + 1).padStart(2, "0")}
+    <section id="collections" className="scroll-mt-24 bg-matte-black py-16 lg:py-20">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+        <div className="flex flex-col gap-4 border-b border-ivory/10 pb-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-sand">
+              {collectionsSection.label}
             </p>
-            <h2 className="mt-4 font-serif text-4xl font-light text-ivory md:text-5xl lg:text-6xl">
-              {col.title}
-            </h2>
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-ivory/65 md:text-base">
-              {col.description}
-            </p>
-            <span className="mt-8 inline-block text-[10px] font-medium uppercase tracking-[0.22em] text-ivory/80 group-hover:text-sand">
-              View Collection →
-            </span>
+            <p className="mt-3 text-sm text-ivory/55">{collectionsSection.heading}</p>
           </div>
-        </button>
-      ))}
+          <Link
+            href={collectionsSection.viewAllHref}
+            className="shrink-0 text-[10px] font-medium uppercase tracking-[0.22em] text-ivory/50 transition-colors hover:text-sand"
+          >
+            View All Collections →
+          </Link>
+        </div>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          {collections.map((col) => (
+            <button
+              key={col.id}
+              type="button"
+              onClick={() => {
+                onSelect(col.id);
+                document.getElementById("grid")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="hover-zoom group relative min-h-[280px] overflow-hidden text-left lg:min-h-[320px]"
+            >
+              <Image
+                src={col.image}
+                alt={col.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-matte-black/92 via-matte-black/35 to-matte-black/10" />
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <CollectionIcon type={col.icon} />
+                <h2 className="mt-4 font-serif text-xl font-light uppercase tracking-wide text-ivory md:text-2xl">
+                  {col.title}
+                </h2>
+                <p className="mt-2 text-xs leading-relaxed text-ivory/60">
+                  {col.description}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

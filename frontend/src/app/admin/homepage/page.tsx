@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { HomepageHeroEditor } from "@/components/admin/HomepageHeroEditor";
 import { HomepageImageEditor } from "@/components/admin/HomepageImageEditor";
-import type { HomepageContent, HomepageImageField } from "@/types/homepage";
+import type { HomepageContent, HomepageHero, HomepageImageField } from "@/types/homepage";
 
 const IMAGE_FIELDS: HomepageImageField[] = [
   "featureCards.expeditions",
@@ -42,19 +43,29 @@ export default function AdminHomepagePage() {
     });
   }
 
+  function handleHeroChange(hero: HomepageHero) {
+    if (!content) return;
+    setContent({ ...content, hero });
+  }
+
   return (
     <div className="space-y-10">
       <div>
-        <h2 className="font-serif text-3xl font-light">Homepage images</h2>
+        <h2 className="font-serif text-3xl font-light">Homepage content</h2>
         <p className="mt-3 max-w-xl text-sm text-charcoal/65">
-          Signed in as admin. Uploads use your session automatically. Files are
-          stored in <code className="text-xs">content/homepage.json</code> and{" "}
-          <code className="text-xs">public/images/</code>.
+          Edit the hero and section images. Changes save to{" "}
+          <code className="text-xs">content/homepage.json</code> and{" "}
+          <code className="text-xs">public/</code>.
         </p>
       </div>
 
       {content && (
         <div className="grid gap-8 md:grid-cols-2">
+          <HomepageHeroEditor
+            hero={content.hero}
+            onHeroChange={handleHeroChange}
+            onStatus={setStatus}
+          />
           {IMAGE_FIELDS.map((field) => {
             const image = getImage(field);
             if (!image) return null;

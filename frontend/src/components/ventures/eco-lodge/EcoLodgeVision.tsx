@@ -1,0 +1,14 @@
+import { ecoLodgeFutureVision } from "@/lib/data/eco-lodge";
+
+export function EcoLodgeVision() {
+  return (
+    <section className="relative flex min-h-[60vh] items-center justify-center bg-matte-black px-6 py-28 lg:min-h-[70vh]">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--safari-green-deep)_0%,_var(--matte-black)_70%)]" />
+      <blockquote className="relative z-10 max-w-3xl text-center">
+        <p className="font-serif text-3xl font-light leading-[1.35] text-ivory sm:text-4xl md:text-[2.75rem] md:leading-[1.3]">
+          {ecoLodgeFutureVision.quote}
+        </p>
+      </blockquote>
+    </section>
+  );
+}

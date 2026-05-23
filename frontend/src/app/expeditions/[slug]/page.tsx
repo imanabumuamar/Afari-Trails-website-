@@ -46,7 +46,7 @@ export default async function ExpeditionDetailPage({ params }: PageProps) {
             Full itinerary and booking — coming soon.
           </p>
           <Link
-            href="/contact"
+            href="/expeditions/connect"
             className="mt-10 inline-block border border-charcoal/25 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-charcoal transition-colors hover:border-gold hover:text-gold"
           >
             Plan Your Journey →

@@ -1,0 +1,207 @@
+export const communityHero = {
+  label: "Community Empowerment",
+  heading: "Building Growth Through Culture, Collaboration, and Opportunity.",
+  subheading:
+    "Afari Trails believes meaningful experiences should uplift local communities, preserve cultural identity, and create long-term impact rooted in partnership and respect.",
+  exploreCta: "Explore Our Focus",
+  partnerCta: "Partner With Us",
+  image:
+    "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+  imageAlt: "Artisan hands at work in warm natural light",
+} as const;
+
+export const communityPhilosophy = {
+  label: "Our Philosophy",
+  statement:
+    "We believe communities should not exist at the edges of exploration experiences, but at the center of them.",
+  themes: [
+    "Dignity in every partnership",
+    "Local leadership, not outside direction",
+    "Cultural preservation as shared responsibility",
+    "Long-term opportunity over short-term optics",
+    "Storytelling that honors real lives",
+    "Economic growth built on trust",
+  ],
+} as const;
+
+export const communityFocusAreas = {
+  label: "Key Focus Areas",
+  heading: "Where collaboration becomes impact.",
+  items: [
+    {
+      id: "employment",
+      title: "Local Employment",
+      description:
+        "Supporting guides, hospitality teams, creatives, and local expertise across every venture.",
+      image:
+        "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+    },
+    {
+      id: "culture",
+      title: "Cultural Preservation",
+      description:
+        "Protecting stories, traditions, languages, and craftsmanship for generations to come.",
+      image:
+        "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1000&q=85",
+    },
+    {
+      id: "artisan",
+      title: "Artisan Collaborations",
+      description:
+        "Working with local makers and designers to create goods rooted in place and identity.",
+      image:
+        "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=1000&q=85",
+    },
+    {
+      id: "youth",
+      title: "Youth Opportunities",
+      description:
+        "Future mentorship in storytelling, tourism, conservation, and creative education.",
+      image:
+        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1000&q=85",
+    },
+    {
+      id: "women",
+      title: "Women-Led Initiatives",
+      description:
+        "Supporting women entrepreneurs, artisans, and local leadership across our ecosystem.",
+      image:
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1000&q=85",
+    },
+    {
+      id: "growth",
+      title: "Sustainable Economic Growth",
+      description:
+        "Creating enduring value through ethical partnerships — not one-time charity.",
+      image:
+        "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=85",
+    },
+  ],
+} as const;
+
+export const communityStories = {
+  label: "Local Stories",
+  heading: "Voices from the trail.",
+  intro:
+    "The people who shape Afari — guides, artisans, storytellers, and partners whose knowledge grounds every journey.",
+  profiles: [
+    {
+      name: "James Mwamba",
+      role: "River Guide & Storyteller",
+      quote:
+        "Growing up near the river shaped how I understand nature and storytelling — every expedition carries that memory.",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=85",
+    },
+    {
+      name: "Amara Ndlovu",
+      role: "Textile Artisan",
+      quote:
+        "Our patterns hold generations. When travelers learn their meaning, culture travels farther than any object.",
+      image:
+        "https://images.unsplash.com/photo-1573497019940-1c28c88bdeb6?w=800&q=85",
+    },
+    {
+      name: "David Chisenga",
+      role: "Field Photographer",
+      quote:
+        "I document what the land teaches — light, patience, and the quiet moments most people rush past.",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=85",
+    },
+  ],
+} as const;
+
+export const communityCraftsmanship = {
+  label: "African Craftsmanship",
+  heading: "Made by hand. Rooted in place.",
+  body: "Textiles, weaving, natural materials, and traditional techniques — craftsmanship that connects our store, archive, eco lodge vision, and brand identity to the hands and histories behind them.",
+  highlights: [
+    "Handwoven textiles",
+    "Natural dyes & fibers",
+    "Traditional techniques",
+    "Collaborative design",
+  ],
+  images: [
+    {
+      src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=900&q=85",
+      alt: "Textile textures and natural fibers",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=900&q=85",
+      alt: "Artisan at work",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=900&q=85",
+      alt: "Handcrafted objects and materials",
+    },
+  ],
+} as const;
+
+export const communityInitiatives = {
+  label: "Future Initiatives",
+  heading: "Directions we are building toward.",
+  intro:
+    "Conceptual today — foundational tomorrow. Initiatives shaped with community leaders and creative partners.",
+  items: [
+    "Photography Mentorships",
+    "Artisan Collaborations",
+    "Cultural Storytelling Projects",
+    "Local Expedition Training",
+    "Scholarship Programs",
+    "Community Tourism Partnerships",
+  ],
+} as const;
+
+export const communityGallery = [
+  {
+    src: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1000&q=85",
+    alt: "Shared cultural moment",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+    alt: "Hands crafting",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1000&q=85",
+    alt: "Gathering around fire",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+    alt: "Village landscape at golden hour",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=1000&q=85",
+    alt: "Textile textures",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1000&q=85",
+    alt: "Learning outdoors",
+  },
+] as const;
+
+export const communityPartners = {
+  label: "Partnerships & Collaboration",
+  heading: "Relationships built on trust.",
+  body: "Afari Trails seeks long-term relationships rooted in trust, mutual respect, and meaningful collaboration across Africa's communities and creative industries.",
+  placeholders: [
+    "Local artisans",
+    "Guide collectives",
+    "Cultural organizations",
+    "Educators",
+    "Tourism communities",
+    "Creative studios",
+  ],
+} as const;
+
+export const communityCta = {
+  heading: "Grow With the Journey",
+  body: "Whether you lead community programs, create, guide, or share our belief in shared value — we welcome the conversation.",
+  primaryCta: "Partner With Us",
+  secondaryCta: "Explore Ventures",
+  tertiaryCta: "Connect With Afari",
+} as const;
+
+export const communityClosing = {
+  quote: "Strong communities shape meaningful journeys.",
+} as const;

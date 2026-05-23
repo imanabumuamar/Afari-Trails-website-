@@ -18,7 +18,7 @@ export async function PUT(request: Request) {
   }
 
   const body = (await request.json()) as Partial<
-    Pick<HomepageContent, "featureCards" | "ourEssence">
+    Pick<HomepageContent, "hero" | "featureCards" | "ourEssence">
   >;
   const updated = saveHomepage(body);
   return NextResponse.json(updated);

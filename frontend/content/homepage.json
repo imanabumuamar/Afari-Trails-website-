@@ -1,4 +1,21 @@
 {
+  "hero": {
+    "heading": "Every trail changes the person walking it.",
+    "subtext": "Curated expeditions. Meaningful ventures. Timeless safari-inspired living.",
+    "poster": {
+      "src": "https://images.unsplash.com/photo-1587595431973-c026f9778660?w=2400&q=85",
+      "alt": "Safari landscape at golden hour"
+    },
+    "video": "/videos/hero.mp4",
+    "primaryCta": {
+      "label": "Explore Expeditions",
+      "href": "/expeditions"
+    },
+    "secondaryCta": {
+      "label": "Discover Ventures",
+      "href": "/ventures"
+    }
+  },
   "featureCards": {
     "expeditions": {
       "src": "/images/home-expeditions-featured.png",

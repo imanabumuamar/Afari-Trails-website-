@@ -1,11 +1,12 @@
-import { PageShell } from "@/components/ui/PageShell";
+import { ConnectPageView } from "@/components/connect/ConnectPageView";
+import { generalConnectConfig } from "@/lib/data/connect-general";
 
-export default function ContactPage() {
-  return (
-    <PageShell
-      label="Contact"
-      title="Begin the Conversation"
-      description="Inquiries for expeditions, ventures, and collaborations — contact form coming soon."
-    />
-  );
+export const metadata = {
+  title: "Connect With Us",
+  description:
+    "Begin the conversation with Afari Trails — expeditions, partnerships, media, and meaningful collaborations across Africa.",
+};
+
+export default function ConnectPage() {
+  return <ConnectPageView config={generalConnectConfig} />;
 }

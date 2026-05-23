@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { ROUTES } from "@/config/routes";
 import { venturesHero } from "@/lib/data/ventures";
 
 export function VenturesHero() {
@@ -27,7 +28,7 @@ export function VenturesHero() {
           {venturesHero.intro}
         </p>
         <div className="mt-10">
-          <Button href="/contact" variant="outline-light" showArrow>
+          <Button href={ROUTES.venturesPartner} variant="outline-light" showArrow>
             Partner With Us
           </Button>
         </div>

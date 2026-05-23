@@ -1,0 +1,177 @@
+export const ecoLodgeHero = {
+  label: "Afari Eco Lodge",
+  heading: "A Retreat Rooted in Wilderness, Stillness, and Story.",
+  subheading:
+    "A future hospitality concept inspired by nature, culture, and immersive safari living.",
+  exploreCta: "Explore the Vision",
+  partnerCta: "Partner With Us",
+  image:
+    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=2400&q=85",
+  imageAlt: "Luxury safari lodge deck overlooking wilderness at golden hour",
+} as const;
+
+export const ecoLodgeConcept = {
+  label: "The Concept",
+  statement:
+    "Designed as a sanctuary between landscape, architecture, and human connection.",
+  body: "Afari Eco Lodge is envisioned as a place of slow luxury — where eco-conscious hospitality meets immersive wilderness experience. Built from local materials and shaped by African design, it invites guests to travel with intention: fewer distractions, deeper presence, and a rhythm set by the land. This is not a resort. It is a future chapter in how Afari Trails imagines exploration, rest, and return to what matters.",
+} as const;
+
+export const ecoLodgeExperiences = {
+  label: "The Experience",
+  heading: "What you feel here.",
+  intro: "Not amenities — atmosphere. Moments designed to shift pace and perspective.",
+  items: [
+    {
+      id: "sunrise",
+      title: "Sunrise Game Drives",
+      image:
+        "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=900&q=85",
+    },
+    {
+      id: "dining",
+      title: "Riverfront Dining",
+      image:
+        "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=900&q=85",
+    },
+    {
+      id: "stars",
+      title: "Stargazing Nights",
+      image:
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=85",
+    },
+    {
+      id: "campfire",
+      title: "Campfire Storytelling",
+      image:
+        "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=900&q=85",
+    },
+    {
+      id: "wellness",
+      title: "Wellness & Stillness",
+      image:
+        "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&q=85",
+    },
+    {
+      id: "culture",
+      title: "Cultural Encounters",
+      image:
+        "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=900&q=85",
+    },
+    {
+      id: "slow",
+      title: "Slow Safari Living",
+      image:
+        "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=900&q=85",
+    },
+  ],
+} as const;
+
+export const ecoLodgeDesign = {
+  label: "Architecture & Design",
+  heading: "Built to belong to the landscape.",
+  body: "Natural materials, earthy textures, and open-air architecture allow the lodge to dissolve into its surroundings. Sustainable construction, handcrafted details, and lantern-lit pathways create a sense of arrival — quiet, warm, and deeply considered.",
+  moodboard: [
+    {
+      src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=800&q=85",
+      alt: "Natural wood and linen interior textures",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=85",
+      alt: "Open architecture blending with nature",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=85",
+      alt: "Earthy stone and warm interior light",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=85",
+      alt: "Handcrafted lodge details",
+    },
+  ],
+} as const;
+
+export const ecoLodgeSustainability = {
+  label: "Sustainability",
+  heading: "Stewardship woven into every detail.",
+  intro: "Elegant responsibility — never preachy, always intentional.",
+  pillars: [
+    {
+      title: "Solar Energy",
+      description: "Renewable power designed for low-impact wilderness operations.",
+    },
+    {
+      title: "Water Preservation",
+      description: "Thoughtful systems that respect river ecosystems and scarce resources.",
+    },
+    {
+      title: "Local Sourcing",
+      description: "Materials and craftsmanship drawn from surrounding communities.",
+    },
+    {
+      title: "Conservation Partnerships",
+      description: "Aligned with projects that protect wildlife and wild places.",
+    },
+    {
+      title: "Community Collaboration",
+      description: "Employment, training, and cultural exchange built into the model.",
+    },
+    {
+      title: "Low-Impact Architecture",
+      description: "Structures that touch the land lightly and endure with grace.",
+    },
+  ],
+} as const;
+
+export const ecoLodgeGallery = [
+  {
+    src: "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1000&q=85",
+    alt: "Wildlife in golden savanna light",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=1000&q=85",
+    alt: "Warm lodge interior",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+    alt: "River at dusk",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=85",
+    alt: "Sunset over African horizon",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=85",
+    alt: "Architecture in wilderness",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1000&q=85",
+    alt: "Campfire atmosphere",
+  },
+] as const;
+
+export const ecoLodgeFutureVision = {
+  quote:
+    "Afari Eco Lodge is envisioned as part of a wider ecosystem of exploration, conservation, and immersive African hospitality experiences.",
+} as const;
+
+export const ecoLodgeLocation = {
+  label: "Location",
+  heading: "Zambia. River. Remote horizon.",
+  body: "Planned within one of Zambia's extraordinary wilderness regions — where river ecosystems, safari landscapes, and vast silence create the perfect canvas for slow, intentional hospitality.",
+  image:
+    "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=1600&q=85",
+  imageAlt: "Zambian river valley and wilderness",
+} as const;
+
+export const ecoLodgePartnerCta = {
+  heading: "Join the Vision",
+  body: "We welcome aligned hospitality, conservation, and development partnerships.",
+  cta: "Partner With Us",
+  image:
+    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+} as const;
+
+export const ecoLodgeClosing = {
+  quote: "Luxury is not excess. It is space, silence, and connection.",
+} as const;

@@ -31,7 +31,7 @@ export function ArchiveMasonry({
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-[10px] uppercase tracking-[0.28em] text-charcoal/45">
-              Gallery
+              Full Gallery
             </p>
             <h2 className="mt-3 font-serif text-3xl font-light text-charcoal md:text-4xl">
               {activeLabel}

@@ -17,86 +17,141 @@ export const archiveHero = {
     "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
 } as const;
 
+export const collectionsSection = {
+  label: "Explore Collections",
+  heading: "Curated stories captured across Africa.",
+  viewAllHref: "#grid",
+} as const;
+
 export const collections = [
   {
     id: "wildlife" as const,
     title: "Wildlife",
-    description: "Lions, elephants, leopards, and the rhythm of the wild.",
+    description: "The untamed. In their natural world.",
+    icon: "wildlife",
     image:
-      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1600&q=85",
+      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1200&q=85",
   },
   {
     id: "landscapes" as const,
     title: "Landscapes",
-    description: "Rivers, sunsets, deserts, and forests — Africa's shifting light.",
+    description: "Earth in its rawest, most beautiful form.",
+    icon: "landscapes",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1600&q=85",
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=85",
   },
   {
     id: "expedition-life" as const,
     title: "Expedition Life",
-    description:
-      "Dusty roads, firelit evenings, and moments between destinations.",
+    description: "The moments between destinations.",
+    icon: "expedition",
     image:
-      "https://images.unsplash.com/photo-1587595431973-c026f9778660?w=1600&q=85",
+      "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1200&q=85",
   },
   {
     id: "culture-people" as const,
     title: "Culture & People",
-    description: "Portraits, traditions, and the human texture of place.",
+    description: "The soul of Africa, its people, its stories.",
+    icon: "culture",
     image:
-      "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1600&q=85",
+      "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1200&q=85",
   },
   {
     id: "the-afari-lens" as const,
     title: "The Afari Lens",
-    description: "Community photography — curated, monthly, intentional.",
+    description: "Community perspectives. Captured by you.",
+    icon: "lens",
     image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85",
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&q=85",
   },
   {
     id: "behind-afari" as const,
     title: "Behind Afari",
-    description: "Building the brand — field notes from the journey inward.",
+    description: "Behind the scenes. The journey within.",
+    icon: "behind",
     image:
-      "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1600&q=85",
+      "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1200&q=85",
   },
 ];
 
 export const afariLens = {
-  title: "The Afari Lens",
-  photographer: "Natasha Banda",
-  location: "South Luangwa, Zambia",
+  label: "The Afari Lens",
+  heading: "Photograph of the Month",
+  title: "Morning Mist, South Luangwa",
+  photographer: "Chileshe Mwansa",
   story:
-    "First light through mahogany smoke — a moment of stillness before the valley wakes. Selected from our March community edition.",
+    "First light through mahogany smoke — a moment of stillness before the valley wakes. Selected from our community edition.",
   image:
     "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1600&q=85",
   submitHref: "/archive/submit",
+  entriesHref: "/archive#grid",
   editionsHref: "/archive#grid",
 } as const;
 
-export type VisualStrip =
-  | { type: "image"; image: string; alt: string }
-  | { type: "quote"; text: string };
+export const latestMomentsSection = {
+  label: "Latest Moments",
+  viewAllHref: "#grid",
+} as const;
 
-export const visualStrips: VisualStrip[] = [
+export const latestMoments = [
   {
-    type: "image",
+    id: "lm-1",
+    alt: "Elephant in golden light",
     image:
-      "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
-    alt: "Aerial river at golden hour",
+      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=600&q=85",
   },
   {
-    type: "quote",
-    text: "Some places cannot be explained. Only experienced.",
-  },
-  {
-    type: "image",
+    id: "lm-2",
+    alt: "Bird in flight",
     image:
-      "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
-    alt: "Campfire beneath the trees at night",
+      "https://images.unsplash.com/photo-1552728086-1f037a6f3318?w=600&q=85",
   },
-];
+  {
+    id: "lm-3",
+    alt: "River at sunset",
+    image:
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=85",
+  },
+  {
+    id: "lm-4",
+    alt: "Forest path",
+    image:
+      "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=600&q=85",
+  },
+  {
+    id: "lm-5",
+    alt: "Lion cub",
+    image:
+      "https://images.unsplash.com/photo-1546182990-dcdf1f4e4163?w=600&q=85",
+  },
+  {
+    id: "lm-6",
+    alt: "Waterfall",
+    image:
+      "https://images.unsplash.com/photo-1432405972618-60d1a68b9b67?w=600&q=85",
+  },
+  {
+    id: "lm-7",
+    alt: "Elder portrait",
+    image:
+      "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=600&q=85",
+  },
+  {
+    id: "lm-8",
+    alt: "Campfire under stars",
+    image:
+      "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=600&q=85",
+  },
+] as const;
+
+export const archiveSubmit = {
+  quote:
+    "We do not inherit the earth from our ancestors, we borrow it from our children.",
+  attribution: "African Proverb",
+  body: "Share your perspective. Be part of the story.",
+  cta: "Submit Your Photograph",
+  href: "/archive/submit",
+} as const;
 
 export type ArchiveImage = {
   id: string;
@@ -122,7 +177,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "First light on the floodplain — giants moving through mist.",
     category: "wildlife",
     image:
-      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1200&q=85",
+      "https://images.unsplash.com/photo/1589552603490-efd4e1f2836b?w=1200&q=85",
     span: "tall",
     related: { label: "In the Presence of Giants", href: "/journal/in-the-presence-of-giants" },
   },
@@ -163,7 +218,7 @@ export const archiveImages: ArchiveImage[] = [
     id: "lens-feature",
     title: "Valley Silence",
     location: "South Luangwa, Zambia",
-    photographer: "Natasha Banda",
+    photographer: "Chileshe Mwansa",
     caption: "The Afari Lens — March edition.",
     category: "the-afari-lens",
     image:
@@ -188,7 +243,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "When the valley belongs to shadow.",
     category: "wildlife",
     image:
-      "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1200&q=85",
+      "https://images.unsplash.com/photo-1546182990-dcdf1f4e4163?w=1200&q=85",
     related: { label: "The Art of Patience", href: "/journal/the-art-of-patience" },
   },
   {

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { ROUTES } from "@/config/routes";
 import { expeditionsHero } from "@/lib/data/expeditions";
 
 export function ExpeditionsHero() {
@@ -27,7 +28,7 @@ export function ExpeditionsHero() {
           <Button href="#featured" variant="sand">
             Explore Expeditions
           </Button>
-          <Button href="/contact" variant="text" showArrow>
+          <Button href={ROUTES.expeditionsConnect} variant="text" showArrow>
             Plan Your Journey
           </Button>
         </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ROUTES } from "@/config/routes";
 import { expeditionsCta } from "@/lib/data/expeditions";
 
 export function ExpeditionsCTA() {
@@ -29,16 +30,16 @@ export function ExpeditionsCTA() {
             {expeditionsCta.boxText}
           </p>
           <Link
-            href="/contact"
+            href={ROUTES.expeditionsConnect}
             className="mt-8 inline-flex bg-sand px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-charcoal transition-colors hover:bg-sand-light"
           >
             Design Your Journey
           </Link>
           <Link
-            href="/contact"
+            href={ROUTES.expeditionsConnect}
             className="mt-5 block text-xs font-medium uppercase tracking-[0.22em] text-ivory/70 transition-colors hover:text-ivory"
           >
-            Contact Our Experts →
+            Plan Your Journey →
           </Link>
         </div>
       </div>
