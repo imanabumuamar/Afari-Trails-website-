@@ -4,7 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/ui/Logo";
-import { DARK_HERO_PATHS, navLinks, ROUTES } from "@/config/routes";
+import {
+  DARK_HERO_PATHS,
+  isExpeditionDetailPath,
+  navLinks,
+  ROUTES,
+} from "@/config/routes";
 
 function SearchIcon() {
   return (
@@ -50,7 +55,8 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isDarkHero = DARK_HERO_PATHS.includes(pathname);
+  const isDarkHero =
+    DARK_HERO_PATHS.includes(pathname) || isExpeditionDetailPath(pathname);
   const isJournal = pathname === "/journal" || pathname.startsWith("/journal/");
   const isArchive = pathname === "/archive";
   const isExpeditions = pathname.startsWith("/expeditions");

@@ -1,6 +1,10 @@
-import { communityClosing } from "@/lib/data/community";
+import { communityClosing as default_communityClosing } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
 
-export function CommunityClosing() {
+export async function CommunityClosing() {
+  const content = await getVenturePageContent("community");
+  const communityClosing = content.communityClosing as typeof default_communityClosing;
+
   return (
     <section className="relative flex min-h-[55vh] items-center justify-center bg-matte-black px-6 py-28 lg:min-h-[60vh]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--safari-green-deep)_0%,_var(--matte-black)_75%)]" />

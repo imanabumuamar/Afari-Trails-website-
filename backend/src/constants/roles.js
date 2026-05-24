@@ -1,0 +1,58 @@
+export const ROLES = ["super_admin", "admin", "editor", "viewer"];
+
+export const PERMISSIONS = [
+  "admin:access",
+  "content:homepage:read",
+  "content:homepage:write",
+  "content:ventures:read",
+  "content:ventures:write",
+  "users:read",
+  "users:write",
+];
+
+const ROLE_PERMISSIONS = {
+  super_admin: PERMISSIONS,
+  admin: [
+    "admin:access",
+    "content:homepage:read",
+    "content:homepage:write",
+    "content:ventures:read",
+    "content:ventures:write",
+  ],
+  editor: [
+    "admin:access",
+    "content:homepage:read",
+    "content:homepage:write",
+    "content:ventures:read",
+    "content:ventures:write",
+  ],
+  viewer: [
+    "admin:access",
+    "content:homepage:read",
+    "content:ventures:read",
+  ],
+};
+
+export function isRole(value) {
+  return ROLES.includes(value);
+}
+
+export function parseRole(value, fallback = "viewer") {
+  return isRole(value) ? value : fallback;
+}
+
+export function hasPermission(role, permission) {
+  const perms = ROLE_PERMISSIONS[parseRole(role)] ?? [];
+  return perms.includes(permission);
+}
+
+export function canAccessAdmin(role) {
+  return hasPermission(role, "admin:access");
+}
+
+export const ROLE_LABELS = {
+  super_admin: "Super admin",
+  admin: "Admin",
+  editor: "Editor",
+  viewer: "Viewer",
+};

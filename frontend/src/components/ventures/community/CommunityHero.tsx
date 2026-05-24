@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
-import { communityHero } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityHero as default_communityHero } from "@/lib/data/community";
 
-export function CommunityHero() {
+export async function CommunityHero() {
+  const content = await getVenturePageContent("community");
+  const communityHero = content.communityHero as typeof default_communityHero;
+
   return (
     <section className="relative min-h-screen">
       <Image

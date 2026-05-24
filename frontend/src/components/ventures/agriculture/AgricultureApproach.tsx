@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { agricultureApproach } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agricultureApproach as default_agricultureApproach } from "@/lib/data/agriculture";
 
-export function AgricultureApproach() {
+export async function AgricultureApproach() {
+  const content = await getVenturePageContent("agriculture");
+  const agricultureApproach = content.agricultureApproach as typeof default_agricultureApproach;
+
   return (
     <section id="approach" className="scroll-mt-24 bg-ivory py-28 lg:py-40">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

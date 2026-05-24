@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { conservationInitiatives } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationInitiatives as default_conservationInitiatives } from "@/lib/data/conservation";
 
-export function ConservationInitiatives() {
+export async function ConservationInitiatives() {
+  const content = await getVenturePageContent("conservation");
+  const conservationInitiatives = content.conservationInitiatives as typeof default_conservationInitiatives;
+
   return (
     <section
       id="initiatives"

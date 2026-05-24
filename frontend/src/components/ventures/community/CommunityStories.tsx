@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { communityStories } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityStories as default_communityStories } from "@/lib/data/community";
 
-export function CommunityStories() {
+export async function CommunityStories() {
+  const content = await getVenturePageContent("community");
+  const communityStories = content.communityStories as typeof default_communityStories;
+
   return (
     <section className="bg-ivory py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

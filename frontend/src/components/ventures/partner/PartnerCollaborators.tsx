@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { partnerCollaborators } from "@/lib/data/partner";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { partnerCollaborators as default_partnerCollaborators } from "@/lib/data/partner";
 
-export function PartnerCollaborators() {
+export async function PartnerCollaborators() {
+  const content = await getVenturePageContent("partner");
+  const partnerCollaborators = content.partnerCollaborators as typeof default_partnerCollaborators;
+
   return (
     <section className="bg-ivory py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

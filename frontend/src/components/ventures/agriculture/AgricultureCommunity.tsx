@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { agricultureCommunity } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agricultureCommunity as default_agricultureCommunity } from "@/lib/data/agriculture";
 
-export function AgricultureCommunity() {
+export async function AgricultureCommunity() {
+  const content = await getVenturePageContent("agriculture");
+  const agricultureCommunity = content.agricultureCommunity as typeof default_agricultureCommunity;
+
   return (
     <section className="grid lg:grid-cols-2">
       <div className="flex flex-col justify-center bg-ivory px-6 py-20 lg:px-14 lg:py-28">

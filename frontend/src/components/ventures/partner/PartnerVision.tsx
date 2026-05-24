@@ -1,6 +1,10 @@
-import { partnerVision } from "@/lib/data/partner";
+import { partnerVision as default_partnerVision } from "@/lib/data/partner";
+import { getVenturePageContent } from "@/services/content/ventures";
 
-export function PartnerVision() {
+export async function PartnerVision() {
+  const content = await getVenturePageContent("partner");
+  const partnerVision = content.partnerVision as typeof default_partnerVision;
+
   return (
     <section className="relative flex min-h-[75vh] items-center justify-center overflow-hidden bg-matte-black px-6 py-32 lg:min-h-[85vh] lg:px-12">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--safari-green-deep)_0%,_var(--matte-black)_65%)]" />

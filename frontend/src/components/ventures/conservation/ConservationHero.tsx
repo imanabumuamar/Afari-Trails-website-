@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
-import { conservationHero } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationHero as default_conservationHero } from "@/lib/data/conservation";
 
-export function ConservationHero() {
+export async function ConservationHero() {
+  const content = await getVenturePageContent("conservation");
+  const conservationHero = content.conservationHero as typeof default_conservationHero;
+
   return (
     <section className="relative min-h-screen">
       <Image

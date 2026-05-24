@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { hospitalityPhilosophy } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { hospitalityPhilosophy as default_hospitalityPhilosophy } from "@/lib/data/hospitality";
 
-export function HospitalityPhilosophy() {
+export async function HospitalityPhilosophy() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityPhilosophy = content.hospitalityPhilosophy as typeof default_hospitalityPhilosophy;
+
   return (
     <section id="philosophy" className="scroll-mt-24 bg-ivory py-28 lg:py-40">
       <div className="mx-auto grid max-w-[1400px] gap-14 px-6 lg:grid-cols-12 lg:gap-16 lg:px-10">

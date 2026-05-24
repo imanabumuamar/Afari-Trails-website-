@@ -14,7 +14,7 @@ model User {
   emailVerified DateTime?
   image         String?
   passwordHash  String?
-  role          String    @default("admin")
+  role          String    @default("viewer")
   accounts      Account[]
   sessions      Session[]
   createdAt     DateTime  @default(now())

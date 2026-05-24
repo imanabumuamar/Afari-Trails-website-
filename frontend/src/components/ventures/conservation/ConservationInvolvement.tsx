@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { ROUTES } from "@/config/routes";
-import { conservationInvolvement } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationInvolvement as default_conservationInvolvement } from "@/lib/data/conservation";
 
-export function ConservationInvolvement() {
+export async function ConservationInvolvement() {
+  const content = await getVenturePageContent("conservation");
+  const conservationInvolvement = content.conservationInvolvement as typeof default_conservationInvolvement;
+
   return (
     <section className="bg-ivory py-24 text-center lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

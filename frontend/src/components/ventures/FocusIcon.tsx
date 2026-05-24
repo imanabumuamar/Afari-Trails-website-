@@ -1,9 +1,10 @@
 type FocusIconProps = {
   type: string;
+  className?: string;
 };
 
-export function FocusIcon({ type }: FocusIconProps) {
-  const cls = "h-5 w-5 text-sand";
+export function FocusIcon({ type, className }: FocusIconProps) {
+  const cls = className ?? "h-5 w-5 text-sand";
   switch (type) {
     case "lodge":
       return (

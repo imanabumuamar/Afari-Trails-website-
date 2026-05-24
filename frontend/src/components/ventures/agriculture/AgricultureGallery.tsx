@@ -1,7 +1,11 @@
 import Image from "next/image";
-import { agricultureGallery } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agricultureGallery as default_agricultureGallery } from "@/lib/data/agriculture";
 
-export function AgricultureGallery() {
+export async function AgricultureGallery() {
+  const content = await getVenturePageContent("agriculture");
+  const agricultureGallery = content.agricultureGallery as typeof default_agricultureGallery;
+
   return (
     <section className="overflow-hidden bg-matte-black py-4 lg:py-6" aria-label="Visual storytelling">
       <div className="flex gap-1 overflow-x-auto scrollbar-none lg:gap-1.5">

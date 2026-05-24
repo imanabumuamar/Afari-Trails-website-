@@ -3,11 +3,7 @@ import { config } from "./config/index.js";
 import { connectDatabase } from "./config/database.js";
 
 async function start() {
-  try {
-    await connectDatabase();
-  } catch (err) {
-    console.warn("[db] Could not connect:", err.message);
-  }
+  await connectDatabase();
 
   const app = createApp();
   app.listen(config.port, () => {
@@ -16,4 +12,7 @@ async function start() {
   });
 }
 
-start();
+start().catch((err) => {
+  console.error("[api] Failed to start:", err.message);
+  process.exit(1);
+});

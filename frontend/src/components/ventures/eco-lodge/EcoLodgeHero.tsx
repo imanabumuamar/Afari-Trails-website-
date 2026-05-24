@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
-import { ecoLodgeHero } from "@/lib/data/eco-lodge";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { ecoLodgeHero as default_ecoLodgeHero } from "@/lib/data/eco-lodge";
 
-export function EcoLodgeHero() {
+export async function EcoLodgeHero() {
+  const content = await getVenturePageContent("eco-lodge");
+  const ecoLodgeHero = content.ecoLodgeHero as typeof default_ecoLodgeHero;
+
   return (
     <section className="relative min-h-screen">
       <Image

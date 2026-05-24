@@ -1,7 +1,11 @@
 import Image from "next/image";
-import { ecoLodgeGallery } from "@/lib/data/eco-lodge";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { ecoLodgeGallery as default_ecoLodgeGallery } from "@/lib/data/eco-lodge";
 
-export function EcoLodgeGallery() {
+export async function EcoLodgeGallery() {
+  const content = await getVenturePageContent("eco-lodge");
+  const ecoLodgeGallery = content.ecoLodgeGallery as typeof default_ecoLodgeGallery;
+
   return (
     <section className="overflow-hidden bg-matte-black py-4 lg:py-6" aria-label="Visual immersion">
       <div className="flex gap-1 overflow-x-auto scrollbar-none lg:gap-1.5">

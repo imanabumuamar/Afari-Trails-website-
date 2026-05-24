@@ -12,6 +12,7 @@ export const ROUTES = {
   venturesAgriculture: "/ventures/agriculture",
   venturesHospitality: "/ventures/hospitality",
   expeditions: "/expeditions",
+  expeditionsAll: "/expeditions/all",
   journal: "/journal",
   journalArchive: "/journal/archive",
   archive: "/archive",
@@ -72,6 +73,7 @@ export const DARK_HERO_PATHS: readonly string[] = [
   ROUTES.venturesAgriculture,
   ROUTES.venturesHospitality,
   ROUTES.expeditions,
+  ROUTES.expeditionsAll,
   ROUTES.journal,
   ROUTES.archive,
   ROUTES.store,
@@ -80,3 +82,13 @@ export const DARK_HERO_PATHS: readonly string[] = [
   ROUTES.expeditionsConnect,
   ROUTES.venturesConnect,
 ];
+
+/** Expedition detail pages use fullscreen cinematic heroes */
+export function isExpeditionDetailPath(pathname: string): boolean {
+  return (
+    pathname.startsWith("/expeditions/") &&
+    pathname !== ROUTES.expeditions &&
+    pathname !== ROUTES.expeditionsAll &&
+    pathname !== ROUTES.expeditionsConnect
+  );
+}

@@ -1,7 +1,11 @@
 import Image from "next/image";
-import { conservationGallery } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationGallery as default_conservationGallery } from "@/lib/data/conservation";
 
-export function ConservationGallery() {
+export async function ConservationGallery() {
+  const content = await getVenturePageContent("conservation");
+  const conservationGallery = content.conservationGallery as typeof default_conservationGallery;
+
   return (
     <section className="overflow-hidden bg-matte-black py-4 lg:py-6" aria-label="Visual storytelling">
       <div className="flex gap-1 overflow-x-auto scrollbar-none lg:gap-1.5">

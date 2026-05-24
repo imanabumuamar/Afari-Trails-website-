@@ -1,26 +1,27 @@
 import * as authService from "../services/auth.service.js";
 
-export async function register(req, res, next) {
+export async function login(req, res, next) {
   try {
-    const { email, name, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password required" });
-    }
-    const user = await authService.registerAdmin({ email, name, password });
-    res.status(201).json({ user });
+    const result = await authService.loginStaff(req.body);
+    res.json(result);
   } catch (err) {
     next(err);
   }
 }
 
-export async function login(req, res, next) {
+export async function me(req, res, next) {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password required" });
-    }
-    const result = await authService.loginAdmin({ email, password });
-    res.json(result);
+    const user = await authService.getStaffFromToken(req.user);
+    res.json({ user });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function register(req, res, next) {
+  try {
+    const user = await authService.registerStaff(req.user, req.body);
+    res.status(201).json({ user });
   } catch (err) {
     next(err);
   }

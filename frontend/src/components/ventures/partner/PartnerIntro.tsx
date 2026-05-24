@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { partnerIntro } from "@/lib/data/partner";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { partnerIntro as default_partnerIntro } from "@/lib/data/partner";
 
-export function PartnerIntro() {
+export async function PartnerIntro() {
+  const content = await getVenturePageContent("partner");
+  const partnerIntro = content.partnerIntro as typeof default_partnerIntro;
+
   return (
     <section className="bg-ivory py-24 lg:py-36">
       <div className="mx-auto grid max-w-[1400px] gap-14 px-6 lg:grid-cols-2 lg:items-start lg:gap-20 lg:px-10">

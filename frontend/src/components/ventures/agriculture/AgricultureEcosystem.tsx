@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { agricultureEcosystem } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agricultureEcosystem as default_agricultureEcosystem } from "@/lib/data/agriculture";
 
-export function AgricultureEcosystem() {
+export async function AgricultureEcosystem() {
+  const content = await getVenturePageContent("agriculture");
+  const agricultureEcosystem = content.agricultureEcosystem as typeof default_agricultureEcosystem;
+
   return (
     <section className="border-y border-charcoal/10 bg-beige py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 text-center lg:px-10">

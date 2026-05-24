@@ -10,6 +10,7 @@ type HomepageImageEditorProps = {
   image: ContentImage;
   onUpdated: (image: ContentImage) => void;
   onStatus: (message: string) => void;
+  readOnly?: boolean;
 };
 
 export function HomepageImageEditor({
@@ -17,6 +18,7 @@ export function HomepageImageEditor({
   image,
   onUpdated,
   onStatus,
+  readOnly = false,
 }: HomepageImageEditorProps) {
   const [alt, setAlt] = useState(image.alt);
   const [uploading, setUploading] = useState(false);
@@ -78,37 +80,41 @@ export function HomepageImageEditor({
       </div>
       <p className="mt-2 break-all text-xs text-charcoal/50">{image.src}</p>
 
-      <form onSubmit={handleUpload} className="mt-6 space-y-4">
-        <div>
-          <label className="block text-xs uppercase tracking-[0.2em] text-charcoal/55">
-            Replace image
-          </label>
-          <input
-            name="image"
-            type="file"
-            accept="image/png,image/jpeg,image/webp"
-            className="mt-2 block w-full text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-xs uppercase tracking-[0.2em] text-charcoal/55">
-            Alt text
-          </label>
-          <input
-            type="text"
-            value={alt}
-            onChange={(e) => setAlt(e.target.value)}
-            className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={uploading}
-          className="bg-charcoal px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
-        >
-          {uploading ? "Uploading…" : "Save image"}
-        </button>
-      </form>
+      {readOnly ? (
+        <p className="mt-6 text-xs text-charcoal/50">Alt: {image.alt}</p>
+      ) : (
+        <form onSubmit={handleUpload} className="mt-6 space-y-4">
+          <div>
+            <label className="block text-xs uppercase tracking-[0.2em] text-charcoal/55">
+              Replace image
+            </label>
+            <input
+              name="image"
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              className="mt-2 block w-full text-sm"
+            />
+          </div>
+          <div>
+            <label className="block text-xs uppercase tracking-[0.2em] text-charcoal/55">
+              Alt text
+            </label>
+            <input
+              type="text"
+              value={alt}
+              onChange={(e) => setAlt(e.target.value)}
+              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={uploading}
+            className="bg-charcoal px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
+          >
+            {uploading ? "Uploading…" : "Save image"}
+          </button>
+        </form>
+      )}
     </article>
   );
 }

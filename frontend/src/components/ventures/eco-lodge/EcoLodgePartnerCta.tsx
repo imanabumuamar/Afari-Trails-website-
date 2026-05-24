@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ROUTES } from "@/config/routes";
-import { ecoLodgePartnerCta } from "@/lib/data/eco-lodge";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { ecoLodgePartnerCta as default_ecoLodgePartnerCta } from "@/lib/data/eco-lodge";
 
-export function EcoLodgePartnerCta() {
+export async function EcoLodgePartnerCta() {
+  const content = await getVenturePageContent("eco-lodge");
+  const ecoLodgePartnerCta = content.ecoLodgePartnerCta as typeof default_ecoLodgePartnerCta;
+
   return (
     <section className="relative min-h-[400px] lg:min-h-[460px]">
       <Image

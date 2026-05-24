@@ -1,6 +1,10 @@
-import { ventureStats } from "@/lib/data/ventures";
+import { ventureStats as default_ventureStats } from "@/lib/data/ventures";
+import { getVenturePageContent } from "@/services/content/ventures";
 
-export function VenturesStats() {
+export async function VenturesStats() {
+  const content = await getVenturePageContent("main");
+  const ventureStats = content.ventureStats as typeof default_ventureStats;
+
   return (
     <section className="bg-charcoal py-14 text-ivory lg:py-16">
       <div className="mx-auto grid max-w-[1400px] grid-cols-2 px-6 sm:grid-cols-4 lg:px-10">

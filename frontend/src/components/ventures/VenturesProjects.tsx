@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import {
-  featuredProject,
-  venturesProjects,
-  venturesProjectsSection,
-} from "@/lib/data/ventures";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { featuredProject as default_featuredProject } from "@/lib/data/ventures";
+import { venturesProjects as default_venturesProjects } from "@/lib/data/ventures";
+import { venturesProjectsSection as default_venturesProjectsSection } from "@/lib/data/ventures";
 
-export function VenturesProjects() {
+export async function VenturesProjects() {
+  const content = await getVenturePageContent("main");
+  const featuredProject = content.featuredProject as typeof default_featuredProject;
+  const venturesProjects = content.venturesProjects as typeof default_venturesProjects;
+  const venturesProjectsSection = content.venturesProjectsSection as typeof default_venturesProjectsSection;
+
   const pipeline = venturesProjects.filter(
     (p) => !("featured" in p && p.featured)
   );
@@ -62,7 +66,7 @@ export function VenturesProjects() {
                   {featuredProject.title}
                 </h3>
                 <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-gold-muted">
-                  {featuredProject.category} · Featured
+                  {featuredProject.status} · Featured
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-6">

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { AdminAuthError, requireAdminSession } from "@/lib/auth/require-admin";
+import { backendFetch } from "@/lib/api/backend";
+import { AuthError, requirePermission } from "@/lib/auth/require-session";
 import {
   isHomepageImageField,
   isHomepageVideoField,
@@ -8,11 +9,15 @@ import {
 } from "@/services/content/homepage";
 
 export async function POST(request: Request) {
+  let token: string;
   try {
-    await requireAdminSession();
+    ({ token } = await requirePermission("content:homepage:write"));
   } catch (error) {
-    if (error instanceof AdminAuthError) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (error instanceof AuthError) {
+      return NextResponse.json(
+        { error: error.message },
+        { status: error.status },
+      );
     }
     throw error;
   }
@@ -24,6 +29,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid field" }, { status: 400 });
   }
 
+  let updated;
+
   if (isHomepageVideoField(field)) {
     const file = formData.get("video") ?? formData.get("image");
     if (!file || !(file instanceof File)) {
@@ -33,25 +40,38 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Video must be MP4" }, { status: 400 });
     }
     const buffer = Buffer.from(await file.arrayBuffer());
-    const updated = updateHomepageVideo(field, buffer);
-    return NextResponse.json(updated);
-  }
-
-  if (!isHomepageImageField(field)) {
+    updated = updateHomepageVideo(field, buffer);
+  } else if (isHomepageImageField(field)) {
+    const file = formData.get("image");
+    if (!file || !(file instanceof File)) {
+      return NextResponse.json({ error: "No image provided" }, { status: 400 });
+    }
+    if (!file.type.startsWith("image/")) {
+      return NextResponse.json({ error: "File must be an image" }, { status: 400 });
+    }
+    const alt = (formData.get("alt") as string | null) ?? undefined;
+    const buffer = Buffer.from(await file.arrayBuffer());
+    updated = updateHomepageImage(field, buffer, file.type, alt);
+  } else {
     return NextResponse.json({ error: "Invalid field" }, { status: 400 });
   }
 
-  const file = formData.get("image");
-  if (!file || !(file instanceof File)) {
-    return NextResponse.json({ error: "No image provided" }, { status: 400 });
-  }
-  if (!file.type.startsWith("image/")) {
-    return NextResponse.json({ error: "File must be an image" }, { status: 400 });
+  const { data, ok } = await backendFetch("/content/homepage", {
+    method: "PUT",
+    token,
+    body: JSON.stringify({
+      hero: updated.hero,
+      featureCards: updated.featureCards,
+      ourEssence: updated.ourEssence,
+    }),
+  });
+
+  if (!ok || !data) {
+    return NextResponse.json(
+      { error: "File saved locally but API sync failed. Is the backend running?" },
+      { status: 502 },
+    );
   }
 
-  const alt = (formData.get("alt") as string | null) ?? undefined;
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const updated = updateHomepageImage(field, buffer, file.type, alt);
-
-  return NextResponse.json(updated);
+  return NextResponse.json(data);
 }

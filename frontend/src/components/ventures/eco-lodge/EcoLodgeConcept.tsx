@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { ecoLodgeConcept } from "@/lib/data/eco-lodge";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { ecoLodgeConcept as default_ecoLodgeConcept } from "@/lib/data/eco-lodge";
 
-export function EcoLodgeConcept() {
+export async function EcoLodgeConcept() {
+  const content = await getVenturePageContent("eco-lodge");
+  const ecoLodgeConcept = content.ecoLodgeConcept as typeof default_ecoLodgeConcept;
+
   return (
     <section id="concept" className="scroll-mt-24 bg-ivory py-24 lg:py-36">
       <div className="mx-auto grid max-w-[1400px] gap-14 px-6 lg:grid-cols-2 lg:items-start lg:gap-20 lg:px-10">

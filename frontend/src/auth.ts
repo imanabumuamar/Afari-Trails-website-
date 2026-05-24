@@ -1,13 +1,17 @@
-import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { prisma } from "@/lib/prisma";
+import { authConfig } from "@/auth.config";
+import { parseRole, type Role } from "@/lib/auth/roles";
+import { getApiBaseUrl } from "@/lib/api/backend";
+
+type StaffLoginResponse = {
+  user: { id: string; email: string; name: string | null; role: Role };
+  token: string;
+};
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  session: { strategy: "jwt" },
-  pages: {
-    signIn: "/admin/login",
-  },
+  ...authConfig,
+  secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({
       name: "credentials",
@@ -16,39 +20,37 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const email = credentials?.email as string | undefined;
+        const email = (credentials?.email as string | undefined)
+          ?.trim()
+          .toLowerCase();
         const password = credentials?.password as string | undefined;
 
         if (!email || !password) return null;
 
-        const user = await prisma.user.findUnique({ where: { email } });
-        if (!user?.passwordHash || user.role !== "admin") return null;
+        let res: Response;
+        try {
+          res = await fetch(`${getApiBaseUrl()}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+        } catch {
+          console.error("[auth] API unreachable — is the backend running?");
+          return null;
+        }
 
-        const valid = await bcrypt.compare(password, user.passwordHash);
-        if (!valid) return null;
+        if (!res.ok) return null;
+
+        const data = (await res.json()) as StaffLoginResponse;
 
         return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
+          id: data.user.id,
+          email: data.user.email,
+          name: data.user.name,
+          role: parseRole(data.user.role),
+          accessToken: data.token,
         };
       },
     }),
   ],
-  callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.role = user.role;
-      }
-      return token;
-    },
-    session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.sub!;
-        session.user.role = (token.role as string) ?? "admin";
-      }
-      return session;
-    },
-  },
 });

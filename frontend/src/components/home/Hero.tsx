@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { FeatureCards } from "@/components/home/FeatureCards";
-import { getHomepage } from "@/services/content/homepage";
+import { getHomepageAsync } from "@/services/content/homepage";
 
-export function Hero() {
-  const { hero } = getHomepage();
+export async function Hero() {
+  const { hero } = await getHomepageAsync();
 
   return (
     <section className="relative bg-matte-black">

@@ -1,0 +1,162 @@
+{
+  "slug": "agriculture",
+  "data": {
+    "agricultureHero": {
+      "label": "Sustainable Agriculture",
+      "heading": "Cultivating Growth in Harmony With the Land.",
+      "subheading": "Afari Trails supports agricultural initiatives that balance sustainability, community development, environmental stewardship, and long-term resilience.",
+      "exploreCta": "Explore the Vision",
+      "partnerCta": "Partner With Us",
+      "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=2400&q=85",
+      "imageAlt": "Golden fields at sunrise across African farmland"
+    },
+    "agricultureApproach": {
+      "label": "Our Approach",
+      "statement": "We believe agriculture should nourish communities, protect ecosystems, and create sustainable opportunities for future generations.",
+      "themes": [
+        "Regenerative systems that restore soil and biodiversity",
+        "Land stewardship rooted in respect",
+        "Ethical production and fair partnership",
+        "Innovation guided by local knowledge",
+        "Resilience for people and place",
+        "Long-term thinking over short-term yield"
+      ]
+    },
+    "agricultureFocusAreas": {
+      "label": "Key Focus Areas",
+      "heading": "Where land, people, and future meet.",
+      "items": [
+        {
+          "id": "regenerative",
+          "title": "Regenerative Farming",
+          "description": "Practices that restore soil health, biodiversity, and the living rhythm of the land.",
+          "image": "https://images.unsplash.com/photo-1574943321395-2e06e1f9e40a?w=1000&q=85"
+        },
+        {
+          "id": "water",
+          "title": "Water Stewardship",
+          "description": "Responsible irrigation and protection of rivers, wetlands, and shared water sources.",
+          "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85"
+        },
+        {
+          "id": "community",
+          "title": "Community Partnerships",
+          "description": "Working alongside local farmers and communities as leaders — not recipients.",
+          "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85"
+        },
+        {
+          "id": "food",
+          "title": "Food Security",
+          "description": "Supporting resilient, sustainable food systems built for changing seasons and futures.",
+          "image": "https://images.unsplash.com/photo-1464226184873-943d2d315587?w=1000&q=85"
+        },
+        {
+          "id": "livestock",
+          "title": "Sustainable Livestock",
+          "description": "Ethical, environmentally balanced systems that coexist with wild landscapes.",
+          "image": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1000&q=85"
+        },
+        {
+          "id": "innovation",
+          "title": "Agricultural Innovation",
+          "description": "Modern efficiency shaped by tradition, local expertise, and ecological intelligence.",
+          "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=85"
+        }
+      ]
+    },
+    "agricultureLand": {
+      "label": "Land & Environment",
+      "quote": "Healthy land creates healthy communities.",
+      "body": "Agriculture and wilderness are not opposites when guided by balance. We support systems that preserve natural resources, protect wildlife corridors, and honor the coexistence between cultivation and the wild — because the future of food depends on the future of ecosystems.",
+      "image": "https://images.unsplash.com/photo-1416879595882-3373a0488b93?w=1600&q=85",
+      "imageAlt": "Hands holding rich soil in warm light"
+    },
+    "agricultureCommunity": {
+      "label": "Community Impact",
+      "heading": "Partners on the land.",
+      "body": "Local employment, farmer partnerships, skills development, and long-term opportunity — including women-led agriculture and youth initiatives. Communities are partners and leaders in every vision we pursue, shaping how land is tended and how harvests are shared.",
+      "image": "https://images.unsplash.com/photo-1574943321395-2e06e1f9e40a?w=1600&q=85",
+      "imageAlt": "Farmers walking through crops at golden hour"
+    },
+    "agricultureInitiatives": {
+      "label": "Future Initiatives",
+      "heading": "Seeds of what comes next.",
+      "intro": "Visionary directions we are building toward — connected to hospitality, exploration, and place.",
+      "items": [
+        "Sustainable Farm Projects",
+        "Agricultural Education Programs",
+        "Irrigation Innovation",
+        "Agroforestry",
+        "Community Food Networks",
+        "Eco-Agriculture Partnerships",
+        "Farm-to-Table Hospitality"
+      ]
+    },
+    "agricultureGallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=85",
+        "alt": "Crops moving in wind at sunrise"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1416879595882-3373a0488b93?w=1000&q=85",
+        "alt": "Soil textures in warm light"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1574943321395-2e06e1f9e40a?w=1000&q=85",
+        "alt": "Farmers working in the field"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+        "alt": "River and farmland horizon"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1464226184873-943d2d315587?w=1000&q=85",
+        "alt": "Local food preparation"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1000&q=85",
+        "alt": "Open landscape and sustainable systems"
+      }
+    ],
+    "agriculturePartners": {
+      "label": "Partnerships",
+      "heading": "Growing alliances.",
+      "body": "Afari Trails seeks collaborative partnerships that support resilient agricultural systems and sustainable long-term development across Africa.",
+      "placeholders": [
+        "Local farmers",
+        "Agricultural innovators",
+        "Sustainability organizations",
+        "Food systems groups",
+        "Conservation initiatives",
+        "Hospitality suppliers"
+      ]
+    },
+    "agricultureEcosystem": {
+      "label": "The Afari Ecosystem",
+      "heading": "One vision. Many connected paths.",
+      "body": "Sustainable agriculture forms part of a wider vision connecting hospitality, conservation, community development, and responsible exploration — from eco lodge dining to field experiences and long-term land stewardship.",
+      "links": [
+        {
+          "label": "Eco Lodge",
+          "href": "/ventures/eco-lodge"
+        },
+        {
+          "label": "Conservation",
+          "href": "/ventures/conservation"
+        },
+        {
+          "label": "Community",
+          "href": "/ventures/community"
+        },
+        {
+          "label": "Partner With Us",
+          "href": "/ventures/partner"
+        }
+      ]
+    },
+    "agricultureClosing": {
+      "quote": "The future grows from how we care for the land today."
+    }
+  },
+  "updatedAt": "2026-05-23T18:03:59.476Z"
+}

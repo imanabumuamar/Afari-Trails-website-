@@ -1,6 +1,10 @@
-import { hospitalityExperience } from "@/lib/data/hospitality";
+import { hospitalityExperience as default_hospitalityExperience } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
 
-export function HospitalityExperience() {
+export async function HospitalityExperience() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityExperience = content.hospitalityExperience as typeof default_hospitalityExperience;
+
   return (
     <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-matte-black px-6 py-28 lg:min-h-[80vh]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--safari-green-deep)_0%,_var(--matte-black)_70%)]" />

@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { agriculturePartners } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agriculturePartners as default_agriculturePartners } from "@/lib/data/agriculture";
 
-export function AgriculturePartners() {
+export async function AgriculturePartners() {
+  const content = await getVenturePageContent("agriculture");
+  const agriculturePartners = content.agriculturePartners as typeof default_agriculturePartners;
+
   return (
     <section className="bg-ivory py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { hospitalityDestinations } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { hospitalityDestinations as default_hospitalityDestinations } from "@/lib/data/hospitality";
 
-export function HospitalityDestinations() {
+export async function HospitalityDestinations() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityDestinations = content.hospitalityDestinations as typeof default_hospitalityDestinations;
+
   return (
     <section className="bg-safari-green-deep py-24 text-ivory lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

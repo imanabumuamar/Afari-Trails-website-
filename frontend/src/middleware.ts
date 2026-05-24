@@ -1,5 +1,11 @@
-import { auth } from "@/auth";
+import NextAuth from "next-auth";
+import { authConfig } from "@/auth.config";
 
+const { auth } = NextAuth(authConfig);
+
+/**
+ * Edge-safe middleware: only checks sign-in (no Prisma).
+ */
 export default auth((req) => {
   const { pathname } = req.nextUrl;
   const isLogin = pathname === "/admin/login";

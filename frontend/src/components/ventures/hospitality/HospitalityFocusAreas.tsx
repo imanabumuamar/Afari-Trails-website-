@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
-import { hospitalityFocusAreas } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { hospitalityFocusAreas as default_hospitalityFocusAreas } from "@/lib/data/hospitality";
 
-export function HospitalityFocusAreas() {
+export async function HospitalityFocusAreas() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityFocusAreas = content.hospitalityFocusAreas as typeof default_hospitalityFocusAreas;
+
   return (
     <section className="bg-beige py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

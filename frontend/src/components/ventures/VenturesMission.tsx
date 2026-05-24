@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { venturesMission } from "@/lib/data/ventures";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { venturesMission as default_venturesMission } from "@/lib/data/ventures";
 
-export function VenturesMission() {
+export async function VenturesMission() {
+  const content = await getVenturePageContent("main");
+  const venturesMission = content.venturesMission as typeof default_venturesMission;
+
   return (
     <section className="grid lg:grid-cols-2">
       <div className="flex flex-col justify-center bg-beige px-6 py-20 lg:px-14 lg:py-28">

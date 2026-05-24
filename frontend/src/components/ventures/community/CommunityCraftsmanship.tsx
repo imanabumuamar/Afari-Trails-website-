@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { communityCraftsmanship } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityCraftsmanship as default_communityCraftsmanship } from "@/lib/data/community";
 
-export function CommunityCraftsmanship() {
+export async function CommunityCraftsmanship() {
+  const content = await getVenturePageContent("community");
+  const communityCraftsmanship = content.communityCraftsmanship as typeof default_communityCraftsmanship;
+
   const [first, second, third] = communityCraftsmanship.images;
 
   return (

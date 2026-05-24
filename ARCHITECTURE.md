@@ -1,103 +1,105 @@
 # Afari Trails — Project architecture
 
-Monorepo with a **Next.js frontend** and **Express API backend**.
+Monorepo: **Next.js frontend** + **Express API** + **MongoDB**.
 
 ## Repository layout
 
 ```
 website/
 ├── frontend/          # Next.js 16 (public site + admin UI)
-├── backend/           # Express 5 API (auth, content, future CMS)
-├── content/           # (lives in frontend/content — editable JSON)
+├── backend/           # Express 5 API (auth, users, CMS content)
+├── docker-compose.yml # MongoDB for local dev
+├── package.json       # Run API + web together
 └── ARCHITECTURE.md
 ```
 
 ---
 
-## Frontend (`frontend/`)
-
-| Folder | Role |
-|--------|------|
-| `src/app/` | **Routes / pages** (Next.js App Router) |
-| `src/components/` | **UI** — `ui/`, `layout/`, feature folders (`home/`, `store/`, …) |
-| `src/config/` | **Routes** (`routes.ts`), **env** (`env.ts`) |
-| `src/context/` | **Shared React state** (`providers.tsx`) |
-| `src/services/` | **API & domain logic** — `api/`, `content/`, `auth/` |
-| `src/lib/data/` | Static page copy & product data (TS modules) |
-| `src/types/` | Shared TypeScript types |
-| `content/` | Editable JSON (homepage images, etc.) |
-| `public/` | Static assets (images, hero video) |
-
-### Path alias
-
-`@/*` → `src/*` (see `tsconfig.json`)
-
-### Environment
-
-Copy `frontend/.env.example` → `frontend/.env.local`:
-
-```env
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_API_URL=http://localhost:4000/api
-ADMIN_SECRET=your-secret
-```
-
-### Commands
+## Quick start
 
 ```bash
-cd frontend && npm run dev    # http://localhost:3000
+# From repo root
+npm install
+npm run db:up          # starts MongoDB (Docker)
+npm run db:seed        # super admin + homepage in MongoDB
+
+npm run dev            # API :4000 + site :3000
 ```
+
+Sign in: http://localhost:3000/admin/login  
+Default: `admin@afaritrails.com` / `changeme123` (see `backend/.env`)
 
 ---
 
 ## Backend (`backend/`)
 
-| Folder | Role |
+| Layer | Role |
 |--------|------|
-| `src/config/` | App config, database connection |
-| `src/models/` | Mongoose schemas (`User`, …) |
-| `src/routes/` | HTTP route definitions |
-| `src/controllers/` | Request handlers (thin) |
+| `src/models/` | Mongoose schemas (`User`, `HomepageContent`) |
 | `src/services/` | Business logic |
-| `src/middleware/` | Auth, errors |
-| `src/app.js` | Express app setup |
-| `src/server.js` | Entry point |
+| `src/routes/` | HTTP routes |
+| `src/middleware/` | JWT auth, RBAC |
+| `scripts/seed.js` | Super admin + homepage seed |
 
-### Environment
-
-Copy `backend/.env.example` → `backend/.env`:
+### Environment (`backend/.env`)
 
 ```env
 PORT=4000
 CORS_ORIGIN=http://localhost:3000
 MONGODB_URI=mongodb://127.0.0.1:27017/afari-trails
 JWT_SECRET=...
-ADMIN_SECRET=...   # same as frontend for content API
+ADMIN_EMAIL=admin@afaritrails.com
+ADMIN_PASSWORD=changeme123
 ```
 
-### Commands
+### API
 
-```bash
-cd backend && npm install && npm run dev   # http://localhost:4000
-```
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| GET | `/api/health` | — | Health + DB status |
+| POST | `/api/auth/login` | — | Staff login → JWT |
+| GET | `/api/auth/me` | JWT | Current user |
+| GET | `/api/staff/users` | JWT + super_admin | List staff |
+| POST | `/api/staff/users` | JWT + super_admin | Create staff |
+| PATCH | `/api/staff/users` | JWT + super_admin | Update staff |
+| DELETE | `/api/staff/users/:id` | JWT + super_admin | Delete staff |
+| GET | `/api/content/homepage` | — | Public homepage CMS |
+| PUT | `/api/content/homepage` | JWT + editor+ | Update homepage |
 
-### API (starter)
-
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/health` | Health check |
-| POST | `/api/auth/register` | Create admin (needs MongoDB) |
-| POST | `/api/auth/login` | Admin login → JWT |
-| GET | `/api/content/homepage` | Homepage CMS JSON |
-| PUT | `/api/content/homepage` | Update homepage (header `x-admin-secret`) |
-
----
-
-## Users (planned)
+### Roles (MongoDB `User.role`)
 
 | Role | Access |
 |------|--------|
-| **Visitor** | Public frontend only — no login |
-| **Admin** | `/admin/*` + API — multiple accounts via backend `User` model + JWT |
+| `super_admin` | Users + all CMS |
+| `admin` | Full CMS |
+| `editor` | Edit homepage |
+| `viewer` | Read-only admin |
 
-Frontend admin today uses `ADMIN_SECRET`; backend is ready for proper multi-admin auth when MongoDB is connected.
+---
+
+## Frontend (`frontend/`)
+
+- **Public pages** load homepage from API (`getHomepageAsync`) with JSON fallback.
+- **Admin** uses NextAuth; login calls `POST /api/auth/login` on the backend.
+- JWT stored in session as `accessToken` for staff API calls.
+- Image/video uploads still write to `frontend/public/` then sync metadata to MongoDB.
+
+### Environment (`frontend/.env.local`)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
+AUTH_SECRET=...
+AUTH_URL=http://localhost:3000
+```
+
+---
+
+## Data flow
+
+```
+Browser → Next.js (3000) → Express API (4000) → MongoDB
+                ↓
+         public/ (images, videos)
+```
+
+Staff accounts and homepage content live in **MongoDB**. The frontend no longer uses SQLite/Prisma for auth.

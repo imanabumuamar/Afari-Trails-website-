@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { conservationValues } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationValues as default_conservationValues } from "@/lib/data/conservation";
 
-export function ConservationValues() {
+export async function ConservationValues() {
+  const content = await getVenturePageContent("conservation");
+  const conservationValues = content.conservationValues as typeof default_conservationValues;
+
   return (
     <section className="border-y border-charcoal/10 bg-beige py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

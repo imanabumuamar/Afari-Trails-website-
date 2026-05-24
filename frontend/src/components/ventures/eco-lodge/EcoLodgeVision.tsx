@@ -1,6 +1,10 @@
-import { ecoLodgeFutureVision } from "@/lib/data/eco-lodge";
+import { ecoLodgeFutureVision as default_ecoLodgeFutureVision } from "@/lib/data/eco-lodge";
+import { getVenturePageContent } from "@/services/content/ventures";
 
-export function EcoLodgeVision() {
+export async function EcoLodgeVision() {
+  const content = await getVenturePageContent("eco-lodge");
+  const ecoLodgeFutureVision = content.ecoLodgeFutureVision as typeof default_ecoLodgeFutureVision;
+
   return (
     <section className="relative flex min-h-[60vh] items-center justify-center bg-matte-black px-6 py-28 lg:min-h-[70vh]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--safari-green-deep)_0%,_var(--matte-black)_70%)]" />

@@ -1,7 +1,11 @@
 import Image from "next/image";
-import { hospitalityGallery } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { hospitalityGallery as default_hospitalityGallery } from "@/lib/data/hospitality";
 
-export function HospitalityGallery() {
+export async function HospitalityGallery() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityGallery = content.hospitalityGallery as typeof default_hospitalityGallery;
+
   return (
     <section className="overflow-hidden bg-matte-black py-4 lg:py-6" aria-label="Visual immersion">
       <div className="flex gap-1 overflow-x-auto scrollbar-none lg:gap-1.5">

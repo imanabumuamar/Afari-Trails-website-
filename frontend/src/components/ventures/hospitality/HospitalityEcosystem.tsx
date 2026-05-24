@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { hospitalityEcosystem } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { hospitalityEcosystem as default_hospitalityEcosystem } from "@/lib/data/hospitality";
 
-export function HospitalityEcosystem() {
+export async function HospitalityEcosystem() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityEcosystem = content.hospitalityEcosystem as typeof default_hospitalityEcosystem;
+
   return (
     <section className="border-y border-charcoal/10 bg-beige py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 text-center lg:px-10">

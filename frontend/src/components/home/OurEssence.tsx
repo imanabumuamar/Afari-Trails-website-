@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { getHomepage } from "@/services/content/homepage";
+import { getHomepageAsync } from "@/services/content/homepage";
 import { site } from "@/lib/data/site";
 
-export function OurEssence() {
-  const { ourEssence } = getHomepage();
+export async function OurEssence() {
+  const { ourEssence } = await getHomepageAsync();
 
   return (
     <section className="bg-ivory py-20 lg:py-28">

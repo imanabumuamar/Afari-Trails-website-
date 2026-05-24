@@ -1,0 +1,142 @@
+{
+  "slug": "connect",
+  "data": {
+    "venturesConnectConfig": {
+      "hero": {
+        "label": "Ventures & Partnerships",
+        "heading": "Let's Build Something Meaningful Together.",
+        "subheading": "For hospitality, conservation, community, agriculture, and aligned investment — we welcome conversations with those who share a long-term vision for Africa.",
+        "cta": "Begin the Conversation",
+        "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+        "imageAlt": "Luxury lodge architecture overlooking the Zambezi valley"
+      },
+      "intro": {
+        "label": "For Collaborators",
+        "statement": "Afari Ventures is not a real estate play — it is a commitment to places, people, and experiences that endure.",
+        "body": "Whether you lead a lodge, conservation initiative, community program, or creative studio — tell us about your vision. We partner with intention, not volume."
+      },
+      "categories": {
+        "label": "Partnership Paths",
+        "heading": "Where we collaborate.",
+        "items": [
+          {
+            "id": "hospitality",
+            "title": "Hospitality Development",
+            "description": "Eco lodges, camps, and destination concepts.",
+            "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=85",
+            "href": "/ventures/hospitality"
+          },
+          {
+            "id": "conservation",
+            "title": "Conservation",
+            "description": "Wildlife, land, and ecosystem partnerships.",
+            "image": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=900&q=85",
+            "href": "/ventures/conservation"
+          },
+          {
+            "id": "community",
+            "title": "Community Empowerment",
+            "description": "Local leadership and cultural collaboration.",
+            "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=900&q=85",
+            "href": "/ventures/community"
+          },
+          {
+            "id": "agriculture",
+            "title": "Sustainable Agriculture",
+            "description": "Regenerative land and food systems.",
+            "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&q=85",
+            "href": "/ventures/agriculture"
+          },
+          {
+            "id": "investment",
+            "title": "Investment & Development",
+            "description": "Aligned capital and long-horizon builds.",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=85",
+            "href": "#form",
+            "inquiry": "investment"
+          },
+          {
+            "id": "partner",
+            "title": "Full Partnership Vision",
+            "description": "Explore our partner philosophy in depth.",
+            "image": "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=900&q=85",
+            "href": "/ventures/partner"
+          }
+        ]
+      },
+      "form": {
+        "label": "Ventures Inquiry",
+        "heading": "Share your vision",
+        "subtext": "We look forward to hearing your ideas — and exploring whether the trail aligns.",
+        "submitLabel": "Begin the Conversation",
+        "successMessage": "Thank you. We review every partnership inquiry with care and will reach out when there is alignment.",
+        "inquiryOptions": [
+          {
+            "value": "hospitality",
+            "label": "Hospitality Development"
+          },
+          {
+            "value": "conservation",
+            "label": "Conservation"
+          },
+          {
+            "value": "community",
+            "label": "Community Empowerment"
+          },
+          {
+            "value": "agriculture",
+            "label": "Sustainable Agriculture"
+          },
+          {
+            "value": "investment",
+            "label": "Investment"
+          },
+          {
+            "value": "media",
+            "label": "Media & Storytelling"
+          },
+          {
+            "value": "general",
+            "label": "General Partnership"
+          }
+        ]
+      },
+      "direct": {
+        "email": "ventures@afaritrails.com",
+        "location": "Lusaka, Zambia",
+        "socials": [
+          {
+            "label": "Instagram",
+            "href": "https://instagram.com"
+          },
+          {
+            "label": "Pinterest",
+            "href": "https://pinterest.com"
+          }
+        ]
+      },
+      "gallery": [
+        {
+          "src": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=85",
+          "alt": "Hospitality architecture"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+          "alt": "Community collaboration"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=85",
+          "alt": "Sustainable agriculture"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+          "alt": "Zambezi valley development"
+        }
+      ],
+      "closing": {
+        "quote": "The strongest ventures are built where vision, land, and people meet."
+      }
+    }
+  },
+  "updatedAt": "2026-05-23T18:03:59.491Z"
+}

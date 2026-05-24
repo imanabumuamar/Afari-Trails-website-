@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { hospitalityDesign } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { hospitalityDesign as default_hospitalityDesign } from "@/lib/data/hospitality";
 
-export function HospitalityDesign() {
+export async function HospitalityDesign() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityDesign = content.hospitalityDesign as typeof default_hospitalityDesign;
+
   return (
     <section className="bg-ivory py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

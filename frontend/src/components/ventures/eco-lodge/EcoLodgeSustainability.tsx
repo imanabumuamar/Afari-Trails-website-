@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { ecoLodgeSustainability } from "@/lib/data/eco-lodge";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { ecoLodgeSustainability as default_ecoLodgeSustainability } from "@/lib/data/eco-lodge";
 
-export function EcoLodgeSustainability() {
+export async function EcoLodgeSustainability() {
+  const content = await getVenturePageContent("eco-lodge");
+  const ecoLodgeSustainability = content.ecoLodgeSustainability as typeof default_ecoLodgeSustainability;
+
   return (
     <section className="bg-safari-green-deep py-24 text-ivory lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

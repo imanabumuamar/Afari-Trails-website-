@@ -4,7 +4,7 @@ export const venturesHero = {
   intro:
     "Afari Trails Ventures is committed to sustainable development across hospitality, conservation, and community — creating long-term value for the land, its people, and those who journey through it.",
   image:
-    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=2400&q=85",
 } as const;
 
 export const venturesMission = {
@@ -127,10 +127,10 @@ export const featuredProject = {
   description:
     "An eco-lodge vision along the Zambezi corridor — low-impact hospitality designed for stillness, river views, and deep connection to the valley.",
   status: "In Development",
-  category: "Hospitality · Eco Lodge",
   image:
-    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=2400&q=85",
   href: "/ventures/eco-lodge",
+  ctaLabel: "View Project →",
 } as const;
 
 export const venturesCta = {
@@ -139,4 +139,10 @@ export const venturesCta = {
   body: "We welcome conversations with landowners, hospitality partners, conservation groups, and aligned investors.",
   image:
     "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+  ctaLabel: "Get In Touch →",
+  ctaHref: "/ventures/connect",
+} as const;
+
+export const focusAreasSection = {
+  label: "Our Focus Areas",
 } as const;

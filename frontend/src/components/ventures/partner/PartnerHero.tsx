@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { partnerHero } from "@/lib/data/partner";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { partnerHero as default_partnerHero } from "@/lib/data/partner";
 
-export function PartnerHero() {
+export async function PartnerHero() {
+  const content = await getVenturePageContent("partner");
+  const partnerHero = content.partnerHero as typeof default_partnerHero;
+
   return (
     <section className="relative min-h-screen">
       <Image

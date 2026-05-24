@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { communityInitiatives } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityInitiatives as default_communityInitiatives } from "@/lib/data/community";
 
-export function CommunityInitiatives() {
+export async function CommunityInitiatives() {
+  const content = await getVenturePageContent("community");
+  const communityInitiatives = content.communityInitiatives as typeof default_communityInitiatives;
+
   return (
     <section
       id="initiatives"

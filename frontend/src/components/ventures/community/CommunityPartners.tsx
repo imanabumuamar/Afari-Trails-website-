@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { communityPartners } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityPartners as default_communityPartners } from "@/lib/data/community";
 
-export function CommunityPartners() {
+export async function CommunityPartners() {
+  const content = await getVenturePageContent("community");
+  const communityPartners = content.communityPartners as typeof default_communityPartners;
+
   return (
     <section className="bg-ivory py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { communityFocusAreas } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityFocusAreas as default_communityFocusAreas } from "@/lib/data/community";
 
-export function CommunityFocusAreas() {
+export async function CommunityFocusAreas() {
+  const content = await getVenturePageContent("community");
+  const communityFocusAreas = content.communityFocusAreas as typeof default_communityFocusAreas;
+
   return (
     <section id="focus" className="scroll-mt-24 bg-beige py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
-import { hospitalityHero } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { hospitalityHero as default_hospitalityHero } from "@/lib/data/hospitality";
 
-export function HospitalityHero() {
+export async function HospitalityHero() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityHero = content.hospitalityHero as typeof default_hospitalityHero;
+
   return (
     <section className="relative min-h-screen">
       <Image

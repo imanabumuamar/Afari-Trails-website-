@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getHomepage } from "@/services/content/homepage";
+import { getHomepageAsync } from "@/services/content/homepage";
+import type { HomepageContent } from "@/types/homepage";
 
 type FeatureCardConfig = {
-  id: keyof ReturnType<typeof getHomepage>["featureCards"];
+  id: keyof HomepageContent["featureCards"];
   title: string;
   description: string;
   cta: string;
@@ -65,8 +66,8 @@ function CardIcon({ type }: { type: FeatureCardConfig["icon"] }) {
   );
 }
 
-export function FeatureCards() {
-  const { featureCards } = getHomepage();
+export async function FeatureCards() {
+  const { featureCards } = await getHomepageAsync();
 
   return (
     <div className="relative z-20 mx-auto grid max-w-[1400px] gap-4 px-6 md:grid-cols-3 md:gap-5 lg:-mt-28 lg:px-10 lg:gap-6">

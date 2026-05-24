@@ -1,7 +1,11 @@
 import Image from "next/image";
-import { communityGallery } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityGallery as default_communityGallery } from "@/lib/data/community";
 
-export function CommunityGallery() {
+export async function CommunityGallery() {
+  const content = await getVenturePageContent("community");
+  const communityGallery = content.communityGallery as typeof default_communityGallery;
+
   return (
     <section className="overflow-hidden bg-matte-black py-4 lg:py-6" aria-label="Visual storytelling">
       <div className="flex gap-1 overflow-x-auto scrollbar-none lg:gap-1.5">

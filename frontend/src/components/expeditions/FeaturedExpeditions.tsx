@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { ROUTES } from "@/config/routes";
 import { featuredExpeditions } from "@/lib/data/expeditions";
 
 export function FeaturedExpeditions() {
@@ -15,7 +16,7 @@ export function FeaturedExpeditions() {
             </h2>
           </div>
           <Link
-            href="#featured"
+            href={ROUTES.expeditionsAll}
             className="shrink-0 text-xs font-medium uppercase tracking-[0.25em] text-charcoal/60 transition-colors hover:text-gold"
           >
             View All Expeditions →

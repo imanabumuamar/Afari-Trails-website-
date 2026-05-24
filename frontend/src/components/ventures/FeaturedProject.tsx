@@ -1,44 +1,43 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SectionLabel } from "@/components/ui/SectionLabel";
-import { featuredProject } from "@/lib/data/ventures";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { featuredProject as defaultFeaturedProject } from "@/lib/data/ventures";
 
-export function FeaturedProject() {
+export async function FeaturedProject() {
+  const content = await getVenturePageContent("main");
+  const project = content.featuredProject as typeof defaultFeaturedProject;
+
   return (
-    <section className="relative min-h-[85vh] lg:min-h-screen">
-      <Image
-        src={featuredProject.image}
-        alt={featuredProject.title}
-        fill
-        className="object-cover"
-        sizes="100vw"
-        priority={false}
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-matte-black/85 via-matte-black/50 to-matte-black/25" />
-      <div className="absolute inset-0 bg-gradient-to-t from-matte-black/70 via-transparent to-matte-black/30" />
+    <section
+      id="featured-project"
+      className="scroll-mt-24 grid min-h-[420px] grid-cols-[2fr_3fr] items-stretch sm:min-h-[480px] lg:min-h-[520px]"
+    >
+      <div className="flex flex-col justify-center bg-charcoal px-4 py-10 sm:px-6 sm:py-16 lg:px-14 lg:py-24">
+        <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-sand">
+          {project.label}
+        </p>
+        <h2 className="mt-4 max-w-md font-serif text-3xl font-light leading-tight text-ivory md:text-4xl lg:text-[2.5rem]">
+          {project.title}
+        </h2>
+        <p className="mt-6 max-w-md text-sm leading-[1.85] text-ivory/65 md:text-base">
+          {project.description}
+        </p>
+        <Link
+          href={project.href ?? "/ventures/eco-lodge"}
+          className="mt-10 inline-flex w-fit border border-ivory/40 px-8 py-3.5 text-[10px] font-medium uppercase tracking-[0.22em] text-ivory transition-colors hover:border-sand hover:text-sand"
+        >
+          {project.ctaLabel ?? "View Project →"}
+        </Link>
+      </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[85vh] max-w-[1400px] flex-col justify-end px-6 pb-16 pt-32 lg:min-h-screen lg:justify-center lg:px-10 lg:pb-24 lg:pt-36">
-        <div className="max-w-xl lg:max-w-2xl">
-          <SectionLabel light>{featuredProject.label}</SectionLabel>
-          <span className="mt-5 inline-flex border border-ivory/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-ivory/70">
-            {featuredProject.status}
-          </span>
-          <p className="mt-4 text-[11px] uppercase tracking-[0.24em] text-sand">
-            {featuredProject.category}
-          </p>
-          <h2 className="mt-6 font-serif text-4xl font-light leading-tight text-ivory md:text-5xl lg:text-[3.5rem] lg:leading-[1.1]">
-            {featuredProject.title}
-          </h2>
-          <p className="mt-8 max-w-md text-sm leading-[1.85] text-ivory/75 md:text-base">
-            {featuredProject.description}
-          </p>
-          <Link
-            href={featuredProject.href}
-            className="mt-10 inline-flex items-center justify-center border border-ivory/55 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10"
-          >
-            Explore the Vision →
-          </Link>
-        </div>
+      <div className="relative min-h-0 w-full">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, 60vw"
+        />
       </div>
     </section>
   );

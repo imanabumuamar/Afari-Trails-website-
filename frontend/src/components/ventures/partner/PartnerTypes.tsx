@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { partnershipTypes } from "@/lib/data/partner";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { partnershipTypes as default_partnershipTypes } from "@/lib/data/partner";
 
-export function PartnerTypes() {
+export async function PartnerTypes() {
+  const content = await getVenturePageContent("partner");
+  const partnershipTypes = content.partnershipTypes as typeof default_partnershipTypes;
+
   return (
     <section className="bg-beige py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

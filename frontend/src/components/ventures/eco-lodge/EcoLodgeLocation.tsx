@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { ecoLodgeLocation } from "@/lib/data/eco-lodge";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { ecoLodgeLocation as default_ecoLodgeLocation } from "@/lib/data/eco-lodge";
 
-export function EcoLodgeLocation() {
+export async function EcoLodgeLocation() {
+  const content = await getVenturePageContent("eco-lodge");
+  const ecoLodgeLocation = content.ecoLodgeLocation as typeof default_ecoLodgeLocation;
+
   return (
     <section className="grid lg:grid-cols-2">
       <div className="relative min-h-[360px] lg:min-h-[560px]">

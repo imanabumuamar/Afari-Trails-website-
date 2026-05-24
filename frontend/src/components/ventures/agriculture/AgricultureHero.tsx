@@ -2,9 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
-import { agricultureHero } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agricultureHero as default_agricultureHero } from "@/lib/data/agriculture";
 
-export function AgricultureHero() {
+export async function AgricultureHero() {
+  const content = await getVenturePageContent("agriculture");
+  const agricultureHero = content.agricultureHero as typeof default_agricultureHero;
+
   return (
     <section className="relative min-h-screen">
       <Image

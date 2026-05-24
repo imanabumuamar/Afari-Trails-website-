@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { communityPhilosophy } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityPhilosophy as default_communityPhilosophy } from "@/lib/data/community";
 
-export function CommunityPhilosophy() {
+export async function CommunityPhilosophy() {
+  const content = await getVenturePageContent("community");
+  const communityPhilosophy = content.communityPhilosophy as typeof default_communityPhilosophy;
+
   return (
     <section className="bg-ivory py-28 lg:py-40">
       <div className="mx-auto grid max-w-[1400px] gap-14 px-6 lg:grid-cols-12 lg:gap-16 lg:px-10">

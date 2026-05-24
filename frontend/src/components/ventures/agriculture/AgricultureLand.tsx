@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { agricultureLand } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agricultureLand as default_agricultureLand } from "@/lib/data/agriculture";
 
-export function AgricultureLand() {
+export async function AgricultureLand() {
+  const content = await getVenturePageContent("agriculture");
+  const agricultureLand = content.agricultureLand as typeof default_agricultureLand;
+
   return (
     <section className="relative min-h-[70vh] lg:min-h-[80vh]">
       <Image

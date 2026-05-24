@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { agricultureFocusAreas } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agricultureFocusAreas as default_agricultureFocusAreas } from "@/lib/data/agriculture";
 
-export function AgricultureFocusAreas() {
+export async function AgricultureFocusAreas() {
+  const content = await getVenturePageContent("agriculture");
+  const agricultureFocusAreas = content.agricultureFocusAreas as typeof default_agricultureFocusAreas;
+
   return (
     <section id="focus" className="scroll-mt-24 bg-beige py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

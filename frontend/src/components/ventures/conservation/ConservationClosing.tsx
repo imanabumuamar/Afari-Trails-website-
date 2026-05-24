@@ -1,6 +1,10 @@
-import { conservationClosing } from "@/lib/data/conservation";
+import { conservationClosing as default_conservationClosing } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
 
-export function ConservationClosing() {
+export async function ConservationClosing() {
+  const content = await getVenturePageContent("conservation");
+  const conservationClosing = content.conservationClosing as typeof default_conservationClosing;
+
   return (
     <section className="relative flex min-h-[55vh] items-center justify-center bg-matte-black px-6 py-28 lg:min-h-[60vh]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--safari-green-deep)_0%,_var(--matte-black)_75%)]" />

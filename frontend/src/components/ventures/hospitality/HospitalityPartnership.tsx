@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ROUTES } from "@/config/routes";
-import { hospitalityPartnership } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { hospitalityPartnership as default_hospitalityPartnership } from "@/lib/data/hospitality";
 
-export function HospitalityPartnership() {
+export async function HospitalityPartnership() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityPartnership = content.hospitalityPartnership as typeof default_hospitalityPartnership;
+
   return (
     <section className="relative min-h-[420px] lg:min-h-[480px]">
       <Image

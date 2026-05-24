@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { conservationFocusAreas } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationFocusAreas as default_conservationFocusAreas } from "@/lib/data/conservation";
 
-export function ConservationFocusAreas() {
+export async function ConservationFocusAreas() {
+  const content = await getVenturePageContent("conservation");
+  const conservationFocusAreas = content.conservationFocusAreas as typeof default_conservationFocusAreas;
+
   return (
     <section className="bg-beige py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

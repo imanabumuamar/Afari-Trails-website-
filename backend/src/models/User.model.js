@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { ROLES } from "../constants/roles.js";
 
 const userSchema = new mongoose.Schema(
   {
@@ -13,11 +14,11 @@ const userSchema = new mongoose.Schema(
     passwordHash: { type: String, required: true },
     role: {
       type: String,
-      enum: ["admin"],
-      default: "admin",
+      enum: ROLES,
+      default: "viewer",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const User =

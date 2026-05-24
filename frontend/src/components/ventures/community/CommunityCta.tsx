@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { ROUTES } from "@/config/routes";
-import { communityCta } from "@/lib/data/community";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { communityCta as default_communityCta } from "@/lib/data/community";
 
-export function CommunityCta() {
+export async function CommunityCta() {
+  const content = await getVenturePageContent("community");
+  const communityCta = content.communityCta as typeof default_communityCta;
+
   return (
     <section className="bg-beige py-24 text-center lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

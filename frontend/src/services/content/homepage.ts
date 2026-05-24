@@ -1,5 +1,6 @@
 import { writeFileSync } from "fs";
 import path from "path";
+import { getApiBaseUrl } from "@/lib/api/backend";
 import {
   HOMEPAGE_IMAGE_FIELDS,
   HOMEPAGE_VIDEO_FIELDS,
@@ -102,6 +103,21 @@ export function getHomepage(): HomepageContent {
   } catch {
     return DEFAULT_HOMEPAGE;
   }
+}
+
+/** Loads homepage from MongoDB API with JSON file fallback. */
+export async function getHomepageAsync(): Promise<HomepageContent> {
+  try {
+    const res = await fetch(`${getApiBaseUrl()}/content/homepage`, {
+      next: { revalidate: 30 },
+    });
+    if (res.ok) {
+      return normalizeHomepage((await res.json()) as Partial<HomepageContent>);
+    }
+  } catch {
+    // API offline — use local JSON
+  }
+  return getHomepage();
 }
 
 export function saveHomepage(

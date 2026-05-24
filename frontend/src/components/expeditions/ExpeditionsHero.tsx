@@ -25,7 +25,7 @@ export function ExpeditionsHero() {
           {expeditionsHero.subtext}
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-6">
-          <Button href="#featured" variant="sand">
+          <Button href={ROUTES.expeditionsAll} variant="sand">
             Explore Expeditions
           </Button>
           <Button href={ROUTES.expeditionsConnect} variant="text" showArrow>

@@ -18,7 +18,12 @@ export function requireJwt(req, res, next) {
   }
 
   try {
-    req.user = jwt.verify(token, config.jwt.secret);
+    const payload = jwt.verify(token, config.jwt.secret);
+    req.user = {
+      id: payload.sub,
+      email: payload.email,
+      role: payload.role,
+    };
     next();
   } catch {
     return res.status(401).json({ error: "Invalid token" });

@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { ecoLodgeExperiences } from "@/lib/data/eco-lodge";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { ecoLodgeExperiences as default_ecoLodgeExperiences } from "@/lib/data/eco-lodge";
 
-export function EcoLodgeExperiences() {
+export async function EcoLodgeExperiences() {
+  const content = await getVenturePageContent("eco-lodge");
+  const ecoLodgeExperiences = content.ecoLodgeExperiences as typeof default_ecoLodgeExperiences;
+
   return (
     <section id="experience" className="scroll-mt-24 bg-beige py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

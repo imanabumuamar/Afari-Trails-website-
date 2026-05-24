@@ -1,16 +1,8 @@
-import { auth } from "@/auth";
+import { requirePermission } from "@/lib/auth/require-session";
 
+/** Requires homepage write access (admin, editor, super_admin). */
 export async function requireAdminSession() {
-  const session = await auth();
-  if (!session?.user || session.user.role !== "admin") {
-    throw new AdminAuthError();
-  }
-  return session;
+  return requirePermission("content:homepage:write");
 }
 
-export class AdminAuthError extends Error {
-  constructor() {
-    super("Unauthorized");
-    this.name = "AdminAuthError";
-  }
-}
+export { AdminAuthError, AuthError } from "@/lib/auth/require-session";

@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { conservationPhilosophy } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationPhilosophy as default_conservationPhilosophy } from "@/lib/data/conservation";
 
-export function ConservationPhilosophy() {
+export async function ConservationPhilosophy() {
+  const content = await getVenturePageContent("conservation");
+  const conservationPhilosophy = content.conservationPhilosophy as typeof default_conservationPhilosophy;
+
   return (
     <section id="philosophy" className="scroll-mt-24 bg-ivory py-28 lg:py-40">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

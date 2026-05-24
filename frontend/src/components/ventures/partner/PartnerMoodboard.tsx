@@ -1,7 +1,11 @@
 import Image from "next/image";
-import { partnerMoodboard } from "@/lib/data/partner";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { partnerMoodboard as default_partnerMoodboard } from "@/lib/data/partner";
 
-export function PartnerMoodboard() {
+export async function PartnerMoodboard() {
+  const content = await getVenturePageContent("partner");
+  const partnerMoodboard = content.partnerMoodboard as typeof default_partnerMoodboard;
+
   return (
     <section className="overflow-hidden bg-ivory py-16 lg:py-20" aria-label="Visual atmosphere">
       <div

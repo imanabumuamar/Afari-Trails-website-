@@ -1,6 +1,10 @@
-import { hospitalityClosing } from "@/lib/data/hospitality";
+import { hospitalityClosing as default_hospitalityClosing } from "@/lib/data/hospitality";
+import { getVenturePageContent } from "@/services/content/ventures";
 
-export function HospitalityClosing() {
+export async function HospitalityClosing() {
+  const content = await getVenturePageContent("hospitality");
+  const hospitalityClosing = content.hospitalityClosing as typeof default_hospitalityClosing;
+
   return (
     <section className="relative flex min-h-[55vh] items-center justify-center bg-matte-black px-6 py-28 lg:min-h-[60vh]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--safari-green-deep)_0%,_var(--matte-black)_75%)]" />

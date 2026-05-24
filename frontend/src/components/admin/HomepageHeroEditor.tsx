@@ -8,12 +8,14 @@ type HomepageHeroEditorProps = {
   hero: HomepageHero;
   onHeroChange: (hero: HomepageHero) => void;
   onStatus: (message: string) => void;
+  readOnly?: boolean;
 };
 
 export function HomepageHeroEditor({
   hero,
   onHeroChange,
   onStatus,
+  readOnly = false,
 }: HomepageHeroEditorProps) {
   const [draft, setDraft] = useState(hero);
   const [saving, setSaving] = useState(false);
@@ -131,7 +133,10 @@ export function HomepageHeroEditor({
         Video: <code className="break-all">{draft.video}</code>
       </p>
 
-      <form onSubmit={saveCopy} className="mt-8 space-y-4 border-t border-charcoal/10 pt-8">
+      <form
+        onSubmit={readOnly ? (e) => e.preventDefault() : saveCopy}
+        className="mt-8 space-y-4 border-t border-charcoal/10 pt-8"
+      >
         <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/55">
           Text & buttons
         </h3>
@@ -143,7 +148,8 @@ export function HomepageHeroEditor({
             value={draft.heading}
             onChange={(e) => updateDraft({ heading: e.target.value })}
             rows={3}
-            className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm"
+            readOnly={readOnly}
+            className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm disabled:opacity-60"
           />
         </div>
         <div>
@@ -154,7 +160,8 @@ export function HomepageHeroEditor({
             value={draft.subtext}
             onChange={(e) => updateDraft({ subtext: e.target.value })}
             rows={3}
-            className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm"
+            readOnly={readOnly}
+            className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm disabled:opacity-60"
           />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -170,7 +177,8 @@ export function HomepageHeroEditor({
                   primaryCta: { ...draft.primaryCta, label: e.target.value },
                 })
               }
-              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm"
+              readOnly={readOnly}
+              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm disabled:opacity-60"
             />
             <label className="mt-3 block text-xs uppercase tracking-[0.2em] text-charcoal/55">
               Primary link
@@ -183,7 +191,8 @@ export function HomepageHeroEditor({
                   primaryCta: { ...draft.primaryCta, href: e.target.value },
                 })
               }
-              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm"
+              readOnly={readOnly}
+              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm disabled:opacity-60"
             />
           </div>
           <div>
@@ -198,7 +207,8 @@ export function HomepageHeroEditor({
                   secondaryCta: { ...draft.secondaryCta, label: e.target.value },
                 })
               }
-              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm"
+              readOnly={readOnly}
+              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm disabled:opacity-60"
             />
             <label className="mt-3 block text-xs uppercase tracking-[0.2em] text-charcoal/55">
               Secondary link
@@ -211,19 +221,23 @@ export function HomepageHeroEditor({
                   secondaryCta: { ...draft.secondaryCta, href: e.target.value },
                 })
               }
-              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm"
+              readOnly={readOnly}
+              className="mt-2 w-full border border-charcoal/20 bg-beige px-4 py-3 text-sm disabled:opacity-60"
             />
           </div>
         </div>
-        <button
-          type="submit"
-          disabled={saving}
-          className="bg-charcoal px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
-        >
-          {saving ? "Saving…" : "Save hero text"}
-        </button>
+        {!readOnly && (
+          <button
+            type="submit"
+            disabled={saving}
+            className="bg-charcoal px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
+          >
+            {saving ? "Saving…" : "Save hero text"}
+          </button>
+        )}
       </form>
 
+      {!readOnly && (
       <form onSubmit={uploadPoster} className="mt-8 space-y-4 border-t border-charcoal/10 pt-8">
         <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/55">
           Poster image (fallback & video thumbnail)
@@ -251,7 +265,9 @@ export function HomepageHeroEditor({
           {uploadingPoster ? "Uploading…" : "Upload poster"}
         </button>
       </form>
+      )}
 
+      {!readOnly && (
       <form onSubmit={uploadVideo} className="mt-8 space-y-4 border-t border-charcoal/10 pt-8">
         <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/55">
           Background video (MP4)
@@ -270,6 +286,7 @@ export function HomepageHeroEditor({
           {uploadingVideo ? "Uploading…" : "Upload video"}
         </button>
       </form>
+      )}
     </article>
   );
 }

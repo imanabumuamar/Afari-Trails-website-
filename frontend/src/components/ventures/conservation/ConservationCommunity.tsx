@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { conservationCommunity } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationCommunity as default_conservationCommunity } from "@/lib/data/conservation";
 
-export function ConservationCommunity() {
+export async function ConservationCommunity() {
+  const content = await getVenturePageContent("conservation");
+  const conservationCommunity = content.conservationCommunity as typeof default_conservationCommunity;
+
   return (
     <section className="grid lg:grid-cols-2">
       <div className="flex flex-col justify-center bg-ivory px-6 py-20 lg:order-2 lg:px-14 lg:py-28">

@@ -3,8 +3,9 @@ import { config } from "./index.js";
 
 export async function connectDatabase() {
   if (!config.mongodbUri) {
-    console.warn("[db] MONGODB_URI not set — API runs without database");
-    return null;
+    throw new Error(
+      "MONGODB_URI is not set. Copy backend/.env.example to backend/.env and start MongoDB.",
+    );
   }
 
   await mongoose.connect(config.mongodbUri);

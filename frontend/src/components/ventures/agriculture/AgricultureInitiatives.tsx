@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { agricultureInitiatives } from "@/lib/data/agriculture";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { agricultureInitiatives as default_agricultureInitiatives } from "@/lib/data/agriculture";
 
-export function AgricultureInitiatives() {
+export async function AgricultureInitiatives() {
+  const content = await getVenturePageContent("agriculture");
+  const agricultureInitiatives = content.agricultureInitiatives as typeof default_agricultureInitiatives;
+
   return (
     <section
       id="initiatives"

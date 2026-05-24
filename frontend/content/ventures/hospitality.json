@@ -1,0 +1,215 @@
+{
+  "slug": "hospitality",
+  "data": {
+    "hospitalityHero": {
+      "label": "Hospitality Development",
+      "heading": "Designing Experiences Rooted in Landscape, Culture, and Stillness.",
+      "subheading": "Afari Trails envisions hospitality experiences that blend architecture, wilderness, sustainability, and immersive storytelling across Africa.",
+      "exploreCta": "Explore the Vision",
+      "partnerCta": "Partner With Us",
+      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=2400&q=85",
+      "imageAlt": "Luxury safari lodge architecture overlooking wilderness at dusk"
+    },
+    "hospitalityPhilosophy": {
+      "label": "Our Philosophy",
+      "statement": "We believe hospitality should create a sense of belonging, connection, and immersion within the landscapes and cultures that surround it.",
+      "themes": [
+        "Slow luxury shaped by place",
+        "Immersive design and emotional experience",
+        "Sustainability woven into every detail",
+        "Cultural authenticity over imitation",
+        "Architecture in harmony with nature",
+        "Intentional living on the trail"
+      ]
+    },
+    "hospitalityFocusAreas": {
+      "label": "Development Focus",
+      "heading": "Where vision takes form.",
+      "items": [
+        {
+          "id": "eco-lodge",
+          "title": "Eco Lodges",
+          "description": "Low-impact wilderness retreats immersed in landscape and story.",
+          "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+          "href": "/ventures/eco-lodge"
+        },
+        {
+          "id": "safari-camps",
+          "title": "Safari Camps",
+          "description": "Immersive expedition-based hospitality shaped by the rhythm of the wild.",
+          "image": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=1000&q=85"
+        },
+        {
+          "id": "wellness",
+          "title": "Wellness Retreats",
+          "description": "Stillness, nature, and restoration — paced for presence, not performance.",
+          "image": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1000&q=85"
+        },
+        {
+          "id": "cultural",
+          "title": "Cultural Hospitality Experiences",
+          "description": "Locally rooted storytelling and cultural immersion at the heart of every stay.",
+          "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+          "href": "/ventures/community"
+        },
+        {
+          "id": "destination",
+          "title": "Sustainable Destination Development",
+          "description": "Long-term hospitality ecosystems built responsibly across regions and communities.",
+          "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85"
+        },
+        {
+          "id": "boutique",
+          "title": "Boutique Wilderness Escapes",
+          "description": "Private, intimate experiences designed for deep connection to place.",
+          "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=85"
+        }
+      ]
+    },
+    "hospitalityDesign": {
+      "label": "Architecture & Design",
+      "heading": "Built to belong.",
+      "body": "Natural materials, open-air architecture, earthy textures, and handcrafted interiors — structures that blend into landscape through local craftsmanship and sustainable design. Every space is considered: light, air, silence, and the view beyond the deck.",
+      "moodboard": [
+        {
+          "src": "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=900&q=85",
+          "alt": "Natural wood and linen interior textures"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=85",
+          "alt": "Earthy stone and warm interior light"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=900&q=85",
+          "alt": "Handcrafted architectural details"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=900&q=85",
+          "alt": "Fire-lit evening atmosphere"
+        }
+      ]
+    },
+    "hospitalityExperience": {
+      "label": "Experience Philosophy",
+      "quote": "True luxury is space, silence, and emotional connection to place.",
+      "themes": [
+        "Stillness",
+        "Connection to Nature",
+        "Slow Living",
+        "Meaningful Exploration",
+        "Cultural Immersion",
+        "Storytelling Through Space"
+      ]
+    },
+    "hospitalityDestinations": {
+      "label": "Future Destinations",
+      "heading": "Horizons we are shaping.",
+      "intro": "Conceptual today — expansive tomorrow. Destinations envisioned across Africa's most extraordinary landscapes.",
+      "items": [
+        "Zambia Wilderness Retreats",
+        "Riverfront Safari Lodges",
+        "Conservation-Based Camps",
+        "Cultural Escape Concepts",
+        "Remote Wellness Sanctuaries"
+      ]
+    },
+    "hospitalitySustainability": {
+      "label": "Responsible Development",
+      "heading": "Luxury with accountability.",
+      "intro": "Elegant stewardship — intelligent, never preachy.",
+      "pillars": [
+        {
+          "title": "Low-Impact Construction",
+          "description": "Structures that touch the land lightly and endure with grace."
+        },
+        {
+          "title": "Renewable Systems",
+          "description": "Energy and water designed for wilderness operations."
+        },
+        {
+          "title": "Conservation Partnerships",
+          "description": "Hospitality aligned with protection of wild places."
+        },
+        {
+          "title": "Local Sourcing",
+          "description": "Materials, craft, and food rooted in surrounding communities."
+        },
+        {
+          "title": "Community Integration",
+          "description": "Employment and collaboration at the center of development."
+        },
+        {
+          "title": "Responsible Tourism",
+          "description": "Travel that leaves people and landscapes stronger."
+        }
+      ]
+    },
+    "hospitalityGallery": [
+      {
+        "src": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=85",
+        "alt": "Lantern-lit lodge deck"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=1000&q=85",
+        "alt": "Warm interior atmosphere"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=85",
+        "alt": "Architecture in wilderness"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+        "alt": "Riverside landscape"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+        "alt": "Retreat at golden hour"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1000&q=85",
+        "alt": "Campfire evening"
+      }
+    ],
+    "hospitalityPartnership": {
+      "heading": "Partnership & Investment",
+      "body": "Afari Trails welcomes aligned partnerships in hospitality, architecture, conservation, and destination development across Africa.",
+      "primaryCta": "Partner With Us",
+      "secondaryCta": "Discuss Opportunities"
+    },
+    "hospitalityEcosystem": {
+      "label": "The Afari Ecosystem",
+      "heading": "One vision. Many connected paths.",
+      "body": "Hospitality forms part of a wider Afari ecosystem connecting exploration, sustainability, culture, and immersive African living.",
+      "links": [
+        {
+          "label": "Expeditions",
+          "href": "/expeditions"
+        },
+        {
+          "label": "Conservation",
+          "href": "/ventures/conservation"
+        },
+        {
+          "label": "Agriculture",
+          "href": "/ventures/agriculture"
+        },
+        {
+          "label": "Community",
+          "href": "/ventures/community"
+        },
+        {
+          "label": "Archive",
+          "href": "/archive"
+        },
+        {
+          "label": "Store",
+          "href": "/store"
+        }
+      ]
+    },
+    "hospitalityClosing": {
+      "quote": "Hospitality is not only where people stay. It is how people feel remembered by a place."
+    }
+  },
+  "updatedAt": "2026-05-23T18:03:59.480Z"
+}

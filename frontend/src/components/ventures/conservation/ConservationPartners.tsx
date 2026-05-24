@@ -1,7 +1,11 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { conservationPartners } from "@/lib/data/conservation";
+import { getVenturePageContent } from "@/services/content/ventures";
+import { conservationPartners as default_conservationPartners } from "@/lib/data/conservation";
 
-export function ConservationPartners() {
+export async function ConservationPartners() {
+  const content = await getVenturePageContent("conservation");
+  const conservationPartners = content.conservationPartners as typeof default_conservationPartners;
+
   return (
     <section className="bg-ivory py-24 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
