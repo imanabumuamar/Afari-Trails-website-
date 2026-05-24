@@ -1,24 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import { archiveImages, collections, type ArchiveGridCategory } from "@/lib/data/archive";
-import type { ArchiveImage } from "@/lib/data/archive";
+import type {
+  ArchiveCollection,
+  ArchiveGridCategory,
+  ArchiveImageRecord,
+} from "@/types/archive-content";
 
 type ArchiveMasonryProps = {
+  collections: ArchiveCollection[];
+  images: ArchiveImageRecord[];
   active: ArchiveGridCategory;
-  onSelect: (item: ArchiveImage) => void;
+  onSelect: (item: ArchiveImageRecord) => void;
   onFilterChange: (id: ArchiveGridCategory) => void;
 };
 
 export function ArchiveMasonry({
+  collections,
+  images,
   active,
   onSelect,
   onFilterChange,
 }: ArchiveMasonryProps) {
   const filtered =
     active === "all"
-      ? archiveImages
-      : archiveImages.filter((img) => img.category === active);
+      ? images
+      : images.filter((img) => img.category === active);
 
   const activeLabel =
     active === "all"

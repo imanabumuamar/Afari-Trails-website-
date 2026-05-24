@@ -1,11 +1,14 @@
 import { JournalPageContent } from "@/components/journal/JournalPageContent";
+import { getJournalContent } from "@/services/content/journal";
 
 export const metadata = {
   title: "Journal",
   description:
-    "Stories from the trail — reflections, encounters, and field notes from Africa's wild places.",
+    "Stories, field notes, and reflections from Afari Trails journeys across Africa.",
 };
 
-export default function JournalPage() {
-  return <JournalPageContent />;
+export default async function JournalPage() {
+  const content = await getJournalContent();
+
+  return <JournalPageContent content={content} />;
 }

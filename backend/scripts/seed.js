@@ -9,9 +9,13 @@ dotenv.config({ path: path.join(__dirname, "../.env") });
 
 const { User } = await import("../src/models/User.model.js");
 const { HomepageContent } = await import("../src/models/HomepageContent.model.js");
-const { getHomepageContent, seedVentureContent } = await import(
-  "../src/services/content.service.js"
-);
+const {
+  getHomepageContent,
+  seedVentureContent,
+  seedExpeditionContent,
+  seedJournalContent,
+  seedArchiveContent,
+} = await import("../src/services/content.service.js");
 
 const email = process.env.ADMIN_EMAIL ?? "admin@afaritrails.com";
 const password = process.env.ADMIN_PASSWORD ?? "changeme123";
@@ -38,11 +42,16 @@ async function main() {
 
   await getHomepageContent();
   await seedVentureContent();
+  await seedExpeditionContent();
+  await seedJournalContent();
+  await seedArchiveContent();
 
   const superCount = await User.countDocuments({ role: "super_admin" });
   console.log(`Super admin: ${user.email} (${user.role})`);
   console.log(`Super admins in DB: ${superCount}`);
-  console.log("Homepage and venture content synced to MongoDB");
+  console.log(
+    "Homepage, venture, expedition, journal, and archive content synced to MongoDB",
+  );
 }
 
 main()

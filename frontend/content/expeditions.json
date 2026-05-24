@@ -1,0 +1,1009 @@
+{
+  "key": "main",
+  "data": {
+    "page": {
+      "hero": {
+        "heading": "Journeys Into the Wild.",
+        "subtext": "Curated expeditions across Zambia and beyond — designed for travelers seeking deeper encounters with Africa's landscapes, cultures, and untamed beauty.",
+        "image": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85"
+      },
+      "ourPromise": {
+        "label": "Our Promise",
+        "heading": "More than a trip. A return to what truly matters.",
+        "body": "Every expedition is designed to reconnect people with nature, stillness, adventure, and the spirit of exploration — paced for presence, not performance.",
+        "approachHref": "#approach",
+        "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1600&q=85"
+      },
+      "categoryBar": [
+        {
+          "id": "safari",
+          "title": "Safari Expeditions",
+          "tagline": "Iconic wildlife. Timeless landscapes.",
+          "icon": "elephant"
+        },
+        {
+          "id": "wilderness",
+          "title": "Wilderness Expeditions",
+          "tagline": "Off the beaten path. Wild and remote.",
+          "icon": "mountain"
+        },
+        {
+          "id": "cultural",
+          "title": "Cultural Expeditions",
+          "tagline": "Discover traditions. Connect with people.",
+          "icon": "mask"
+        },
+        {
+          "id": "private",
+          "title": "Private Expeditions",
+          "tagline": "Tailored journeys. Beyond expectations.",
+          "icon": "compass"
+        }
+      ],
+      "expeditionApproach": {
+        "heading": "Thoughtful by nature. Meaningful by design.",
+        "body": "We craft journeys with intention — small groups, expert guides, sustainable partnerships, and authentic connection to the land and its people.",
+        "pillars": [
+          {
+            "title": "Small Groups",
+            "icon": "group"
+          },
+          {
+            "title": "Expert Guides",
+            "icon": "guide"
+          },
+          {
+            "title": "Sustainable Travel",
+            "icon": "leaf"
+          },
+          {
+            "title": "Authentic Connections",
+            "icon": "heart"
+          }
+        ]
+      },
+      "expeditionsCta": {
+        "quote": "The wilderness has a way of returning us to ourselves.",
+        "readyLabel": "Ready to begin your journey?",
+        "boxText": "Let us design a private expedition tailored to your pace, interests, and style.",
+        "image": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85"
+      }
+    },
+    "featuredIds": [
+      "south-luangwa",
+      "lower-zambezi",
+      "livingstone",
+      "kafue",
+      "cultural-heritage"
+    ],
+    "expeditions": [
+      {
+        "id": "south-luangwa",
+        "name": "South Luangwa",
+        "title": "South Luangwa Wilderness Expedition",
+        "tagline": "Walking safaris and leopard country.",
+        "metaDescription": "A cinematic journey through Zambia's South Luangwa — walking safaris, river systems, and intimate wilderness camps paced for presence.",
+        "heroImage": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+        "quickDetails": [
+          "Zambia",
+          "7 Days",
+          "Small Group",
+          "Seasonal",
+          "Guided Experience"
+        ],
+        "intro": {
+          "statement": "A journey through Zambia's wild river systems, open plains, and untamed safari landscapes.",
+          "body": "South Luangwa moves at the pace of water and wildlife — dawn mist lifting from the Luangwa River, elephants threading through mopane woodland, and the quiet focus of a walking safari when the bush feels close enough to breathe. This is not a checklist of sightings; it is a rhythm of stillness, anticipation, and connection. Days unfold between river channels and open vleis, evenings settle around firelight, and every drive or walk is guided by people who know this valley as home."
+        },
+        "highlights": [
+          {
+            "label": "Duration",
+            "value": "5 – 7 Days"
+          },
+          {
+            "label": "Group Size",
+            "value": "6 – 8 Guests"
+          },
+          {
+            "label": "Location",
+            "value": "South Luangwa, Zambia"
+          },
+          {
+            "label": "Accommodation",
+            "value": "Intimate Safari Camps"
+          },
+          {
+            "label": "Best Season",
+            "value": "May – October"
+          },
+          {
+            "label": "Style",
+            "value": "Walking Safari · Photography"
+          }
+        ],
+        "visualStrip": [
+          {
+            "src": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "alt": "Leopard in dappled woodland light"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "alt": "Luangwa River at golden hour"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "alt": "Safari camp beneath open sky"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+            "alt": "Walking safari through the bush"
+          }
+        ],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Arrival & Wilderness Introduction",
+            "description": "Touch down in the valley and settle into camp. An evening drive introduces the landscape — riverine forest, open plains, and the first silhouettes of wildlife at dusk."
+          },
+          {
+            "day": 2,
+            "title": "River Safari & Wildlife Tracking",
+            "description": "Follow the Luangwa's edge by vehicle and on foot. Hippos, crocodiles, and birdlife animate the channels while guides read tracks and signs along the banks."
+          },
+          {
+            "day": 3,
+            "title": "Walking Expedition",
+            "description": "A full morning on foot — the signature Luangwa experience. Heightened senses, close encounters, and the rare privilege of meeting the bush at human pace."
+          },
+          {
+            "day": 4,
+            "title": "Open Plains & Golden Hour",
+            "description": "Explore grasslands and woodland mosaic. Photography-minded guests find long light; everyone finds space to watch without hurry."
+          },
+          {
+            "day": 5,
+            "title": "Night Sounds & Predator Country",
+            "description": "Optional night drive into a world of owls, civets, and leopard territory. Days remain unhurried; evenings deepen the sense of wildness."
+          },
+          {
+            "day": 6,
+            "title": "Slow Safari Rhythm",
+            "description": "A deliberately open day — repeat what called to you, rest at camp, or follow guides to a new corner of the valley."
+          },
+          {
+            "day": 7,
+            "title": "Departure & Last Light",
+            "description": "A final morning in the bush before transfer. The valley leaves its imprint — not as a tour completed, but as a place felt."
+          }
+        ],
+        "accommodation": {
+          "heading": "Camps in the heart of the valley",
+          "body": "Intimate safari camps designed for stillness, comfort, and immersion within the landscape. Canvas and timber blend with the bush; meals are shared under stars; sustainability and community partnership guide every stay. This is luxury measured in presence — not excess.",
+          "image": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+          "imageAlt": "Safari camp at twilight in the Luangwa Valley"
+        },
+        "experiences": [
+          {
+            "title": "Wildlife Encounters",
+            "body": "Leopard, lion, elephant, and endemic Thornicroft's giraffe — encounters shaped by patience and local knowledge rather than rushed schedules.",
+            "image": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "imageAlt": "Leopard resting on a branch"
+          },
+          {
+            "title": "Walking Safari",
+            "body": "The birthplace of the walking safari. On foot, the valley becomes intimate, immediate, and unforgettable.",
+            "image": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+            "imageAlt": "Guides leading a walking safari"
+          },
+          {
+            "title": "Campfire Evenings",
+            "body": "Stories, silence, and firelight. Nights at camp are part of the journey — not an intermission between drives.",
+            "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "imageAlt": "Evening campfire under African stars"
+          },
+          {
+            "title": "Photography Moments",
+            "body": "Long lenses optional. What matters is light — dawn mist, dust on a track, a heron lifting from the river.",
+            "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "imageAlt": "Golden sunset over the savanna"
+          }
+        ],
+        "gallery": [
+          {
+            "src": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+            "alt": "Elephants crossing at sunrise",
+            "wide": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "alt": "Leopard in woodland"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "alt": "River landscape"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1539650116574-75c0cddb8a8e?w=2400&q=85",
+            "alt": "Safari vehicle on a dusty track"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "alt": "Camp at dusk",
+            "wide": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "alt": "Campfire evening"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+            "alt": "Walking safari"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=85",
+            "alt": "Night sky over wilderness"
+          }
+        ],
+        "included": [
+          "Accommodation",
+          "All meals",
+          "Expert guides",
+          "Park & conservation fees",
+          "Safari activities",
+          "Airport transfers"
+        ],
+        "notIncluded": [
+          "International flights",
+          "Travel insurance",
+          "Gratuities",
+          "Personal purchases"
+        ],
+        "philosophy": {
+          "quote": "We believe meaningful exploration is less about rushing between destinations and more about reconnecting with the rhythm of the landscape."
+        },
+        "faq": [
+          {
+            "question": "Best time to visit?",
+            "answer": "The dry season (May–October) offers excellent wildlife viewing and comfortable temperatures. The emerald season brings lush scenery and fewer visitors — ideal for photographers who love atmosphere."
+          },
+          {
+            "question": "Fitness requirements?",
+            "answer": "Walking safaris are moderate — typically 2–4 hours on foot with breaks. A reasonable level of fitness and comfort in warm weather is recommended."
+          },
+          {
+            "question": "Packing recommendations?",
+            "answer": "Neutral-toned layers, comfortable walking shoes, sun protection, and a light jacket for cool mornings. Binoculars and a camera are welcome companions."
+          },
+          {
+            "question": "Group size?",
+            "answer": "We keep groups small — usually six to eight guests — so the experience stays personal and the bush stays quiet."
+          },
+          {
+            "question": "Travel logistics?",
+            "answer": "We coordinate regional flights and transfers to camp. Our team will guide you through visas, health considerations, and timing before you depart."
+          }
+        ],
+        "inquiry": {
+          "heading": "Begin your journey into the valley",
+          "subtext": "Share your dates and intentions. We will respond personally to shape an expedition that fits your pace and curiosity."
+        },
+        "relatedIds": [
+          "lower-zambezi",
+          "kafue"
+        ],
+        "closingQuote": "The wilderness changes more than scenery.",
+        "published": true
+      },
+      {
+        "id": "lower-zambezi",
+        "name": "Lower Zambezi",
+        "title": "Lower Zambezi River Expedition",
+        "tagline": "River channels and golden-hour canoes.",
+        "metaDescription": "Canoe the Zambezi, track wildlife along forested banks, and settle into riverside camps on an unhurried Lower Zambezi expedition.",
+        "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+        "quickDetails": [
+          "Zambia",
+          "5 Days",
+          "Small Group",
+          "River Season",
+          "Guided Experience"
+        ],
+        "intro": {
+          "statement": "Where the great river bends through forest and floodplain, adventure becomes reflection.",
+          "body": "The Lower Zambezi is water in motion — canoe gliding past elephant herds, fish eagles calling from fig trees, and the slow pulse of a landscape defined by the river. Mornings belong to mist and paddle; afternoons to game drives along the escarpment; evenings to the sound of hippos and the glow of a Zambezi sunset. This expedition is for travelers who want Africa's wild elegance from the waterline outward."
+        },
+        "highlights": [
+          {
+            "label": "Duration",
+            "value": "4 – 6 Days"
+          },
+          {
+            "label": "Group Size",
+            "value": "6 – 8 Guests"
+          },
+          {
+            "label": "Location",
+            "value": "Lower Zambezi, Zambia"
+          },
+          {
+            "label": "Accommodation",
+            "value": "Riverside Lodges & Camps"
+          },
+          {
+            "label": "Best Season",
+            "value": "April – November"
+          },
+          {
+            "label": "Style",
+            "value": "River Exploration · Canoe Safari"
+          }
+        ],
+        "visualStrip": [
+          {
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "alt": "Canoe on the Zambezi at dawn"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "alt": "River channels through forest"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+            "alt": "Elephants along the riverbank"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "alt": "Sunset over the water"
+          }
+        ],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Arrival on the River",
+            "description": "Settle into your lodge facing the Zambezi. An evening boat cruise introduces the rhythm of the water and its inhabitants."
+          },
+          {
+            "day": 2,
+            "title": "Canoe Safari",
+            "description": "Glide through channels with expert guides — close to waterbirds, hippos, and the quiet thrill of the river."
+          },
+          {
+            "day": 3,
+            "title": "Forest & Floodplain Drives",
+            "description": "Explore inland — buffalo, antelope, and predators moving between river and woodland."
+          },
+          {
+            "day": 4,
+            "title": "Angling & Stillness",
+            "description": "Optional fishing or a slow day at camp. Read, rest, and watch the river change with the light."
+          },
+          {
+            "day": 5,
+            "title": "Farewell on the Water",
+            "description": "A final morning on the river before departure — the Zambezi remembered as movement and mirror."
+          }
+        ],
+        "accommodation": {
+          "heading": "Riverside refuge",
+          "body": "Lodges and camps positioned for views and silence — open-fronted spaces, natural materials, and meals that celebrate local harvest. Comfort without crowding the wild.",
+          "image": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+          "imageAlt": "Riverside lodge overlooking the Zambezi"
+        },
+        "experiences": [
+          {
+            "title": "River Exploration",
+            "body": "Canoe and boat safaris reveal the Zambezi from its most intimate angle — water-level encounters with wildlife and landscape.",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "imageAlt": "Canoe safari on calm water"
+          },
+          {
+            "title": "Golden Hour on the Water",
+            "body": "The river at dusk is cinema — reflected sky, silhouetted elephants, and the hush before night.",
+            "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "imageAlt": "Golden hour on the Zambezi"
+          },
+          {
+            "title": "Wildlife Along the Banks",
+            "body": "Elephant, lion, and wild dog move between river and forest. Guides interpret every sign with quiet expertise.",
+            "image": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+            "imageAlt": "Wildlife at the river's edge"
+          }
+        ],
+        "gallery": [
+          {
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "alt": "Canoe on the Zambezi",
+            "wide": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "alt": "River channel"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+            "alt": "Elephants near water"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "alt": "River at sunset",
+            "wide": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "alt": "Riverside camp"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "alt": "Evening by the river"
+          }
+        ],
+        "included": [
+          "Accommodation",
+          "All meals",
+          "Guides & river activities",
+          "Park fees",
+          "Transfers"
+        ],
+        "notIncluded": [
+          "International flights",
+          "Travel insurance",
+          "Gratuities"
+        ],
+        "philosophy": {
+          "quote": "On the river, time softens. We design journeys that honor that softness — not fill it with noise."
+        },
+        "faq": [
+          {
+            "question": "Best time to visit?",
+            "answer": "Mid-season (June–September) offers excellent wildlife and comfortable weather. Shoulder months can be rewarding for fewer guests and dramatic skies."
+          },
+          {
+            "question": "Canoe experience required?",
+            "answer": "No prior experience needed. Guides provide instruction; routes are chosen for calm water and safety."
+          },
+          {
+            "question": "Group size?",
+            "answer": "Six to eight guests maximum for intimate river and drive experiences."
+          }
+        ],
+        "inquiry": {
+          "heading": "Inquire about this river journey",
+          "subtext": "Tell us when you hope to travel and what draws you to the Zambezi. We will craft a response as personal as the river itself."
+        },
+        "relatedIds": [
+          "south-luangwa",
+          "livingstone"
+        ],
+        "closingQuote": "Some journeys stay with you long after the trail ends.",
+        "published": true
+      },
+      {
+        "id": "livingstone",
+        "name": "Livingstone",
+        "title": "Livingstone & Victoria Falls Expedition",
+        "tagline": "Victoria Falls and the edge of adventure.",
+        "metaDescription": "Stand before Victoria Falls, explore the Zambezi, and discover Livingstone — where natural wonder meets thoughtful adventure.",
+        "heroImage": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+        "quickDetails": [
+          "Zambia",
+          "4 Days",
+          "Small Group",
+          "Year-Round",
+          "Guided Experience"
+        ],
+        "intro": {
+          "statement": "At the edge of the world's greatest curtain of water, awe becomes personal.",
+          "body": "Livingstone is mist, thunder, and the wide Zambezi — Victoria Falls as living force, not postcard backdrop. This expedition balances iconic wonder with quiet moments: a sunset cruise, a walk through spray-soaked rainforest, time with local guides who carry the story of this place. Adventure here is not adrenaline for its own sake — it is standing still long enough to feel the earth tremble."
+        },
+        "highlights": [
+          {
+            "label": "Duration",
+            "value": "3 – 5 Days"
+          },
+          {
+            "label": "Group Size",
+            "value": "6 – 10 Guests"
+          },
+          {
+            "label": "Location",
+            "value": "Livingstone, Zambia"
+          },
+          {
+            "label": "Accommodation",
+            "value": "Boutique River Lodges"
+          },
+          {
+            "label": "Best Season",
+            "value": "Year-Round"
+          },
+          {
+            "label": "Style",
+            "value": "Adventure · Cultural Connection"
+          }
+        ],
+        "visualStrip": [
+          {
+            "src": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+            "alt": "Victoria Falls mist and rainbow"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "alt": "Zambezi sunset cruise"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "alt": "Local heritage and craft"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "alt": "Wide river at dusk"
+          }
+        ],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Arrival & First Mist",
+            "description": "Settle in and meet the falls from a thoughtful distance — orientation, rest, and an evening facing the Zambezi."
+          },
+          {
+            "day": 2,
+            "title": "The Falls Up Close",
+            "description": "Walk the rainforest path — spray, rainbows, and the roar that defines Livingstone. Guided perspective, unhurried pace."
+          },
+          {
+            "day": 3,
+            "title": "River & Landscape",
+            "description": "Sunset cruise or gentle activity on the Zambezi. Wildlife, light, and the contrast of calm water beside thundering falls."
+          },
+          {
+            "day": 4,
+            "title": "Culture & Departure",
+            "description": "Connect with local heritage — craft, story, and community — before farewell. The falls remain; you carry something quieter away."
+          }
+        ],
+        "accommodation": {
+          "heading": "Lodges facing the Zambezi",
+          "body": "Boutique properties chosen for view, calm, and proximity to both falls and river — design that defers to landscape, service that feels personal.",
+          "image": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+          "imageAlt": "Lodge view toward Victoria Falls region"
+        },
+        "experiences": [
+          {
+            "title": "Victoria Falls",
+            "body": "Mosi-oa-Tunya — the Smoke That Thunders. Experience the falls through guided walks and viewpoints chosen for presence, not crowds.",
+            "image": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+            "imageAlt": "Victoria Falls"
+          },
+          {
+            "title": "Zambezi Sunsets",
+            "body": "Evening on the river — hippos, elephants in the distance, and sky turning gold over Africa's great waterway.",
+            "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "imageAlt": "Sunset on the Zambezi"
+          },
+          {
+            "title": "Cultural Connection",
+            "body": "Livingstone's living heritage — artisans, historians, and hosts who welcome you into story rather than spectacle.",
+            "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "imageAlt": "Cultural experience in Livingstone"
+          }
+        ],
+        "gallery": [
+          {
+            "src": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+            "alt": "Victoria Falls",
+            "wide": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "alt": "Zambezi cruise"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "alt": "Local culture"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "alt": "River sunset",
+            "wide": true
+          }
+        ],
+        "included": [
+          "Accommodation",
+          "Meals",
+          "Guided falls visit",
+          "River activity",
+          "Transfers"
+        ],
+        "notIncluded": [
+          "Flights",
+          "Optional adventure activities",
+          "Insurance"
+        ],
+        "philosophy": {
+          "quote": "Wonder should be witnessed, not consumed. We pace this expedition so the falls stay sacred — not scheduled."
+        },
+        "faq": [
+          {
+            "question": "Best time to see the falls?",
+            "answer": "High water (February–May) brings dramatic spray; low water (September–December) reveals the gorge. Both are extraordinary — we help you choose."
+          },
+          {
+            "question": "Adventure activities?",
+            "answer": "Optional add-ons — helicopter, bridge, rafting — can be arranged. The core expedition remains unhurried and grounded."
+          }
+        ],
+        "inquiry": {
+          "heading": "Connect with us about Livingstone",
+          "subtext": "Share your travel window and what you hope to feel at the falls. We will respond with a thoughtful plan."
+        },
+        "relatedIds": [
+          "lower-zambezi",
+          "cultural-heritage"
+        ],
+        "closingQuote": "The wilderness changes more than scenery.",
+        "published": true
+      },
+      {
+        "id": "kafue",
+        "name": "Kafue National Park",
+        "title": "Kafue Wilderness Expedition",
+        "tagline": "Floodplains, cheetah, and vast wilderness.",
+        "metaDescription": "Explore Zambia's vast Kafue — remote floodplains, cheetah country, and luxury bush camps far from the crowds.",
+        "heroImage": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+        "quickDetails": [
+          "Zambia",
+          "8 Days",
+          "Small Group",
+          "Remote",
+          "Guided Experience"
+        ],
+        "intro": {
+          "statement": "One of Africa's largest parks — and among its least crowded — opens like a continent within itself.",
+          "body": "Kafue is scale and solitude — Busanga Plains rising from mist, cheetah moving through golden grass, and waterways that draw thousands of birds. Here, safari returns to exploration: long drives without queues, camps spaced for silence, and guides who know a park so vast it never repeats itself. This expedition is for those who want wilderness with room to breathe."
+        },
+        "highlights": [
+          {
+            "label": "Duration",
+            "value": "6 – 8 Days"
+          },
+          {
+            "label": "Group Size",
+            "value": "4 – 6 Guests"
+          },
+          {
+            "label": "Location",
+            "value": "Kafue National Park, Zambia"
+          },
+          {
+            "label": "Accommodation",
+            "value": "Remote Bush Camps"
+          },
+          {
+            "label": "Best Season",
+            "value": "June – October"
+          },
+          {
+            "label": "Style",
+            "value": "Luxury Safari · Remote Wilderness"
+          }
+        ],
+        "visualStrip": [
+          {
+            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "alt": "Busanga Plains at sunset"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "alt": "Predator in open grassland"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1539650116574-75c0cddb8a8e?w=2400&q=85",
+            "alt": "Remote safari drive"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=85",
+            "alt": "Night sky over the plains"
+          }
+        ],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Into the Park",
+            "description": "Transfer deep into Kafue and arrive at camp as light fades — first sounds of the bush at night."
+          },
+          {
+            "day": 2,
+            "title": "Plains & Predators",
+            "description": "Busanga's openness — cheetah, lion, and lechwe on floodplain horizons that seem endless."
+          },
+          {
+            "day": 3,
+            "title": "River Systems",
+            "description": "Explore Kafue's waterways — hippos, puku, and the birdlife that makes this park legendary."
+          },
+          {
+            "day": 4,
+            "title": "Woodland & Wetland",
+            "description": "Contrast in habitat — forest patches, pans, and the ever-changing theatre of wild dog and cat."
+          },
+          {
+            "day": 5,
+            "title": "Slow Day in Camp",
+            "description": "Rest, read, optional walk. Luxury here means permission to do less."
+          },
+          {
+            "day": 6,
+            "title": "Deeper North or South",
+            "description": "Relocate or extend range — Kafue rewards time with discoveries no single visit exhausts."
+          },
+          {
+            "day": 7,
+            "title": "Final Drives",
+            "description": "Last light on the plains. The park's silence stays with you."
+          },
+          {
+            "day": 8,
+            "title": "Departure",
+            "description": "Morning transfer out — carrying the memory of true scale."
+          }
+        ],
+        "accommodation": {
+          "heading": "Remote bush camps",
+          "body": "Small-footprint camps on the plains and along rivers — en-suite comfort, solar power, and design that leaves no trace but gratitude.",
+          "image": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+          "imageAlt": "Remote bush camp on the plains"
+        },
+        "experiences": [
+          {
+            "title": "Busanga Plains",
+            "body": "Seasonal floodplains that transform into one of Africa's great wildlife stages — open, luminous, alive.",
+            "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "imageAlt": "Busanga Plains landscape"
+          },
+          {
+            "title": "Cheetah & Wild Dog",
+            "body": "Kafue's predators thrive in space. Sightings feel earned — and unforgettable.",
+            "image": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "imageAlt": "Cheetah on the plains"
+          },
+          {
+            "title": "Stargazing",
+            "body": "No light pollution. Nights here are a second safari — constellations over camp.",
+            "image": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=85",
+            "imageAlt": "Stars over the bush"
+          }
+        ],
+        "gallery": [
+          {
+            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "alt": "Plains sunset",
+            "wide": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "alt": "Wildlife on the plains"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1539650116574-75c0cddb8a8e?w=2400&q=85",
+            "alt": "Safari in Kafue"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "alt": "Bush camp",
+            "wide": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=85",
+            "alt": "Night sky"
+          }
+        ],
+        "included": [
+          "Accommodation",
+          "Meals",
+          "Guides & activities",
+          "Park fees",
+          "Internal transfers"
+        ],
+        "notIncluded": [
+          "International flights",
+          "Insurance",
+          "Gratuities"
+        ],
+        "philosophy": {
+          "quote": "Space is the luxury. In Kafue, we protect that space — for wildlife and for the traveler willing to listen."
+        },
+        "faq": [
+          {
+            "question": "How remote is Kafue?",
+            "answer": "Very — transfers can take several hours. The reward is exclusivity and some of Zambia's finest, least-pressured game viewing."
+          },
+          {
+            "question": "Best season for Busanga?",
+            "answer": "The plains camps operate in the dry season (roughly June–October) when wildlife concentrates on rising ground."
+          }
+        ],
+        "inquiry": {
+          "heading": "Inquire about Kafue",
+          "subtext": "Remote expeditions deserve personal planning. Tell us your dates and we will guide you into the park thoughtfully."
+        },
+        "relatedIds": [
+          "south-luangwa",
+          "lower-zambezi"
+        ],
+        "closingQuote": "Some journeys stay with you long after the trail ends.",
+        "published": true
+      },
+      {
+        "id": "cultural-heritage",
+        "name": "Cultural Heritage",
+        "title": "Zambian Cultural Heritage Expedition",
+        "tagline": "Traditions, artisans, and living heritage.",
+        "metaDescription": "Connect with Zambia's living heritage — artisans, communities, and landscapes woven into a thoughtful cultural expedition.",
+        "heroImage": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+        "quickDetails": [
+          "Zambia",
+          "5 Days",
+          "Small Group",
+          "Community-Led",
+          "Guided Experience"
+        ],
+        "intro": {
+          "statement": "Beyond the savanna — a journey into the people, craft, and stories that give the land its voice.",
+          "body": "Africa is not only wildlife. This expedition honors Zambia's living culture — village visits with dignity, workshops with artisans, music and meal shared with hosts who choose to welcome you. We move respectfully, with time for conversation and craft. Landscape still matters — rivers, markets, and golden afternoons — but the human thread is the heart of the journey."
+        },
+        "highlights": [
+          {
+            "label": "Duration",
+            "value": "4 – 5 Days"
+          },
+          {
+            "label": "Group Size",
+            "value": "6 – 8 Guests"
+          },
+          {
+            "label": "Location",
+            "value": "Zambia"
+          },
+          {
+            "label": "Accommodation",
+            "value": "Boutique Guesthouses"
+          },
+          {
+            "label": "Best Season",
+            "value": "Year-Round"
+          },
+          {
+            "label": "Style",
+            "value": "Cultural · Community Partnership"
+          }
+        ],
+        "visualStrip": [
+          {
+            "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "alt": "Artisan at work"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "alt": "Shared evening meal"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "alt": "Landscape along the journey"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "alt": "Thoughtful guest accommodation"
+          }
+        ],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Arrival & Orientation",
+            "description": "Meet your guides and hosts. An evening introduction to the journey's rhythm — respect, curiosity, and open conversation."
+          },
+          {
+            "day": 2,
+            "title": "Craft & Community",
+            "description": "Visit artisans — weaving, carving, or textile traditions passed through generations. Learn by watching and participating."
+          },
+          {
+            "day": 3,
+            "title": "Village & Landscape",
+            "description": "A day between community and countryside — markets, farmland, and the stories that connect them."
+          },
+          {
+            "day": 4,
+            "title": "Music, Food & Story",
+            "description": "Shared meals and performance — not staged tourism, but genuine exchange arranged with care."
+          },
+          {
+            "day": 5,
+            "title": "Reflection & Departure",
+            "description": "Closing conversation and transfer. You leave with relationships, not only photographs."
+          }
+        ],
+        "accommodation": {
+          "heading": "Guesthouses with soul",
+          "body": "Locally owned properties and boutique stays — comfort, character, and direct benefit to communities we partner with.",
+          "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+          "imageAlt": "Cultural heritage accommodation"
+        },
+        "experiences": [
+          {
+            "title": "Artisan Encounters",
+            "body": "Hands that shape clay, fiber, and wood — learn the philosophy behind the craft, not only the product.",
+            "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "imageAlt": "Artisan workshop"
+          },
+          {
+            "title": "Community Partnership",
+            "body": "Visits designed with hosts, not at them. Fair compensation, clear expectations, and mutual respect.",
+            "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "imageAlt": "Community gathering"
+          },
+          {
+            "title": "Landscape as Context",
+            "body": "Culture lives in place. Rivers, towns, and bush intervals frame every human story.",
+            "image": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "imageAlt": "Zambian landscape"
+          }
+        ],
+        "gallery": [
+          {
+            "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "alt": "Heritage and craft",
+            "wide": true
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "alt": "Evening gathering"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "alt": "Landscape"
+          },
+          {
+            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "alt": "Guest stay"
+          }
+        ],
+        "included": [
+          "Accommodation",
+          "Meals",
+          "Cultural guides",
+          "Community fees",
+          "Transfers"
+        ],
+        "notIncluded": [
+          "Flights",
+          "Insurance",
+          "Personal shopping"
+        ],
+        "philosophy": {
+          "quote": "Culture is not a performance. We travel to listen — and to leave something good behind."
+        },
+        "faq": [
+          {
+            "question": "How are communities involved?",
+            "answer": "Partners co-design visits, set terms, and receive fair payment. We avoid exploitative or intrusive practices."
+          },
+          {
+            "question": "Photography?",
+            "answer": "Always ask permission. Your guides will help navigate what is welcome and what is private."
+          }
+        ],
+        "inquiry": {
+          "heading": "Connect with Afari about this journey",
+          "subtext": "Tell us what you hope to learn and when you might travel. We will shape an itinerary with care for every host community."
+        },
+        "relatedIds": [
+          "livingstone",
+          "south-luangwa"
+        ],
+        "closingQuote": "Some journeys stay with you long after the trail ends.",
+        "published": true
+      }
+    ]
+  },
+  "updatedAt": "2026-05-24T20:49:49.243Z"
+}

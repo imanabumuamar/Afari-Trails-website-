@@ -8,6 +8,12 @@ export const PERMISSIONS = [
   "content:homepage:write",
   "content:ventures:read",
   "content:ventures:write",
+  "content:expeditions:read",
+  "content:expeditions:write",
+  "content:journal:read",
+  "content:journal:write",
+  "content:archive:read",
+  "content:archive:write",
   "users:read",
   "users:write",
 ] as const;
@@ -24,7 +30,7 @@ export const ROLE_LABELS: Record<Role, string> = {
 export const ROLE_DESCRIPTIONS: Record<Role, string> = {
   super_admin: "Full access, including user management",
   admin: "Edit all CMS content",
-  editor: "Edit homepage and ventures content",
+  editor: "Edit homepage, ventures, expeditions, journal, and archive content",
   viewer: "View admin content (read-only)",
 };
 
@@ -36,6 +42,12 @@ const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     "content:homepage:write",
     "content:ventures:read",
     "content:ventures:write",
+    "content:expeditions:read",
+    "content:expeditions:write",
+    "content:journal:read",
+    "content:journal:write",
+    "content:archive:read",
+    "content:archive:write",
   ],
   editor: [
     "admin:access",
@@ -43,11 +55,20 @@ const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     "content:homepage:write",
     "content:ventures:read",
     "content:ventures:write",
+    "content:expeditions:read",
+    "content:expeditions:write",
+    "content:journal:read",
+    "content:journal:write",
+    "content:archive:read",
+    "content:archive:write",
   ],
   viewer: [
     "admin:access",
     "content:homepage:read",
     "content:ventures:read",
+    "content:expeditions:read",
+    "content:journal:read",
+    "content:archive:read",
   ],
 };
 

@@ -1,12 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { archiveHero } from "@/lib/data/archive";
+import type { ArchivePageContent } from "@/types/archive-content";
 
-export function ArchiveHero() {
+type ArchiveHeroProps = {
+  hero: ArchivePageContent["hero"];
+};
+
+export function ArchiveHero({ hero }: ArchiveHeroProps) {
   return (
     <section className="relative flex min-h-screen items-center">
       <Image
-        src={archiveHero.image}
+        src={hero.image}
         alt="Elephant crossing at dawn on the African savanna"
         fill
         priority
@@ -18,13 +22,13 @@ export function ArchiveHero() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 py-32 lg:px-10">
         <p className="text-[10px] font-medium uppercase tracking-[0.35em] text-sand">
-          {archiveHero.label}
+          {hero.label}
         </p>
         <h1 className="mt-6 max-w-2xl font-serif text-5xl font-light leading-[1.1] text-ivory sm:text-6xl lg:text-[4.25rem]">
-          {archiveHero.heading}
+          {hero.heading}
         </h1>
         <p className="mt-8 max-w-md text-sm leading-relaxed text-ivory/65 md:text-base">
-          {archiveHero.description}
+          {hero.description}
         </p>
         <Link
           href="#collections"

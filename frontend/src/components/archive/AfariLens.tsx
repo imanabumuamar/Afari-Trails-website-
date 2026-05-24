@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { afariLens } from "@/lib/data/archive";
+import type { ArchivePageContent } from "@/types/archive-content";
 
-export function AfariLens() {
+type AfariLensProps = {
+  afariLens: ArchivePageContent["afariLens"];
+};
+
+export function AfariLens({ afariLens }: AfariLensProps) {
   return (
     <section className="bg-ivory py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1400px] gap-12 px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-10">

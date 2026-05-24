@@ -29,7 +29,9 @@ const SUB_HERO_FIELDS = [
   "subheading",
   "intro",
   "exploreCta",
+  "exploreHref",
   "partnerCta",
+  "partnerHref",
   "cta",
   "imageAlt",
 ] as const;
@@ -173,6 +175,16 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
           base[key] = asString(d[key]);
         }
       }
+      if (d.exploreCta || base.exploreCta) {
+        base.exploreCta = asString(d.exploreCta || base.exploreCta);
+        base.exploreHref = asString(d.exploreHref || base.exploreHref || "#who-we-are");
+      }
+      if (d.partnerCta || base.partnerCta) {
+        base.partnerCta = asString(d.partnerCta || base.partnerCta);
+        base.partnerHref = asString(
+          d.partnerHref || base.partnerHref || "/ventures/partner",
+        );
+      }
       return base;
     }
     case "text-block": {
@@ -191,14 +203,36 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
       const base: Record<string, unknown> = {
         label: asString(d.label),
         statement: asString(d.statement),
-      };
-      if ("body" in d) base.body = asString(d.body);
-      if ("themes" in d) {
-        base.themes = Array.isArray(d.themes)
+        body: asString(d.body),
+        partnerCta: asString(d.partnerCta),
+        deckCta: asString(d.deckCta),
+        partnerHref: asString(d.partnerHref || "/ventures/partner"),
+        deckHref: asString(d.deckHref || "/ventures/connect"),
+        themes: Array.isArray(d.themes)
           ? d.themes.map((t) => asString(t))
-          : [];
-      }
+          : [],
+      };
       return base;
+    }
+    case "service-grid": {
+      const d = asRecord(data);
+      const items = Array.isArray(d.items) ? d.items : [];
+      return {
+        label: asString(d.label),
+        heading: asString(d.heading),
+        intro: asString(d.intro),
+        items:
+          items.length > 0
+            ? items.map((item) => {
+                const r = asRecord(item);
+                return {
+                  id: asString(r.id),
+                  title: asString(r.title),
+                  description: asString(r.description),
+                };
+              })
+            : [{ id: "", title: "", description: "" }],
+      };
     }
     case "focus-items": {
       const d = asRecord(data);
@@ -206,6 +240,7 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
       return {
         label: asString(d.label),
         heading: asString(d.heading),
+        intro: asString(d.intro),
         items:
           items.length > 0
             ? items.map((item) => {
@@ -310,6 +345,9 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
         heading: asString(d.heading),
         body: asString(d.body),
         cta: asString(d.cta),
+        secondaryCta: asString(d.secondaryCta),
+        ctaHref: asString(d.ctaHref || "/ventures/connect"),
+        secondaryCtaHref: asString(d.secondaryCtaHref || "/ventures/partner"),
         image: asString(d.image),
       };
     }
@@ -958,7 +996,7 @@ export function VentureSectionEditor({
                 onChange={(e) => setDraft({ ...d, label: e.target.value })}
               />
             </AdminField>
-            <AdminField label="Statement">
+            <AdminField label="Statement / quote">
               <textarea
                 className={textareaClass}
                 rows={4}
@@ -967,17 +1005,51 @@ export function VentureSectionEditor({
                 onChange={(e) => setDraft({ ...d, statement: e.target.value })}
               />
             </AdminField>
-            {"body" in d && (
-              <AdminField label="Body">
-                <textarea
-                  className={textareaClass}
-                  rows={4}
-                  value={asString(d.body)}
+            <AdminField label="Body">
+              <textarea
+                className={textareaClass}
+                rows={4}
+                value={asString(d.body)}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, body: e.target.value })}
+              />
+            </AdminField>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <AdminField label="Primary CTA label">
+                <input
+                  className={inputClass}
+                  value={asString(d.partnerCta)}
                   disabled={readOnly}
-                  onChange={(e) => setDraft({ ...d, body: e.target.value })}
+                  onChange={(e) => setDraft({ ...d, partnerCta: e.target.value })}
                 />
               </AdminField>
-            )}
+              <AdminField label="Secondary CTA label">
+                <input
+                  className={inputClass}
+                  value={asString(d.deckCta)}
+                  disabled={readOnly}
+                  onChange={(e) => setDraft({ ...d, deckCta: e.target.value })}
+                />
+              </AdminField>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <AdminField label="Primary CTA link (href)">
+                <input
+                  className={inputClass}
+                  value={asString(d.partnerHref)}
+                  disabled={readOnly}
+                  onChange={(e) => setDraft({ ...d, partnerHref: e.target.value })}
+                />
+              </AdminField>
+              <AdminField label="Secondary CTA link (href)">
+                <input
+                  className={inputClass}
+                  value={asString(d.deckHref)}
+                  disabled={readOnly}
+                  onChange={(e) => setDraft({ ...d, deckHref: e.target.value })}
+                />
+              </AdminField>
+            </div>
             {themes !== null && (
               <div className="space-y-4">
                 <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
@@ -1013,10 +1085,104 @@ export function VentureSectionEditor({
         );
       }
 
+      case "service-grid": {
+        const d = draft as {
+          label: string;
+          heading: string;
+          intro: string;
+          items: { id: string; title: string; description: string }[];
+        };
+        return (
+          <div className="space-y-6">
+            <AdminField label="Label">
+              <input
+                className={inputClass}
+                value={d.label}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, label: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Heading">
+              <input
+                className={inputClass}
+                value={d.heading}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, heading: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Intro">
+              <textarea
+                className={textareaClass}
+                rows={2}
+                value={d.intro ?? ""}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, intro: e.target.value })}
+              />
+            </AdminField>
+            {d.items.map((item, i) => (
+              <div key={i} className="space-y-4 border-t border-charcoal/10 pt-6">
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+                  Service {i + 1}
+                </p>
+                <AdminField label="ID">
+                  <input
+                    className={inputClass}
+                    value={item.id}
+                    disabled={readOnly}
+                    onChange={(e) => {
+                      const items = [...d.items];
+                      items[i] = { ...item, id: e.target.value };
+                      setDraft({ ...d, items });
+                    }}
+                  />
+                </AdminField>
+                <AdminField label="Title">
+                  <input
+                    className={inputClass}
+                    value={item.title}
+                    disabled={readOnly}
+                    onChange={(e) => {
+                      const items = [...d.items];
+                      items[i] = { ...item, title: e.target.value };
+                      setDraft({ ...d, items });
+                    }}
+                  />
+                </AdminField>
+                <AdminField label="Description">
+                  <textarea
+                    className={textareaClass}
+                    rows={3}
+                    value={item.description}
+                    disabled={readOnly}
+                    onChange={(e) => {
+                      const items = [...d.items];
+                      items[i] = { ...item, description: e.target.value };
+                      setDraft({ ...d, items });
+                    }}
+                  />
+                </AdminField>
+              </div>
+            ))}
+            <AddRemoveButtons
+              readOnly={readOnly}
+              canRemove={d.items.length > 1}
+              onAdd={() =>
+                setDraft({
+                  ...d,
+                  items: [...d.items, { id: "", title: "", description: "" }],
+                })
+              }
+              onRemove={() => setDraft({ ...d, items: d.items.slice(0, -1) })}
+            />
+          </div>
+        );
+      }
+
       case "focus-items": {
         const d = draft as {
           label: string;
           heading: string;
+          intro: string;
           items: { id: string; title: string; description: string; image: string }[];
         };
         return (
@@ -1035,6 +1201,15 @@ export function VentureSectionEditor({
                 value={d.heading}
                 disabled={readOnly}
                 onChange={(e) => setDraft({ ...d, heading: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Intro">
+              <textarea
+                className={textareaClass}
+                rows={2}
+                value={d.intro ?? ""}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, intro: e.target.value })}
               />
             </AdminField>
             {d.items.map((item, i) => (
@@ -1541,7 +1716,7 @@ export function VentureSectionEditor({
                 onChange={(e) => setDraft({ ...d, body: e.target.value })}
               />
             </AdminField>
-            <AdminField label="CTA label">
+            <AdminField label="Primary CTA label">
               <input
                 className={inputClass}
                 value={d.cta}
@@ -1549,6 +1724,36 @@ export function VentureSectionEditor({
                 onChange={(e) => setDraft({ ...d, cta: e.target.value })}
               />
             </AdminField>
+            <AdminField label="Secondary CTA label">
+              <input
+                className={inputClass}
+                value={d.secondaryCta ?? ""}
+                disabled={readOnly}
+                onChange={(e) =>
+                  setDraft({ ...d, secondaryCta: e.target.value })
+                }
+              />
+            </AdminField>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <AdminField label="Primary link (href)">
+                <input
+                  className={inputClass}
+                  value={d.ctaHref ?? ""}
+                  disabled={readOnly}
+                  onChange={(e) => setDraft({ ...d, ctaHref: e.target.value })}
+                />
+              </AdminField>
+              <AdminField label="Secondary link (href)">
+                <input
+                  className={inputClass}
+                  value={d.secondaryCtaHref ?? ""}
+                  disabled={readOnly}
+                  onChange={(e) =>
+                    setDraft({ ...d, secondaryCtaHref: e.target.value })
+                  }
+                />
+              </AdminField>
+            </div>
             <VentureImageField
               slug={slug}
               fieldPath={fp(key, "image")}

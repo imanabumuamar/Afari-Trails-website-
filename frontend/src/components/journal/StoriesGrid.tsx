@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { JournalStory } from "@/lib/data/journal";
+import type { JournalStoryRecord } from "@/types/journal-content";
 
 type StoriesGridProps = {
-  stories: JournalStory[];
+  stories: JournalStoryRecord[];
   showViewAll?: boolean;
 };
 

@@ -1,33 +1,29 @@
-import { EcoLodgeClosing } from "@/components/ventures/eco-lodge/EcoLodgeClosing";
-import { EcoLodgeConcept } from "@/components/ventures/eco-lodge/EcoLodgeConcept";
-import { EcoLodgeDesign } from "@/components/ventures/eco-lodge/EcoLodgeDesign";
-import { EcoLodgeExperiences } from "@/components/ventures/eco-lodge/EcoLodgeExperiences";
+import { EcoLodgeApproach } from "@/components/ventures/eco-lodge/EcoLodgeApproach";
+import { EcoLodgeFinalCta } from "@/components/ventures/eco-lodge/EcoLodgeFinalCta";
 import { EcoLodgeGallery } from "@/components/ventures/eco-lodge/EcoLodgeGallery";
 import { EcoLodgeHero } from "@/components/ventures/eco-lodge/EcoLodgeHero";
-import { EcoLodgeLocation } from "@/components/ventures/eco-lodge/EcoLodgeLocation";
-import { EcoLodgePartnerCta } from "@/components/ventures/eco-lodge/EcoLodgePartnerCta";
-import { EcoLodgeSustainability } from "@/components/ventures/eco-lodge/EcoLodgeSustainability";
-import { EcoLodgeVision } from "@/components/ventures/eco-lodge/EcoLodgeVision";
+import { EcoLodgeInvestment } from "@/components/ventures/eco-lodge/EcoLodgeInvestment";
+import { EcoLodgeWhatWeDo } from "@/components/ventures/eco-lodge/EcoLodgeWhatWeDo";
+import { EcoLodgeWhoWeAre } from "@/components/ventures/eco-lodge/EcoLodgeWhoWeAre";
+import { EcoLodgeWhyAfrica } from "@/components/ventures/eco-lodge/EcoLodgeWhyAfrica";
 
 export const metadata = {
   title: "Afari Eco Lodge",
   description:
-    "A future hospitality vision — immersive African living rooted in wilderness, stillness, slow luxury, and sustainable design.",
+    "End-to-end luxury eco lodge development across Africa — sustainable hospitality, conservation, and immersive safari experiences by Afari Trails.",
 };
 
 export default function EcoLodgePage() {
   return (
     <>
       <EcoLodgeHero />
-      <EcoLodgeConcept />
-      <EcoLodgeExperiences />
-      <EcoLodgeDesign />
-      <EcoLodgeSustainability />
+      <EcoLodgeWhoWeAre />
+      <EcoLodgeWhatWeDo />
+      <EcoLodgeApproach />
+      <EcoLodgeInvestment />
+      <EcoLodgeWhyAfrica />
       <EcoLodgeGallery />
-      <EcoLodgeVision />
-      <EcoLodgeLocation />
-      <EcoLodgePartnerCta />
-      <EcoLodgeClosing />
+      <EcoLodgeFinalCta />
     </>
   );
 }

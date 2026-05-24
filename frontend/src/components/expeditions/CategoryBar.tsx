@@ -1,11 +1,14 @@
 import { CategoryIcon } from "@/components/expeditions/CategoryIcon";
-import { categoryBar } from "@/lib/data/expeditions";
+import { getExpeditionsContent } from "@/services/content/expeditions";
 
-export function CategoryBar() {
+export async function CategoryBar() {
+  const { page } = await getExpeditionsContent();
+  const categories = page.categoryBar;
+
   return (
     <section className="bg-charcoal py-14 text-ivory lg:py-16">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:px-10">
-        {categoryBar.map((cat, i) => (
+        {categories.map((cat, i) => (
           <div
             key={cat.id}
             className={`flex flex-col items-center text-center ${

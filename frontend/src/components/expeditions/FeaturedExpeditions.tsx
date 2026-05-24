@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
-import { featuredExpeditions } from "@/lib/data/expeditions";
+import { getFeaturedExpeditionCards } from "@/services/content/expeditions";
 
-export function FeaturedExpeditions() {
+export async function FeaturedExpeditions() {
+  const featured = await getFeaturedExpeditionCards();
+
   return (
     <section id="featured" className="scroll-mt-24 bg-ivory py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
@@ -24,7 +26,7 @@ export function FeaturedExpeditions() {
         </div>
 
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-5">
-          {featuredExpeditions.map((exp) => (
+          {featured.map((exp) => (
             <Link
               key={exp.id}
               href={`/expeditions/${exp.id}`}

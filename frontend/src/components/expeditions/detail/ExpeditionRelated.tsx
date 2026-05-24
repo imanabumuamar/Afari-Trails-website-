@@ -1,17 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { featuredExpeditions } from "@/lib/data/expeditions";
+import { getRelatedExpeditionCards } from "@/services/content/expeditions";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 type ExpeditionRelatedProps = {
   expedition: ExpeditionDetail;
 };
 
-export function ExpeditionRelated({ expedition }: ExpeditionRelatedProps) {
-  const related = expedition.relatedIds
-    .map((id) => featuredExpeditions.find((e) => e.id === id))
-    .filter((e): e is (typeof featuredExpeditions)[number] => Boolean(e));
+export async function ExpeditionRelated({ expedition }: ExpeditionRelatedProps) {
+  const related = await getRelatedExpeditionCards(expedition.relatedIds);
 
   if (related.length === 0) return null;
 

@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-import type { ArchiveImage } from "@/lib/data/archive";
+import type { ArchiveImageRecord } from "@/types/archive-content";
 
 type ArchiveLightboxProps = {
-  item: ArchiveImage | null;
+  item: ArchiveImageRecord | null;
   onClose: () => void;
 };
 

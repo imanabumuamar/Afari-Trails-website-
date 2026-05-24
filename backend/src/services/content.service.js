@@ -3,6 +3,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { HomepageContent } from "../models/HomepageContent.model.js";
 import { VentureContent } from "../models/VentureContent.model.js";
+import { ExpeditionContent } from "../models/ExpeditionContent.model.js";
+import { JournalContent } from "../models/JournalContent.model.js";
+import { ArchiveContent } from "../models/ArchiveContent.model.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FRONTEND_HOMEPAGE_JSON = path.join(
@@ -250,5 +253,284 @@ export async function seedVentureContent() {
         updatedAt: new Date(),
       });
     }
+  }
+}
+
+const EXPEDITIONS_JSON_PATH = path.join(
+  __dirname,
+  "../../../frontend/content/expeditions.json",
+);
+
+function loadExpeditionsJsonFallback() {
+  try {
+    const raw = fs.readFileSync(EXPEDITIONS_JSON_PATH, "utf-8");
+    const parsed = JSON.parse(raw);
+    return parsed.data ?? parsed;
+  } catch {
+    return null;
+  }
+}
+
+function toExpeditionsClient(doc) {
+  if (!doc) return null;
+  const o = doc.toObject ? doc.toObject() : doc;
+  return {
+    key: o.key ?? "main",
+    data: o.data,
+    updatedAt: (o.updatedAt ?? new Date()).toISOString(),
+  };
+}
+
+export async function getExpeditionsContent() {
+  let doc = await ExpeditionContent.findOne({ key: "main" });
+  if (!doc) {
+    const fallback = loadExpeditionsJsonFallback();
+    if (!fallback) {
+      const err = new Error("Expedition content not found");
+      err.status = 404;
+      throw err;
+    }
+    doc = await ExpeditionContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+  return toExpeditionsClient(doc);
+}
+
+export async function saveExpeditionsContent(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    const err = new Error("Invalid expedition content");
+    err.status = 400;
+    throw err;
+  }
+
+  if (!Array.isArray(data.expeditions)) {
+    const err = new Error("expeditions must be an array");
+    err.status = 400;
+    throw err;
+  }
+
+  let doc = await ExpeditionContent.findOne({ key: "main" });
+  if (!doc) {
+    doc = new ExpeditionContent({ key: "main", data });
+  } else {
+    doc.data = data;
+  }
+  doc.updatedAt = new Date();
+  await doc.save();
+
+  const client = toExpeditionsClient(doc);
+
+  try {
+    fs.writeFileSync(
+      EXPEDITIONS_JSON_PATH,
+      `${JSON.stringify(client, null, 2)}\n`,
+    );
+  } catch {
+    // best-effort JSON sync
+  }
+
+  return client;
+}
+
+export async function seedExpeditionContent() {
+  const existing = await ExpeditionContent.findOne({ key: "main" });
+  if (existing) return;
+
+  const fallback = loadExpeditionsJsonFallback();
+  if (fallback) {
+    await ExpeditionContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+}
+
+const JOURNAL_JSON_PATH = path.join(
+  __dirname,
+  "../../../frontend/content/journal.json",
+);
+
+function loadJournalJsonFallback() {
+  try {
+    const raw = fs.readFileSync(JOURNAL_JSON_PATH, "utf-8");
+    const parsed = JSON.parse(raw);
+    return parsed.data ?? parsed;
+  } catch {
+    return null;
+  }
+}
+
+function toJournalClient(doc) {
+  if (!doc) return null;
+  const o = doc.toObject ? doc.toObject() : doc;
+  return {
+    key: o.key ?? "main",
+    data: o.data,
+    updatedAt: (o.updatedAt ?? new Date()).toISOString(),
+  };
+}
+
+export async function getJournalContent() {
+  let doc = await JournalContent.findOne({ key: "main" });
+  if (!doc) {
+    const fallback = loadJournalJsonFallback();
+    if (!fallback) {
+      const err = new Error("Journal content not found");
+      err.status = 404;
+      throw err;
+    }
+    doc = await JournalContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+  return toJournalClient(doc);
+}
+
+export async function saveJournalContent(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    const err = new Error("Invalid journal content");
+    err.status = 400;
+    throw err;
+  }
+
+  if (!Array.isArray(data.stories)) {
+    const err = new Error("stories must be an array");
+    err.status = 400;
+    throw err;
+  }
+
+  let doc = await JournalContent.findOne({ key: "main" });
+  if (!doc) {
+    doc = new JournalContent({ key: "main", data });
+  } else {
+    doc.data = data;
+  }
+  doc.updatedAt = new Date();
+  await doc.save();
+
+  const client = toJournalClient(doc);
+
+  try {
+    fs.writeFileSync(
+      JOURNAL_JSON_PATH,
+      `${JSON.stringify(client, null, 2)}\n`,
+    );
+  } catch {
+    // best-effort JSON sync
+  }
+
+  return client;
+}
+
+export async function seedJournalContent() {
+  const existing = await JournalContent.findOne({ key: "main" });
+  if (existing) return;
+
+  const fallback = loadJournalJsonFallback();
+  if (fallback) {
+    await JournalContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+}
+
+const ARCHIVE_JSON_PATH = path.join(
+  __dirname,
+  "../../../frontend/content/archive.json",
+);
+
+function loadArchiveJsonFallback() {
+  try {
+    const raw = fs.readFileSync(ARCHIVE_JSON_PATH, "utf-8");
+    const parsed = JSON.parse(raw);
+    return parsed.data ?? parsed;
+  } catch {
+    return null;
+  }
+}
+
+function toArchiveClient(doc) {
+  if (!doc) return null;
+  const o = doc.toObject ? doc.toObject() : doc;
+  return {
+    key: o.key ?? "main",
+    data: o.data,
+    updatedAt: (o.updatedAt ?? new Date()).toISOString(),
+  };
+}
+
+export async function getArchiveContent() {
+  let doc = await ArchiveContent.findOne({ key: "main" });
+  if (!doc) {
+    const fallback = loadArchiveJsonFallback();
+    if (!fallback) {
+      const err = new Error("Archive content not found");
+      err.status = 404;
+      throw err;
+    }
+    doc = await ArchiveContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+  return toArchiveClient(doc);
+}
+
+export async function saveArchiveContent(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    const err = new Error("Invalid archive content");
+    err.status = 400;
+    throw err;
+  }
+
+  if (!Array.isArray(data.images)) {
+    const err = new Error("images must be an array");
+    err.status = 400;
+    throw err;
+  }
+
+  let doc = await ArchiveContent.findOne({ key: "main" });
+  if (!doc) {
+    doc = new ArchiveContent({ key: "main", data });
+  } else {
+    doc.data = data;
+  }
+  doc.updatedAt = new Date();
+  await doc.save();
+
+  const client = toArchiveClient(doc);
+
+  try {
+    fs.writeFileSync(
+      ARCHIVE_JSON_PATH,
+      `${JSON.stringify(client, null, 2)}\n`,
+    );
+  } catch {
+    // best-effort JSON sync
+  }
+
+  return client;
+}
+
+export async function seedArchiveContent() {
+  const existing = await ArchiveContent.findOne({ key: "main" });
+  if (existing) return;
+
+  const fallback = loadArchiveJsonFallback();
+  if (fallback) {
+    await ArchiveContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
   }
 }

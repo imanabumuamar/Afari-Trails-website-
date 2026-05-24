@@ -1,13 +1,16 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { ROUTES } from "@/config/routes";
-import { expeditionsHero } from "@/lib/data/expeditions";
+import { getExpeditionsContent } from "@/services/content/expeditions";
 
-export function ExpeditionsHero() {
+export async function ExpeditionsHero() {
+  const { page } = await getExpeditionsContent();
+  const hero = page.hero;
+
   return (
     <section className="relative min-h-[88vh] lg:min-h-screen">
       <Image
-        src={expeditionsHero.image}
+        src={hero.image}
         alt="Safari vehicle on the savanna at sunset with elephants in the distance"
         fill
         priority
@@ -19,10 +22,10 @@ export function ExpeditionsHero() {
 
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-[1400px] flex-col justify-end px-6 pb-24 pt-32 lg:min-h-screen lg:px-10 lg:pb-32 lg:pt-36">
         <h1 className="max-w-2xl font-serif text-5xl font-light leading-[1.1] text-ivory sm:text-6xl lg:text-[4.5rem]">
-          {expeditionsHero.heading}
+          {hero.heading}
         </h1>
         <p className="mt-6 max-w-lg text-sm leading-relaxed text-ivory/75 md:text-base">
-          {expeditionsHero.subtext}
+          {hero.subtext}
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-6">
           <Button href={ROUTES.expeditionsAll} variant="sand">

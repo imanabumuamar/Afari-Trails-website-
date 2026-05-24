@@ -54,3 +54,78 @@ export async function updateVenture(req, res, next) {
     next(err);
   }
 }
+
+export async function getExpeditions(req, res, next) {
+  try {
+    const content = await contentService.getExpeditionsContent();
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function updateExpeditions(req, res, next) {
+  try {
+    const payload = req.body.data ?? req.body;
+    const content = await contentService.saveExpeditionsContent(payload);
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404 || err.status === 400) {
+      return res.status(err.status).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function getJournal(req, res, next) {
+  try {
+    const content = await contentService.getJournalContent();
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function updateJournal(req, res, next) {
+  try {
+    const payload = req.body.data ?? req.body;
+    const content = await contentService.saveJournalContent(payload);
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404 || err.status === 400) {
+      return res.status(err.status).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function getArchive(req, res, next) {
+  try {
+    const content = await contentService.getArchiveContent();
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function updateArchive(req, res, next) {
+  try {
+    const payload = req.body.data ?? req.body;
+    const content = await contentService.saveArchiveContent(payload);
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404 || err.status === 400) {
+      return res.status(err.status).json({ error: err.message });
+    }
+    next(err);
+  }
+}

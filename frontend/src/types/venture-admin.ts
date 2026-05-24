@@ -14,6 +14,7 @@ export type VentureSectionType =
   | "text-block"
   | "philosophy-block"
   | "focus-items"
+  | "service-grid"
   | "experience-grid"
   | "design-moodboard"
   | "pillars-block"
@@ -42,15 +43,14 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
   ],
   "eco-lodge": [
     { key: "ecoLodgeHero", type: "sub-hero", title: "Hero" },
-    { key: "ecoLodgeConcept", type: "text-block", title: "The concept" },
-    { key: "ecoLodgeExperiences", type: "experience-grid", title: "Experiences" },
-    { key: "ecoLodgeDesign", type: "design-moodboard", title: "Architecture & design" },
-    { key: "ecoLodgeSustainability", type: "pillars-block", title: "Sustainability" },
-    { key: "ecoLodgeGallery", type: "image-gallery", title: "Gallery" },
-    { key: "ecoLodgeFutureVision", type: "quote-block", title: "Future vision" },
-    { key: "ecoLodgeLocation", type: "location-block", title: "Location" },
-    { key: "ecoLodgePartnerCta", type: "partner-cta", title: "Partner CTA" },
-    { key: "ecoLodgeClosing", type: "quote-block", title: "Closing quote" },
+    { key: "ecoLodgeWhoWeAre", type: "text-block", title: "Who we are" },
+    { key: "ecoLodgeWhatWeDo", type: "service-grid", title: "What we do" },
+    { key: "ecoLodgeWhyAfrica", type: "location-block", title: "Why Africa" },
+    { key: "ecoLodgeApproach", type: "pillars-block", title: "Our approach" },
+    { key: "ecoLodgeInvestment", type: "philosophy-block", title: "Investment & partnerships" },
+    { key: "ecoLodgeGalleryIntro", type: "text-block", title: "Gallery heading" },
+    { key: "ecoLodgeGallery", type: "image-gallery", title: "Gallery images" },
+    { key: "ecoLodgeFinalCta", type: "partner-cta", title: "Final call to action" },
   ],
   conservation: [
     { key: "conservationHero", type: "sub-hero", title: "Hero" },

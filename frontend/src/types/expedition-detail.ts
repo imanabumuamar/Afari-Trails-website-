@@ -29,6 +29,8 @@ export type ExpeditionFaqItem = {
 
 export type ExpeditionDetail = {
   id: string;
+  /** When false, hidden from “View all” catalog (detail URL may still work). */
+  published?: boolean;
   name: string;
   title: string;
   tagline: string;

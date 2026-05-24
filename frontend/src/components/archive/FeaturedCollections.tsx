@@ -3,29 +3,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CollectionIcon } from "@/components/archive/CollectionIcon";
-import {
-  collections,
-  collectionsSection,
-  type ArchiveGridCategory,
-} from "@/lib/data/archive";
+import type {
+  ArchiveCollection,
+  ArchiveGridCategory,
+  ArchivePageContent,
+} from "@/types/archive-content";
 
 type FeaturedCollectionsProps = {
+  collections: ArchiveCollection[];
+  section: ArchivePageContent["collectionsSection"];
   onSelect: (id: ArchiveGridCategory) => void;
 };
 
-export function FeaturedCollections({ onSelect }: FeaturedCollectionsProps) {
+export function FeaturedCollections({
+  collections,
+  section,
+  onSelect,
+}: FeaturedCollectionsProps) {
   return (
     <section id="collections" className="scroll-mt-24 bg-matte-black py-16 lg:py-20">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="flex flex-col gap-4 border-b border-ivory/10 pb-8 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-sand">
-              {collectionsSection.label}
+              {section.label}
             </p>
-            <p className="mt-3 text-sm text-ivory/55">{collectionsSection.heading}</p>
+            <p className="mt-3 text-sm text-ivory/55">{section.heading}</p>
           </div>
           <Link
-            href={collectionsSection.viewAllHref}
+            href={section.viewAllHref}
             className="shrink-0 text-[10px] font-medium uppercase tracking-[0.22em] text-ivory/50 transition-colors hover:text-sand"
           >
             View All Collections →

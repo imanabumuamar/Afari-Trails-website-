@@ -8,21 +8,48 @@ import { ArchiveMasonry } from "@/components/archive/ArchiveMasonry";
 import { ArchiveSubmitCta } from "@/components/archive/ArchiveSubmitCta";
 import { FeaturedCollections } from "@/components/archive/FeaturedCollections";
 import { LatestMoments } from "@/components/archive/LatestMoments";
-import type { ArchiveGridCategory, ArchiveImage } from "@/lib/data/archive";
+import type {
+  ArchiveCollection,
+  ArchiveContentData,
+  ArchiveGridCategory,
+  ArchiveImageRecord,
+  ArchiveLatestMoment,
+  ArchivePageContent,
+} from "@/types/archive-content";
 
-export function ArchivePageContent() {
+export type ArchivePageProps = {
+  page: ArchivePageContent;
+  collections: ArchiveCollection[];
+  latestMoments: ArchiveLatestMoment[];
+  images: ArchiveImageRecord[];
+};
+
+export function ArchivePageContent({
+  page,
+  collections,
+  latestMoments,
+  images,
+}: ArchivePageProps) {
   const [activeCollection, setActiveCollection] =
     useState<ArchiveGridCategory>("all");
-  const [lightboxItem, setLightboxItem] = useState<ArchiveImage | null>(null);
+  const [lightboxItem, setLightboxItem] = useState<ArchiveImageRecord | null>(
+    null,
+  );
 
   return (
     <>
-      <ArchiveHero />
-      <FeaturedCollections onSelect={setActiveCollection} />
-      <AfariLens />
-      <LatestMoments />
-      <ArchiveSubmitCta />
+      <ArchiveHero hero={page.hero} />
+      <FeaturedCollections
+        collections={collections}
+        section={page.collectionsSection}
+        onSelect={setActiveCollection}
+      />
+      <AfariLens afariLens={page.afariLens} />
+      <LatestMoments moments={latestMoments} section={page.latestMomentsSection} />
+      <ArchiveSubmitCta archiveSubmit={page.archiveSubmit} />
       <ArchiveMasonry
+        collections={collections}
+        images={images}
         active={activeCollection}
         onSelect={setLightboxItem}
         onFilterChange={setActiveCollection}
@@ -34,3 +61,5 @@ export function ArchivePageContent() {
     </>
   );
 }
+
+export type { ArchiveContentData };

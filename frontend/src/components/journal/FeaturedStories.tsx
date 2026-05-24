@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  featuredSideStories,
-  featuredStory,
-  type JournalStory,
-} from "@/lib/data/journal";
+import type { JournalStoryRecord } from "@/types/journal-content";
 
-function SideStory({ story }: { story: JournalStory }) {
+type FeaturedStoriesProps = {
+  featuredStory: JournalStoryRecord;
+  featuredSideStories: JournalStoryRecord[];
+};
+
+function SideStory({ story }: { story: JournalStoryRecord }) {
   return (
     <Link
       href={`/journal/${story.slug}`}
@@ -39,7 +40,10 @@ function SideStory({ story }: { story: JournalStory }) {
   );
 }
 
-export function FeaturedStories() {
+export function FeaturedStories({
+  featuredStory,
+  featuredSideStories,
+}: FeaturedStoriesProps) {
   return (
     <section className="bg-beige py-16 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

@@ -6,17 +6,47 @@ import { FeaturedStories } from "@/components/journal/FeaturedStories";
 import { JournalHero } from "@/components/journal/JournalHero";
 import { JournalNewsletter } from "@/components/journal/JournalNewsletter";
 import { StoriesGrid } from "@/components/journal/StoriesGrid";
-import { journalStories, latestStories, type JournalCategory } from "@/lib/data/journal";
+import {
+  getFeaturedSideStories,
+  getFeaturedStory,
+  getLatestStories,
+  getPublishedStories,
+} from "@/lib/journal/helpers";
+import type { JournalCategoryId, JournalContentData } from "@/types/journal-content";
 
-export function JournalPageContent() {
-  const [active, setActive] = useState<JournalCategory>("all");
+type JournalPageContentProps = {
+  content: JournalContentData;
+};
+
+export function JournalPageContent({ content }: JournalPageContentProps) {
+  const [active, setActive] = useState<JournalCategoryId>("all");
   const [search, setSearch] = useState("");
+
+  const published = useMemo(
+    () => getPublishedStories(content.stories),
+    [content.stories],
+  );
+
+  const featuredStory = useMemo(
+    () => getFeaturedStory(content.stories),
+    [content.stories],
+  );
+
+  const featuredSideStories = useMemo(
+    () => getFeaturedSideStories(content.stories),
+    [content.stories],
+  );
+
+  const latestStories = useMemo(
+    () => getLatestStories(content.stories),
+    [content.stories],
+  );
 
   const filteredLatest = useMemo(() => {
     let pool =
       active === "all"
         ? latestStories
-        : journalStories.filter(
+        : published.filter(
             (s) =>
               !s.featured &&
               !s.featuredSide &&
@@ -34,18 +64,27 @@ export function JournalPageContent() {
     }
 
     return pool;
-  }, [active, search]);
+  }, [active, search, latestStories, published]);
+
+  const showFeatured =
+    active === "all" && !search.trim() && featuredStory;
 
   return (
     <>
-      <JournalHero />
+      <JournalHero hero={content.page.hero} />
       <ExploreTopics
+        categories={content.page.categories}
         active={active}
         onChange={setActive}
         search={search}
         onSearchChange={setSearch}
       />
-      {active === "all" && !search.trim() && <FeaturedStories />}
+      {showFeatured && (
+        <FeaturedStories
+          featuredStory={featuredStory}
+          featuredSideStories={featuredSideStories}
+        />
+      )}
       <section id="stories" className="scroll-mt-24 bg-beige py-16 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <StoriesGrid
@@ -54,7 +93,7 @@ export function JournalPageContent() {
           />
         </div>
       </section>
-      <JournalNewsletter />
+      <JournalNewsletter newsletter={content.page.newsletter} />
     </>
   );
 }

@@ -2,21 +2,22 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ExpeditionDetailView } from "@/components/expeditions/detail/ExpeditionDetailView";
 import {
-  getAllExpeditionSlugs,
-  getExpeditionDetail,
-} from "@/lib/data/expedition-details";
+  getAllExpeditionSlugsAsync,
+  getExpeditionBySlug,
+} from "@/services/content/expeditions";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return getAllExpeditionSlugs().map((slug) => ({ slug }));
+  const slugs = await getAllExpeditionSlugsAsync();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const expedition = getExpeditionDetail(slug);
+  const expedition = await getExpeditionBySlug(slug);
 
   if (!expedition) {
     return { title: "Expedition" };
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ExpeditionDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const expedition = getExpeditionDetail(slug);
+  const expedition = await getExpeditionBySlug(slug);
 
   if (!expedition) notFound();
 

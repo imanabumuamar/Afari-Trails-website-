@@ -37,6 +37,15 @@ export default async function AdminLayout({
             <Link href="/admin/homepage" className="hover:text-gold">
               Homepage
             </Link>
+            <Link href="/admin/expeditions" className="hover:text-gold">
+              Expeditions
+            </Link>
+            <Link href="/admin/journal" className="hover:text-gold">
+              Journal
+            </Link>
+            <Link href="/admin/archive" className="hover:text-gold">
+              Archive
+            </Link>
             <Link href="/admin/ventures" className="hover:text-gold">
               Ventures
             </Link>

@@ -45,6 +45,39 @@ export default async function AdminDashboardPage() {
           </p>
         </Link>
 
+        <Link
+          href="/admin/expeditions"
+          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
+          <p className="mt-2 font-serif text-xl font-light">Expeditions</p>
+          <p className="mt-2 text-sm text-charcoal/60">
+            Add expeditions, edit journeys, and pick which appear on the main page.
+          </p>
+        </Link>
+
+        <Link
+          href="/admin/journal"
+          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
+          <p className="mt-2 font-serif text-xl font-light">Journal</p>
+          <p className="mt-2 text-sm text-charcoal/60">
+            Edit the journal page, stories, featured articles, and images.
+          </p>
+        </Link>
+
+        <Link
+          href="/admin/archive"
+          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
+          <p className="mt-2 font-serif text-xl font-light">Archive</p>
+          <p className="mt-2 text-sm text-charcoal/60">
+            Edit collections, gallery images, Afari Lens copy, and submit page text.
+          </p>
+        </Link>
+
         {canManageUsers && (
           <Link
             href="/admin/users"

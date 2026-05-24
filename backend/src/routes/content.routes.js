@@ -22,4 +22,28 @@ router.put(
   contentController.updateVenture,
 );
 
+router.get("/expeditions", contentController.getExpeditions);
+router.put(
+  "/expeditions",
+  requireJwt,
+  requirePermission("content:expeditions:write"),
+  contentController.updateExpeditions,
+);
+
+router.get("/journal", contentController.getJournal);
+router.put(
+  "/journal",
+  requireJwt,
+  requirePermission("content:journal:write"),
+  contentController.updateJournal,
+);
+
+router.get("/archive", contentController.getArchive);
+router.put(
+  "/archive",
+  requireJwt,
+  requirePermission("content:archive:write"),
+  contentController.updateArchive,
+);
+
 export default router;

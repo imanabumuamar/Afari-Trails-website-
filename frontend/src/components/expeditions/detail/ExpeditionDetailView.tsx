@@ -18,7 +18,9 @@ type ExpeditionDetailViewProps = {
   expedition: ExpeditionDetail;
 };
 
-export function ExpeditionDetailView({ expedition }: ExpeditionDetailViewProps) {
+export async function ExpeditionDetailView({
+  expedition,
+}: ExpeditionDetailViewProps) {
   return (
     <>
       <ExpeditionDetailHero expedition={expedition} />

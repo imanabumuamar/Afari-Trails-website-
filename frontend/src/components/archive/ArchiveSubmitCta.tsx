@@ -1,7 +1,11 @@
 import Link from "next/link";
-import { archiveSubmit } from "@/lib/data/archive";
+import type { ArchivePageContent } from "@/types/archive-content";
 
-export function ArchiveSubmitCta() {
+type ArchiveSubmitCtaProps = {
+  archiveSubmit: ArchivePageContent["archiveSubmit"];
+};
+
+export function ArchiveSubmitCta({ archiveSubmit }: ArchiveSubmitCtaProps) {
   return (
     <section className="bg-[#2a241c] py-20 text-ivory lg:py-28">
       <div className="mx-auto grid max-w-[1400px] gap-14 px-6 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-10">
