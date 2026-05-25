@@ -2,6 +2,8 @@ import { Router } from "express";
 import mongoose from "mongoose";
 import authRoutes from "./auth.routes.js";
 import contentRoutes from "./content.routes.js";
+import inquiryRoutes from "./inquiry.routes.js";
+import checkoutRoutes from "./checkout.routes.js";
 import staffRoutes from "./staff.routes.js";
 
 const router = Router();
@@ -36,5 +38,7 @@ router.get("/health", async (_req, res) => {
 router.use("/auth", authRoutes);
 router.use("/staff", staffRoutes);
 router.use("/content", contentRoutes);
+router.use("/inquiries", inquiryRoutes);
+router.use("/checkout", checkoutRoutes);
 
 export default router;

@@ -9,5 +9,7 @@ export const metadata = {
 
 export default async function ConnectPage() {
   const content = await getConnectContent();
-  return <ConnectPageView config={content.contact} />;
+  return (
+    <ConnectPageView config={content.contact} inquirySource="contact" />
+  );
 }

@@ -3,6 +3,11 @@
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import {
+  inquiryPayloadFromForm,
+  submitInquiry,
+  type InquirySource,
+} from "@/lib/inquiry/submit-inquiry";
 import type { ConnectPageConfig } from "@/types/connect-page";
 
 const inputClass =
@@ -10,9 +15,10 @@ const inputClass =
 
 type ConnectFormProps = {
   config: ConnectPageConfig;
+  source: InquirySource;
 };
 
-function ConnectFormInner({ config }: ConnectFormProps) {
+function ConnectFormInner({ config, source }: ConnectFormProps) {
   const { form } = config;
   const searchParams = useSearchParams();
   const inquiryParam = searchParams.get("inquiry");
@@ -20,10 +26,24 @@ function ConnectFormInner({ config }: ConnectFormProps) {
   const defaultInquiry = validInquiry ? inquiryParam! : "";
 
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setSubmitting(true);
+
+    const result = await submitInquiry(
+      inquiryPayloadFromForm(e.currentTarget, source),
+    );
+
+    setSubmitting(false);
+    if (result.ok) {
+      setSubmitted(true);
+      return;
+    }
+    setError(result.error);
   }
 
   return (
@@ -51,6 +71,20 @@ function ConnectFormInner({ config }: ConnectFormProps) {
             onSubmit={handleSubmit}
             className="animate-fade-in mx-auto mt-16 max-w-lg space-y-10"
           >
+            <div
+              className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+              aria-hidden
+            >
+              <label htmlFor={`${source}-website`}>Website</label>
+              <input
+                id={`${source}-website`}
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div>
               <label
                 htmlFor="connect-name"
@@ -145,12 +179,19 @@ function ConnectFormInner({ config }: ConnectFormProps) {
               />
             </div>
 
+            {error && (
+              <p className="text-center text-sm text-red-800/80" role="alert">
+                {error}
+              </p>
+            )}
+
             <div className="pt-4 text-center">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center bg-charcoal px-12 py-4 text-xs font-medium uppercase tracking-[0.28em] text-ivory transition-colors duration-300 hover:bg-matte-black"
+                disabled={submitting}
+                className="inline-flex items-center justify-center bg-charcoal px-12 py-4 text-xs font-medium uppercase tracking-[0.28em] text-ivory transition-colors duration-300 hover:bg-matte-black disabled:opacity-50"
               >
-                {form.submitLabel}
+                {submitting ? "Sending…" : form.submitLabel}
               </button>
             </div>
           </form>
@@ -160,10 +201,13 @@ function ConnectFormInner({ config }: ConnectFormProps) {
   );
 }
 
-export function ConnectForm({ config }: ConnectFormProps) {
+export function ConnectForm({
+  config,
+  source,
+}: ConnectFormProps) {
   return (
     <Suspense fallback={<div className="min-h-[480px] bg-ivory" />}>
-      <ConnectFormInner config={config} />
+      <ConnectFormInner config={config} source={source} />
     </Suspense>
   );
 }

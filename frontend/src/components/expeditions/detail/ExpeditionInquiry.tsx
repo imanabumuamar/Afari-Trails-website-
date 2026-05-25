@@ -4,6 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
+import {
+  inquiryPayloadFromForm,
+  submitInquiry,
+} from "@/lib/inquiry/submit-inquiry";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 const inputClass =
@@ -15,10 +19,26 @@ type ExpeditionInquiryProps = {
 
 export function ExpeditionInquiry({ expedition }: ExpeditionInquiryProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setSubmitting(true);
+
+    const result = await submitInquiry({
+      ...inquiryPayloadFromForm(e.currentTarget, "expedition"),
+      expeditionId: expedition.id,
+      expeditionName: expedition.name,
+    });
+
+    setSubmitting(false);
+    if (result.ok) {
+      setSubmitted(true);
+      return;
+    }
+    setError(result.error);
   }
 
   return (
@@ -47,7 +67,9 @@ export function ExpeditionInquiry({ expedition }: ExpeditionInquiryProps) {
             onSubmit={handleSubmit}
             className="animate-fade-in mx-auto mt-16 max-w-lg space-y-10"
           >
-            <input type="hidden" name="expedition" value={expedition.id} />
+            <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
+              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
 
             <div>
               <label
@@ -129,11 +151,18 @@ export function ExpeditionInquiry({ expedition }: ExpeditionInquiryProps) {
               />
             </div>
 
+            {error && (
+              <p className="text-center text-sm text-red-800/80" role="alert">
+                {error}
+              </p>
+            )}
+
             <button
               type="submit"
-              className="w-full bg-charcoal px-8 py-4 text-xs font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:bg-charcoal/90"
+              disabled={submitting}
+              className="w-full bg-charcoal px-8 py-4 text-xs font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:bg-charcoal/90 disabled:opacity-50"
             >
-              Begin Your Journey
+              {submitting ? "Sending…" : "Begin Your Journey"}
             </button>
           </form>
         )}

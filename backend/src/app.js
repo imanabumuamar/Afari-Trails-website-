@@ -4,6 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { config } from "./config/index.js";
 import apiRoutes from "./routes/index.js";
+import { stripeWebhook } from "./controllers/checkout.controller.js";
 import { errorHandler, notFoundHandler } from "./middleware/error.middleware.js";
 
 export function createApp() {
@@ -17,6 +18,13 @@ export function createApp() {
     })
   );
   app.use(morgan(config.env === "development" ? "dev" : "combined"));
+
+  app.post(
+    "/api/checkout/webhook",
+    express.raw({ type: "application/json" }),
+    stripeWebhook,
+  );
+
   app.use(express.json({ limit: "2mb" }));
 
   app.use("/api", apiRoutes);

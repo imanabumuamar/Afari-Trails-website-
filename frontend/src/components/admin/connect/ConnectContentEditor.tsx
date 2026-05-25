@@ -52,8 +52,7 @@ export function ConnectContentEditor({ readOnly = false }: ConnectContentEditorP
     setData((prev) => (prev ? { ...prev, [key]: config } : prev));
   }
 
-  async function handleSave(e: React.FormEvent) {
-    e.preventDefault();
+  async function handleSave() {
     if (!data || readOnly) return;
 
     setSaving(true);
@@ -137,7 +136,7 @@ export function ConnectContentEditor({ readOnly = false }: ConnectContentEditorP
         ))}
       </div>
 
-      <form onSubmit={handleSave} className="space-y-8">
+      <div className="space-y-8">
         <ConnectPageEditor
           pageKey={tab}
           config={pageConfig}
@@ -148,10 +147,14 @@ export function ConnectContentEditor({ readOnly = false }: ConnectContentEditorP
         />
         {!readOnly && (
           <div className="border-t border-charcoal/10 pt-6">
-            <SaveButton saving={saving} label="Save connect pages" />
+            <SaveButton
+              saving={saving}
+              label="Save connect pages"
+              onClick={() => void handleSave()}
+            />
           </div>
         )}
-      </form>
+      </div>
     </div>
   );
 }

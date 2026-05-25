@@ -13,5 +13,10 @@ export default async function VenturesConnectPage() {
   const content = await getVenturePageContent("connect");
   const config = content.venturesConnectConfig as ConnectPageConfig;
 
-  return <ConnectPageView config={config ?? defaultConfig} />;
+  return (
+    <ConnectPageView
+      config={config ?? defaultConfig}
+      inquirySource="ventures-connect"
+    />
+  );
 }

@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import {
+  inquiryPayloadFromForm,
+  submitInquiry,
+} from "@/lib/inquiry/submit-inquiry";
 import { partnerForm as defaultPartnerForm } from "@/lib/data/partner";
 
 type PartnerFormData = typeof defaultPartnerForm;
@@ -15,10 +19,24 @@ type PartnerFormClientProps = {
 
 export function PartnerFormClient({ partnerForm }: PartnerFormClientProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setSubmitting(true);
+
+    const result = await submitInquiry(
+      inquiryPayloadFromForm(e.currentTarget, "partner"),
+    );
+
+    setSubmitting(false);
+    if (result.ok) {
+      setSubmitted(true);
+      return;
+    }
+    setError(result.error);
   }
 
   return (
@@ -49,6 +67,10 @@ export function PartnerFormClient({ partnerForm }: PartnerFormClientProps) {
             onSubmit={handleSubmit}
             className="animate-fade-in mx-auto mt-16 max-w-lg space-y-10"
           >
+            <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
+              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
+
             <div>
               <label
                 htmlFor="partner-name"
@@ -140,12 +162,19 @@ export function PartnerFormClient({ partnerForm }: PartnerFormClientProps) {
               />
             </div>
 
+            {error && (
+              <p className="text-center text-sm text-red-800/80" role="alert">
+                {error}
+              </p>
+            )}
+
             <div className="pt-4 text-center">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center bg-charcoal px-12 py-4 text-xs font-medium uppercase tracking-[0.28em] text-ivory transition-colors duration-300 hover:bg-matte-black"
+                disabled={submitting}
+                className="inline-flex items-center justify-center bg-charcoal px-12 py-4 text-xs font-medium uppercase tracking-[0.28em] text-ivory transition-colors duration-300 hover:bg-matte-black disabled:opacity-50"
               >
-                {partnerForm.submitLabel}
+                {submitting ? "Sending…" : partnerForm.submitLabel}
               </button>
             </div>
           </form>

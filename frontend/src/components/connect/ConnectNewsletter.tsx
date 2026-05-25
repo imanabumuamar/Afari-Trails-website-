@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { submitInquiry } from "@/lib/inquiry/submit-inquiry";
 import type { ConnectPageConfig } from "@/types/connect-page";
 
 type ConnectNewsletterProps = {
@@ -12,10 +13,27 @@ export function ConnectNewsletter({ config }: ConnectNewsletterProps) {
   if (!newsletter) return null;
 
   const [joined, setJoined] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setJoined(true);
+    setError(null);
+    setSubmitting(true);
+
+    const data = new FormData(e.currentTarget);
+    const result = await submitInquiry({
+      source: "newsletter",
+      email: String(data.get("email") ?? "").trim(),
+      website: String(data.get("website") ?? "").trim() || undefined,
+    });
+
+    setSubmitting(false);
+    if (result.ok) {
+      setJoined(true);
+      return;
+    }
+    setError(result.error);
   }
 
   return (
@@ -37,6 +55,9 @@ export function ConnectNewsletter({ config }: ConnectNewsletterProps) {
             onSubmit={handleSubmit}
             className="mx-auto mt-10 flex max-w-md flex-col gap-4 sm:flex-row sm:items-end"
           >
+            <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
+              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
             <input
               type="email"
               name="email"
@@ -46,10 +67,16 @@ export function ConnectNewsletter({ config }: ConnectNewsletterProps) {
             />
             <button
               type="submit"
-              className="shrink-0 border border-ivory/50 px-8 py-3 text-xs font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10"
+              disabled={submitting}
+              className="shrink-0 border border-ivory/50 px-8 py-3 text-xs font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10 disabled:opacity-50"
             >
-              {newsletter.submitLabel}
+              {submitting ? "Sending…" : newsletter.submitLabel}
             </button>
+            {error && (
+              <p className="w-full text-sm text-ivory/80 sm:col-span-2" role="alert">
+                {error}
+              </p>
+            )}
           </form>
         )}
       </div>

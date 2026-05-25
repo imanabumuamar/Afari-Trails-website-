@@ -24,14 +24,17 @@ export const textareaClass =
 export function SaveButton({
   saving,
   label = "Save section",
+  onClick,
 }: {
   saving: boolean;
   label?: string;
+  onClick?: () => void;
 }) {
   return (
     <button
-      type="submit"
+      type={onClick ? "button" : "submit"}
       disabled={saving}
+      onClick={onClick}
       className="bg-charcoal px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
     >
       {saving ? "Saving…" : label}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AddToCartButton } from "@/components/store/AddToCartButton";
 import { ProductCard } from "@/components/store/ProductCard";
 import {
   getStoreContentLocal,
@@ -81,12 +82,7 @@ export default async function ProductPage({ params }: PageProps) {
               ))}
             </dl>
 
-            <button
-              type="button"
-              className="mt-12 w-full bg-charcoal px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-matte-black sm:w-auto"
-            >
-              Add to Cart
-            </button>
+            <AddToCartButton product={product} />
           </div>
 
           <div className="lg:col-span-7">

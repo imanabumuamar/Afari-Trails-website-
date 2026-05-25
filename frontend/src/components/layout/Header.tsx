@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CartLink } from "@/components/store/CartLink";
 import { Logo } from "@/components/ui/Logo";
 import {
   DARK_HERO_PATHS,
@@ -134,6 +135,7 @@ export function Header() {
             useLightChrome ? "text-ivory" : "text-charcoal"
           }`}
         >
+          <CartLink light={useLightChrome} />
           {useSearchAndMenu ? (
             <button
               type="button"
@@ -187,6 +189,17 @@ export function Header() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href={ROUTES.storeCart}
+                className={`font-serif text-2xl font-light ${
+                  useLightChrome ? "text-ivory" : "text-charcoal"
+                }`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Cart
+              </Link>
+            </li>
             <li>
               <Link
                 href={connectHref}
