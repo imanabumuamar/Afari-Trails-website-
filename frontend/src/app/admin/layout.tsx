@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AdminSignOut } from "@/components/admin/AdminSignOut";
+import { AdminStackStatus } from "@/components/admin/AdminStackStatus";
 import { AdminStaffBanner } from "@/components/admin/AdminStaffBanner";
 import { hasPermission } from "@/lib/auth/rbac";
 import { ROLE_LABELS } from "@/lib/auth/roles";
@@ -46,6 +47,18 @@ export default async function AdminLayout({
             <Link href="/admin/archive" className="hover:text-gold">
               Archive
             </Link>
+            <Link href="/admin/about" className="hover:text-gold">
+              About
+            </Link>
+            <Link href="/admin/store" className="hover:text-gold">
+              Store
+            </Link>
+            <Link href="/admin/support" className="hover:text-gold">
+              Support
+            </Link>
+            <Link href="/admin/connect" className="hover:text-gold">
+              Connect
+            </Link>
             <Link href="/admin/ventures" className="hover:text-gold">
               Ventures
             </Link>
@@ -75,6 +88,7 @@ export default async function AdminLayout({
         </div>
       </header>
       <div className="mx-auto max-w-5xl px-6 py-10">
+        <AdminStackStatus />
         {role && session?.user && <AdminStaffBanner role={role} />}
         {children}
       </div>

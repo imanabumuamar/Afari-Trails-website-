@@ -4,7 +4,7 @@ export const venturesHero = {
   intro:
     "Afari Trails Ventures is committed to sustainable development across hospitality, conservation, and community — creating long-term value for the land, its people, and those who journey through it.",
   image:
-    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=2400&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
 } as const;
 
 export const venturesMission = {
@@ -13,7 +13,7 @@ export const venturesMission = {
   body: "We partner on ventures that honor wilderness, empower communities, and build hospitality rooted in authenticity — bridging tourism, conservation, and local development for generations to come.",
   approachHref: "#focus-areas",
   image:
-    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1600&q=85",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
 } as const;
 
 export const ventureStats = [
@@ -30,7 +30,7 @@ export const focusAreas = [
     description:
       "Boutique safari camps and wilderness stays immersed in the landscape.",
     image:
-      "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     icon: "lodge",
     href: "/ventures/eco-lodge" as const,
   },
@@ -40,7 +40,7 @@ export const focusAreas = [
     description:
       "Wildlife preservation and eco-conscious operations across wild places.",
     image:
-      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=800&q=85",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
     icon: "leaf",
     href: "/ventures/conservation" as const,
   },
@@ -50,7 +50,7 @@ export const focusAreas = [
     description:
       "Local employment, education, and artisan collaborations that endure.",
     image:
-      "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     icon: "people",
     href: "/ventures/community" as const,
   },
@@ -60,7 +60,7 @@ export const focusAreas = [
     description:
       "Regenerative land stewardship and agricultural partnerships.",
     image:
-      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=85",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
     icon: "crop",
     href: "/ventures/agriculture" as const,
   },
@@ -70,7 +70,7 @@ export const focusAreas = [
     description:
       "Safari retreats, wellness camps, and boutique properties.",
     image:
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     icon: "home",
     href: "/ventures/hospitality" as const,
   },
@@ -128,7 +128,7 @@ export const featuredProject = {
     "An eco-lodge vision along the Zambezi corridor — low-impact hospitality designed for stillness, river views, and deep connection to the valley.",
   status: "In Development",
   image:
-    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=2400&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
   href: "/ventures/eco-lodge",
   ctaLabel: "View Project →",
 } as const;
@@ -138,7 +138,7 @@ export const venturesCta = {
   heading: "Let's Build Together",
   body: "We welcome conversations with landowners, hospitality partners, conservation groups, and aligned investors.",
   image:
-    "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
   ctaLabel: "Get In Touch →",
   ctaHref: "/ventures/connect",
 } as const;

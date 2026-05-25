@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import type { ContentImage, HomepageImageField } from "@/types/homepage";
 import { HOMEPAGE_IMAGE_FIELDS } from "@/types/homepage";
 
@@ -42,13 +43,8 @@ export function HomepageImageEditor({
 
     setUploading(false);
 
-    if (res.status === 401) {
-      onStatus("Session expired. Sign in again.");
-      return;
-    }
-
     if (!res.ok) {
-      onStatus(`Upload failed for ${meta.label}.`);
+      onStatus(await readAdminApiError(res, `Upload failed for ${meta.label}.`));
       return;
     }
 

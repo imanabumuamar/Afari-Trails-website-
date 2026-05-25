@@ -32,12 +32,22 @@ async function resolveStaff() {
     throw new AuthError("Unauthorized", 401);
   }
 
-  const { data, ok } = await backendFetch<{
+  const { data, ok, status } = await backendFetch<{
     user: { id: string; email: string; name: string | null; role: string };
   }>("/auth/me", { token: session.accessToken });
 
+  if (status === 503) {
+    throw new AuthError(
+      "API is not running. From the project root run: npm run dev",
+      503,
+    );
+  }
+
   if (!ok || !data?.user) {
-    throw new AuthError("Unauthorized", 401);
+    throw new AuthError(
+      "Session expired. Sign in again at /admin/login.",
+      401,
+    );
   }
 
   const role = parseRole(data.user.role);

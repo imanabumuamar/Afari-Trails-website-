@@ -1,4 +1,4 @@
-import type { CollectionIconType } from "@/lib/data/store";
+import type { CollectionIconType } from "@/types/store-content";
 
 type CollectionIconProps = {
   type: CollectionIconType;

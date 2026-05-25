@@ -22,6 +22,30 @@ export default async function AdminDashboardPage() {
         </p>
       </div>
 
+      <section className="rounded border border-gold/30 bg-gold/10 p-6 text-sm text-charcoal/80">
+        <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">
+          Local editing (read this first)
+        </h3>
+        <ol className="mt-4 list-decimal space-y-2 pl-5">
+          <li>
+            In Terminal, from the <strong className="font-normal">website</strong> folder, run{" "}
+            <code className="text-[11px]">npm run dev</code> — not frontend-only.
+          </li>
+          <li>
+            Wait until the log shows <strong className="font-normal">Ready</strong>, then open{" "}
+            <Link href="/admin/login" className="text-gold hover:underline">
+              admin login
+            </Link>{" "}
+            at <code className="text-[11px]">localhost:3000</code> (not 127.0.0.1).
+          </li>
+          <li>Pick a section below, edit, and click Save. Leave the dev terminal open.</li>
+          <li>
+            If something fails, run <code className="text-[11px]">npm run doctor</code> from the
+            project folder.
+          </li>
+        </ol>
+      </section>
+
       <div className="grid gap-6 sm:grid-cols-2">
         <Link
           href="/admin/homepage"
@@ -75,6 +99,50 @@ export default async function AdminDashboardPage() {
           <p className="mt-2 font-serif text-xl font-light">Archive</p>
           <p className="mt-2 text-sm text-charcoal/60">
             Edit collections, gallery images, Afari Lens copy, and submit page text.
+          </p>
+        </Link>
+
+        <Link
+          href="/admin/about"
+          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
+          <p className="mt-2 font-serif text-xl font-light">About</p>
+          <p className="mt-2 text-sm text-charcoal/60">
+            Edit hero, brand story, philosophy, vision pillars, and contact CTA.
+          </p>
+        </Link>
+
+        <Link
+          href="/admin/store"
+          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
+          <p className="mt-2 font-serif text-xl font-light">Store</p>
+          <p className="mt-2 text-sm text-charcoal/60">
+            Edit hero, collections, curated picks, products, and World of Afari.
+          </p>
+        </Link>
+
+        <Link
+          href="/admin/support"
+          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
+          <p className="mt-2 font-serif text-xl font-light">Support</p>
+          <p className="mt-2 text-sm text-charcoal/60">
+            Edit FAQ, shipping policy, and returns — all in one place.
+          </p>
+        </Link>
+
+        <Link
+          href="/admin/connect"
+          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
+          <p className="mt-2 font-serif text-xl font-light">Connect</p>
+          <p className="mt-2 text-sm text-charcoal/60">
+            Edit contact and expeditions connect — hero, form copy, categories, and gallery.
           </p>
         </Link>
 

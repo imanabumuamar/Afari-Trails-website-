@@ -21,10 +21,12 @@ export async function AgricultureEcosystem() {
           className="mt-12 flex flex-wrap items-center justify-center gap-6"
           aria-label="Afari ventures ecosystem"
         >
-          {agricultureEcosystem.links.map((link) => (
+          {agricultureEcosystem.links
+            .filter((link) => link.href)
+            .map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={link.href!}
               className="text-xs font-medium uppercase tracking-[0.22em] text-charcoal/55 transition-colors hover:text-gold"
             >
               {link.label} →

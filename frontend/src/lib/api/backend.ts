@@ -26,10 +26,15 @@ export async function backendFetch<T>(
     headers.set("Content-Type", "application/json");
   }
 
-  const res = await fetch(`${getApiBaseUrl()}${path}`, {
-    ...init,
-    headers,
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${getApiBaseUrl()}${path}`, {
+      ...init,
+      headers,
+    });
+  } catch {
+    return { data: null, status: 503, ok: false };
+  }
 
   let data: T | null = null;
   const text = await res.text();

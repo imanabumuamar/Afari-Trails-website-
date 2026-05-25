@@ -21,10 +21,12 @@ export async function HospitalityEcosystem() {
           className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
           aria-label="Afari ecosystem"
         >
-          {hospitalityEcosystem.links.map((link) => (
+          {hospitalityEcosystem.links
+            .filter((link) => link.href)
+            .map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={link.href!}
               className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/55 transition-colors hover:text-gold"
             >
               {link.label} →

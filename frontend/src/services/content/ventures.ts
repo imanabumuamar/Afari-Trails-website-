@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { getApiBaseUrl } from "@/lib/api/backend";
+import { fetchCmsJson } from "@/lib/api/fetch-content";
 import {
   VENTURE_PAGE_DEFAULTS,
   type VentureSlug,
@@ -57,17 +57,10 @@ export function getVentureContentLocal(slug: VentureSlug): Record<string, unknow
 
 export const getVenturePageContent = cache(
   async (slug: VentureSlug): Promise<Record<string, unknown>> => {
-    try {
-      const res = await fetch(`${getApiBaseUrl()}/content/ventures/${slug}`, {
-        next: { revalidate: 30 },
-      });
-      if (res.ok) {
-        const doc = (await res.json()) as VentureContentDocument;
-        return mergeVentureData(slug, doc.data);
-      }
-    } catch {
-      // API offline
-    }
+    const doc = await fetchCmsJson<VentureContentDocument>(
+      `/content/ventures/${slug}`,
+    );
+    if (doc?.data) return mergeVentureData(slug, doc.data);
     return getVentureContentLocal(slug);
   },
 );

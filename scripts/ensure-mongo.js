@@ -36,6 +36,11 @@ function run(cmd, args) {
 async function tryStartMongo() {
   console.log("[mongo] Not running — trying to start…");
 
+  if (await run("docker", ["compose", "up", "-d", "mongodb"])) {
+    await sleep(4000);
+    if (await tryConnect()) return true;
+  }
+
   if (await run("brew", ["services", "start", "mongodb-community"])) {
     await sleep(3000);
     if (await tryConnect()) return true;

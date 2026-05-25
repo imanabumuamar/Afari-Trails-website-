@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import {
   VENTURE_SLUGS,
   VENTURE_SLUG_LABELS,
@@ -29,12 +30,8 @@ export function VenturesStructuredEditor({
     const res = await fetch(`/api/admin/content/ventures/${pageSlug}`);
     setLoading(false);
 
-    if (res.status === 401) {
-      setStatus("Session expired. Sign in again.");
-      return;
-    }
     if (!res.ok) {
-      setStatus("Could not load venture content.");
+      setStatus(await readAdminApiError(res, "Could not load venture content."));
       return;
     }
 
@@ -58,7 +55,7 @@ export function VenturesStructuredEditor({
     });
 
     if (!res.ok) {
-      setStatus("Save failed.");
+      setStatus(await readAdminApiError(res, "Save failed."));
       return;
     }
 

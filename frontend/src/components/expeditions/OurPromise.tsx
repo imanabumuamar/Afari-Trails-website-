@@ -18,7 +18,7 @@ export async function OurPromise() {
           {section.body}
         </p>
         <Link
-          href={section.approachHref}
+          href={section.approachHref ?? "#approach"}
           className="mt-10 inline-block text-xs font-medium uppercase tracking-[0.25em] text-charcoal transition-colors hover:text-gold"
         >
           Our Approach →

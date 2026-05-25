@@ -46,4 +46,36 @@ router.put(
   contentController.updateArchive,
 );
 
+router.get("/about", contentController.getAbout);
+router.put(
+  "/about",
+  requireJwt,
+  requirePermission("content:about:write"),
+  contentController.updateAbout,
+);
+
+router.get("/store", contentController.getStore);
+router.put(
+  "/store",
+  requireJwt,
+  requirePermission("content:store:write"),
+  contentController.updateStore,
+);
+
+router.get("/support", contentController.getSupport);
+router.put(
+  "/support",
+  requireJwt,
+  requirePermission("content:support:write"),
+  contentController.updateSupport,
+);
+
+router.get("/connect", contentController.getConnect);
+router.put(
+  "/connect",
+  requireJwt,
+  requirePermission("content:connect:write"),
+  contentController.updateConnect,
+);
+
 export default router;

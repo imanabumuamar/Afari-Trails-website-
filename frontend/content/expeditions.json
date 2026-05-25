@@ -5,14 +5,14 @@
       "hero": {
         "heading": "Journeys Into the Wild.",
         "subtext": "Curated expeditions across Zambia and beyond — designed for travelers seeking deeper encounters with Africa's landscapes, cultures, and untamed beauty.",
-        "image": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85"
+        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80"
       },
       "ourPromise": {
         "label": "Our Promise",
         "heading": "More than a trip. A return to what truly matters.",
         "body": "Every expedition is designed to reconnect people with nature, stillness, adventure, and the spirit of exploration — paced for presence, not performance.",
         "approachHref": "#approach",
-        "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1600&q=85"
+        "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80"
       },
       "categoryBar": [
         {
@@ -66,7 +66,7 @@
         "quote": "The wilderness has a way of returning us to ourselves.",
         "readyLabel": "Ready to begin your journey?",
         "boxText": "Let us design a private expedition tailored to your pace, interests, and style.",
-        "image": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85"
+        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80"
       }
     },
     "featuredIds": [
@@ -83,7 +83,7 @@
         "title": "South Luangwa Wilderness Expedition",
         "tagline": "Walking safaris and leopard country.",
         "metaDescription": "A cinematic journey through Zambia's South Luangwa — walking safaris, river systems, and intimate wilderness camps paced for presence.",
-        "heroImage": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+        "heroImage": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
         "quickDetails": [
           "Zambia",
           "7 Days",
@@ -123,19 +123,19 @@
         ],
         "visualStrip": [
           {
-            "src": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Leopard in dappled woodland light"
           },
           {
-            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Luangwa River at golden hour"
           },
           {
-            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Safari camp beneath open sky"
           },
           {
-            "src": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Walking safari through the bush"
           }
         ],
@@ -179,68 +179,68 @@
         "accommodation": {
           "heading": "Camps in the heart of the valley",
           "body": "Intimate safari camps designed for stillness, comfort, and immersion within the landscape. Canvas and timber blend with the bush; meals are shared under stars; sustainability and community partnership guide every stay. This is luxury measured in presence — not excess.",
-          "image": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+          "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
           "imageAlt": "Safari camp at twilight in the Luangwa Valley"
         },
         "experiences": [
           {
             "title": "Wildlife Encounters",
             "body": "Leopard, lion, elephant, and endemic Thornicroft's giraffe — encounters shaped by patience and local knowledge rather than rushed schedules.",
-            "image": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Leopard resting on a branch"
           },
           {
             "title": "Walking Safari",
             "body": "The birthplace of the walking safari. On foot, the valley becomes intimate, immediate, and unforgettable.",
-            "image": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Guides leading a walking safari"
           },
           {
             "title": "Campfire Evenings",
             "body": "Stories, silence, and firelight. Nights at camp are part of the journey — not an intermission between drives.",
-            "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Evening campfire under African stars"
           },
           {
             "title": "Photography Moments",
             "body": "Long lenses optional. What matters is light — dawn mist, dust on a track, a heron lifting from the river.",
-            "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Golden sunset over the savanna"
           }
         ],
         "gallery": [
           {
-            "src": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Elephants crossing at sunrise",
             "wide": true
           },
           {
-            "src": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Leopard in woodland"
           },
           {
-            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "River landscape"
           },
           {
-            "src": "https://images.unsplash.com/photo-1539650116574-75c0cddb8a8e?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Safari vehicle on a dusty track"
           },
           {
-            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Camp at dusk",
             "wide": true
           },
           {
-            "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Campfire evening"
           },
           {
-            "src": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Walking safari"
           },
           {
-            "src": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Night sky over wilderness"
           }
         ],
@@ -300,7 +300,7 @@
         "title": "Lower Zambezi River Expedition",
         "tagline": "River channels and golden-hour canoes.",
         "metaDescription": "Canoe the Zambezi, track wildlife along forested banks, and settle into riverside camps on an unhurried Lower Zambezi expedition.",
-        "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+        "heroImage": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
         "quickDetails": [
           "Zambia",
           "5 Days",
@@ -340,19 +340,19 @@
         ],
         "visualStrip": [
           {
-            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Canoe on the Zambezi at dawn"
           },
           {
-            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "River channels through forest"
           },
           {
-            "src": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Elephants along the riverbank"
           },
           {
-            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Sunset over the water"
           }
         ],
@@ -386,54 +386,54 @@
         "accommodation": {
           "heading": "Riverside refuge",
           "body": "Lodges and camps positioned for views and silence — open-fronted spaces, natural materials, and meals that celebrate local harvest. Comfort without crowding the wild.",
-          "image": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
           "imageAlt": "Riverside lodge overlooking the Zambezi"
         },
         "experiences": [
           {
             "title": "River Exploration",
             "body": "Canoe and boat safaris reveal the Zambezi from its most intimate angle — water-level encounters with wildlife and landscape.",
-            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Canoe safari on calm water"
           },
           {
             "title": "Golden Hour on the Water",
             "body": "The river at dusk is cinema — reflected sky, silhouetted elephants, and the hush before night.",
-            "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Golden hour on the Zambezi"
           },
           {
             "title": "Wildlife Along the Banks",
             "body": "Elephant, lion, and wild dog move between river and forest. Guides interpret every sign with quiet expertise.",
-            "image": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Wildlife at the river's edge"
           }
         ],
         "gallery": [
           {
-            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Canoe on the Zambezi",
             "wide": true
           },
           {
-            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "River channel"
           },
           {
-            "src": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Elephants near water"
           },
           {
-            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "River at sunset",
             "wide": true
           },
           {
-            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Riverside camp"
           },
           {
-            "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Evening by the river"
           }
         ],
@@ -483,7 +483,7 @@
         "title": "Livingstone & Victoria Falls Expedition",
         "tagline": "Victoria Falls and the edge of adventure.",
         "metaDescription": "Stand before Victoria Falls, explore the Zambezi, and discover Livingstone — where natural wonder meets thoughtful adventure.",
-        "heroImage": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+        "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
         "quickDetails": [
           "Zambia",
           "4 Days",
@@ -523,19 +523,19 @@
         ],
         "visualStrip": [
           {
-            "src": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Victoria Falls mist and rainbow"
           },
           {
-            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Zambezi sunset cruise"
           },
           {
-            "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Local heritage and craft"
           },
           {
-            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Wide river at dusk"
           }
         ],
@@ -564,45 +564,45 @@
         "accommodation": {
           "heading": "Lodges facing the Zambezi",
           "body": "Boutique properties chosen for view, calm, and proximity to both falls and river — design that defers to landscape, service that feels personal.",
-          "image": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
           "imageAlt": "Lodge view toward Victoria Falls region"
         },
         "experiences": [
           {
             "title": "Victoria Falls",
             "body": "Mosi-oa-Tunya — the Smoke That Thunders. Experience the falls through guided walks and viewpoints chosen for presence, not crowds.",
-            "image": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Victoria Falls"
           },
           {
             "title": "Zambezi Sunsets",
             "body": "Evening on the river — hippos, elephants in the distance, and sky turning gold over Africa's great waterway.",
-            "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Sunset on the Zambezi"
           },
           {
             "title": "Cultural Connection",
             "body": "Livingstone's living heritage — artisans, historians, and hosts who welcome you into story rather than spectacle.",
-            "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Cultural experience in Livingstone"
           }
         ],
         "gallery": [
           {
-            "src": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Victoria Falls",
             "wide": true
           },
           {
-            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Zambezi cruise"
           },
           {
-            "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Local culture"
           },
           {
-            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "River sunset",
             "wide": true
           }
@@ -649,7 +649,7 @@
         "title": "Kafue Wilderness Expedition",
         "tagline": "Floodplains, cheetah, and vast wilderness.",
         "metaDescription": "Explore Zambia's vast Kafue — remote floodplains, cheetah country, and luxury bush camps far from the crowds.",
-        "heroImage": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+        "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
         "quickDetails": [
           "Zambia",
           "8 Days",
@@ -689,19 +689,19 @@
         ],
         "visualStrip": [
           {
-            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Busanga Plains at sunset"
           },
           {
-            "src": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Predator in open grassland"
           },
           {
-            "src": "https://images.unsplash.com/photo-1539650116574-75c0cddb8a8e?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Remote safari drive"
           },
           {
-            "src": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Night sky over the plains"
           }
         ],
@@ -750,50 +750,50 @@
         "accommodation": {
           "heading": "Remote bush camps",
           "body": "Small-footprint camps on the plains and along rivers — en-suite comfort, solar power, and design that leaves no trace but gratitude.",
-          "image": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+          "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
           "imageAlt": "Remote bush camp on the plains"
         },
         "experiences": [
           {
             "title": "Busanga Plains",
             "body": "Seasonal floodplains that transform into one of Africa's great wildlife stages — open, luminous, alive.",
-            "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Busanga Plains landscape"
           },
           {
             "title": "Cheetah & Wild Dog",
             "body": "Kafue's predators thrive in space. Sightings feel earned — and unforgettable.",
-            "image": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Cheetah on the plains"
           },
           {
             "title": "Stargazing",
             "body": "No light pollution. Nights here are a second safari — constellations over camp.",
-            "image": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Stars over the bush"
           }
         ],
         "gallery": [
           {
-            "src": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Plains sunset",
             "wide": true
           },
           {
-            "src": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Wildlife on the plains"
           },
           {
-            "src": "https://images.unsplash.com/photo-1539650116574-75c0cddb8a8e?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Safari in Kafue"
           },
           {
-            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Bush camp",
             "wide": true
           },
           {
-            "src": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Night sky"
           }
         ],
@@ -839,7 +839,7 @@
         "title": "Zambian Cultural Heritage Expedition",
         "tagline": "Traditions, artisans, and living heritage.",
         "metaDescription": "Connect with Zambia's living heritage — artisans, communities, and landscapes woven into a thoughtful cultural expedition.",
-        "heroImage": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+        "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
         "quickDetails": [
           "Zambia",
           "5 Days",
@@ -879,19 +879,19 @@
         ],
         "visualStrip": [
           {
-            "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Artisan at work"
           },
           {
-            "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Shared evening meal"
           },
           {
-            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Landscape along the journey"
           },
           {
-            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Thoughtful guest accommodation"
           }
         ],
@@ -925,45 +925,45 @@
         "accommodation": {
           "heading": "Guesthouses with soul",
           "body": "Locally owned properties and boutique stays — comfort, character, and direct benefit to communities we partner with.",
-          "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
           "imageAlt": "Cultural heritage accommodation"
         },
         "experiences": [
           {
             "title": "Artisan Encounters",
             "body": "Hands that shape clay, fiber, and wood — learn the philosophy behind the craft, not only the product.",
-            "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Artisan workshop"
           },
           {
             "title": "Community Partnership",
             "body": "Visits designed with hosts, not at them. Fair compensation, clear expectations, and mutual respect.",
-            "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Community gathering"
           },
           {
             "title": "Landscape as Context",
             "body": "Culture lives in place. Rivers, towns, and bush intervals frame every human story.",
-            "image": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "imageAlt": "Zambian landscape"
           }
         ],
         "gallery": [
           {
-            "src": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Heritage and craft",
             "wide": true
           },
           {
-            "src": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Evening gathering"
           },
           {
-            "src": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
             "alt": "Landscape"
           },
           {
-            "src": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
             "alt": "Guest stay"
           }
         ],
@@ -1005,5 +1005,5 @@
       }
     ]
   },
-  "updatedAt": "2026-05-24T20:49:49.243Z"
+  "updatedAt": "2026-05-25T13:59:30.295Z"
 }

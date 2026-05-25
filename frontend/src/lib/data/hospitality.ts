@@ -6,7 +6,7 @@ export const hospitalityHero = {
   exploreCta: "Explore the Vision",
   partnerCta: "Partner With Us",
   image:
-    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=2400&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
   imageAlt: "Luxury safari lodge architecture overlooking wilderness at dusk",
 } as const;
 
@@ -33,7 +33,7 @@ export const hospitalityFocusAreas = {
       title: "Eco Lodges",
       description: "Low-impact wilderness retreats immersed in landscape and story.",
       image:
-        "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
       href: "/ventures/eco-lodge",
     },
     {
@@ -41,21 +41,21 @@ export const hospitalityFocusAreas = {
       title: "Safari Camps",
       description: "Immersive expedition-based hospitality shaped by the rhythm of the wild.",
       image:
-        "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "wellness",
       title: "Wellness Retreats",
       description: "Stillness, nature, and restoration — paced for presence, not performance.",
       image:
-        "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "cultural",
       title: "Cultural Hospitality Experiences",
       description: "Locally rooted storytelling and cultural immersion at the heart of every stay.",
       image:
-        "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
       href: "/ventures/community",
     },
     {
@@ -63,14 +63,14 @@ export const hospitalityFocusAreas = {
       title: "Sustainable Destination Development",
       description: "Long-term hospitality ecosystems built responsibly across regions and communities.",
       image:
-        "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "boutique",
       title: "Boutique Wilderness Escapes",
       description: "Private, intimate experiences designed for deep connection to place.",
       image:
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
   ],
 } as const;
@@ -81,19 +81,19 @@ export const hospitalityDesign = {
   body: "Natural materials, open-air architecture, earthy textures, and handcrafted interiors — structures that blend into landscape through local craftsmanship and sustainable design. Every space is considered: light, air, silence, and the view beyond the deck.",
   moodboard: [
     {
-      src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=900&q=85",
+      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
       alt: "Natural wood and linen interior textures",
     },
     {
-      src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=85",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
       alt: "Earthy stone and warm interior light",
     },
     {
-      src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=900&q=85",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
       alt: "Handcrafted architectural details",
     },
     {
-      src: "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=900&q=85",
+      src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
       alt: "Fire-lit evening atmosphere",
     },
   ],
@@ -160,27 +160,27 @@ export const hospitalitySustainability = {
 
 export const hospitalityGallery = [
   {
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Lantern-lit lodge deck",
   },
   {
-    src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Warm interior atmosphere",
   },
   {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Architecture in wilderness",
   },
   {
-    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Riverside landscape",
   },
   {
-    src: "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Retreat at golden hour",
   },
   {
-    src: "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Campfire evening",
   },
 ] as const;

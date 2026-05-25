@@ -34,7 +34,7 @@ export async function VenturesProjects() {
           {pipeline.map((project) => (
             <li key={project.id}>
               <Link
-                href={project.href}
+                href={project.href ?? "/ventures"}
                 className="group flex flex-col gap-3 py-5 transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-8"
               >
                 <div className="min-w-0">
@@ -58,7 +58,7 @@ export async function VenturesProjects() {
           ))}
           <li>
             <Link
-              href={featuredProject.href}
+              href={featuredProject.href ?? "/ventures/eco-lodge"}
               className="group flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8"
             >
               <div className="min-w-0">

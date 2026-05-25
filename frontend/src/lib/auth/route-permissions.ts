@@ -5,6 +5,10 @@ export const ADMIN_PAGE_PERMISSIONS: { prefix: string; permission: Permission }[
   { prefix: "/admin/users", permission: "users:read" },
   { prefix: "/admin/homepage", permission: "content:homepage:read" },
   { prefix: "/admin/ventures", permission: "content:ventures:read" },
+  { prefix: "/admin/about", permission: "content:about:read" },
+  { prefix: "/admin/store", permission: "content:store:read" },
+  { prefix: "/admin/support", permission: "content:support:read" },
+  { prefix: "/admin/connect", permission: "content:connect:read" },
 ];
 
 export function permissionForAdminPath(pathname: string): Permission {
@@ -29,6 +33,26 @@ export function permissionForAdminApi(pathname: string, method: string): Permiss
   if (pathname.startsWith("/api/admin/content/ventures")) {
     if (method === "GET") return "content:ventures:read";
     if (method === "PUT" || method === "POST") return "content:ventures:write";
+  }
+
+  if (pathname.startsWith("/api/admin/content/about")) {
+    if (method === "GET") return "content:about:read";
+    if (method === "PUT" || method === "POST") return "content:about:write";
+  }
+
+  if (pathname.startsWith("/api/admin/content/store")) {
+    if (method === "GET") return "content:store:read";
+    if (method === "PUT" || method === "POST") return "content:store:write";
+  }
+
+  if (pathname.startsWith("/api/admin/content/support")) {
+    if (method === "GET") return "content:support:read";
+    if (method === "PUT" || method === "POST") return "content:support:write";
+  }
+
+  if (pathname.startsWith("/api/admin/content/connect")) {
+    if (method === "GET") return "content:connect:read";
+    if (method === "PUT" || method === "POST") return "content:connect:write";
   }
   return null;
 }

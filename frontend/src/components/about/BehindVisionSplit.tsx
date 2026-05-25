@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PhilosophyIcon } from "@/components/about/PhilosophyIcon";
-import { behindTheBrand, futureVision } from "@/lib/data/about";
+import { getAboutContent } from "@/services/content/about";
 
 function PillarIcon({ type }: { type: string }) {
   const icons: Record<string, string> = {
@@ -13,7 +13,9 @@ function PillarIcon({ type }: { type: string }) {
   return <PhilosophyIcon type={icons[type] ?? "connect"} />;
 }
 
-export function BehindVisionSplit() {
+export async function BehindVisionSplit() {
+  const { behindTheBrand, futureVision } = await getAboutContent();
+
   return (
     <section className="grid lg:grid-cols-2">
       <div className="bg-matte-black px-6 py-16 lg:px-10 lg:py-20">
@@ -49,7 +51,7 @@ export function BehindVisionSplit() {
           {futureVision.pillars.map((pillar) => (
             <Link
               key={pillar.href}
-              href={pillar.href}
+              href={pillar.href ?? "#"}
               className="flex flex-col items-center gap-3 text-center transition-opacity hover:opacity-80"
             >
               <PillarIcon type={pillar.icon} />

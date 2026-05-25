@@ -6,11 +6,11 @@
         "label": "Stories From the Trail",
         "heading": "Journal",
         "description": "Thoughts, stories, and field notes from our journeys across Africa. Reflections on nature, culture, conservation, and the human experience.",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85"
+        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80"
       },
       "newsletter": {
         "heading": "Stories. Inspiration. Africa.",
-        "image": "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85"
+        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80"
       },
       "categories": [
         {
@@ -52,7 +52,7 @@
         "categoryLabel": "Expeditions",
         "readTime": "7 MIN READ",
         "dateDisplay": "MAR 28, 2026",
-        "image": "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=1400&q=85",
+        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1400&q=80",
         "featured": true,
         "body": "",
         "published": true
@@ -65,7 +65,7 @@
         "categoryLabel": "Conservation",
         "readTime": "6 MIN READ",
         "dateDisplay": "MAR 18, 2026",
-        "image": "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=800&q=85",
+        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
         "featuredSide": true,
         "body": "",
         "published": true
@@ -78,7 +78,7 @@
         "categoryLabel": "Culture",
         "readTime": "5 MIN READ",
         "dateDisplay": "MAR 10, 2026",
-        "image": "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=800&q=85",
+        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
         "featuredSide": true,
         "body": "",
         "published": true
@@ -91,7 +91,7 @@
         "categoryLabel": "Wildlife",
         "readTime": "4 MIN READ",
         "dateDisplay": "FEB 24, 2026",
-        "image": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=800&q=85",
+        "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
         "featuredSide": true,
         "body": "",
         "published": true
@@ -104,7 +104,7 @@
         "categoryLabel": "Expeditions",
         "readTime": "6 MIN READ",
         "dateDisplay": "MAR 15, 2026",
-        "image": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=800&q=85",
+        "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
         "body": "",
         "published": true
       },
@@ -116,7 +116,7 @@
         "categoryLabel": "Reflections",
         "readTime": "8 MIN READ",
         "dateDisplay": "MAR 8, 2026",
-        "image": "https://images.unsplash.com/photo-1535330014194-e6e8b0e8b8b0?w=800&q=85",
+        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
         "body": "",
         "published": true
       },
@@ -128,7 +128,7 @@
         "categoryLabel": "People",
         "readTime": "5 MIN READ",
         "dateDisplay": "FEB 28, 2026",
-        "image": "https://images.unsplash.com/photo-1547471080-7cc2caa12f7f?w=800&q=85",
+        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
         "body": "",
         "published": true
       },
@@ -140,11 +140,11 @@
         "categoryLabel": "Conservation",
         "readTime": "8 MIN READ",
         "dateDisplay": "FEB 14, 2026",
-        "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=85",
+        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
         "body": "",
         "published": true
       }
     ]
   },
-  "updatedAt": "2026-05-24T21:23:32.842Z"
+  "updatedAt": "2026-05-25T13:59:30.303Z"
 }

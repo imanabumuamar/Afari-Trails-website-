@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
+import { cmsLoadError } from "@/lib/admin/cms-api-error";
 import { AuthError, requirePermission } from "@/lib/auth/require-session";
 import type { VentureContentDocument } from "@/types/ventures-content";
 import {
@@ -38,7 +39,7 @@ export async function GET(_request: Request, context: RouteContext) {
 
     if (!ok || !data) {
       return NextResponse.json(
-        { error: "Could not load venture content" },
+        { error: cmsLoadError(status, "venture content") },
         { status: status || 502 },
       );
     }

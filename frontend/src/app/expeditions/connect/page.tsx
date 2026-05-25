@@ -1,5 +1,5 @@
 import { ConnectPageView } from "@/components/connect/ConnectPageView";
-import { expeditionsConnectConfig } from "@/lib/data/connect-expeditions";
+import { getConnectContent } from "@/services/content/connect";
 
 export const metadata = {
   title: "Plan Your Journey",
@@ -7,6 +7,7 @@ export const metadata = {
     "Design your Afari Trails expedition — custom safaris, private journeys, and curated travel across Zambia and beyond.",
 };
 
-export default function ExpeditionsConnectPage() {
-  return <ConnectPageView config={expeditionsConnectConfig} />;
+export default async function ExpeditionsConnectPage() {
+  const content = await getConnectContent();
+  return <ConnectPageView config={content.expeditions} />;
 }

@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { EXPEDITIONS_CONTENT_DEFAULTS } from "@/lib/data/expedition-defaults";
-import { getApiBaseUrl } from "@/lib/api/backend";
+import { fetchCmsJson } from "@/lib/api/fetch-content";
 import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 import type {
   ExpeditionDetailRecord,
@@ -61,17 +61,10 @@ export function getExpeditionsContentLocal(): ExpeditionsContentData {
 
 export const getExpeditionsContent = cache(
   async (): Promise<ExpeditionsContentData> => {
-    try {
-      const res = await fetch(`${getApiBaseUrl()}/content/expeditions`, {
-        next: { revalidate: 30 },
-      });
-      if (res.ok) {
-        const doc = (await res.json()) as ExpeditionsContentDocument;
-        return mergeExpeditionsData(doc.data);
-      }
-    } catch {
-      // API offline
-    }
+    const doc = await fetchCmsJson<ExpeditionsContentDocument>(
+      "/content/expeditions",
+    );
+    if (doc?.data) return mergeExpeditionsData(doc.data);
     return getExpeditionsContentLocal();
   },
 );

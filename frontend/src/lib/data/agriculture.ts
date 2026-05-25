@@ -6,7 +6,7 @@ export const agricultureHero = {
   exploreCta: "Explore the Vision",
   partnerCta: "Partner With Us",
   image:
-    "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=2400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
   imageAlt: "Golden fields at sunrise across African farmland",
 } as const;
 
@@ -34,7 +34,7 @@ export const agricultureFocusAreas = {
       description:
         "Practices that restore soil health, biodiversity, and the living rhythm of the land.",
       image:
-        "https://images.unsplash.com/photo-1574943321395-2e06e1f9e40a?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "water",
@@ -42,7 +42,7 @@ export const agricultureFocusAreas = {
       description:
         "Responsible irrigation and protection of rivers, wetlands, and shared water sources.",
       image:
-        "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "community",
@@ -50,7 +50,7 @@ export const agricultureFocusAreas = {
       description:
         "Working alongside local farmers and communities as leaders — not recipients.",
       image:
-        "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "food",
@@ -58,7 +58,7 @@ export const agricultureFocusAreas = {
       description:
         "Supporting resilient, sustainable food systems built for changing seasons and futures.",
       image:
-        "https://images.unsplash.com/photo-1464226184873-943d2d315587?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "livestock",
@@ -66,7 +66,7 @@ export const agricultureFocusAreas = {
       description:
         "Ethical, environmentally balanced systems that coexist with wild landscapes.",
       image:
-        "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "innovation",
@@ -74,7 +74,7 @@ export const agricultureFocusAreas = {
       description:
         "Modern efficiency shaped by tradition, local expertise, and ecological intelligence.",
       image:
-        "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
   ],
 } as const;
@@ -84,7 +84,7 @@ export const agricultureLand = {
   quote: "Healthy land creates healthy communities.",
   body: "Agriculture and wilderness are not opposites when guided by balance. We support systems that preserve natural resources, protect wildlife corridors, and honor the coexistence between cultivation and the wild — because the future of food depends on the future of ecosystems.",
   image:
-    "https://images.unsplash.com/photo-1416879595882-3373a0488b93?w=1600&q=85",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
   imageAlt: "Hands holding rich soil in warm light",
 } as const;
 
@@ -93,7 +93,7 @@ export const agricultureCommunity = {
   heading: "Partners on the land.",
   body: "Local employment, farmer partnerships, skills development, and long-term opportunity — including women-led agriculture and youth initiatives. Communities are partners and leaders in every vision we pursue, shaping how land is tended and how harvests are shared.",
   image:
-    "https://images.unsplash.com/photo-1574943321395-2e06e1f9e40a?w=1600&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80",
   imageAlt: "Farmers walking through crops at golden hour",
 } as const;
 
@@ -115,27 +115,27 @@ export const agricultureInitiatives = {
 
 export const agricultureGallery = [
   {
-    src: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Crops moving in wind at sunrise",
   },
   {
-    src: "https://images.unsplash.com/photo-1416879595882-3373a0488b93?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Soil textures in warm light",
   },
   {
-    src: "https://images.unsplash.com/photo-1574943321395-2e06e1f9e40a?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Farmers working in the field",
   },
   {
-    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "River and farmland horizon",
   },
   {
-    src: "https://images.unsplash.com/photo-1464226184873-943d2d315587?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Local food preparation",
   },
   {
-    src: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Open landscape and sustainable systems",
   },
 ] as const;

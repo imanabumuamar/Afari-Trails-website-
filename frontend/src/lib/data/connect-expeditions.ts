@@ -8,7 +8,7 @@ export const expeditionsConnectConfig: ConnectPageConfig = {
       "Tell us how you imagine Africa — pace, places, companions, and the kind of journey you want to remember for a lifetime.",
     cta: "Start Planning",
     image:
-      "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
     imageAlt: "Safari vehicle on the savanna at golden hour",
   },
   intro: {
@@ -26,7 +26,7 @@ export const expeditionsConnectConfig: ConnectPageConfig = {
         title: "Custom Safari",
         description: "A journey built entirely around you.",
         image:
-          "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=900&q=85",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
         href: "#form",
         inquiry: "custom-safari",
       },
@@ -35,7 +35,7 @@ export const expeditionsConnectConfig: ConnectPageConfig = {
         title: "Group Expedition",
         description: "Travel with a curated small group.",
         image:
-          "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=900&q=85",
+          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
         href: "#form",
         inquiry: "group",
       },
@@ -44,7 +44,7 @@ export const expeditionsConnectConfig: ConnectPageConfig = {
         title: "Private Journey",
         description: "Exclusive access and bespoke pacing.",
         image:
-          "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=900&q=85",
+          "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
         href: "#form",
         inquiry: "private",
       },
@@ -53,7 +53,7 @@ export const expeditionsConnectConfig: ConnectPageConfig = {
         title: "Questions & Guidance",
         description: "Not sure where to begin — we're here.",
         image:
-          "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=900&q=85",
+          "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
         href: "#form",
         inquiry: "general",
       },
@@ -86,19 +86,19 @@ export const expeditionsConnectConfig: ConnectPageConfig = {
   },
   gallery: [
     {
-      src: "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1000&q=85",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
       alt: "Wildlife on the savanna",
     },
     {
-      src: "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
       alt: "River valley expedition",
     },
     {
-      src: "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1000&q=85",
+      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
       alt: "Campfire on the trail",
     },
     {
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=85",
+      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
       alt: "Mountain wilderness",
     },
   ],

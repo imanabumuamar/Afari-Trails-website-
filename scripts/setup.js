@@ -84,7 +84,9 @@ run("npm", ["install"], path.join(root, "backend"));
 run("npm", ["install"], path.join(root, "frontend"));
 
 run("node", ["scripts/ensure-mongo.js"]);
+run("node", ["scripts/fix-broken-images.js"]);
 run("npm", ["run", "seed"], path.join(root, "backend"));
+run("npm", ["run", "sync"], path.join(root, "backend"));
 
 console.log(`
 === Setup complete ===
@@ -99,4 +101,6 @@ Then open:
 
   Email:    admin@afaritrails.com
   Password: changeme123  (from frontend/.env.local)
+
+Verify anytime:  npm run doctor
 `);

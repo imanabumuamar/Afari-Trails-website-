@@ -2,19 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductCard } from "@/components/store/ProductCard";
-import { editorialCollections, products } from "@/lib/data/store";
+import {
+  getStoreContent,
+  getStoreContentLocal,
+} from "@/services/content/store";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return editorialCollections.map((c) => ({ slug: c.slug }));
+  const { collections } = getStoreContentLocal();
+  return collections.map((c) => ({ slug: c.slug }));
 }
 
 export default async function CollectionPage({ params }: PageProps) {
   const { slug } = await params;
-  const collection = editorialCollections.find((c) => c.slug === slug);
+  const { collections, products } = await getStoreContent();
+  const collection = collections.find((c) => c.slug === slug);
 
   if (!collection) notFound();
 

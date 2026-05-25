@@ -9,7 +9,7 @@ export const ecoLodgeHero = {
   partnerCta: "Partner With Us",
   partnerHref: "/ventures/partner",
   image:
-    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=2400&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
   imageAlt: "Luxury safari lodge overlooking African wilderness at sunset",
 } as const;
 
@@ -111,7 +111,7 @@ export const ecoLodgeWhyAfrica = {
   heading: "Why Africa",
   body: "Africa represents one of the world's most powerful opportunities for eco tourism and luxury nature-based hospitality.\n\nWith extraordinary landscapes, wildlife ecosystems, cultural richness, and rising demand for authentic travel experiences, the continent is positioned for the next generation of sustainable tourism investment.\n\nAfari Trails aims to contribute to that future by developing destinations that celebrate Africa while protecting its natural heritage.",
   image:
-    "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1600&q=85",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
   imageAlt: "African savanna at golden hour",
 } as const;
 
@@ -123,35 +123,35 @@ export const ecoLodgeGalleryIntro = {
 
 export const ecoLodgeGallery = [
   {
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Luxury safari lodge architecture",
   },
   {
-    src: "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Luxury tented camp in the wilderness",
   },
   {
-    src: "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Open-air lounge at sunset",
   },
   {
-    src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Sustainable lodge interior",
   },
   {
-    src: "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Wildlife encounter on safari",
   },
   {
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Sunset dining experience",
   },
   {
-    src: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Eco spa and wellness concept",
   },
   {
-    src: "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Wilderness expedition scene",
   },
 ] as const;
@@ -164,5 +164,5 @@ export const ecoLodgeFinalCta = {
   ctaHref: "/ventures/connect",
   secondaryCtaHref: "/ventures/partner",
   image:
-    "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
 } as const;

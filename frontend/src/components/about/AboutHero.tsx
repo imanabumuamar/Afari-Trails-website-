@@ -1,11 +1,13 @@
 import Image from "next/image";
-import { aboutHero } from "@/lib/data/about";
+import { getAboutContent } from "@/services/content/about";
 
-export function AboutHero() {
+export async function AboutHero() {
+  const { hero } = await getAboutContent();
+
   return (
     <section className="relative flex min-h-screen items-center">
       <Image
-        src={aboutHero.image}
+        src={hero.image}
         alt="Silhouette overlooking an African landscape at sunset"
         fill
         priority
@@ -17,13 +19,13 @@ export function AboutHero() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 py-32 lg:px-10">
         <p className="text-[10px] font-medium uppercase tracking-[0.35em] text-sand">
-          {aboutHero.label}
+          {hero.label}
         </p>
         <h1 className="mt-6 max-w-3xl font-serif text-5xl font-light leading-[1.1] text-ivory sm:text-6xl lg:text-[4.25rem]">
-          {aboutHero.heading}
+          {hero.heading}
         </h1>
         <p className="mt-8 max-w-lg text-sm leading-relaxed text-ivory/70 md:text-base">
-          {aboutHero.subtext}
+          {hero.subtext}
         </p>
       </div>
     </section>

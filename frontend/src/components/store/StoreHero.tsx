@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { storeHero } from "@/lib/data/store";
+import { getStoreContent } from "@/services/content/store";
 
 const ghostBtn =
   "inline-flex items-center gap-2 border border-ivory/55 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10";
 
-export function StoreHero() {
+export async function StoreHero() {
+  const { hero: storeHero } = await getStoreContent();
+
   return (
     <section className="relative flex min-h-screen items-center">
       <Image

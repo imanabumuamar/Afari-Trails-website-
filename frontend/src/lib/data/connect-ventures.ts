@@ -8,7 +8,7 @@ export const venturesConnectConfig: ConnectPageConfig = {
       "For hospitality, conservation, community, agriculture, and aligned investment — we welcome conversations with those who share a long-term vision for Africa.",
     cta: "Begin the Conversation",
     image:
-      "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
     imageAlt: "Luxury lodge architecture overlooking the Zambezi valley",
   },
   intro: {
@@ -26,7 +26,7 @@ export const venturesConnectConfig: ConnectPageConfig = {
         title: "Hospitality Development",
         description: "Eco lodges, camps, and destination concepts.",
         image:
-          "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=85",
+          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
         href: "/ventures/hospitality",
       },
       {
@@ -34,7 +34,7 @@ export const venturesConnectConfig: ConnectPageConfig = {
         title: "Conservation",
         description: "Wildlife, land, and ecosystem partnerships.",
         image:
-          "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=900&q=85",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
         href: "/ventures/conservation",
       },
       {
@@ -42,7 +42,7 @@ export const venturesConnectConfig: ConnectPageConfig = {
         title: "Community Empowerment",
         description: "Local leadership and cultural collaboration.",
         image:
-          "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=900&q=85",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
         href: "/ventures/community",
       },
       {
@@ -50,7 +50,7 @@ export const venturesConnectConfig: ConnectPageConfig = {
         title: "Sustainable Agriculture",
         description: "Regenerative land and food systems.",
         image:
-          "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&q=85",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
         href: "/ventures/agriculture",
       },
       {
@@ -58,7 +58,7 @@ export const venturesConnectConfig: ConnectPageConfig = {
         title: "Investment & Development",
         description: "Aligned capital and long-horizon builds.",
         image:
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=85",
+          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
         href: "#form",
         inquiry: "investment",
       },
@@ -67,7 +67,7 @@ export const venturesConnectConfig: ConnectPageConfig = {
         title: "Full Partnership Vision",
         description: "Explore our partner philosophy in depth.",
         image:
-          "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=900&q=85",
+          "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
         href: "/ventures/partner",
       },
     ],
@@ -100,19 +100,19 @@ export const venturesConnectConfig: ConnectPageConfig = {
   },
   gallery: [
     {
-      src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1000&q=85",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
       alt: "Hospitality architecture",
     },
     {
-      src: "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
       alt: "Community collaboration",
     },
     {
-      src: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=85",
+      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
       alt: "Sustainable agriculture",
     },
     {
-      src: "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
       alt: "Zambezi valley development",
     },
   ],

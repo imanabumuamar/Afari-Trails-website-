@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import type {
   JournalContentData,
   JournalStoryRecord,
@@ -30,12 +31,8 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
     const res = await fetch("/api/admin/content/journal");
     setLoading(false);
 
-    if (res.status === 401) {
-      setStatus("Session expired. Sign in again.");
-      return;
-    }
     if (!res.ok) {
-      setStatus("Could not load journal content.");
+      setStatus(await readAdminApiError(res, "Could not load journal content."));
       return;
     }
 
@@ -61,7 +58,7 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
     });
 
     if (!res.ok) {
-      setStatus("Save failed.");
+      setStatus(await readAdminApiError(res, "Save failed."));
       return;
     }
 

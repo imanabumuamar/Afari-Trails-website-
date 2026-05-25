@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { getInTouch } from "@/lib/data/about";
+import { getAboutContent } from "@/services/content/about";
 
-export function GetInTouch() {
+export async function GetInTouch() {
+  const { getInTouch } = await getAboutContent();
+
   return (
     <section className="border-t border-ivory/10 bg-[#2b231e] py-20 text-ivory lg:py-24">
       <div className="mx-auto max-w-2xl px-6 text-center lg:px-10">
@@ -12,7 +14,7 @@ export function GetInTouch() {
           {getInTouch.body}
         </p>
         <Link
-          href={getInTouch.href}
+          href={getInTouch.href ?? "/contact"}
           className="mt-10 inline-block text-xs font-medium uppercase tracking-[0.25em] text-sand transition-colors hover:text-ivory"
         >
           {getInTouch.cta} →

@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
 import path from "path";
-import { getApiBaseUrl } from "@/lib/api/backend";
+import { fetchCmsJson } from "@/lib/api/fetch-content";
 import {
   HOMEPAGE_IMAGE_FIELDS,
   HOMEPAGE_VIDEO_FIELDS,
@@ -19,7 +19,7 @@ const DEFAULT_HERO: HomepageHero = {
   subtext:
     "Curated expeditions. Meaningful ventures. Timeless safari-inspired living.",
   poster: {
-    src: "https://images.unsplash.com/photo-1587595431973-c026f9778660?w=2400&q=85",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
     alt: "Safari landscape at golden hour",
   },
   video: "/videos/hero.mp4",
@@ -107,16 +107,8 @@ export function getHomepage(): HomepageContent {
 
 /** Loads homepage from MongoDB API with JSON file fallback. */
 export async function getHomepageAsync(): Promise<HomepageContent> {
-  try {
-    const res = await fetch(`${getApiBaseUrl()}/content/homepage`, {
-      next: { revalidate: 30 },
-    });
-    if (res.ok) {
-      return normalizeHomepage((await res.json()) as Partial<HomepageContent>);
-    }
-  } catch {
-    // API offline — use local JSON
-  }
+  const remote = await fetchCmsJson<Partial<HomepageContent>>("/content/homepage");
+  if (remote) return normalizeHomepage(remote);
   return getHomepage();
 }
 

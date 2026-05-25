@@ -6,6 +6,10 @@ import { VentureContent } from "../models/VentureContent.model.js";
 import { ExpeditionContent } from "../models/ExpeditionContent.model.js";
 import { JournalContent } from "../models/JournalContent.model.js";
 import { ArchiveContent } from "../models/ArchiveContent.model.js";
+import { AboutContent } from "../models/AboutContent.model.js";
+import { StoreContent } from "../models/StoreContent.model.js";
+import { SupportContent } from "../models/SupportContent.model.js";
+import { ConnectContent } from "../models/ConnectContent.model.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FRONTEND_HOMEPAGE_JSON = path.join(
@@ -20,7 +24,7 @@ const DEFAULT_HOMEPAGE = {
     subtext:
       "Curated expeditions. Meaningful ventures. Timeless safari-inspired living.",
     poster: {
-      src: "https://images.unsplash.com/photo-1587595431973-c026f9778660?w=2400&q=85",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
       alt: "Safari landscape at golden hour",
     },
     video: "/videos/hero.mp4",
@@ -528,6 +532,354 @@ export async function seedArchiveContent() {
   const fallback = loadArchiveJsonFallback();
   if (fallback) {
     await ArchiveContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+}
+
+const ABOUT_JSON_PATH = path.join(
+  __dirname,
+  "../../../frontend/content/about.json",
+);
+
+function loadAboutJsonFallback() {
+  try {
+    const raw = fs.readFileSync(ABOUT_JSON_PATH, "utf-8");
+    const parsed = JSON.parse(raw);
+    return parsed.data ?? parsed;
+  } catch {
+    return null;
+  }
+}
+
+function toAboutClient(doc) {
+  if (!doc) return null;
+  const o = doc.toObject ? doc.toObject() : doc;
+  return {
+    key: o.key ?? "main",
+    data: o.data,
+    updatedAt: (o.updatedAt ?? new Date()).toISOString(),
+  };
+}
+
+export async function getAboutContent() {
+  let doc = await AboutContent.findOne({ key: "main" });
+  if (!doc) {
+    const fallback = loadAboutJsonFallback();
+    if (!fallback) {
+      const err = new Error("About content not found");
+      err.status = 404;
+      throw err;
+    }
+    doc = await AboutContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+  return toAboutClient(doc);
+}
+
+export async function saveAboutContent(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    const err = new Error("Invalid about content");
+    err.status = 400;
+    throw err;
+  }
+
+  let doc = await AboutContent.findOne({ key: "main" });
+  if (!doc) {
+    doc = new AboutContent({ key: "main", data });
+  } else {
+    doc.data = data;
+  }
+  doc.updatedAt = new Date();
+  await doc.save();
+
+  const client = toAboutClient(doc);
+
+  try {
+    fs.writeFileSync(
+      ABOUT_JSON_PATH,
+      `${JSON.stringify(client, null, 2)}\n`,
+    );
+  } catch {
+    // best-effort JSON sync
+  }
+
+  return client;
+}
+
+export async function seedAboutContent() {
+  const existing = await AboutContent.findOne({ key: "main" });
+  if (existing) return;
+
+  const fallback = loadAboutJsonFallback();
+  if (fallback) {
+    await AboutContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+}
+
+const STORE_JSON_PATH = path.join(
+  __dirname,
+  "../../../frontend/content/store.json",
+);
+
+function loadStoreJsonFallback() {
+  try {
+    const raw = fs.readFileSync(STORE_JSON_PATH, "utf-8");
+    const parsed = JSON.parse(raw);
+    return parsed.data ?? parsed;
+  } catch {
+    return null;
+  }
+}
+
+function toStoreClient(doc) {
+  if (!doc) return null;
+  const o = doc.toObject ? doc.toObject() : doc;
+  return {
+    key: o.key ?? "main",
+    data: o.data,
+    updatedAt: (o.updatedAt ?? new Date()).toISOString(),
+  };
+}
+
+export async function getStoreContent() {
+  let doc = await StoreContent.findOne({ key: "main" });
+  if (!doc) {
+    const fallback = loadStoreJsonFallback();
+    if (!fallback) {
+      const err = new Error("Store content not found");
+      err.status = 404;
+      throw err;
+    }
+    doc = await StoreContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+  return toStoreClient(doc);
+}
+
+export async function saveStoreContent(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    const err = new Error("Invalid store content");
+    err.status = 400;
+    throw err;
+  }
+
+  let doc = await StoreContent.findOne({ key: "main" });
+  if (!doc) {
+    doc = new StoreContent({ key: "main", data });
+  } else {
+    doc.data = data;
+  }
+  doc.updatedAt = new Date();
+  await doc.save();
+
+  const client = toStoreClient(doc);
+
+  try {
+    fs.writeFileSync(
+      STORE_JSON_PATH,
+      `${JSON.stringify(client, null, 2)}\n`,
+    );
+  } catch {
+    // best-effort JSON sync
+  }
+
+  return client;
+}
+
+export async function seedStoreContent() {
+  const existing = await StoreContent.findOne({ key: "main" });
+  if (existing) return;
+
+  const fallback = loadStoreJsonFallback();
+  if (fallback) {
+    await StoreContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+}
+
+const SUPPORT_JSON_PATH = path.join(
+  __dirname,
+  "../../../frontend/content/support.json",
+);
+
+function loadSupportJsonFallback() {
+  try {
+    const raw = fs.readFileSync(SUPPORT_JSON_PATH, "utf-8");
+    const parsed = JSON.parse(raw);
+    return parsed.data ?? parsed;
+  } catch {
+    return null;
+  }
+}
+
+function toSupportClient(doc) {
+  if (!doc) return null;
+  const o = doc.toObject ? doc.toObject() : doc;
+  return {
+    key: o.key ?? "main",
+    data: o.data,
+    updatedAt: (o.updatedAt ?? new Date()).toISOString(),
+  };
+}
+
+export async function getSupportContent() {
+  let doc = await SupportContent.findOne({ key: "main" });
+  if (!doc) {
+    const fallback = loadSupportJsonFallback();
+    if (!fallback) {
+      const err = new Error("Support content not found");
+      err.status = 404;
+      throw err;
+    }
+    doc = await SupportContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+  return toSupportClient(doc);
+}
+
+export async function saveSupportContent(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    const err = new Error("Invalid support content");
+    err.status = 400;
+    throw err;
+  }
+
+  let doc = await SupportContent.findOne({ key: "main" });
+  if (!doc) {
+    doc = new SupportContent({ key: "main", data });
+  } else {
+    doc.data = data;
+  }
+  doc.updatedAt = new Date();
+  await doc.save();
+
+  const client = toSupportClient(doc);
+
+  try {
+    fs.writeFileSync(
+      SUPPORT_JSON_PATH,
+      `${JSON.stringify(client, null, 2)}\n`,
+    );
+  } catch {
+    // best-effort JSON sync
+  }
+
+  return client;
+}
+
+export async function seedSupportContent() {
+  const existing = await SupportContent.findOne({ key: "main" });
+  if (existing) return;
+
+  const fallback = loadSupportJsonFallback();
+  if (fallback) {
+    await SupportContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+}
+
+const CONNECT_JSON_PATH = path.join(
+  __dirname,
+  "../../../frontend/content/connect.json",
+);
+
+function loadConnectJsonFallback() {
+  try {
+    const raw = fs.readFileSync(CONNECT_JSON_PATH, "utf-8");
+    const parsed = JSON.parse(raw);
+    return parsed.data ?? parsed;
+  } catch {
+    return null;
+  }
+}
+
+function toConnectClient(doc) {
+  if (!doc) return null;
+  const o = doc.toObject ? doc.toObject() : doc;
+  return {
+    key: o.key ?? "main",
+    data: o.data,
+    updatedAt: (o.updatedAt ?? new Date()).toISOString(),
+  };
+}
+
+export async function getConnectContent() {
+  let doc = await ConnectContent.findOne({ key: "main" });
+  if (!doc) {
+    const fallback = loadConnectJsonFallback();
+    if (!fallback) {
+      const err = new Error("Connect content not found");
+      err.status = 404;
+      throw err;
+    }
+    doc = await ConnectContent.create({
+      key: "main",
+      data: fallback,
+      updatedAt: new Date(),
+    });
+  }
+  return toConnectClient(doc);
+}
+
+export async function saveConnectContent(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    const err = new Error("Invalid connect content");
+    err.status = 400;
+    throw err;
+  }
+
+  let doc = await ConnectContent.findOne({ key: "main" });
+  if (!doc) {
+    doc = new ConnectContent({ key: "main", data });
+  } else {
+    doc.data = data;
+  }
+  doc.updatedAt = new Date();
+  await doc.save();
+
+  const client = toConnectClient(doc);
+
+  try {
+    fs.writeFileSync(
+      CONNECT_JSON_PATH,
+      `${JSON.stringify(client, null, 2)}\n`,
+    );
+  } catch {
+    // best-effort JSON sync
+  }
+
+  return client;
+}
+
+export async function seedConnectContent() {
+  const existing = await ConnectContent.findOne({ key: "main" });
+  if (existing) return;
+
+  const fallback = loadConnectJsonFallback();
+  if (fallback) {
+    await ConnectContent.create({
       key: "main",
       data: fallback,
       updatedAt: new Date(),

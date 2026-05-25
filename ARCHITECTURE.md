@@ -35,7 +35,7 @@ Default: `admin@afaritrails.com` / `changeme123` (see `backend/.env`)
 
 | Layer | Role |
 |--------|------|
-| `src/models/` | Mongoose schemas (`User`, `HomepageContent`) |
+| `src/models/` | Mongoose schemas (`User`, `HomepageContent`, `VentureContent`, `ExpeditionContent`, `JournalContent`, `ArchiveContent`) |
 | `src/services/` | Business logic |
 | `src/routes/` | HTTP routes |
 | `src/middleware/` | JWT auth, RBAC |
@@ -63,8 +63,14 @@ ADMIN_PASSWORD=changeme123
 | POST | `/api/staff/users` | JWT + super_admin | Create staff |
 | PATCH | `/api/staff/users` | JWT + super_admin | Update staff |
 | DELETE | `/api/staff/users/:id` | JWT + super_admin | Delete staff |
-| GET | `/api/content/homepage` | — | Public homepage CMS |
+| GET | `/api/content/homepage` | — | Homepage CMS |
 | PUT | `/api/content/homepage` | JWT + editor+ | Update homepage |
+| GET/PUT | `/api/content/ventures/:slug` | read public / write JWT | Venture pages |
+| GET/PUT | `/api/content/expeditions` | read public / write JWT | Expeditions CMS |
+| GET/PUT | `/api/content/journal` | read public / write JWT | Journal CMS |
+| GET/PUT | `/api/content/archive` | read public / write JWT | Archive CMS |
+
+Saves write to **MongoDB** and sync **JSON** under `frontend/content/` for offline fallbacks.
 
 ### Roles (MongoDB `User.role`)
 
@@ -72,14 +78,22 @@ ADMIN_PASSWORD=changeme123
 |------|--------|
 | `super_admin` | Users + all CMS |
 | `admin` | Full CMS |
-| `editor` | Edit homepage |
+| `editor` | Homepage, ventures, expeditions, journal, archive |
 | `viewer` | Read-only admin |
+
+### Verify local stack
+
+```bash
+npm run db:up      # start / check MongoDB
+npm run db:seed    # admin user + CMS documents
+npm run doctor     # MongoDB + API smoke test
+```
 
 ---
 
 ## Frontend (`frontend/`)
 
-- **Public pages** load homepage from API (`getHomepageAsync`) with JSON fallback.
+- **Public pages** load CMS from API (`getHomepageAsync`, `getExpeditionsContent`, etc.) with JSON fallback.
 - **Admin** uses NextAuth; login calls `POST /api/auth/login` on the backend.
 - JWT stored in session as `accessToken` for staff API calls.
 - Image/video uploads still write to `frontend/public/` then sync metadata to MongoDB.

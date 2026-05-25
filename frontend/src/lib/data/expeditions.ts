@@ -3,7 +3,7 @@ export const expeditionsHero = {
   subtext:
     "Curated expeditions across Zambia and beyond — designed for travelers seeking deeper encounters with Africa's landscapes, cultures, and untamed beauty.",
   image:
-    "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
 } as const;
 
 export const ourPromise = {
@@ -12,7 +12,7 @@ export const ourPromise = {
   body: "Every expedition is designed to reconnect people with nature, stillness, adventure, and the spirit of exploration — paced for presence, not performance.",
   approachHref: "#approach",
   image:
-    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1600&q=85",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
 } as const;
 
 export const categoryBar = [
@@ -49,7 +49,7 @@ export const featuredExpeditions = [
     tagline: "Walking safaris and leopard country.",
     duration: "5 – 7 Days",
     image:
-      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=800&q=85",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "lower-zambezi",
@@ -57,7 +57,7 @@ export const featuredExpeditions = [
     tagline: "River channels and golden-hour canoes.",
     duration: "4 – 6 Days",
     image:
-      "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "livingstone",
@@ -65,7 +65,7 @@ export const featuredExpeditions = [
     tagline: "Victoria Falls and the edge of adventure.",
     duration: "3 – 5 Days",
     image:
-      "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=800&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "kafue",
@@ -73,7 +73,7 @@ export const featuredExpeditions = [
     tagline: "Floodplains, cheetah, and vast wilderness.",
     duration: "6 – 8 Days",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "cultural-heritage",
@@ -81,7 +81,7 @@ export const featuredExpeditions = [
     tagline: "Traditions, artisans, and living heritage.",
     duration: "4 – 5 Days",
     image:
-      "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
   },
 ] as const;
 
@@ -102,5 +102,5 @@ export const expeditionsCta = {
   boxText:
     "Let us design a private expedition tailored to your pace, interests, and style.",
   image:
-    "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=2400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
 } as const;

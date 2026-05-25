@@ -1,0 +1,152 @@
+{
+  "key": "main",
+  "data": {
+    "faq": {
+      "label": "Support",
+      "title": "Frequently Asked Questions",
+      "intro": "Practical answers about expeditions, ventures, the store, and how we work across Africa. For anything not covered here, reach out via our contact page.",
+      "items": [
+        {
+          "question": "How do I inquire about an expedition?",
+          "answer": "Visit Expeditions to explore journeys, then use Expeditions Connect or the main Contact page. Share your dates, group size, and interests — our team shapes itineraries with local guides and partners."
+        },
+        {
+          "question": "Are Afari Trails ventures open to partners?",
+          "answer": "Yes. Hospitality, conservation, community, agriculture, and eco-lodge initiatives welcome aligned partners. Start on Ventures or Ventures Connect with a short note about your vision and timeline."
+        },
+        {
+          "question": "Can I purchase from the store online?",
+          "answer": "The store showcases expedition-inspired apparel and field essentials. Online checkout is not live yet — use Contact and select Store to inquire about availability, sizing, or wholesale."
+        },
+        {
+          "question": "Where do you ship store orders?",
+          "answer": "When ordering is available, we ship internationally from our fulfilment partners. See Shipping for regions, timelines, and customs notes."
+        },
+        {
+          "question": "What is your returns policy?",
+          "answer": "Unworn items in original condition may be returned within 30 days of delivery where applicable. Full details are on our Returns page."
+        },
+        {
+          "question": "How can I submit photography to The Afari Lens?",
+          "answer": "Go to Archive → Submit to share your work for consideration in our community feature. Include context, location, and how the image connects to place."
+        },
+        {
+          "question": "Do you offer media or press collaborations?",
+          "answer": "We welcome storytelling that respects people and landscapes. Use Contact and choose Media, or write to hello@afaritrails.com with your pitch."
+        }
+      ],
+      "relatedLinks": [
+        {
+          "label": "Shipping",
+          "href": "/shipping"
+        },
+        {
+          "label": "Returns",
+          "href": "/returns"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact"
+        }
+      ]
+    },
+    "shipping": {
+      "label": "Support",
+      "title": "Shipping",
+      "intro": "We pack every order with care — mindful of distance, climate, and the communities that craft many of our pieces.",
+      "sections": [
+        {
+          "heading": "Processing",
+          "paragraphs": [
+            "Orders are prepared within 3–5 business days after confirmation. Made-to-order or community marketplace items may require additional time; we will confirm before dispatch."
+          ]
+        },
+        {
+          "heading": "Domestic & regional",
+          "paragraphs": [
+            "Within Zambia and select Southern and East African destinations, delivery typically takes 5–12 business days via trusted courier partners."
+          ]
+        },
+        {
+          "heading": "International",
+          "paragraphs": [
+            "International shipments usually arrive within 10–21 business days depending on destination and customs processing. Tracking is provided when available.",
+            "Import duties and taxes are the responsibility of the recipient unless stated otherwise at checkout."
+          ]
+        },
+        {
+          "heading": "Care in transit",
+          "paragraphs": [
+            "Apparel and field goods are packed in protective materials suited to long journeys. If your order arrives damaged, contact us within 7 days with photos — see Returns."
+          ]
+        }
+      ],
+      "relatedLinks": [
+        {
+          "label": "FAQ",
+          "href": "/faq"
+        },
+        {
+          "label": "Returns",
+          "href": "/returns"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact"
+        }
+      ]
+    },
+    "returns": {
+      "label": "Support",
+      "title": "Returns & Exchanges",
+      "intro": "We want you to keep what you love. If something is not right, we will work with you fairly and clearly.",
+      "sections": [
+        {
+          "heading": "Eligibility",
+          "paragraphs": [
+            "Items may be returned within 30 days of delivery if unworn, unwashed, and in original packaging with tags attached. Community marketplace goods may have partner-specific terms noted on the product page."
+          ]
+        },
+        {
+          "heading": "How to start a return",
+          "paragraphs": [
+            "Email hello@afaritrails.com with your order reference, reason for return, and photos if the item is faulty or damaged. We will reply with return instructions and a reference number."
+          ]
+        },
+        {
+          "heading": "Refunds",
+          "paragraphs": [
+            "Approved refunds are issued to the original payment method within 7–14 business days after we receive and inspect the item. Shipping costs on standard returns are non-refundable unless the error was ours."
+          ]
+        },
+        {
+          "heading": "Exchanges",
+          "paragraphs": [
+            "Exchanges for size or colour are offered when stock allows. Note your preference when you contact us — we will confirm availability before you ship anything back."
+          ]
+        },
+        {
+          "heading": "Damaged or incorrect items",
+          "paragraphs": [
+            "If your order arrives damaged or incorrect, notify us within 7 days. We will arrange replacement or refund and cover return shipping for verified issues."
+          ]
+        }
+      ],
+      "relatedLinks": [
+        {
+          "label": "FAQ",
+          "href": "/faq"
+        },
+        {
+          "label": "Shipping",
+          "href": "/shipping"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact"
+        }
+      ]
+    }
+  },
+  "updatedAt": "2026-05-25T20:36:58.455Z"
+}

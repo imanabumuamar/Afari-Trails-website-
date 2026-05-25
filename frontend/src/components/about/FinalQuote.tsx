@@ -1,6 +1,8 @@
-import { finalQuote } from "@/lib/data/about";
+import { getAboutContent } from "@/services/content/about";
 
-export function FinalQuote() {
+export async function FinalQuote() {
+  const { finalQuote } = await getAboutContent();
+
   return (
     <section className="bg-matte-black px-6 py-24 lg:py-32">
       <blockquote className="mx-auto max-w-4xl text-center">

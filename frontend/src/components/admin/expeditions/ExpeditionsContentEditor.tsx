@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import type {
   ExpeditionDetailRecord,
   ExpeditionsContentData,
@@ -33,12 +34,8 @@ export function ExpeditionsContentEditor({
     const res = await fetch("/api/admin/content/expeditions");
     setLoading(false);
 
-    if (res.status === 401) {
-      setStatus("Session expired. Sign in again.");
-      return;
-    }
     if (!res.ok) {
-      setStatus("Could not load expedition content.");
+      setStatus(await readAdminApiError(res, "Could not load expedition content."));
       return;
     }
 
@@ -64,7 +61,7 @@ export function ExpeditionsContentEditor({
     });
 
     if (!res.ok) {
-      setStatus("Save failed.");
+      setStatus(await readAdminApiError(res, "Save failed."));
       return;
     }
 

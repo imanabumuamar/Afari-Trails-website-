@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import type {
   ArchiveContentData,
   ArchiveImageRecord,
@@ -32,12 +33,8 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
     const res = await fetch("/api/admin/content/archive");
     setLoading(false);
 
-    if (res.status === 401) {
-      setStatus("Session expired. Sign in again.");
-      return;
-    }
     if (!res.ok) {
-      setStatus("Could not load archive content.");
+      setStatus(await readAdminApiError(res, "Could not load archive content."));
       return;
     }
 
@@ -65,7 +62,7 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
     });
 
     if (!res.ok) {
-      setStatus("Save failed.");
+      setStatus(await readAdminApiError(res, "Save failed."));
       return;
     }
 

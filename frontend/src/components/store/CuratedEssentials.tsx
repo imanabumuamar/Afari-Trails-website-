@@ -1,7 +1,10 @@
 import { ProductCard } from "@/components/store/ProductCard";
-import { curatedEssentials, getProduct } from "@/lib/data/store";
+import { getStoreContent } from "@/services/content/store";
 
-export function CuratedEssentials() {
+export async function CuratedEssentials() {
+  const content = await getStoreContent();
+  const { curatedEssentials, products } = content;
+  const getProduct = (slug: string) => products.find((p) => p.slug === slug);
   return (
     <section id="products" className="scroll-mt-24 bg-sand-light/50 py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

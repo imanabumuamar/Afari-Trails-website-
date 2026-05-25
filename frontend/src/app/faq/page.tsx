@@ -1,11 +1,23 @@
-import { PageShell } from "@/components/ui/PageShell";
+import { FaqList, SupportPage } from "@/components/support/SupportPage";
+import { getSupportContent } from "@/services/content/support";
 
-export default function FaqPage() {
+export const metadata = {
+  title: "FAQ",
+  description:
+    "Frequently asked questions about Afari Trails expeditions, ventures, store orders, and collaborations across Africa.",
+};
+
+export default async function FaqPage() {
+  const { faq } = await getSupportContent();
+
   return (
-    <PageShell
-      label="Support"
-      title="FAQ"
-      description="Answers to common questions about expeditions, ventures, and orders — coming soon."
-    />
+    <SupportPage
+      label={faq.label}
+      title={faq.title}
+      intro={faq.intro}
+      relatedLinks={faq.relatedLinks}
+    >
+      <FaqList items={faq.items} />
+    </SupportPage>
   );
 }

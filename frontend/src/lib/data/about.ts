@@ -4,7 +4,7 @@ export const aboutHero = {
   subtext:
     "Afari Trails was created to explore the connection between wilderness, identity, culture, and the spirit of discovery.",
   image:
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
 } as const;
 
 export const brandStory = {
@@ -28,23 +28,23 @@ export const brandStory = {
 
 export const visualStrip = [
   {
-    src: "https://images.unsplash.com/photo-1587595431973-c026f9778660?w=800&q=85",
+    src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
     alt: "Winding road through valley",
   },
   {
-    src: "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=800&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
     alt: "Campfire at night",
   },
   {
-    src: "https://images.unsplash.com/photo-1624222247344-550fb60583fd?w=800&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     alt: "Worn hiking boots",
   },
   {
-    src: "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=800&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     alt: "Portrait in traditional jewelry",
   },
   {
-    src: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     alt: "Fabric in the wind",
   },
 ] as const;
@@ -64,20 +64,20 @@ export const whyWeExist = {
   quote:
     "We believe the wilderness has the power to reconnect people with stillness, perspective, and themselves.",
   image:
-    "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1200&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
 } as const;
 
 export const behindTheBrand = {
   heading: "Behind the Brand",
   images: [
-    "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=85",
-    "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&q=85",
-    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&q=85",
-    "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=400&q=85",
-    "https://images.unsplash.com/photo-1547471080-7cc2caa12f7f?w=400&q=85",
-    "https://images.unsplash.com/photo-1587595431973-c026f9778660?w=400&q=85",
-    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=400&q=85",
-    "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
   ],
 } as const;
 

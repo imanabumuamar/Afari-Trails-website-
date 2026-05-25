@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { PhilosophyIcon } from "@/components/about/PhilosophyIcon";
-import { philosophy, whyWeExist } from "@/lib/data/about";
+import { getAboutContent } from "@/services/content/about";
 
-export function PhilosophyWhySplit() {
+export async function PhilosophyWhySplit() {
+  const { philosophy, whyWeExist } = await getAboutContent();
+
   return (
     <section className="grid lg:grid-cols-2">
       <div className="bg-[#3c3228] px-6 py-16 text-ivory lg:px-12 lg:py-24">

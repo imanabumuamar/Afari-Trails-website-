@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
+import { cmsLoadError } from "@/lib/admin/cms-api-error";
 import { AuthError, requirePermission } from "@/lib/auth/require-session";
 import type { HomepageContent } from "@/types/homepage";
 
@@ -22,7 +23,7 @@ export async function GET() {
     );
     if (!ok || !data) {
       return NextResponse.json(
-        { error: "Could not load homepage from API" },
+        { error: cmsLoadError(status, "homepage") },
         { status: status || 502 },
       );
     }

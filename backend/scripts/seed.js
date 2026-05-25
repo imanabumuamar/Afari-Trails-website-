@@ -15,6 +15,10 @@ const {
   seedExpeditionContent,
   seedJournalContent,
   seedArchiveContent,
+  seedAboutContent,
+  seedStoreContent,
+  seedSupportContent,
+  seedConnectContent,
 } = await import("../src/services/content.service.js");
 
 const email = process.env.ADMIN_EMAIL ?? "admin@afaritrails.com";
@@ -45,12 +49,16 @@ async function main() {
   await seedExpeditionContent();
   await seedJournalContent();
   await seedArchiveContent();
+  await seedAboutContent();
+  await seedStoreContent();
+  await seedSupportContent();
+  await seedConnectContent();
 
   const superCount = await User.countDocuments({ role: "super_admin" });
   console.log(`Super admin: ${user.email} (${user.role})`);
   console.log(`Super admins in DB: ${superCount}`);
   console.log(
-    "Homepage, venture, expedition, journal, and archive content synced to MongoDB",
+    "Homepage, venture, expedition, journal, archive, and about content synced to MongoDB",
   );
 }
 

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
+import { cmsLoadError } from "@/lib/admin/cms-api-error";
 import { AuthError, requirePermission } from "@/lib/auth/require-session";
 import type { JournalContentDocument } from "@/types/journal-content";
 
@@ -23,7 +24,7 @@ export async function GET() {
 
     if (!ok || !data) {
       return NextResponse.json(
-        { error: "Could not load journal content" },
+        { error: cmsLoadError(status, "journal content") },
         { status: status || 502 },
       );
     }

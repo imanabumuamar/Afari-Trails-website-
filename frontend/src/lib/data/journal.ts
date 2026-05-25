@@ -36,13 +36,13 @@ export const journalHero = {
   description:
     "Thoughts, stories, and field notes from our journeys across Africa. Reflections on nature, culture, conservation, and the human experience.",
   image:
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
 } as const;
 
 export const journalNewsletter = {
   heading: "Stories. Inspiration. Africa.",
   image:
-    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=2400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
 } as const;
 
 export const journalStories: JournalStory[] = [
@@ -56,7 +56,7 @@ export const journalStories: JournalStory[] = [
     readTime: "7 MIN READ",
     dateDisplay: "MAR 28, 2026",
     image:
-      "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=1400&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1400&q=80",
     featured: true,
   },
   {
@@ -69,7 +69,7 @@ export const journalStories: JournalStory[] = [
     readTime: "6 MIN READ",
     dateDisplay: "MAR 18, 2026",
     image:
-      "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=800&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
     featuredSide: true,
   },
   {
@@ -82,7 +82,7 @@ export const journalStories: JournalStory[] = [
     readTime: "5 MIN READ",
     dateDisplay: "MAR 10, 2026",
     image:
-      "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     featuredSide: true,
   },
   {
@@ -95,7 +95,7 @@ export const journalStories: JournalStory[] = [
     readTime: "4 MIN READ",
     dateDisplay: "FEB 24, 2026",
     image:
-      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=800&q=85",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
     featuredSide: true,
   },
   {
@@ -108,7 +108,7 @@ export const journalStories: JournalStory[] = [
     readTime: "5 MIN READ",
     dateDisplay: "MAR 22, 2026",
     image:
-      "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
   },
   {
     slug: "life-around-the-campfire",
@@ -120,7 +120,7 @@ export const journalStories: JournalStory[] = [
     readTime: "6 MIN READ",
     dateDisplay: "MAR 15, 2026",
     image:
-      "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=800&q=85",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
   },
   {
     slug: "voices-of-the-delta",
@@ -132,7 +132,7 @@ export const journalStories: JournalStory[] = [
     readTime: "8 MIN READ",
     dateDisplay: "MAR 8, 2026",
     image:
-      "https://images.unsplash.com/photo-1535330014194-e6e8b0e8b8b0?w=800&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
   },
   {
     slug: "guides-of-the-trail",
@@ -144,7 +144,7 @@ export const journalStories: JournalStory[] = [
     readTime: "5 MIN READ",
     dateDisplay: "FEB 28, 2026",
     image:
-      "https://images.unsplash.com/photo-1547471080-7cc2caa12f7f?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
   },
   {
     slug: "conservation-is-community",
@@ -156,7 +156,7 @@ export const journalStories: JournalStory[] = [
     readTime: "8 MIN READ",
     dateDisplay: "FEB 14, 2026",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
   },
   {
     slug: "walking-slower",
@@ -168,7 +168,7 @@ export const journalStories: JournalStory[] = [
     readTime: "7 MIN READ",
     dateDisplay: "JAN 30, 2026",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
   },
 ];
 

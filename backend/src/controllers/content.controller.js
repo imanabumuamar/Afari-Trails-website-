@@ -129,3 +129,103 @@ export async function updateArchive(req, res, next) {
     next(err);
   }
 }
+
+export async function getAbout(req, res, next) {
+  try {
+    const content = await contentService.getAboutContent();
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function updateAbout(req, res, next) {
+  try {
+    const payload = req.body.data ?? req.body;
+    const content = await contentService.saveAboutContent(payload);
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404 || err.status === 400) {
+      return res.status(err.status).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function getStore(req, res, next) {
+  try {
+    const content = await contentService.getStoreContent();
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function updateStore(req, res, next) {
+  try {
+    const payload = req.body.data ?? req.body;
+    const content = await contentService.saveStoreContent(payload);
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404 || err.status === 400) {
+      return res.status(err.status).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function getSupport(req, res, next) {
+  try {
+    const content = await contentService.getSupportContent();
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function updateSupport(req, res, next) {
+  try {
+    const payload = req.body.data ?? req.body;
+    const content = await contentService.saveSupportContent(payload);
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404 || err.status === 400) {
+      return res.status(err.status).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function getConnect(req, res, next) {
+  try {
+    const content = await contentService.getConnectContent();
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function updateConnect(req, res, next) {
+  try {
+    const payload = req.body.data ?? req.body;
+    const content = await contentService.saveConnectContent(payload);
+    res.json(content);
+  } catch (err) {
+    if (err.status === 404 || err.status === 400) {
+      return res.status(err.status).json({ error: err.message });
+    }
+    next(err);
+  }
+}

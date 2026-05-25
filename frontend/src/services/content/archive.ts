@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { ARCHIVE_CONTENT_DEFAULTS } from "@/lib/data/archive-defaults";
-import { getApiBaseUrl } from "@/lib/api/backend";
+import { fetchCmsJson } from "@/lib/api/fetch-content";
 import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 import type {
   ArchiveCollection,
@@ -90,17 +90,8 @@ export function getArchiveContentLocal(): ArchiveContentData {
 
 export const getArchiveContent = cache(
   async (): Promise<ArchiveContentData> => {
-    try {
-      const res = await fetch(`${getApiBaseUrl()}/content/archive`, {
-        next: { revalidate: 30 },
-      });
-      if (res.ok) {
-        const doc = (await res.json()) as ArchiveContentDocument;
-        return mergeArchiveData(doc.data);
-      }
-    } catch {
-      // API offline
-    }
+    const doc = await fetchCmsJson<ArchiveContentDocument>("/content/archive");
+    if (doc?.data) return mergeArchiveData(doc.data);
     return getArchiveContentLocal();
   },
 );

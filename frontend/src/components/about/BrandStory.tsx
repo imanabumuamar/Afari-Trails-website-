@@ -1,6 +1,8 @@
-import { brandStory } from "@/lib/data/about";
+import { getAboutContent } from "@/services/content/about";
 
-export function BrandStory() {
+export async function BrandStory() {
+  const { brandStory } = await getAboutContent();
+
   return (
     <section className="bg-[#e8dfd0] py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

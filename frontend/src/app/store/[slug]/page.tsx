@@ -2,30 +2,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductCard } from "@/components/store/ProductCard";
-import { getProduct, getRelatedProducts, products } from "@/lib/data/store";
+import {
+  getStoreContentLocal,
+  getStoreProduct,
+  getStoreRelatedProducts,
+} from "@/services/content/store";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
+  const { products } = getStoreContentLocal();
   return products.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getStoreProduct(slug);
   if (!product) return { title: "Store" };
   return { title: product.name, description: product.shortDescription };
 }
 
 export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getStoreProduct(slug);
 
   if (!product) notFound();
 
-  const related = getRelatedProducts(product.related);
+  const related = await getStoreRelatedProducts(product.related);
 
   return (
     <>

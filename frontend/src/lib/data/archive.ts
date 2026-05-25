@@ -14,7 +14,7 @@ export const archiveHero = {
   description:
     "A visual journey through landscapes, wildlife, people, and the spirit of Africa.",
   image:
-    "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
 } as const;
 
 export const collectionsSection = {
@@ -30,7 +30,7 @@ export const collections = [
     description: "The untamed. In their natural world.",
     icon: "wildlife",
     image:
-      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "landscapes" as const,
@@ -38,7 +38,7 @@ export const collections = [
     description: "Earth in its rawest, most beautiful form.",
     icon: "landscapes",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "expedition-life" as const,
@@ -46,7 +46,7 @@ export const collections = [
     description: "The moments between destinations.",
     icon: "expedition",
     image:
-      "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "culture-people" as const,
@@ -54,7 +54,7 @@ export const collections = [
     description: "The soul of Africa, its people, its stories.",
     icon: "culture",
     image:
-      "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "the-afari-lens" as const,
@@ -62,7 +62,7 @@ export const collections = [
     description: "Community perspectives. Captured by you.",
     icon: "lens",
     image:
-      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "behind-afari" as const,
@@ -70,7 +70,7 @@ export const collections = [
     description: "Behind the scenes. The journey within.",
     icon: "behind",
     image:
-      "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
@@ -82,7 +82,7 @@ export const afariLens = {
   story:
     "First light through mahogany smoke — a moment of stillness before the valley wakes. Selected from our community edition.",
   image:
-    "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1600&q=85",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
   submitHref: "/archive/submit",
   entriesHref: "/archive#grid",
   editionsHref: "/archive#grid",
@@ -98,49 +98,49 @@ export const latestMoments = [
     id: "lm-1",
     alt: "Elephant in golden light",
     image:
-      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=600&q=85",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "lm-2",
     alt: "Bird in flight",
     image:
-      "https://images.unsplash.com/photo-1552728086-1f037a6f3318?w=600&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "lm-3",
     alt: "River at sunset",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "lm-4",
     alt: "Forest path",
     image:
-      "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=600&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "lm-5",
     alt: "Lion cub",
     image:
-      "https://images.unsplash.com/photo-1546182990-dcdf1f4e4163?w=600&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "lm-6",
     alt: "Waterfall",
     image:
-      "https://images.unsplash.com/photo-1432405972618-60d1a68b9b67?w=600&q=85",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "lm-7",
     alt: "Elder portrait",
     image:
-      "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=600&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80",
   },
   {
     id: "lm-8",
     alt: "Campfire under stars",
     image:
-      "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=600&q=85",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80",
   },
 ] as const;
 
@@ -177,7 +177,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "First light on the floodplain — giants moving through mist.",
     category: "wildlife",
     image:
-      "https://images.unsplash.com/photo/1589552603490-efd4e1f2836b?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
     span: "tall",
     related: { label: "In the Presence of Giants", href: "/journal/in-the-presence-of-giants" },
   },
@@ -189,7 +189,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "The river as a living map — silver at dusk.",
     category: "landscapes",
     image:
-      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
     span: "wide",
     related: { label: "Lower Zambezi Expedition", href: "/expeditions/lower-zambezi" },
   },
@@ -201,7 +201,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "Between camps — the road as ritual.",
     category: "expedition-life",
     image:
-      "https://images.unsplash.com/photo-1587595431973-c026f9778660?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "artisan-hands",
@@ -211,7 +211,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "Craft passed through generations of touch.",
     category: "culture-people",
     image:
-      "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
     related: { label: "Traditions That Endure", href: "/journal/traditions-that-endure" },
   },
   {
@@ -222,7 +222,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "The Afari Lens — March edition.",
     category: "the-afari-lens",
     image:
-      "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
     span: "tall",
   },
   {
@@ -233,7 +233,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "Lantern light and the sound of distant water.",
     category: "expedition-life",
     image:
-      "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "leopard-dusk",
@@ -243,7 +243,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "When the valley belongs to shadow.",
     category: "wildlife",
     image:
-      "https://images.unsplash.com/photo-1546182990-dcdf1f4e4163?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
     related: { label: "The Art of Patience", href: "/journal/the-art-of-patience" },
   },
   {
@@ -254,7 +254,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "Earth and sky in a single breath.",
     category: "landscapes",
     image:
-      "https://images.unsplash.com/photo-1509316785289-025f5b846b8e?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
     span: "wide",
   },
   {
@@ -265,7 +265,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "Those who read the land before the sun rises.",
     category: "culture-people",
     image:
-      "https://images.unsplash.com/photo-1547471080-7cc2caa12f7f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
     related: { label: "Guides of the Trail", href: "/journal/guides-of-the-trail" },
   },
   {
@@ -276,7 +276,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "Behind Afari — sketches of what we are building.",
     category: "behind-afari",
     image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
     related: { label: "Our Ventures", href: "/ventures" },
   },
   {
@@ -287,7 +287,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "Still water holding the sky.",
     category: "landscapes",
     image:
-      "https://images.unsplash.com/photo-1535330014194-e6e8b0e8b8b0?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
     span: "tall",
   },
   {
@@ -298,7 +298,7 @@ export const archiveImages: ArchiveImage[] = [
     caption: "Guardianship as daily practice.",
     category: "wildlife",
     image:
-      "https://images.unsplash.com/photo-1564760055778-dfe77213f821?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
     related: { label: "Guardians of the Wild", href: "/journal/guardians-of-the-wild" },
   },
 ];

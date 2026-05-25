@@ -5,7 +5,7 @@ export const partnerHero = {
     "Collaborations rooted in storytelling, culture, conservation, hospitality, and meaningful experiences across Africa.",
   cta: "Start a Conversation",
   image:
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
   imageAlt: "Aerial view of misty African mountains at golden hour",
 } as const;
 
@@ -21,42 +21,42 @@ export const partnershipTypes = [
     title: "Hospitality",
     description: "Safari lodges, retreats, and camps shaped by place and purpose.",
     image:
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "conservation",
     title: "Conservation",
     description: "Wildlife and environmental projects that protect what we explore.",
     image:
-      "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "tourism",
     title: "Tourism & Expeditions",
     description: "Local guides, operators, and experiences crafted with care.",
     image:
-      "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=1200&q=85",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "media",
     title: "Media & Storytelling",
     description: "Photographers, filmmakers, and writers who see Africa with depth.",
     image:
-      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "brand",
     title: "Brand Collaborations",
     description: "Fashion, gear, and travel products aligned with the trail.",
     image:
-      "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "cultural",
     title: "Cultural Projects",
     description: "Communities, artisans, and heritage initiatives worth preserving.",
     image:
-      "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1200&q=85",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
   },
 ] as const;
 
@@ -67,31 +67,31 @@ export const partnerVision = {
 
 export const partnerMoodboard = [
   {
-    src: "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=900&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
     alt: "Golden savanna at dusk",
   },
   {
-    src: "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=900&q=85",
+    src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
     alt: "Safari lodge architecture overlooking wilderness",
   },
   {
-    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=900&q=85",
+    src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
     alt: "River winding through African landscape",
   },
   {
-    src: "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=900&q=85",
+    src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
     alt: "Campfire glow in the wilderness",
   },
   {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
     alt: "Aerial mountain ridges",
   },
   {
-    src: "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=900&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
     alt: "Artisan craftsmanship",
   },
   {
-    src: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=900&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
     alt: "Cultural gathering in warm light",
   },
 ] as const;

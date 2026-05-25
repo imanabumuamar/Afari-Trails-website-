@@ -6,7 +6,7 @@ export const communityHero = {
   exploreCta: "Explore Our Focus",
   partnerCta: "Partner With Us",
   image:
-    "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=2400&q=85",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
   imageAlt: "Artisan hands at work in warm natural light",
 } as const;
 
@@ -34,7 +34,7 @@ export const communityFocusAreas = {
       description:
         "Supporting guides, hospitality teams, creatives, and local expertise across every venture.",
       image:
-        "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "culture",
@@ -42,7 +42,7 @@ export const communityFocusAreas = {
       description:
         "Protecting stories, traditions, languages, and craftsmanship for generations to come.",
       image:
-        "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "artisan",
@@ -50,7 +50,7 @@ export const communityFocusAreas = {
       description:
         "Working with local makers and designers to create goods rooted in place and identity.",
       image:
-        "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "youth",
@@ -58,7 +58,7 @@ export const communityFocusAreas = {
       description:
         "Future mentorship in storytelling, tourism, conservation, and creative education.",
       image:
-        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "women",
@@ -66,7 +66,7 @@ export const communityFocusAreas = {
       description:
         "Supporting women entrepreneurs, artisans, and local leadership across our ecosystem.",
       image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "growth",
@@ -74,7 +74,7 @@ export const communityFocusAreas = {
       description:
         "Creating enduring value through ethical partnerships — not one-time charity.",
       image:
-        "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1000&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     },
   ],
 } as const;
@@ -91,7 +91,7 @@ export const communityStories = {
       quote:
         "Growing up near the river shaped how I understand nature and storytelling — every expedition carries that memory.",
       image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=85",
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
     },
     {
       name: "Amara Ndlovu",
@@ -99,7 +99,7 @@ export const communityStories = {
       quote:
         "Our patterns hold generations. When travelers learn their meaning, culture travels farther than any object.",
       image:
-        "https://images.unsplash.com/photo-1573497019940-1c28c88bdeb6?w=800&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     },
     {
       name: "David Chisenga",
@@ -107,7 +107,7 @@ export const communityStories = {
       quote:
         "I document what the land teaches — light, patience, and the quiet moments most people rush past.",
       image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=85",
+        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
     },
   ],
 } as const;
@@ -124,15 +124,15 @@ export const communityCraftsmanship = {
   ],
   images: [
     {
-      src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=900&q=85",
+      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
       alt: "Textile textures and natural fibers",
     },
     {
-      src: "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=900&q=85",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
       alt: "Artisan at work",
     },
     {
-      src: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=900&q=85",
+      src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
       alt: "Handcrafted objects and materials",
     },
   ],
@@ -155,27 +155,27 @@ export const communityInitiatives = {
 
 export const communityGallery = [
   {
-    src: "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Shared cultural moment",
   },
   {
-    src: "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Hands crafting",
   },
   {
-    src: "https://images.unsplash.com/photo-1473496167754-a98300e3ee24?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Gathering around fire",
   },
   {
-    src: "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Village landscape at golden hour",
   },
   {
-    src: "https://images.unsplash.com/photo-1618221198310-efe179ed8f74?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Textile textures",
   },
   {
-    src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Learning outdoors",
   },
 ] as const;

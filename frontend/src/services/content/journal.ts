@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { JOURNAL_CONTENT_DEFAULTS } from "@/lib/data/journal-defaults";
-import { getApiBaseUrl } from "@/lib/api/backend";
+import { fetchCmsJson } from "@/lib/api/fetch-content";
 import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 import type {
   JournalContentData,
@@ -76,17 +76,8 @@ export function getJournalContentLocal(): JournalContentData {
 
 export const getJournalContent = cache(
   async (): Promise<JournalContentData> => {
-    try {
-      const res = await fetch(`${getApiBaseUrl()}/content/journal`, {
-        next: { revalidate: 30 },
-      });
-      if (res.ok) {
-        const doc = (await res.json()) as JournalContentDocument;
-        return mergeJournalData(doc.data);
-      }
-    } catch {
-      // API offline
-    }
+    const doc = await fetchCmsJson<JournalContentDocument>("/content/journal");
+    if (doc?.data) return mergeJournalData(doc.data);
     return getJournalContentLocal();
   },
 );

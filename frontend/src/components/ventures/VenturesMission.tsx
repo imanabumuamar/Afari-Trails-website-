@@ -19,7 +19,7 @@ export async function VenturesMission() {
           {venturesMission.body}
         </p>
         <Link
-          href={venturesMission.approachHref}
+          href={venturesMission.approachHref ?? "#focus-areas"}
           className="mt-10 inline-block text-xs font-medium uppercase tracking-[0.25em] text-charcoal transition-colors hover:text-gold"
         >
           Our Approach →

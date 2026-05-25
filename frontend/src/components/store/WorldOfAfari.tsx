@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { worldOfAfari } from "@/lib/data/store";
+import { getStoreContent } from "@/services/content/store";
 
-export function WorldOfAfari() {
+export async function WorldOfAfari() {
+  const { worldOfAfari } = await getStoreContent();
   return (
     <section>
       <div className="bg-sand py-5 text-center">

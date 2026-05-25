@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import type { HomepageContent, HomepageHero } from "@/types/homepage";
 
 type HomepageHeroEditorProps = {
@@ -39,12 +40,8 @@ export function HomepageHeroEditor({
 
     setSaving(false);
 
-    if (res.status === 401) {
-      onStatus("Session expired. Sign in again.");
-      return;
-    }
     if (!res.ok) {
-      onStatus("Failed to save hero text.");
+      onStatus(await readAdminApiError(res, "Failed to save hero text."));
       return;
     }
 

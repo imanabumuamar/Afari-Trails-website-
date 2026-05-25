@@ -6,7 +6,7 @@ export const conservationHero = {
   exploreCta: "Explore Initiatives",
   partnerCta: "Partner With Us",
   image:
-    "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=2400&q=85",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
   imageAlt: "Elephants in golden African wilderness at sunrise",
 } as const;
 
@@ -32,7 +32,7 @@ export const conservationFocusAreas = {
       description:
         "Supporting initiatives that safeguard species and the habitats they depend on.",
       image:
-        "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "habitat",
@@ -40,7 +40,7 @@ export const conservationFocusAreas = {
       description:
         "Protecting wetlands, savannas, and river corridors essential to African biodiversity.",
       image:
-        "https://images.unsplash.com/photo-1549366021-9f792d8d5e3c?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "community",
@@ -48,7 +48,7 @@ export const conservationFocusAreas = {
       description:
         "Working alongside local people as collaborators — not subjects of a narrative.",
       image:
-        "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "tourism",
@@ -56,7 +56,7 @@ export const conservationFocusAreas = {
       description:
         "Low-impact exploration designed to leave places stronger than we found them.",
       image:
-        "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "education",
@@ -64,7 +64,7 @@ export const conservationFocusAreas = {
       description:
         "Using narrative, media, and field experience to deepen conservation awareness.",
       image:
-        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
     {
       id: "culture",
@@ -72,7 +72,7 @@ export const conservationFocusAreas = {
       description:
         "Honoring heritage, craft, and identity as inseparable from environmental stewardship.",
       image:
-        "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1000&q=85",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     },
   ],
 } as const;
@@ -82,7 +82,7 @@ export const conservationCommunity = {
   heading: "Conservation is human, too.",
   body: "Wild places endure when the people who live beside them thrive. Afari Trails supports local guides, artisans, and community-led initiatives — building ethical partnerships, fair employment, and cultural preservation that travel alongside every expedition and venture. We do not speak for communities. We listen, collaborate, and invest in shared outcomes.",
   image:
-    "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1600&q=85",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
   imageAlt: "Community members in warm natural light",
 } as const;
 
@@ -103,27 +103,27 @@ export const conservationInitiatives = {
 
 export const conservationGallery = [
   {
-    src: "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Wildlife in natural habitat",
   },
   {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "Aerial wilderness landscape",
   },
   {
-    src: "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
     alt: "River ecosystem at dusk",
   },
   {
-    src: "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Sunrise over savanna",
   },
   {
-    src: "https://images.unsplash.com/photo-1593113598332-32a0a134757f?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Local culture near nature",
   },
   {
-    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&q=85",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
     alt: "Untouched wetland horizon",
   },
 ] as const;
