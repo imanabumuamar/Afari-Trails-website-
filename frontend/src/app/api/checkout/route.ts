@@ -2,12 +2,17 @@ import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
 
 export async function GET() {
-  const { data, ok, status } = await backendFetch<{ enabled: boolean }>(
-    "/checkout/status",
-  );
+  const { data, ok, status } = await backendFetch<{
+    enabled: boolean;
+    provider: "manual" | "stripe";
+    stripeAvailable?: boolean;
+  }>("/checkout/status");
 
   if (!ok || !data) {
-    return NextResponse.json({ enabled: false }, { status: status || 502 });
+    return NextResponse.json(
+      { enabled: false, provider: "manual" as const },
+      { status: status || 502 },
+    );
   }
 
   return NextResponse.json(data);

@@ -8,11 +8,12 @@ export const metadata = {
 };
 
 type PageProps = {
-  searchParams: Promise<{ session_id?: string }>;
+  searchParams: Promise<{ session_id?: string; order?: string }>;
 };
 
 export default async function CheckoutSuccessPage({ searchParams }: PageProps) {
-  const { session_id: sessionId } = await searchParams;
+  const { session_id: sessionId, order: orderRef } = await searchParams;
+  const isManual = Boolean(orderRef) && !sessionId;
 
   return (
     <div className="min-h-screen bg-beige pt-28">
@@ -22,12 +23,28 @@ export default async function CheckoutSuccessPage({ searchParams }: PageProps) {
           Thank you
         </p>
         <h1 className="mt-4 font-serif text-4xl font-light text-charcoal md:text-5xl">
-          Your order is confirmed
+          {isManual ? "Order request received" : "Your order is confirmed"}
         </h1>
         <p className="mt-6 text-sm leading-relaxed text-charcoal/65">
-          We&apos;ve received your payment
-          {sessionId ? " and will send a confirmation email shortly" : ""}. Your
-          expedition essentials are on their way.
+          {isManual ? (
+            <>
+              We&apos;ve received your request
+              {orderRef ? (
+                <>
+                  {" "}
+                  (<span className="font-mono text-xs">{orderRef}</span>)
+                </>
+              ) : null}
+              . Our team will email you with availability, shipping, and payment
+              details for Zambia and international delivery.
+            </>
+          ) : (
+            <>
+              We&apos;ve received your payment
+              {sessionId ? " and will send a confirmation email shortly" : ""}.
+              Your expedition essentials are on their way.
+            </>
+          )}
         </p>
         <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Link

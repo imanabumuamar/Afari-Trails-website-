@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useCart } from "@/context/cart-context";
 import { ROUTES } from "@/config/routes";
+
+const inputClass =
+  "mt-2 w-full border border-charcoal/20 bg-ivory px-3 py-2.5 text-sm text-charcoal focus:border-gold/50 focus:outline-none";
 
 function formatMoney(amount: number) {
   return new Intl.NumberFormat("en-US", {
@@ -15,13 +19,37 @@ function formatMoney(amount: number) {
   }).format(amount);
 }
 
+type CheckoutProvider = "manual" | "stripe";
+
 export function CartPageClient() {
+  const router = useRouter();
   const { lines, subtotal, itemCount, setQuantity, removeItem, clearCart } =
     useCart();
+  const [provider, setProvider] = useState<CheckoutProvider>("manual");
   const [checkingOut, setCheckingOut] = useState(false);
+  const [submittingOrder, setSubmittingOrder] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleCheckout() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [shippingAddress, setShippingAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("Zambia");
+  const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+    fetch("/api/checkout")
+      .then((r) => r.json())
+      .then((d: { provider?: CheckoutProvider }) => {
+        if (d.provider === "stripe" || d.provider === "manual") {
+          setProvider(d.provider);
+        }
+      })
+      .catch(() => setProvider("manual"));
+  }, []);
+
+  async function handleStripeCheckout() {
     if (lines.length === 0) return;
     setError(null);
     setCheckingOut(true);
@@ -57,6 +85,53 @@ export function CartPageClient() {
     } catch {
       setError("Could not reach the server. Is the API running?");
       setCheckingOut(false);
+    }
+  }
+
+  async function handleOrderRequest(e: React.FormEvent) {
+    e.preventDefault();
+    if (lines.length === 0) return;
+    setError(null);
+    setSubmittingOrder(true);
+
+    try {
+      const res = await fetch("/api/checkout/request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: lines.map((l) => ({ slug: l.slug, quantity: l.quantity })),
+          name,
+          email,
+          phone,
+          shippingAddress,
+          city,
+          country,
+          notes,
+          website: "",
+        }),
+      });
+
+      const body = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setError(
+          typeof body.error === "string"
+            ? body.error
+            : "Could not submit your order. Please try again.",
+        );
+        setSubmittingOrder(false);
+        return;
+      }
+
+      clearCart();
+      if (typeof body.redirectUrl === "string") {
+        router.push(body.redirectUrl.replace(/^https?:\/\/[^/]+/, "") || ROUTES.storeCheckoutSuccess);
+      } else if (body.reference) {
+        router.push(`${ROUTES.storeCheckoutSuccess}?order=${body.reference}`);
+      }
+    } catch {
+      setError("Could not reach the server. Is the API running?");
+      setSubmittingOrder(false);
     }
   }
 
@@ -150,28 +225,152 @@ export function CartPageClient() {
           </span>
           <span className="text-lg text-charcoal">{formatMoney(subtotal)}</span>
         </div>
-        <p className="mt-3 text-xs text-charcoal/45">
-          Shipping and tax calculated at checkout.
-        </p>
 
-        {error && (
-          <p className="mt-6 text-sm text-red-800/80" role="alert">
-            {error}
-          </p>
+        {provider === "manual" ? (
+          <div className="mt-12 space-y-8">
+            <div>
+              <h2 className="font-serif text-2xl font-light text-charcoal">
+                Request your order
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-charcoal/60">
+                We&apos;ll confirm availability, shipping to your location, and
+                payment options (bank transfer, mobile money, or international
+                transfer). No card payment required at checkout.
+              </p>
+            </div>
+
+            <form onSubmit={handleOrderRequest} className="max-w-lg space-y-6">
+              <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
+                <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-medium uppercase tracking-[0.28em] text-charcoal/55">
+                  Full name
+                </label>
+                <input
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className={inputClass}
+                  autoComplete="name"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-medium uppercase tracking-[0.28em] text-charcoal/55">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={inputClass}
+                  autoComplete="email"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-medium uppercase tracking-[0.28em] text-charcoal/55">
+                  Phone / WhatsApp
+                </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className={inputClass}
+                  autoComplete="tel"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-medium uppercase tracking-[0.28em] text-charcoal/55">
+                  Shipping address
+                </label>
+                <textarea
+                  required
+                  rows={3}
+                  value={shippingAddress}
+                  onChange={(e) => setShippingAddress(e.target.value)}
+                  className={`${inputClass} resize-y`}
+                />
+              </div>
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label className="text-[10px] font-medium uppercase tracking-[0.28em] text-charcoal/55">
+                    City
+                  </label>
+                  <input
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-medium uppercase tracking-[0.28em] text-charcoal/55">
+                    Country
+                  </label>
+                  <input
+                    required
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-[10px] font-medium uppercase tracking-[0.28em] text-charcoal/55">
+                  Notes{" "}
+                  <span className="normal-case tracking-normal text-charcoal/40">
+                    (optional)
+                  </span>
+                </label>
+                <textarea
+                  rows={2}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Sizing, delivery timing, etc."
+                  className={`${inputClass} resize-y`}
+                />
+              </div>
+
+              {error && (
+                <p className="text-sm text-red-800/80" role="alert">
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={submittingOrder}
+                className="w-full bg-charcoal px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-matte-black disabled:opacity-50 sm:w-auto"
+              >
+                {submittingOrder ? "Submitting…" : "Submit order request"}
+              </button>
+            </form>
+          </div>
+        ) : (
+          <>
+            <p className="mt-3 text-xs text-charcoal/45">
+              Shipping and tax calculated at checkout.
+            </p>
+            {error && (
+              <p className="mt-6 text-sm text-red-800/80" role="alert">
+                {error}
+              </p>
+            )}
+            <button
+              type="button"
+              onClick={handleStripeCheckout}
+              disabled={checkingOut}
+              className="mt-8 w-full bg-charcoal px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-matte-black disabled:opacity-50 sm:w-auto"
+            >
+              {checkingOut ? "Redirecting…" : "Pay with card"}
+            </button>
+          </>
         )}
-
-        <button
-          type="button"
-          onClick={handleCheckout}
-          disabled={checkingOut}
-          className="mt-8 w-full bg-charcoal px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-matte-black disabled:opacity-50 sm:w-auto"
-        >
-          {checkingOut ? "Redirecting…" : "Proceed to checkout"}
-        </button>
 
         <Link
           href={ROUTES.store}
-          className="mt-6 inline-block text-xs uppercase tracking-[0.2em] text-charcoal/55 hover:text-charcoal"
+          className="mt-8 inline-block text-xs uppercase tracking-[0.2em] text-charcoal/55 hover:text-charcoal"
         >
           ← Continue shopping
         </Link>

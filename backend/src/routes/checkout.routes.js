@@ -5,5 +5,6 @@ const router = Router();
 
 router.get("/status", checkoutController.getCheckoutStatus);
 router.post("/session", checkoutController.createSession);
+router.post("/request", checkoutController.createOrderRequest);
 
 export default router;

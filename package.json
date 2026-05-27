@@ -10,6 +10,8 @@
     "fix:images": "node scripts/fix-broken-images.js",
     "repair": "npm run db:up && npm run fix:images && npm run db:seed && npm run db:sync",
     "doctor": "node scripts/verify-stack.js",
+    "stripe:check": "node scripts/stripe-check.js",
+    "stripe:listen": "bash scripts/stripe-listen.sh",
     "dev:check": "node scripts/verify-stack.js",
     "stop": "bash scripts/stop-dev.sh",
     "dev": "bash scripts/dev.sh",
