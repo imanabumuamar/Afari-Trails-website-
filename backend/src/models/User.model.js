@@ -17,6 +17,11 @@ const userSchema = new mongoose.Schema(
       enum: ROLES,
       default: "viewer",
     },
+    /** Custom CMS permissions; empty = use defaults for role */
+    permissions: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true },
 );

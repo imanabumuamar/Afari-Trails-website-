@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { AdminSignOut } from "@/components/admin/AdminSignOut";
-import { AdminStackStatus } from "@/components/admin/AdminStackStatus";
-import { AdminStaffBanner } from "@/components/admin/AdminStaffBanner";
-import { hasPermission } from "@/lib/auth/rbac";
-import { ROLE_LABELS } from "@/lib/auth/roles";
+import { AdminChrome } from "@/components/admin/AdminChrome";
+import { ADMIN_NAV_LINKS } from "@/lib/auth/content-areas";
+import { hasPermission, isSuperAdmin, roleAtLeast } from "@/lib/auth/rbac";
 import { getStaffSession } from "@/lib/auth/staff-session";
 
 export const metadata: Metadata = {
@@ -19,79 +16,26 @@ export default async function AdminLayout({
 }) {
   const session = await getStaffSession();
   const role = session?.user?.role ?? null;
-  const canManageUsers = role ? hasPermission(role, "users:read") : false;
+  const email = session?.user?.email ?? null;
+  const permissions = session?.user?.permissions;
+  const canManageUsers = isSuperAdmin(role);
+  const canViewMessages = role ? roleAtLeast(role, "admin") : false;
+
+  const navLinks = role
+    ? ADMIN_NAV_LINKS.filter(({ permission }) =>
+        hasPermission(role, permission, permissions),
+      ).map(({ href, label }) => ({ href, label }))
+    : [];
 
   return (
-    <div className="min-h-screen bg-beige text-charcoal">
-      <header className="border-b border-charcoal/10 bg-ivory">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.35em] text-charcoal/45">
-              Afari Trails
-            </p>
-            <h1 className="font-serif text-2xl font-light">Content admin</h1>
-          </div>
-          <nav className="flex items-center gap-6 text-xs uppercase tracking-[0.2em]">
-            <Link href="/admin" className="hover:text-gold">
-              Dashboard
-            </Link>
-            <Link href="/admin/homepage" className="hover:text-gold">
-              Homepage
-            </Link>
-            <Link href="/admin/expeditions" className="hover:text-gold">
-              Expeditions
-            </Link>
-            <Link href="/admin/journal" className="hover:text-gold">
-              Journal
-            </Link>
-            <Link href="/admin/archive" className="hover:text-gold">
-              Archive
-            </Link>
-            <Link href="/admin/about" className="hover:text-gold">
-              About
-            </Link>
-            <Link href="/admin/store" className="hover:text-gold">
-              Store
-            </Link>
-            <Link href="/admin/support" className="hover:text-gold">
-              Support
-            </Link>
-            <Link href="/admin/connect" className="hover:text-gold">
-              Connect
-            </Link>
-            <Link href="/admin/ventures" className="hover:text-gold">
-              Ventures
-            </Link>
-            {canManageUsers ? (
-              <Link
-                href="/admin/users"
-                className="rounded bg-charcoal px-3 py-1.5 text-ivory hover:bg-charcoal/90"
-              >
-                Users
-              </Link>
-            ) : session?.user ? (
-              <span className="text-charcoal/35" title="Super admin only">
-                Users
-              </span>
-            ) : null}
-            <Link href="/" className="text-charcoal/55 hover:text-charcoal">
-              View site →
-            </Link>
-            {session?.user && role && (
-              <span className="text-charcoal/45">
-                {session.user.email}
-                <span className="ml-2 text-charcoal/35">({ROLE_LABELS[role]})</span>
-              </span>
-            )}
-            <AdminSignOut />
-          </nav>
-        </div>
-      </header>
-      <div className="mx-auto max-w-5xl px-6 py-10">
-        <AdminStackStatus />
-        {role && session?.user && <AdminStaffBanner role={role} />}
-        {children}
-      </div>
-    </div>
+    <AdminChrome
+      email={email}
+      role={role}
+      canManageUsers={canManageUsers}
+      canViewMessages={canViewMessages}
+      navLinks={navLinks}
+    >
+      {children}
+    </AdminChrome>
   );
 }

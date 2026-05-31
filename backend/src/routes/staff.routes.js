@@ -2,11 +2,12 @@ import { Router } from "express";
 import * as authController from "../controllers/auth.controller.js";
 import * as usersController from "../controllers/users.controller.js";
 import { requireJwt } from "../middleware/auth.middleware.js";
-import { requirePermission } from "../middleware/rbac.middleware.js";
+import { requirePermission, requireSuperAdmin } from "../middleware/rbac.middleware.js";
 
 const router = Router();
 
 router.use(requireJwt);
+router.use(requireSuperAdmin);
 
 router.get("/users", requirePermission("users:read"), usersController.list);
 router.post(

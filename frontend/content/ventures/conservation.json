@@ -4,15 +4,22 @@
     "conservationHero": {
       "label": "Conservation",
       "heading": "Protecting the Landscapes That Inspire Exploration.",
+      "image": "/images/ventures/conservation/conservationHero-image.jpg?v=1780265038030",
       "subheading": "Afari Trails supports a future where tourism, storytelling, and conservation exist in balance with Africa's wilderness and communities.",
       "exploreCta": "Explore Initiatives",
       "partnerCta": "Partner With Us",
-      "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
-      "imageAlt": "Elephants in golden African wilderness at sunrise"
+      "imageAlt": "Elephants in golden African wilderness at sunrise",
+      "exploreHref": "#who-we-are",
+      "partnerHref": "/ventures/partner"
     },
     "conservationPhilosophy": {
       "label": "Our Philosophy",
       "statement": "We believe meaningful exploration must contribute to the protection of landscapes, wildlife, and cultural heritage for future generations.",
+      "body": "",
+      "partnerCta": "",
+      "deckCta": "",
+      "partnerHref": "/ventures/partner",
+      "deckHref": "/ventures/connect",
       "themes": [
         "Coexistence between people and wild places",
         "Preservation rooted in respect, not performance",
@@ -23,42 +30,43 @@
     "conservationFocusAreas": {
       "label": "Key Focus Areas",
       "heading": "Where responsibility takes form.",
+      "intro": "",
       "items": [
         {
           "id": "wildlife",
           "title": "Wildlife Protection",
           "description": "Supporting initiatives that safeguard species and the habitats they depend on.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-0-image.jpg?v=1780265017851"
         },
         {
           "id": "habitat",
           "title": "Habitat Preservation",
           "description": "Protecting wetlands, savannas, and river corridors essential to African biodiversity.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-1-image.jpg?v=1780265055005"
         },
         {
           "id": "community",
           "title": "Community Partnerships",
           "description": "Working alongside local people as collaborators — not subjects of a narrative.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-2-image.jpg?v=1780265069966"
         },
         {
           "id": "tourism",
           "title": "Sustainable Tourism",
           "description": "Low-impact exploration designed to leave places stronger than we found them.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-3-image.jpg?v=1780265080404"
         },
         {
           "id": "education",
           "title": "Education & Storytelling",
           "description": "Using narrative, media, and field experience to deepen conservation awareness.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-4-image.jpg?v=1780265094891"
         },
         {
           "id": "culture",
           "title": "Cultural Preservation",
           "description": "Honoring heritage, craft, and identity as inseparable from environmental stewardship.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-5-image.jpg?v=1780265103717"
         }
       ]
     },
@@ -66,7 +74,7 @@
       "label": "Community & Local Impact",
       "heading": "Conservation is human, too.",
       "body": "Wild places endure when the people who live beside them thrive. Afari Trails supports local guides, artisans, and community-led initiatives — building ethical partnerships, fair employment, and cultural preservation that travel alongside every expedition and venture. We do not speak for communities. We listen, collaborate, and invest in shared outcomes.",
-      "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+      "image": "/images/ventures/conservation/conservationCommunity-image.jpg?v=1780265546900",
       "imageAlt": "Community members in warm natural light"
     },
     "conservationInitiatives": {
@@ -84,15 +92,15 @@
     },
     "conservationGallery": [
       {
-        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "src": "/images/ventures/conservation/conservationGallery-0-src.jpg?v=1780265118935",
         "alt": "Wildlife in natural habitat"
       },
       {
-        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "src": "/images/ventures/conservation/conservationGallery-1-src.jpg?v=1780265204060",
         "alt": "Aerial wilderness landscape"
       },
       {
-        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "src": "/images/ventures/conservation/conservationGallery-2-src.jpg?v=1780265213692",
         "alt": "River ecosystem at dusk"
       },
       {
@@ -153,5 +161,5 @@
       "quote": "The future of exploration depends on the future of the wilderness."
     }
   },
-  "updatedAt": "2026-05-25T13:59:30.280Z"
+  "updatedAt": "2026-05-31T22:12:30.481Z"
 }

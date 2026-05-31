@@ -24,7 +24,7 @@ export const PERMISSIONS = [
   "users:write",
 ];
 
-const ROLE_PERMISSIONS = {
+export const ROLE_PERMISSIONS = {
   super_admin: PERMISSIONS,
   admin: [
     "admin:access",
@@ -94,6 +94,8 @@ export function hasPermission(role, permission) {
   const perms = ROLE_PERMISSIONS[parseRole(role)] ?? [];
   return perms.includes(permission);
 }
+
+/** @deprecated Prefer hasEffectivePermission from permissions.js */
 
 export function canAccessAdmin(role) {
   return hasPermission(role, "admin:access");

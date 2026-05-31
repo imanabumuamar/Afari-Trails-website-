@@ -23,6 +23,7 @@ export function requireJwt(req, res, next) {
       id: payload.sub,
       email: payload.email,
       role: payload.role,
+      permissions: Array.isArray(payload.permissions) ? payload.permissions : [],
     };
     next();
   } catch {

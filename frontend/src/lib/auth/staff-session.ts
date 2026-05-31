@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { backendFetch } from "@/lib/api/backend";
-import { parseRole, type Role } from "@/lib/auth/roles";
+import { parseRole, type Permission, type Role } from "@/lib/auth/roles";
 
 type MeResponse = {
   user: {
@@ -8,10 +8,11 @@ type MeResponse = {
     email: string;
     name: string | null;
     role: string;
+    permissions?: Permission[];
   };
 };
 
-/** Server-only: session with role refreshed from MongoDB via the API. */
+/** Server-only: session with role and permissions refreshed from MongoDB via the API. */
 export async function getStaffSession() {
   const session = await auth();
   if (!session?.user?.email || !session.accessToken) return session;
@@ -31,6 +32,7 @@ export async function getStaffSession() {
       email: data.user.email,
       name: data.user.name,
       role,
+      permissions: data.user.permissions,
     },
   };
 }
@@ -38,6 +40,11 @@ export async function getStaffSession() {
 export async function getStaffRole(): Promise<Role | null> {
   const session = await getStaffSession();
   return session?.user?.role ?? null;
+}
+
+export async function getStaffPermissions(): Promise<Permission[] | null> {
+  const session = await getStaffSession();
+  return session?.user?.permissions ?? null;
 }
 
 export async function getStaffAccessToken(): Promise<string | null> {

@@ -1,12 +1,34 @@
 import Link from "next/link";
-import { hasPermission } from "@/lib/auth/rbac";
+import { CMS_CONTENT_AREAS } from "@/lib/auth/content-areas";
+import { hasPermission, isSuperAdmin, roleAtLeast } from "@/lib/auth/rbac";
 import { ROLE_DESCRIPTIONS, ROLE_LABELS } from "@/lib/auth/roles";
 import { getStaffSession } from "@/lib/auth/staff-session";
+
+const SECTION_BLURBS: Record<string, string> = {
+  homepage: "Edit hero, images, and copy on the main site.",
+  ventures: "Edit all venture pages — copy, images, and section data.",
+  expeditions:
+    "Add expeditions, edit journeys, and pick which appear on the main page.",
+  journal: "Edit the journal page, stories, featured articles, and images.",
+  archive:
+    "Edit collections, gallery images, Afari Lens copy, and submit page text.",
+  about: "Edit hero, brand story, philosophy, vision pillars, and contact CTA.",
+  store: "Edit hero, collections, curated picks, products, and World of Afari.",
+  support: "Edit FAQ, shipping policy, and returns — all in one place.",
+  connect:
+    "Edit contact and expeditions connect — hero, form copy, categories, and gallery.",
+};
 
 export default async function AdminDashboardPage() {
   const session = await getStaffSession();
   const role = session?.user?.role ?? null;
-  const canManageUsers = role ? hasPermission(role, "users:read") : false;
+  const permissions = session?.user?.permissions;
+  const canManageUsers = isSuperAdmin(role);
+  const canViewMessages = role ? roleAtLeast(role, "admin") : false;
+
+  const visibleSections = CMS_CONTENT_AREAS.filter((area) =>
+    role ? hasPermission(role, `content:${area.id}:read`, permissions) : false,
+  );
 
   return (
     <div className="space-y-10">
@@ -47,104 +69,35 @@ export default async function AdminDashboardPage() {
       </section>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <Link
-          href="/admin/homepage"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">Homepage</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Edit hero, images, and copy on the main site.
-          </p>
-        </Link>
+        {visibleSections.map((area) => (
+          <Link
+            key={area.id}
+            href={area.href}
+            className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+          >
+            <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
+            <p className="mt-2 font-serif text-xl font-light">{area.label}</p>
+            <p className="mt-2 text-sm text-charcoal/60">
+              {SECTION_BLURBS[area.id] ?? "Edit this section."}
+            </p>
+          </Link>
+        ))}
 
-        <Link
-          href="/admin/ventures"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">Ventures</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Edit all venture pages — copy, images, and section data.
-          </p>
-        </Link>
-
-        <Link
-          href="/admin/expeditions"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">Expeditions</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Add expeditions, edit journeys, and pick which appear on the main page.
-          </p>
-        </Link>
-
-        <Link
-          href="/admin/journal"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">Journal</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Edit the journal page, stories, featured articles, and images.
-          </p>
-        </Link>
-
-        <Link
-          href="/admin/archive"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">Archive</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Edit collections, gallery images, Afari Lens copy, and submit page text.
-          </p>
-        </Link>
-
-        <Link
-          href="/admin/about"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">About</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Edit hero, brand story, philosophy, vision pillars, and contact CTA.
-          </p>
-        </Link>
-
-        <Link
-          href="/admin/store"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">Store</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Edit hero, collections, curated picks, products, and World of Afari.
-          </p>
-        </Link>
-
-        <Link
-          href="/admin/support"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">Support</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Edit FAQ, shipping policy, and returns — all in one place.
-          </p>
-        </Link>
-
-        <Link
-          href="/admin/connect"
-          className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
-        >
-          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">Content</h3>
-          <p className="mt-2 font-serif text-xl font-light">Connect</p>
-          <p className="mt-2 text-sm text-charcoal/60">
-            Edit contact and expeditions connect — hero, form copy, categories, and gallery.
-          </p>
-        </Link>
+        {canViewMessages && (
+          <Link
+            href="/admin/messages"
+            className="rounded border border-charcoal/15 bg-ivory p-6 transition hover:border-gold/40"
+          >
+            <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">
+              Inbox
+            </h3>
+            <p className="mt-2 font-serif text-xl font-light">Messages</p>
+            <p className="mt-2 text-sm text-charcoal/60">
+              Read contact, connect, partner, expedition, and newsletter form
+              submissions.
+            </p>
+          </Link>
+        )}
 
         {canManageUsers && (
           <Link
@@ -154,13 +107,19 @@ export default async function AdminDashboardPage() {
             <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">
               Super admin
             </h3>
-            <p className="mt-2 font-serif text-xl font-light">Users & roles</p>
+            <p className="mt-2 font-serif text-xl font-light">Users & access</p>
             <p className="mt-2 text-sm text-charcoal/60">
-              Add admins, editors, and viewers. Only super admins see this.
+              Add staff and choose which CMS sections each person can view or edit.
             </p>
           </Link>
         )}
       </div>
+
+      {visibleSections.length === 0 && !canManageUsers && (
+        <p className="text-sm text-charcoal/65">
+          No CMS sections are assigned to your account. Ask a super admin to grant access.
+        </p>
+      )}
 
       {canManageUsers && (
         <section className="rounded border border-charcoal/10 bg-beige/50 p-6 text-sm text-charcoal/70">
@@ -168,10 +127,16 @@ export default async function AdminDashboardPage() {
             Quick start
           </h3>
           <ol className="mt-4 list-decimal space-y-2 pl-5">
-            <li>Open <Link href="/admin/users" className="text-gold hover:underline">Users & roles</Link>.</li>
-            <li>Click <strong>Add user</strong> — pick <strong>Editor</strong> for content-only staff.</li>
-            <li>Pick <strong>Admin</strong> for full CMS access without user management.</li>
-            <li>Use <strong>Super admin</strong> only for people who must add or remove accounts.</li>
+            <li>
+              Open{" "}
+              <Link href="/admin/users" className="text-gold hover:underline">
+                Users & access
+              </Link>
+              .
+            </li>
+            <li>Select which pages each editor or admin can open.</li>
+            <li>Choose view-only or can edit for those sections.</li>
+            <li>Staff must sign out and back in after you change their access.</li>
           </ol>
         </section>
       )}

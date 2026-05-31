@@ -15,6 +15,7 @@ import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 const FILENAME = "homepage.json";
 
 const DEFAULT_HERO: HomepageHero = {
+  eyebrow: "",
   heading: "Every trail changes the person walking it.",
   subtext:
     "Curated expeditions. Meaningful ventures. Timeless safari-inspired living.",
@@ -23,8 +24,15 @@ const DEFAULT_HERO: HomepageHero = {
     alt: "Safari landscape at golden hour",
   },
   video: "/videos/hero.mp4",
+  overlayOpacity: 45,
+  textAlign: "left",
+  verticalPosition: "center",
+  textColor: "light",
+  height: "full",
   primaryCta: { label: "Explore Expeditions", href: "/expeditions" },
   secondaryCta: { label: "Discover Ventures", href: "/ventures" },
+  showPrimaryCta: true,
+  showSecondaryCta: true,
 };
 
 const DEFAULT_HOMEPAGE: HomepageContent = {
@@ -50,14 +58,38 @@ const DEFAULT_HOMEPAGE: HomepageContent = {
   updatedAt: new Date(0).toISOString(),
 };
 
+function clampOpacity(value: unknown): number {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return DEFAULT_HERO.overlayOpacity;
+  return Math.min(Math.max(Math.round(n), 0), 90);
+}
+
+function oneOf<T extends string>(value: unknown, allowed: readonly T[], fallback: T): T {
+  return allowed.includes(value as T) ? (value as T) : fallback;
+}
+
 function normalizeHomepage(raw: Partial<HomepageContent>): HomepageContent {
+  const rawHero = raw.hero;
   return {
     hero: {
       ...DEFAULT_HERO,
-      ...raw.hero,
-      poster: { ...DEFAULT_HERO.poster, ...raw.hero?.poster },
-      primaryCta: { ...DEFAULT_HERO.primaryCta, ...raw.hero?.primaryCta },
-      secondaryCta: { ...DEFAULT_HERO.secondaryCta, ...raw.hero?.secondaryCta },
+      ...rawHero,
+      eyebrow: typeof rawHero?.eyebrow === "string" ? rawHero.eyebrow : "",
+      video: typeof rawHero?.video === "string" ? rawHero.video : DEFAULT_HERO.video,
+      overlayOpacity: clampOpacity(rawHero?.overlayOpacity),
+      textAlign: oneOf(rawHero?.textAlign, ["left", "center"] as const, "left"),
+      verticalPosition: oneOf(
+        rawHero?.verticalPosition,
+        ["top", "center", "bottom"] as const,
+        "center",
+      ),
+      textColor: oneOf(rawHero?.textColor, ["light", "dark"] as const, "light"),
+      height: oneOf(rawHero?.height, ["full", "tall", "medium"] as const, "full"),
+      showPrimaryCta: rawHero?.showPrimaryCta !== false,
+      showSecondaryCta: rawHero?.showSecondaryCta !== false,
+      poster: { ...DEFAULT_HERO.poster, ...rawHero?.poster },
+      primaryCta: { ...DEFAULT_HERO.primaryCta, ...rawHero?.primaryCta },
+      secondaryCta: { ...DEFAULT_HERO.secondaryCta, ...rawHero?.secondaryCta },
     },
     featureCards: {
       expeditions: raw.featureCards?.expeditions ?? DEFAULT_HOMEPAGE.featureCards.expeditions,
@@ -149,7 +181,7 @@ export function updateHomepageImage(
   const imagePath = path.join(publicDir, `${filename}.${ext}`);
   writeFileSync(imagePath, file);
 
-  const src = `/images/${filename}.${ext}`;
+  const src = `/images/${filename}.${ext}?v=${Date.now()}`;
   const current = getHomepage();
   const existing = getNestedImage(current, field);
 
@@ -176,7 +208,7 @@ export function updateHomepageVideo(
   const current = getHomepage();
   const next: HomepageContent = {
     ...current,
-    hero: { ...current.hero, video: `/videos/${filename}.mp4` },
+    hero: { ...current.hero, video: `/videos/${filename}.mp4?v=${Date.now()}` },
     updatedAt: new Date().toISOString(),
   };
 

@@ -1,4 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
+import type { Permission } from "@/lib/auth/roles";
 import { parseRole } from "@/lib/auth/roles";
 
 /**
@@ -20,9 +21,15 @@ export const authConfig = {
         token.role = parseRole(user.role);
         if (user.name) token.name = user.name;
 
-        const withToken = user as { accessToken?: string };
+        const withToken = user as {
+          accessToken?: string;
+          permissions?: Permission[];
+        };
         if (withToken.accessToken) {
           token.accessToken = withToken.accessToken;
+        }
+        if (withToken.permissions?.length) {
+          token.permissions = withToken.permissions;
         }
       }
       return token;
@@ -32,6 +39,9 @@ export const authConfig = {
         session.user.id = token.sub as string;
         session.user.role = parseRole(token.role as string | undefined);
         if (token.name) session.user.name = token.name as string;
+        if (token.permissions) {
+          session.user.permissions = token.permissions as Permission[];
+        }
       }
       if (token.accessToken) {
         session.accessToken = token.accessToken as string;

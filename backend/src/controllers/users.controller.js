@@ -20,7 +20,7 @@ export async function update(req, res, next) {
 
 export async function remove(req, res, next) {
   try {
-    const result = await usersService.deleteUser(req.user, req.params.id);
+    const result = await usersService.deleteUser(req.user, req.params.id, req.body?.currentPassword);
     res.json(result);
   } catch (err) {
     next(err);

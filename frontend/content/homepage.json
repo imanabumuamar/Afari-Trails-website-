@@ -3,7 +3,7 @@
     "heading": "Every trail changes the person walking it.",
     "subtext": "Curated expeditions. Meaningful ventures. Timeless safari-inspired living.",
     "poster": {
-      "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
+      "src": "/images/home-hero-poster.png",
       "alt": "Safari landscape at golden hour"
     },
     "video": "/videos/hero.mp4",
@@ -18,21 +18,21 @@
   },
   "featureCards": {
     "expeditions": {
-      "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+      "src": "/images/home-expeditions-featured.png",
       "alt": "Lush gorge with a bridge spanning the valley and river below"
     },
     "ventures": {
-      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80",
+      "src": "/images/home-ventures-featured.png",
       "alt": "Saddle-billed storks walking through sunlit grassland"
     },
     "store": {
-      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80",
+      "src": "/images/home-store-featured.png",
       "alt": "Afari Trails safari cap with embroidered logo on stone in the savanna"
     }
   },
   "ourEssence": {
-    "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80",
+    "src": "/images/home-our-essence.jpg",
     "alt": "Waterbuck standing between trees in sunlit African woodland"
   },
-  "updatedAt": "2026-05-25T13:59:30.251Z"
+  "updatedAt": "2026-05-31T17:45:57.664Z"
 }

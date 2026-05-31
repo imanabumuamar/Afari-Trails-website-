@@ -1,4 +1,4 @@
-import type { Role } from "@/lib/auth/roles";
+import type { Permission, Role } from "@/lib/auth/roles";
 import "next-auth";
 
 declare module "next-auth" {
@@ -9,12 +9,14 @@ declare module "next-auth" {
       name?: string | null;
       image?: string | null;
       role: Role;
+      permissions?: Permission[];
     };
     accessToken?: string;
   }
 
   interface User {
     role: Role;
+    permissions?: Permission[];
     accessToken?: string;
   }
 }
@@ -22,6 +24,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     role?: Role;
+    permissions?: Permission[];
     accessToken?: string;
   }
 }

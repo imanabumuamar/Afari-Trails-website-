@@ -33,7 +33,13 @@ async function resolveStaff() {
   }
 
   const { data, ok, status } = await backendFetch<{
-    user: { id: string; email: string; name: string | null; role: string };
+    user: {
+      id: string;
+      email: string;
+      name: string | null;
+      role: string;
+      permissions?: Permission[];
+    };
   }>("/auth/me", { token: session.accessToken });
 
   if (status === 503) {
@@ -51,21 +57,22 @@ async function resolveStaff() {
   }
 
   const role = parseRole(data.user.role);
-  return { session, role, token: session.accessToken };
+  const permissions = data.user.permissions ?? null;
+  return { session, role, permissions, token: session.accessToken };
 }
 
 export async function requireSession() {
-  const { session, role, token } = await resolveStaff();
-  if (!hasPermission(role, "admin:access")) {
+  const { session, role, permissions, token } = await resolveStaff();
+  if (!hasPermission(role, "admin:access", permissions)) {
     throw new AuthError("Forbidden", 403);
   }
-  return { session, role, token };
+  return { session, role, permissions, token };
 }
 
 export async function requirePermission(permission: Permission) {
-  const { session, role, token } = await resolveStaff();
-  if (!hasPermission(role, permission)) {
+  const { session, role, permissions, token } = await resolveStaff();
+  if (!hasPermission(role, permission, permissions)) {
     throw new AuthError("Forbidden", 403);
   }
-  return { session, role, token };
+  return { session, role, permissions, token };
 }

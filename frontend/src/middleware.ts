@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
 import { authConfig } from "@/auth.config";
-import { hasPermission } from "@/lib/auth/rbac";
+import { hasPermission, isSuperAdmin } from "@/lib/auth/rbac";
 import {
   permissionForAdminApi,
   permissionForAdminPath,
 } from "@/lib/auth/route-permissions";
+import type { Permission } from "@/lib/auth/roles";
 import { parseRole } from "@/lib/auth/roles";
 
 const { auth } = NextAuth(authConfig);
@@ -12,7 +13,7 @@ const { auth } = NextAuth(authConfig);
 const PUBLIC_ADMIN_PATHS = new Set(["/admin/login", "/admin/forbidden"]);
 
 /**
- * Edge middleware: login required + role permission checks on admin pages and APIs.
+ * Edge middleware: login required + permission checks on admin pages and APIs.
  */
 export default auth((req) => {
   const { pathname } = req.nextUrl;
@@ -33,8 +34,9 @@ export default auth((req) => {
   }
 
   const role = parseRole(req.auth.user?.role as string | undefined, "viewer");
+  const permissions = req.auth.user?.permissions as Permission[] | undefined;
 
-  if (!hasPermission(role, "admin:access")) {
+  if (!hasPermission(role, "admin:access", permissions)) {
     if (isAdminPage && !PUBLIC_ADMIN_PATHS.has(pathname)) {
       return Response.redirect(new URL("/admin/forbidden", req.nextUrl.origin));
     }
@@ -44,16 +46,24 @@ export default auth((req) => {
     return;
   }
 
+  if (
+    isAdminPage &&
+    (pathname === "/admin/users" || pathname.startsWith("/admin/users/")) &&
+    !isSuperAdmin(role)
+  ) {
+    return Response.redirect(new URL("/admin/forbidden", req.nextUrl.origin));
+  }
+
   if (isAdminPage && !PUBLIC_ADMIN_PATHS.has(pathname)) {
     const required = permissionForAdminPath(pathname);
-    if (!hasPermission(role, required)) {
+    if (!hasPermission(role, required, permissions)) {
       return Response.redirect(new URL("/admin/forbidden", req.nextUrl.origin));
     }
   }
 
   if (isAdminApi) {
     const required = permissionForAdminApi(pathname, req.method);
-    if (required && !hasPermission(role, required)) {
+    if (required && !hasPermission(role, required, permissions)) {
       return Response.json({ error: "Forbidden" }, { status: 403 });
     }
   }

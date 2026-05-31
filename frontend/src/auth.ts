@@ -1,11 +1,17 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "@/auth.config";
-import { parseRole, type Role } from "@/lib/auth/roles";
+import { parseRole, type Permission, type Role } from "@/lib/auth/roles";
 import { getApiBaseUrl } from "@/lib/api/backend";
 
 type StaffLoginResponse = {
-  user: { id: string; email: string; name: string | null; role: Role };
+  user: {
+    id: string;
+    email: string;
+    name: string | null;
+    role: Role;
+    permissions?: Permission[];
+  };
   token: string;
 };
 
@@ -48,6 +54,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email: data.user.email,
           name: data.user.name,
           role: parseRole(data.user.role),
+          permissions: data.user.permissions,
           accessToken: data.token,
         };
       },

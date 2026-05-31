@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
+import { setNestedValue } from "@/lib/admin/venture-nested";
 import { AuthError, requirePermission } from "@/lib/auth/require-session";
 import {
   VENTURE_SLUGS,
@@ -48,14 +49,23 @@ export async function POST(request: Request, context: RouteContext) {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const { data } = updateVentureImageField(slug, field, buffer, file.type);
+  const { src } = updateVentureImageField(slug, field, buffer, file.type);
+
+  // Merge the new image onto the LIVE database content (not the local
+  // fallback) so we never wipe other text/image edits already saved.
+  const { data: current } = await backendFetch<VentureContentDocument>(
+    `/content/ventures/${slug}`,
+    { token },
+  );
+  const base = (current?.data as Record<string, unknown>) ?? {};
+  const merged = setNestedValue(base, field, src);
 
   const { data: synced, ok } = await backendFetch<VentureContentDocument>(
     `/content/ventures/${slug}`,
     {
       method: "PUT",
       token,
-      body: JSON.stringify({ data }),
+      body: JSON.stringify({ data: merged }),
     },
   );
 

@@ -56,7 +56,7 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
     { key: "conservationHero", type: "sub-hero", title: "Hero" },
     { key: "conservationPhilosophy", type: "philosophy-block", title: "Philosophy" },
     { key: "conservationFocusAreas", type: "focus-items", title: "Focus areas" },
-    { key: "conservationCommunity", type: "text-block", title: "Community" },
+    { key: "conservationCommunity", type: "location-block", title: "Community & local impact" },
     { key: "conservationInitiatives", type: "text-block", title: "Initiatives" },
     { key: "conservationGallery", type: "image-gallery", title: "Gallery" },
     { key: "conservationPartners", type: "text-block", title: "Partners" },

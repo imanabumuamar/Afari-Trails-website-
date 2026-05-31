@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { VentureSlug } from "@/lib/data/venture-defaults";
 
 type VentureImageFieldProps = {
@@ -27,22 +27,23 @@ export function VentureImageField({
 }: VentureImageFieldProps) {
   const [uploading, setUploading] = useState(false);
   const [urlDraft, setUrlDraft] = useState(src);
+  const [showUrl, setShowUrl] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setUrlDraft(src);
   }, [src]);
 
-  async function handleUpload(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    formData.set("field", fieldPath);
-
-    const file = formData.get("image");
-    if (!file || !(file instanceof File) || file.size === 0) {
-      onStatus("Choose an image file to upload.");
+  async function uploadFile(file: File) {
+    if (file.size === 0) return;
+    if (!file.type.startsWith("image/")) {
+      onStatus("Please choose a JPG, PNG, or WebP image.");
       return;
     }
+
+    const formData = new FormData();
+    formData.set("field", fieldPath);
+    formData.set("image", file);
 
     setUploading(true);
     onStatus(`Uploading ${label}…`);
@@ -55,7 +56,7 @@ export function VentureImageField({
     setUploading(false);
 
     if (!res.ok) {
-      onStatus(`Upload failed for ${label}.`);
+      onStatus(`Upload failed for ${label}. Use a JPG, PNG, or WebP image.`);
       return;
     }
 
@@ -73,8 +74,14 @@ export function VentureImageField({
 
     onUploaded(newSrc);
     setUrlDraft(newSrc);
-    onStatus(`${label} image updated.`);
-    form.reset();
+    onStatus(`${label} updated and saved.`);
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) void uploadFile(file);
+    // Reset so picking the same file again still triggers a change.
+    e.target.value = "";
   }
 
   return (
@@ -83,43 +90,58 @@ export function VentureImageField({
         {label}
       </p>
       {src && (
-        <div className="relative aspect-[16/9] max-h-56 overflow-hidden bg-sand-light/40">
+        <div className="relative aspect-[16/9] max-h-56 overflow-hidden rounded bg-sand-light/40">
           <Image src={src} alt={alt} fill className="object-cover" sizes="400px" />
         </div>
       )}
-      <p className="break-all text-xs text-charcoal/50">{src}</p>
 
       {!readOnly && (
         <>
-          <form onSubmit={handleUpload} className="space-y-3">
-            <input
-              name="image"
-              type="file"
-              accept="image/png,image/jpeg,image/webp"
-              className="block w-full text-sm"
-            />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <div className="flex flex-wrap items-center gap-3">
             <button
-              type="submit"
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
               disabled={uploading}
-              className="bg-charcoal px-5 py-2 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
+              className="rounded bg-charcoal px-5 py-2 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
             >
-              {uploading ? "Uploading…" : "Upload image"}
+              {uploading ? "Uploading…" : src ? "Replace photo" : "Choose photo"}
             </button>
-          </form>
-          <div>
-            <label className="block text-[10px] uppercase tracking-[0.2em] text-charcoal/45">
-              Or paste image URL
-            </label>
-            <input
-              type="url"
-              value={urlDraft}
-              onChange={(e) => {
-                setUrlDraft(e.target.value);
-                onUploaded(e.target.value);
-              }}
-              className="mt-2 w-full border border-charcoal/20 bg-beige px-3 py-2 text-sm"
-            />
+            <span className="text-xs text-charcoal/55">
+              Photos save automatically — no need to click Save.
+            </span>
           </div>
+
+          <button
+            type="button"
+            onClick={() => setShowUrl((v) => !v)}
+            className="text-[10px] uppercase tracking-[0.2em] text-charcoal/45 underline-offset-2 hover:underline"
+          >
+            {showUrl ? "Hide URL option" : "Or paste an image URL"}
+          </button>
+          {showUrl && (
+            <div>
+              <input
+                type="url"
+                value={urlDraft}
+                placeholder="https://…"
+                onChange={(e) => {
+                  setUrlDraft(e.target.value);
+                  onUploaded(e.target.value);
+                }}
+                className="mt-1 w-full rounded border border-charcoal/20 bg-beige px-3 py-2 text-sm"
+              />
+              <p className="mt-1 text-[10px] text-charcoal/45">
+                After pasting a URL, click the section&apos;s Save button to keep it.
+              </p>
+            </div>
+          )}
         </>
       )}
     </div>

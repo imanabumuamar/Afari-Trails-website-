@@ -27,7 +27,9 @@ export function updateVentureImageField(
   const imagePath = path.join(publicDir, filename);
   writeFileSync(imagePath, file);
 
-  const src = `/images/ventures/${slug}/${filename}`;
+  // The filename stays the same on re-upload, so add a version query to bust
+  // the browser cache — otherwise the new photo looks like it "didn't save".
+  const src = `/images/ventures/${slug}/${filename}?v=${Date.now()}`;
   const current = getVentureContentLocal(slug);
   const nextData = setNestedValue(current, fieldPath, src);
 

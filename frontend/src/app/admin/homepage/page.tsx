@@ -28,7 +28,8 @@ function isHomepageContent(data: unknown): data is HomepageContent {
 export default function AdminHomepagePage() {
   const { data: session, status: sessionStatus } = useSession();
   const role = session?.user?.role ? parseRole(session.user.role) : null;
-  const readOnly = role ? !canWriteHomepage(role) : true;
+  const permissions = session?.user?.permissions;
+  const readOnly = role ? !canWriteHomepage(role, permissions) : true;
 
   const [content, setContent] = useState<HomepageContent | null>(null);
   const [status, setStatus] = useState("");

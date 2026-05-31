@@ -5,7 +5,10 @@ import { getStaffSession } from "@/lib/auth/staff-session";
 export default async function AdminSupportPage() {
   const session = await getStaffSession();
   const role = session?.user?.role ?? null;
-  const readOnly = role ? !hasPermission(role, "content:support:write") : true;
+  const permissions = session?.user?.permissions;
+  const readOnly = role
+    ? !hasPermission(role, "content:support:write", permissions)
+    : true;
 
   return (
     <div className="space-y-8">

@@ -5,14 +5,14 @@
       "title": "Ventures",
       "tagline": "Investing in Africa. Building legacies.",
       "intro": "Afari Trails Ventures is committed to sustainable development across hospitality, conservation, and community — creating long-term value for the land, its people, and those who journey through it.",
-      "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80"
+      "image": "/images/ventures/main/venturesHero-image.png?v=1780263226091"
     },
     "venturesMission": {
       "label": "Our Mission",
       "heading": "Developing Africa's potential with purpose.",
       "body": "We partner on ventures that honor wilderness, empower communities, and build hospitality rooted in authenticity — bridging tourism, conservation, and local development for generations to come.",
       "approachHref": "#focus-areas",
-      "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80"
+      "image": "/images/ventures/main/venturesMission-image.png?v=1780264297903"
     },
     "ventureStats": [
       {
@@ -40,7 +40,7 @@
         "id": "eco-lodges",
         "title": "Eco-Lodges",
         "description": "Boutique safari camps and wilderness stays immersed in the landscape.",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "image": "/images/ventures/main/focusAreas-0-image.png?v=1780262572341",
         "icon": "lodge",
         "href": "/ventures/eco-lodge"
       },
@@ -48,7 +48,7 @@
         "id": "conservation",
         "title": "Conservation",
         "description": "Wildlife preservation and eco-conscious operations across wild places.",
-        "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+        "image": "/images/ventures/main/focusAreas-1-image.jpg?v=1780264013500",
         "icon": "leaf",
         "href": "/ventures/conservation"
       },
@@ -56,7 +56,7 @@
         "id": "community",
         "title": "Community Empowerment",
         "description": "Local employment, education, and artisan collaborations that endure.",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "image": "/images/ventures/main/focusAreas-2-image.png?v=1780263893594",
         "icon": "people",
         "href": "/ventures/community"
       },
@@ -72,7 +72,7 @@
         "id": "hospitality",
         "title": "Hospitality Development",
         "description": "Safari retreats, wellness camps, and boutique properties.",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+        "image": "/images/ventures/main/focusAreas-4-image.png?v=1780263095827",
         "icon": "home",
         "href": "/ventures/hospitality"
       }
@@ -82,7 +82,7 @@
       "title": "Zambezi Lodge Development",
       "description": "An eco-lodge vision along the Zambezi corridor — low-impact hospitality designed for stillness, river views, and deep connection to the valley.",
       "status": "In Development",
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
+      "image": "/images/ventures/main/featuredProject-image.jpg?v=1780264447149",
       "href": "/ventures/eco-lodge",
       "ctaLabel": "View Project →"
     },
@@ -90,10 +90,10 @@
       "quote": "When we invest in Africa, we invest in a future worth leaving behind.",
       "heading": "Let's Build Together",
       "body": "We welcome conversations with landowners, hospitality partners, conservation groups, and aligned investors.",
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
+      "image": "/images/ventures/main/venturesCta-image.jpg?v=1780264379307",
       "ctaLabel": "Get In Touch →",
       "ctaHref": "/ventures/connect"
     }
   },
-  "updatedAt": "2026-05-25T13:59:30.273Z"
+  "updatedAt": "2026-05-31T21:54:07.160Z"
 }

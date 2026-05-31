@@ -120,3 +120,51 @@ function toClient(doc) {
     createdAt: (o.createdAt ?? new Date()).toISOString(),
   };
 }
+
+function toAdminClient(doc) {
+  const o = doc.toObject ? doc.toObject() : doc;
+  return {
+    id: String(o._id),
+    source: o.source,
+    name: o.name ?? null,
+    email: o.email,
+    company: o.company ?? null,
+    inquiryType: o.inquiryType ?? null,
+    partnershipType: o.partnershipType ?? null,
+    message: o.message ?? null,
+    expeditionId: o.expeditionId ?? null,
+    expeditionName: o.expeditionName ?? null,
+    dates: o.dates ?? null,
+    guests: o.guests ?? null,
+    pageUrl: o.pageUrl ?? null,
+    createdAt: (o.createdAt ?? new Date()).toISOString(),
+  };
+}
+
+export async function listInquirySubmissions({ source, limit } = {}) {
+  const query = {};
+  if (source && SOURCES.has(source)) {
+    query.source = source;
+  }
+
+  const safeLimit = Math.min(Math.max(Number(limit) || 200, 1), 500);
+
+  const [docs, counts] = await Promise.all([
+    InquirySubmission.find(query).sort({ createdAt: -1 }).limit(safeLimit),
+    InquirySubmission.aggregate([
+      { $group: { _id: "$source", count: { $sum: 1 } } },
+    ]),
+  ]);
+
+  const bySource = {};
+  let total = 0;
+  for (const row of counts) {
+    bySource[row._id] = row.count;
+    total += row.count;
+  }
+
+  return {
+    submissions: docs.map(toAdminClient),
+    counts: { total, bySource },
+  };
+}

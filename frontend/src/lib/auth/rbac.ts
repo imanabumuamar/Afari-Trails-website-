@@ -6,17 +6,47 @@ import {
   type Role,
 } from "@/lib/auth/roles";
 
-export function hasPermission(role: string, permission: Permission): boolean {
+export function resolvePermissions(
+  role: string,
+  effectivePermissions?: readonly Permission[] | null,
+): readonly Permission[] {
   const parsed = isRole(role) ? role : parseRole(role, "viewer");
-  return permissionsForRole(parsed).includes(permission);
+
+  if (parsed === "super_admin") {
+    return permissionsForRole("super_admin");
+  }
+
+  if (effectivePermissions && effectivePermissions.length > 0) {
+    return effectivePermissions;
+  }
+
+  return permissionsForRole(parsed);
 }
 
-export function canAccessAdmin(role: string): boolean {
-  return hasPermission(role, "admin:access");
+export function hasPermission(
+  role: string,
+  permission: Permission,
+  effectivePermissions?: readonly Permission[] | null,
+): boolean {
+  return resolvePermissions(role, effectivePermissions).includes(permission);
 }
 
-export function canWriteHomepage(role: string): boolean {
-  return hasPermission(role, "content:homepage:write");
+export function canAccessAdmin(
+  role: string,
+  effectivePermissions?: readonly Permission[] | null,
+): boolean {
+  return hasPermission(role, "admin:access", effectivePermissions);
+}
+
+export function canWriteHomepage(
+  role: string,
+  effectivePermissions?: readonly Permission[] | null,
+): boolean {
+  return hasPermission(role, "content:homepage:write", effectivePermissions);
+}
+
+export function isSuperAdmin(role: string | null | undefined): boolean {
+  return parseRole(role, "viewer") === "super_admin";
 }
 
 export function roleAtLeast(role: string, minimum: Role): boolean {

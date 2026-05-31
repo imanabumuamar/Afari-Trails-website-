@@ -8,6 +8,18 @@ function clientIp(req) {
   return req.ip ?? req.socket?.remoteAddress ?? undefined;
 }
 
+export async function listInquiries(req, res, next) {
+  try {
+    const data = await inquiryService.listInquirySubmissions({
+      source: typeof req.query.source === "string" ? req.query.source : undefined,
+      limit: req.query.limit,
+    });
+    res.json(data);
+  } catch (err) {
+    next(err);
+  }
+}
+
 export async function submitInquiry(req, res, next) {
   try {
     const result = await inquiryService.createInquirySubmission(req.body, {

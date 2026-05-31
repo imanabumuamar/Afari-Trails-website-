@@ -9,13 +9,29 @@ export type HomepageCta = {
   href: string;
 };
 
+export type HeroTextAlign = "left" | "center";
+export type HeroVerticalPosition = "top" | "center" | "bottom";
+export type HeroTextColor = "light" | "dark";
+export type HeroHeight = "full" | "tall" | "medium";
+
 export type HomepageHero = {
+  /** Small label shown above the headline */
+  eyebrow: string;
   heading: string;
   subtext: string;
   poster: ContentImage;
+  /** A hero video URL means the homepage shows the video; empty means photo only */
   video: string;
+  /** Darkness of the overlay over the background, 0–90 */
+  overlayOpacity: number;
+  textAlign: HeroTextAlign;
+  verticalPosition: HeroVerticalPosition;
+  textColor: HeroTextColor;
+  height: HeroHeight;
   primaryCta: HomepageCta;
   secondaryCta: HomepageCta;
+  showPrimaryCta: boolean;
+  showSecondaryCta: boolean;
 };
 
 export type HomepageContent = {

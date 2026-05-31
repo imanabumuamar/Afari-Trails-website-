@@ -4,12 +4,12 @@
     "ecoLodgeHero": {
       "label": "Afari Eco Lodge",
       "heading": "Designing and Developing Luxury Eco Lodge Destinations Across Africa",
+      "image": "/images/ventures/eco-lodge/ecoLodgeHero-image.jpg?v=1780264599571",
       "subheading": "Afari Trails delivers end-to-end eco hospitality development — transforming natural landscapes into immersive luxury destinations rooted in sustainability, conservation, and authentic African experiences.",
       "exploreCta": "Explore Our Vision",
       "exploreHref": "#who-we-are",
       "partnerCta": "Partner With Us",
       "partnerHref": "/ventures/partner",
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
       "imageAlt": "Luxury safari lodge overlooking African wilderness at sunset"
     },
     "ecoLodgeWhoWeAre": {
@@ -94,7 +94,7 @@
       "label": "Why Africa",
       "heading": "Why Africa",
       "body": "Africa represents one of the world's most powerful opportunities for eco tourism and luxury nature-based hospitality.\n\nWith extraordinary landscapes, wildlife ecosystems, cultural richness, and rising demand for authentic travel experiences, the continent is positioned for the next generation of sustainable tourism investment.\n\nAfari Trails aims to contribute to that future by developing destinations that celebrate Africa while protecting its natural heritage.",
-      "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+      "image": "/images/ventures/eco-lodge/ecoLodgeWhyAfrica-image.jpg?v=1780264618099",
       "imageAlt": "African savanna at golden hour"
     },
     "ecoLodgeGalleryIntro": {
@@ -104,11 +104,11 @@
     },
     "ecoLodgeGallery": [
       {
-        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
+        "src": "/images/ventures/eco-lodge/ecoLodgeGallery-0-src.jpg?v=1780264807610",
         "alt": "Luxury safari lodge architecture"
       },
       {
-        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
+        "src": "/images/ventures/eco-lodge/ecoLodgeGallery-1-src.jpg?v=1780264818376",
         "alt": "Luxury tented camp in the wilderness"
       },
       {
@@ -143,8 +143,8 @@
       "secondaryCta": "Become a Partner",
       "ctaHref": "/ventures/connect",
       "secondaryCtaHref": "/ventures/partner",
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80"
+      "image": "/images/ventures/eco-lodge/ecoLodgeFinalCta-image.jpg?v=1780264702177"
     }
   },
-  "updatedAt": "2026-05-25T13:59:30.276Z"
+  "updatedAt": "2026-05-31T22:00:34.610Z"
 }

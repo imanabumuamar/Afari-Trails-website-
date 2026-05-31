@@ -45,11 +45,14 @@ export function FeaturedExpeditionsPicker({
   return (
     <form onSubmit={handleSave} className="space-y-6 border-t border-charcoal/10 pt-10">
       <div>
-        <h3 className="font-serif text-2xl font-light">Featured on main page</h3>
+        <h3 className="font-serif text-2xl font-light">Featured expeditions</h3>
         <p className="mt-2 max-w-xl text-sm text-charcoal/60">
-          Choose which expeditions appear on{" "}
-          <code className="text-charcoal">/expeditions</code>. Order controls
-          left-to-right layout. Only published expeditions are listed.
+          Choose which expeditions appear in the{" "}
+          <strong className="font-medium text-charcoal">Featured Expeditions</strong>{" "}
+          section on the <code className="text-charcoal">home page</code> and the{" "}
+          <code className="text-charcoal">/expeditions</code> page. The home page
+          shows the first four. Order controls left-to-right layout. Only
+          published expeditions are listed.
         </p>
       </div>
 
