@@ -29,6 +29,8 @@ export type ExpeditionFaqItem = {
 
 export type ExpeditionDetail = {
   id: string;
+  /** Region filter on /expeditions/all (e.g. zambia, south-africa). */
+  regionId?: string;
   /** When false, hidden from “View all” catalog (detail URL may still work). */
   published?: boolean;
   name: string;

@@ -2,6 +2,8 @@ import type { NextAuthConfig } from "next-auth";
 import type { Permission } from "@/lib/auth/roles";
 import { parseRole } from "@/lib/auth/roles";
 
+const useSecureCookies = process.env.NODE_ENV === "production";
+
 /**
  * Edge-safe auth config (no database). Used by middleware.
  */
@@ -11,6 +13,19 @@ export const authConfig = {
   },
   session: {
     strategy: "jwt",
+  },
+  // Store the login as a browser-session cookie (no expiry date) so closing
+  // the browser clears it and the admin must sign in again on reopen.
+  cookies: {
+    sessionToken: {
+      name: `${useSecureCookies ? "__Secure-" : ""}authjs.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: useSecureCookies,
+      },
+    },
   },
   providers: [],
   callbacks: {

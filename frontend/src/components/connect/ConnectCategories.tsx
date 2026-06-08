@@ -5,21 +5,63 @@ import type { ConnectPageConfig } from "@/types/connect-page";
 
 type ConnectCategoriesProps = {
   config: ConnectPageConfig;
+  /** When false, cards show title and description only (no photos). */
+  showImages?: boolean;
+  compact?: boolean;
 };
 
-export function ConnectCategories({ config }: ConnectCategoriesProps) {
+export function ConnectCategories({
+  config,
+  showImages = true,
+  compact = false,
+}: ConnectCategoriesProps) {
   const { categories } = config;
+  const sectionPad = compact ? "py-12 lg:py-16" : "py-24 lg:py-36";
 
   return (
-    <section className="bg-beige py-24 lg:py-36">
+    <section className={`bg-beige ${sectionPad}`}>
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="max-w-xl">
           <SectionLabel>{categories.label}</SectionLabel>
-          <h2 className="font-serif text-4xl font-light text-charcoal md:text-5xl">
+          <h2
+            className={`font-serif font-light text-charcoal ${
+              compact
+                ? "text-3xl md:text-4xl"
+                : "text-4xl md:text-5xl"
+            }`}
+          >
             {categories.heading}
           </h2>
         </div>
 
+        {!showImages ? (
+          <ul
+            className={`flex flex-wrap gap-2 ${compact ? "mt-6" : "mt-8"}`}
+          >
+            {categories.items.map((item) => {
+              const href =
+                item.href +
+                (item.inquiry ? `?inquiry=${item.inquiry}` : "");
+
+              return (
+                <li key={item.id}>
+                  <Link
+                    href={href}
+                    title={item.description}
+                    className="group inline-flex flex-col border border-charcoal/12 bg-ivory px-4 py-3 transition-colors hover:border-charcoal/25 hover:bg-sand-light/50"
+                  >
+                    <span className="text-xs font-medium uppercase tracking-[0.35em] text-charcoal transition-colors group-hover:text-gold">
+                      {item.title}
+                    </span>
+                    <span className="mt-1 max-w-[220px] text-[11px] leading-snug text-charcoal/50">
+                      {item.description}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {categories.items.map((item) => {
             const href =
@@ -55,6 +97,7 @@ export function ConnectCategories({ config }: ConnectCategoriesProps) {
             );
           })}
         </div>
+        )}
       </div>
     </section>
   );

@@ -3,8 +3,6 @@ import { PartnerCollaborators } from "@/components/ventures/partner/PartnerColla
 import { PartnerForm } from "@/components/ventures/partner/PartnerForm";
 import { PartnerHero } from "@/components/ventures/partner/PartnerHero";
 import { PartnerIntro } from "@/components/ventures/partner/PartnerIntro";
-import { PartnerMoodboard } from "@/components/ventures/partner/PartnerMoodboard";
-import { PartnerTypes } from "@/components/ventures/partner/PartnerTypes";
 import { PartnerVision } from "@/components/ventures/partner/PartnerVision";
 
 export const metadata = {
@@ -18,9 +16,7 @@ export default function PartnerPage() {
     <>
       <PartnerHero />
       <PartnerIntro />
-      <PartnerTypes />
       <PartnerVision />
-      <PartnerMoodboard />
       <PartnerCollaborators />
       <PartnerForm />
       <PartnerClosing />

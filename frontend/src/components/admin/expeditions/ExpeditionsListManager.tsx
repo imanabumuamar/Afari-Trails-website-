@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { ExpeditionDetailRecord } from "@/types/expeditions-content";
 import { createBlankExpedition } from "@/lib/expeditions/blank-expedition";
+import { slugifyExpeditionId } from "@/lib/expeditions/expedition-slug";
 
 type ExpeditionsListManagerProps = {
   expeditions: ExpeditionDetailRecord[];
@@ -12,14 +13,6 @@ type ExpeditionsListManagerProps = {
   onAdd: (expedition: ExpeditionDetailRecord) => void;
   onRemove: (id: string) => void;
 };
-
-function slugify(value: string): string {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
 
 export function ExpeditionsListManager({
   expeditions,
@@ -34,7 +27,7 @@ export function ExpeditionsListManager({
 
   function handleAdd(e: React.FormEvent) {
     e.preventDefault();
-    const id = slugify(newName);
+    const id = slugifyExpeditionId(newName);
     if (!id) return;
     onAdd(createBlankExpedition(id, newName.trim() || "New Expedition"));
     setNewName("");

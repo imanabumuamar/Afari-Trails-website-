@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { AppProviders } from "@/context/providers";
 import { site } from "@/lib/data/site";
 import "./globals.css";
@@ -41,6 +42,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <WhatsAppWidget />
         </AppProviders>
       </body>
     </html>

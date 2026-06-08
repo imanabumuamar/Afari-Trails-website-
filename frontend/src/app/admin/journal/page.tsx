@@ -17,7 +17,7 @@ export default async function AdminJournalPage() {
         <p className="mt-3 max-w-2xl text-sm text-charcoal/65">
           {readOnly
             ? "You have read-only access."
-            : "Edit the journal page and every story — published (live) or draft. Use the Published filter to find live stories."}
+            : "Edit the journal page, choose which stories appear in Latest and on the homepage, and manage each story."}
         </p>
       </div>
 

@@ -1,5 +1,6 @@
 import { ConnectPageView } from "@/components/connect/ConnectPageView";
 import { venturesConnectConfig as defaultConfig } from "@/lib/data/connect-ventures";
+import { mergeConnectPage } from "@/services/content/connect";
 import { getVenturePageContent } from "@/services/content/ventures";
 import type { ConnectPageConfig } from "@/types/connect-page";
 
@@ -11,11 +12,12 @@ export const metadata = {
 
 export default async function VenturesConnectPage() {
   const content = await getVenturePageContent("connect");
-  const config = content.venturesConnectConfig as ConnectPageConfig;
+  const remote = content.venturesConnectConfig as Partial<ConnectPageConfig> | undefined;
+  const config = mergeConnectPage(defaultConfig, remote);
 
   return (
     <ConnectPageView
-      config={config ?? defaultConfig}
+      config={config}
       inquirySource="ventures-connect"
     />
   );

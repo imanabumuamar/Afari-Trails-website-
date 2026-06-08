@@ -1,69 +1,14 @@
 import { cache } from "react";
 import { JOURNAL_CONTENT_DEFAULTS } from "@/lib/data/journal-defaults";
+import { mergeJournalData } from "@/lib/journal/merge-journal-data";
 import { fetchCmsJson } from "@/lib/api/fetch-content";
 import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 import type {
   JournalContentData,
   JournalContentDocument,
-  JournalStoryRecord,
 } from "@/types/journal-content";
 
-function mergePage<T extends Record<string, unknown>>(
-  defaults: T,
-  remote?: Partial<T>,
-): T {
-  if (!remote) return defaults;
-  return { ...defaults, ...remote };
-}
-
-function mergeStories(
-  defaults: JournalStoryRecord[],
-  remote: JournalStoryRecord[] | undefined,
-): JournalStoryRecord[] {
-  if (!remote || remote.length === 0) return defaults;
-
-  const remoteBySlug = new Map(remote.map((s) => [s.slug, s]));
-  const merged = defaults.map((story) => {
-    const patch = remoteBySlug.get(story.slug);
-    if (!patch) return story;
-    return {
-      ...story,
-      ...patch,
-      published: patch.published !== false,
-    };
-  });
-
-  for (const story of remote) {
-    if (!defaults.some((d) => d.slug === story.slug)) {
-      merged.push({
-        ...story,
-        published: story.published !== false,
-      });
-    }
-  }
-
-  return merged;
-}
-
-function mergeJournalData(
-  remote?: Partial<JournalContentData> | null,
-): JournalContentData {
-  const defaults = JOURNAL_CONTENT_DEFAULTS;
-  if (!remote) return defaults;
-
-  const page = (remote.page ?? {}) as Partial<JournalContentData["page"]>;
-  return {
-    page: {
-      hero: mergePage(defaults.page.hero, page.hero),
-      newsletter: mergePage(defaults.page.newsletter, page.newsletter),
-      categories:
-        Array.isArray(page.categories) && page.categories.length > 0
-          ? page.categories
-          : defaults.page.categories,
-    },
-    stories: mergeStories(defaults.stories, remote.stories),
-  };
-}
+export { mergeJournalData } from "@/lib/journal/merge-journal-data";
 
 export function getJournalContentLocal(): JournalContentData {
   try {
@@ -97,8 +42,11 @@ export function saveJournalContentLocal(
 export {
   getFeaturedSideStories,
   getFeaturedStory,
+  getHomepageJournalStories,
   getLatestStories,
+  getLatestStoriesForGrid,
   getPublishedStories,
+  resolveStoriesBySlugs,
 } from "@/lib/journal/helpers";
 
 export async function getStoryBySlug(

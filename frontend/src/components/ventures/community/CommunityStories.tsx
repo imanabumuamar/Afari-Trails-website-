@@ -1,11 +1,52 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { getVenturePageContent } from "@/services/content/ventures";
+import { getArchiveContent, getPublishedImages } from "@/services/content/archive";
 import { communityStories as default_communityStories } from "@/lib/data/community";
+
+type StoryCard = {
+  key: string;
+  image: string;
+  role: string;
+  name: string;
+  quote: string;
+};
 
 export async function CommunityStories() {
   const content = await getVenturePageContent("community");
-  const communityStories = content.communityStories as typeof default_communityStories;
+  const communityStories =
+    content.communityStories as typeof default_communityStories;
+
+  const archiveIds = Array.isArray(communityStories.archiveIds)
+    ? communityStories.archiveIds
+    : [];
+
+  let cards: StoryCard[];
+
+  if (archiveIds.length > 0) {
+    const archive = await getArchiveContent();
+    const published = getPublishedImages(archive.images);
+    const byId = new Map(published.map((img) => [img.id, img]));
+    // Keep the admin-chosen order, skipping any that were removed/unpublished.
+    cards = archiveIds
+      .map((id) => byId.get(id))
+      .filter((img): img is NonNullable<typeof img> => Boolean(img))
+      .map((img) => ({
+        key: img.id,
+        image: img.image,
+        role: img.location,
+        name: img.title,
+        quote: img.caption,
+      }));
+  } else {
+    cards = communityStories.profiles.map((profile) => ({
+      key: profile.name,
+      image: profile.image,
+      role: profile.role,
+      name: profile.name,
+      quote: profile.quote,
+    }));
+  }
 
   return (
     <section className="bg-ivory py-24 lg:py-36">
@@ -21,12 +62,12 @@ export async function CommunityStories() {
         </div>
 
         <div className="mt-16 grid gap-10 lg:grid-cols-3 lg:gap-8">
-          {communityStories.profiles.map((profile) => (
-            <article key={profile.name} className="group">
+          {cards.map((card) => (
+            <article key={card.key} className="group">
               <div className="hover-zoom relative aspect-[3/4] overflow-hidden bg-charcoal/10">
                 <Image
-                  src={profile.image}
-                  alt={profile.name}
+                  src={card.image}
+                  alt={card.name}
                   fill
                   className="object-cover grayscale-[15%] transition-[filter] duration-700 group-hover:grayscale-0"
                   sizes="(max-width: 1024px) 100vw, 33vw"
@@ -34,14 +75,16 @@ export async function CommunityStories() {
               </div>
               <div className="mt-6">
                 <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-gold-muted">
-                  {profile.role}
+                  {card.role}
                 </p>
                 <h3 className="mt-2 font-serif text-2xl font-light text-charcoal">
-                  {profile.name}
+                  {card.name}
                 </h3>
-                <blockquote className="mt-4 text-sm leading-[1.85] text-charcoal/65 italic">
-                  &ldquo;{profile.quote}&rdquo;
-                </blockquote>
+                {card.quote && (
+                  <blockquote className="mt-4 text-sm leading-[1.85] text-charcoal/65 italic">
+                    &ldquo;{card.quote}&rdquo;
+                  </blockquote>
+                )}
               </div>
             </article>
           ))}

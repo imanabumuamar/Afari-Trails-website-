@@ -6,16 +6,23 @@ import type {
   ExpeditionDetailRecord,
   ExpeditionsContentData,
 } from "@/types/expeditions-content";
+import { ExpeditionsAllPageEditor } from "@/components/admin/expeditions/ExpeditionsAllPageEditor";
 import { ExpeditionsPageEditor } from "@/components/admin/expeditions/ExpeditionsPageEditor";
+import { ExpeditionRegionsEditor } from "@/components/admin/expeditions/ExpeditionRegionsEditor";
 import { FeaturedExpeditionsPicker } from "@/components/admin/expeditions/FeaturedExpeditionsPicker";
 import { ExpeditionsListManager } from "@/components/admin/expeditions/ExpeditionsListManager";
 import { ExpeditionDetailEditor } from "@/components/admin/expeditions/ExpeditionDetailEditor";
+import {
+  saveExpeditionInContent,
+  slugifyExpeditionId,
+} from "@/lib/expeditions/expedition-slug";
+import { mergeExpeditionsData } from "@/lib/expeditions/merge-expeditions-data";
 
 type ExpeditionsContentEditorProps = {
   readOnly?: boolean;
 };
 
-type Tab = "main-page" | "expeditions";
+type Tab = "main-page" | "all-journeys" | "expeditions";
 
 export function ExpeditionsContentEditor({
   readOnly = false,
@@ -40,7 +47,7 @@ export function ExpeditionsContentEditor({
     }
 
     const doc = await res.json();
-    setData(doc.data as ExpeditionsContentData);
+    setData(mergeExpeditionsData(doc.data as Partial<ExpeditionsContentData>));
     setUpdatedAt(doc.updatedAt ?? null);
     setSelectedId((prev) => {
       if (prev) return prev;
@@ -66,7 +73,7 @@ export function ExpeditionsContentEditor({
     }
 
     const doc = await res.json();
-    setData(doc.data as ExpeditionsContentData);
+    setData(mergeExpeditionsData(doc.data as Partial<ExpeditionsContentData>));
     setUpdatedAt(doc.updatedAt ?? null);
     setStatus("Saved.");
     setTimeout(() => setStatus(""), 2500);
@@ -79,12 +86,35 @@ export function ExpeditionsContentEditor({
     void save(next);
   }
 
-  function patchExpedition(id: string, expedition: ExpeditionDetailRecord) {
+  async function patchExpedition(
+    previousId: string,
+    expedition: ExpeditionDetailRecord,
+  ) {
     if (!data) return;
-    const expeditions = data.expeditions.map((e) =>
-      e.id === id ? expedition : e,
-    );
-    patch({ expeditions });
+
+    const result = saveExpeditionInContent(data, previousId, expedition);
+    if ("error" in result) {
+      setStatus(result.error);
+      return;
+    }
+
+    const newId = slugifyExpeditionId(expedition.id);
+
+    patch(result);
+
+    if (previousId !== newId) {
+      setSelectedId(newId);
+      const res = await fetch("/api/admin/content/expeditions/rename-slug", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ oldId: previousId, newId }),
+      });
+      if (!res.ok) {
+        setStatus(
+          "Slug saved, but the image folder could not be renamed on disk. Re-upload images if previews break.",
+        );
+      }
+    }
   }
 
   function addExpedition(expedition: ExpeditionDetailRecord) {
@@ -136,6 +166,17 @@ export function ExpeditionsContentEditor({
           </button>
           <button
             type="button"
+            onClick={() => setTab("all-journeys")}
+            className={`px-4 py-2 text-xs uppercase tracking-[0.2em] ${
+              tab === "all-journeys"
+                ? "bg-charcoal text-ivory"
+                : "border border-charcoal/20 text-charcoal/70"
+            }`}
+          >
+            All journeys page
+          </button>
+          <button
+            type="button"
             onClick={() => setTab("expeditions")}
             className={`px-4 py-2 text-xs uppercase tracking-[0.2em] ${
               tab === "expeditions"
@@ -162,7 +203,7 @@ export function ExpeditionsContentEditor({
             page={data.page}
             readOnly={readOnly}
             onSave={(page) => patch({ page })}
-            onDocumentSynced={(next) => setData(next)}
+            onDocumentSynced={(next) => setData(mergeExpeditionsData(next))}
             onStatus={setStatus}
           />
           <FeaturedExpeditionsPicker
@@ -174,8 +215,37 @@ export function ExpeditionsContentEditor({
         </div>
       )}
 
+      {tab === "all-journeys" && (
+        <div className="space-y-10">
+          <ExpeditionRegionsEditor
+            regions={data.allPage.regions}
+            readOnly={readOnly}
+            onSave={(regions) =>
+              patch({ allPage: { ...data.allPage, regions } })
+            }
+            onStatus={setStatus}
+          />
+          <ExpeditionsAllPageEditor
+            allPage={data.allPage}
+            readOnly={readOnly}
+            onSave={(allPage) => patch({ allPage })}
+            onDocumentSynced={(next) => setData(mergeExpeditionsData(next))}
+            onStatus={setStatus}
+          />
+        </div>
+      )}
+
       {tab === "expeditions" && (
-        <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
+        <div className="space-y-10">
+          <ExpeditionRegionsEditor
+            regions={data.allPage.regions}
+            readOnly={readOnly}
+            onSave={(regions) =>
+              patch({ allPage: { ...data.allPage, regions } })
+            }
+            onStatus={setStatus}
+          />
+          <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
           <ExpeditionsListManager
             expeditions={data.expeditions}
             selectedId={selectedId}
@@ -188,10 +258,12 @@ export function ExpeditionsContentEditor({
             <ExpeditionDetailEditor
               key={selected.id}
               expedition={selected}
+              originalId={selected.id}
               readOnly={readOnly}
               allIds={data.expeditions.map((e) => e.id)}
+              regions={data.allPage.regions}
               onSave={(exp) => patchExpedition(selected.id, exp)}
-              onDocumentSynced={(next) => setData(next)}
+              onDocumentSynced={(next) => setData(mergeExpeditionsData(next))}
               onStatus={setStatus}
             />
           ) : (
@@ -199,6 +271,7 @@ export function ExpeditionsContentEditor({
               Select an expedition or add a new one.
             </p>
           )}
+          </div>
         </div>
       )}
     </div>

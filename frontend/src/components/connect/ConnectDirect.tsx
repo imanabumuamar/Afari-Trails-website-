@@ -3,13 +3,18 @@ import type { ConnectPageConfig } from "@/types/connect-page";
 
 type ConnectDirectProps = {
   config: ConnectPageConfig;
+  compact?: boolean;
 };
 
-export function ConnectDirect({ config }: ConnectDirectProps) {
+export function ConnectDirect({ config, compact = false }: ConnectDirectProps) {
   const { direct } = config;
 
   return (
-    <section className="border-y border-charcoal/10 bg-beige py-16 lg:py-20">
+    <section
+      className={`border-y border-charcoal/10 bg-beige ${
+        compact ? "py-10 lg:py-12" : "py-16 lg:py-20"
+      }`}
+    >
       <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-center gap-12 px-6 text-center sm:flex-row sm:flex-wrap sm:gap-16 lg:px-10">
         <div>
           <SectionLabel>Direct</SectionLabel>

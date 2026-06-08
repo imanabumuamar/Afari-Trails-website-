@@ -57,15 +57,39 @@ export function updateExpeditionsImageField(
     return { src, data: next };
   }
 
-  const publicDir = path.join(
+  if (fieldPath.startsWith("allPage.")) {
+    const innerPath = fieldPath.slice("allPage.".length);
+    const allDir = path.join(
+      process.cwd(),
+      "public",
+      "images",
+      "expeditions",
+      "all",
+    );
+    mkdirSync(allDir, { recursive: true });
+    writeFileSync(path.join(allDir, filename), file);
+
+    const src = `/images/expeditions/all/${filename}?v=${Date.now()}`;
+    const allPage = setNestedValue(
+      content.allPage as unknown as Record<string, unknown>,
+      innerPath,
+      src,
+    ) as ExpeditionsContentData["allPage"];
+
+    const next: ExpeditionsContentData = { ...content, allPage };
+    saveExpeditionsContentLocal(next);
+    return { src, data: next };
+  }
+
+  const pageDir = path.join(
     process.cwd(),
     "public",
     "images",
     "expeditions",
     "page",
   );
-  mkdirSync(publicDir, { recursive: true });
-  writeFileSync(path.join(publicDir, filename), file);
+  mkdirSync(pageDir, { recursive: true });
+  writeFileSync(path.join(pageDir, filename), file);
 
   const src = `/images/expeditions/page/${filename}`;
   const page = setNestedValue(

@@ -14,6 +14,9 @@ export const communityPhilosophy = {
   label: "Our Philosophy",
   statement:
     "We believe communities should not exist at the edges of exploration experiences, but at the center of them.",
+  image:
+    "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1200&q=85",
+  imageAlt: "Warm community gathering in natural light",
   themes: [
     "Dignity in every partnership",
     "Local leadership, not outside direction",
@@ -84,6 +87,8 @@ export const communityStories = {
   heading: "Voices from the trail.",
   intro:
     "The people who shape Afari — guides, artisans, storytellers, and partners whose knowledge grounds every journey.",
+  // Archive entry IDs chosen from the admin. When empty, the profiles below show.
+  archiveIds: [] as string[],
   profiles: [
     {
       name: "James Mwamba",

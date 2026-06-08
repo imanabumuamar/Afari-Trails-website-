@@ -1,6 +1,9 @@
-import { ExpeditionsAllGrid } from "@/components/expeditions/all/ExpeditionsAllGrid";
 import { ExpeditionsAllHero } from "@/components/expeditions/all/ExpeditionsAllHero";
-import { getCatalogExpeditions } from "@/services/content/expeditions";
+import { ExpeditionsAllPageClient } from "@/components/expeditions/all/ExpeditionsAllPageClient";
+import {
+  getCatalogExpeditions,
+  getExpeditionsContent,
+} from "@/services/content/expeditions";
 
 export const metadata = {
   title: "All Expeditions",
@@ -9,12 +12,15 @@ export const metadata = {
 };
 
 export default async function AllExpeditionsPage() {
-  const expeditions = await getCatalogExpeditions();
+  const [expeditions, { allPage }] = await Promise.all([
+    getCatalogExpeditions(),
+    getExpeditionsContent(),
+  ]);
 
   return (
     <>
-      <ExpeditionsAllHero />
-      <ExpeditionsAllGrid expeditions={expeditions} />
+      <ExpeditionsAllHero content={allPage} />
+      <ExpeditionsAllPageClient expeditions={expeditions} allPage={allPage} />
     </>
   );
 }

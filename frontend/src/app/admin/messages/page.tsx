@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { MessageActions } from "@/components/admin/messages/MessageActions";
 import { backendFetch } from "@/lib/api/backend";
 import { roleAtLeast } from "@/lib/auth/rbac";
 import { getStaffSession } from "@/lib/auth/staff-session";
@@ -10,13 +12,14 @@ type InquirySource =
   | "ventures-connect"
   | "partner"
   | "expedition"
-  | "newsletter";
+  | "newsletter"
+  | "archive-submit";
 
 type Submission = {
   id: string;
   source: InquirySource;
   name: string | null;
-  email: string;
+  email: string | null;
   company: string | null;
   inquiryType: string | null;
   partnershipType: string | null;
@@ -26,13 +29,30 @@ type Submission = {
   dates: string | null;
   guests: string | null;
   pageUrl: string | null;
+  photoUrl: string | null;
   createdAt: string;
 };
 
 type InquiriesResponse = {
   submissions: Submission[];
-  counts: { total: number; bySource: Record<string, number> };
+  counts: {
+    total: number;
+    archived: number;
+    inboxTotal?: number;
+    bySource: Record<string, number>;
+  };
 };
+
+function messagesHref(
+  source: InquirySource | null,
+  view: "inbox" | "archived",
+) {
+  const params = new URLSearchParams();
+  if (source) params.set("source", source);
+  if (view === "archived") params.set("view", "archived");
+  const q = params.toString();
+  return `/admin/messages${q ? `?${q}` : ""}`;
+}
 
 const SOURCE_LABELS: Record<InquirySource, string> = {
   contact: "Contact",
@@ -41,6 +61,7 @@ const SOURCE_LABELS: Record<InquirySource, string> = {
   partner: "Partner",
   expedition: "Expedition request",
   newsletter: "Newsletter",
+  "archive-submit": "Afari Lens photo",
 };
 
 const SOURCE_ORDER: InquirySource[] = [
@@ -50,6 +71,7 @@ const SOURCE_ORDER: InquirySource[] = [
   "partner",
   "expedition",
   "newsletter",
+  "archive-submit",
 ];
 
 function formatDate(iso: string) {
@@ -69,7 +91,7 @@ function formatDate(iso: string) {
 export default async function AdminMessagesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ source?: string }>;
+  searchParams: Promise<{ source?: string; view?: string }>;
 }) {
   const session = await getStaffSession();
   const role = session?.user?.role ?? null;
@@ -79,12 +101,17 @@ export default async function AdminMessagesPage({
   }
 
   const token = session?.accessToken ?? null;
-  const { source } = await searchParams;
+  const { source, view } = await searchParams;
   const activeSource = SOURCE_ORDER.includes(source as InquirySource)
     ? (source as InquirySource)
     : null;
+  const isArchivedView = view === "archived";
 
-  const query = activeSource ? `?source=${activeSource}` : "";
+  const queryParts: string[] = [];
+  if (activeSource) queryParts.push(`source=${activeSource}`);
+  if (isArchivedView) queryParts.push("archived=true");
+  const query = queryParts.length ? `?${queryParts.join("&")}` : "";
+
   const { data, ok, status } = await backendFetch<InquiriesResponse>(
     `/inquiries${query}`,
     { token },
@@ -104,6 +131,8 @@ export default async function AdminMessagesPage({
   }
 
   const { submissions, counts } = data;
+  const inboxCount = counts.inboxTotal ?? counts.total;
+  const archivedCount = counts.archived ?? 0;
 
   return (
     <div className="space-y-8">
@@ -111,28 +140,52 @@ export default async function AdminMessagesPage({
         <h2 className="font-serif text-3xl font-light">Messages</h2>
         <p className="mt-3 max-w-xl text-sm text-charcoal/65">
           Form submissions from the website — contact, connect, partner, expedition
-          requests, and newsletter sign-ups. Newest first.
+          requests, newsletter sign-ups, and Afari Lens photo submissions. Archive to
+          hide from the inbox, or delete to remove permanently.
         </p>
       </div>
 
       <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.12em]">
         <Link
-          href="/admin/messages"
+          href={messagesHref(null, "inbox")}
           className={`border px-3 py-1.5 ${
-            activeSource === null
+            !isArchivedView
               ? "border-charcoal bg-charcoal text-ivory"
               : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
           }`}
         >
-          All ({counts.total})
+          Inbox ({inboxCount})
+        </Link>
+        <Link
+          href={messagesHref(null, "archived")}
+          className={`border px-3 py-1.5 ${
+            isArchivedView
+              ? "border-charcoal bg-charcoal text-ivory"
+              : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
+          }`}
+        >
+          Archived ({archivedCount})
+        </Link>
+      </div>
+
+      <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.12em]">
+        <Link
+          href={messagesHref(null, isArchivedView ? "archived" : "inbox")}
+          className={`border px-3 py-1.5 ${
+            activeSource === null
+              ? "border-charcoal/40 bg-charcoal/5 text-charcoal"
+              : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
+          }`}
+        >
+          All types
         </Link>
         {SOURCE_ORDER.map((src) => (
           <Link
             key={src}
-            href={`/admin/messages?source=${src}`}
+            href={messagesHref(src, isArchivedView ? "archived" : "inbox")}
             className={`border px-3 py-1.5 ${
               activeSource === src
-                ? "border-charcoal bg-charcoal text-ivory"
+                ? "border-charcoal/40 bg-charcoal/5 text-charcoal"
                 : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
             }`}
           >
@@ -143,7 +196,7 @@ export default async function AdminMessagesPage({
 
       {submissions.length === 0 ? (
         <p className="rounded border border-charcoal/15 bg-ivory p-6 text-sm text-charcoal/65">
-          No messages yet
+          {isArchivedView ? "No archived messages" : "No messages yet"}
           {activeSource ? ` for ${SOURCE_LABELS[activeSource]}` : ""}.
         </p>
       ) : (
@@ -153,29 +206,56 @@ export default async function AdminMessagesPage({
               key={s.id}
               className="rounded border border-charcoal/15 bg-ivory p-5"
             >
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="rounded bg-charcoal/10 px-2 py-1 text-[10px] uppercase tracking-[0.15em] text-charcoal/70">
-                  {SOURCE_LABELS[s.source] ?? s.source}
-                </span>
-                <span className="text-xs text-charcoal/50">
-                  {formatDate(s.createdAt)}
-                </span>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded bg-charcoal/10 px-2 py-1 text-[10px] uppercase tracking-[0.15em] text-charcoal/70">
+                    {SOURCE_LABELS[s.source] ?? s.source}
+                  </span>
+                  <span className="text-xs text-charcoal/50">
+                    {formatDate(s.createdAt)}
+                  </span>
+                </div>
+                <MessageActions id={s.id} archived={isArchivedView} />
               </div>
 
               <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 {s.name && (
                   <span className="font-medium text-charcoal">{s.name}</span>
                 )}
-                <a
-                  href={`mailto:${s.email}`}
-                  className="text-sm text-gold hover:underline"
-                >
-                  {s.email}
-                </a>
-                {s.company && (
+                {s.email && (
+                  <a
+                    href={`mailto:${s.email}`}
+                    className="text-sm text-gold hover:underline"
+                  >
+                    {s.email}
+                  </a>
+                )}
+                {s.company && s.source === "archive-submit" && (
+                  <span className="text-sm text-charcoal/55">
+                    · Instagram {s.company}
+                  </span>
+                )}
+                {s.company && s.source !== "archive-submit" && (
                   <span className="text-sm text-charcoal/55">· {s.company}</span>
                 )}
               </div>
+
+              {s.photoUrl && (
+                <a
+                  href={s.photoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative mt-4 block aspect-[4/3] max-w-sm overflow-hidden bg-charcoal/5"
+                >
+                  <Image
+                    src={s.photoUrl}
+                    alt={s.name ? `Photo from ${s.name}` : "Submitted photo"}
+                    fill
+                    className="object-cover"
+                    sizes="320px"
+                  />
+                </a>
+              )}
 
               {(s.inquiryType ||
                 s.partnershipType ||
@@ -185,7 +265,9 @@ export default async function AdminMessagesPage({
                 <dl className="mt-3 grid gap-x-6 gap-y-1 text-sm text-charcoal/70 sm:grid-cols-2">
                   {s.inquiryType && (
                     <div>
-                      <dt className="inline text-charcoal/45">Type: </dt>
+                      <dt className="inline text-charcoal/45">
+                        {s.source === "archive-submit" ? "Location: " : "Type: "}
+                      </dt>
                       <dd className="inline">{s.inquiryType}</dd>
                     </div>
                   )}
@@ -217,9 +299,16 @@ export default async function AdminMessagesPage({
               )}
 
               {s.message && (
-                <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-charcoal/80">
-                  {s.message}
-                </p>
+                <div className="mt-3">
+                  {s.source === "archive-submit" && (
+                    <p className="mb-1 text-[10px] uppercase tracking-[0.15em] text-charcoal/45">
+                      Story
+                    </p>
+                  )}
+                  <p className="whitespace-pre-wrap text-sm leading-relaxed text-charcoal/80">
+                    {s.message}
+                  </p>
+                </div>
               )}
             </li>
           ))}

@@ -7,7 +7,7 @@
       "subheading": "Afari Trails supports agricultural initiatives that balance sustainability, community development, environmental stewardship, and long-term resilience.",
       "exploreCta": "Explore the Vision",
       "partnerCta": "Partner With Us",
-      "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
+      "image": "/images/ventures/agriculture/agricultureHero-image.png?v=1780398979066",
       "imageAlt": "Golden fields at sunrise across African farmland"
     },
     "agricultureApproach": {
@@ -25,58 +25,58 @@
     "agricultureFocusAreas": {
       "label": "Key Focus Areas",
       "heading": "Where land, people, and future meet.",
+      "intro": "",
       "items": [
         {
           "id": "regenerative",
           "title": "Regenerative Farming",
           "description": "Practices that restore soil health, biodiversity, and the living rhythm of the land.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-0-image.png?v=1780399699887"
         },
         {
           "id": "water",
           "title": "Water Stewardship",
           "description": "Responsible irrigation and protection of rivers, wetlands, and shared water sources.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-1-image.png?v=1780399706125"
         },
         {
           "id": "community",
           "title": "Community Partnerships",
           "description": "Working alongside local farmers and communities as leaders — not recipients.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-2-image.png?v=1780399712641"
         },
         {
           "id": "food",
           "title": "Food Security",
           "description": "Supporting resilient, sustainable food systems built for changing seasons and futures.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-3-image.png?v=1780399721065"
         },
         {
           "id": "livestock",
           "title": "Sustainable Livestock",
           "description": "Ethical, environmentally balanced systems that coexist with wild landscapes.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-4-image.png?v=1780399725999"
         },
         {
           "id": "innovation",
           "title": "Agricultural Innovation",
           "description": "Modern efficiency shaped by tradition, local expertise, and ecological intelligence.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-5-image.png?v=1780399737314"
         }
       ]
     },
     "agricultureLand": {
       "label": "Land & Environment",
-      "quote": "Healthy land creates healthy communities.",
+      "heading": "",
       "body": "Agriculture and wilderness are not opposites when guided by balance. We support systems that preserve natural resources, protect wildlife corridors, and honor the coexistence between cultivation and the wild — because the future of food depends on the future of ecosystems.",
-      "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+      "image": "/images/ventures/agriculture/agricultureLand-image.png?v=1780399941394",
       "imageAlt": "Hands holding rich soil in warm light"
     },
     "agricultureCommunity": {
       "label": "Community Impact",
       "heading": "Partners on the land.",
       "body": "Local employment, farmer partnerships, skills development, and long-term opportunity — including women-led agriculture and youth initiatives. Communities are partners and leaders in every vision we pursue, shaping how land is tended and how harvests are shared.",
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80",
-      "imageAlt": "Farmers walking through crops at golden hour"
+      "image": "/images/ventures/agriculture/agricultureCommunity-image.png?v=1780400531321"
     },
     "agricultureInitiatives": {
       "label": "Future Initiatives",
@@ -94,11 +94,11 @@
     },
     "agricultureGallery": [
       {
-        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "src": "/images/ventures/agriculture/agricultureGallery-0-src.png?v=1780399966309",
         "alt": "Crops moving in wind at sunrise"
       },
       {
-        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
+        "src": "/images/ventures/agriculture/agricultureGallery-1-src.png?v=1780400934971",
         "alt": "Soil textures in warm light"
       },
       {
@@ -158,5 +158,5 @@
       "quote": "The future grows from how we care for the land today."
     }
   },
-  "updatedAt": "2026-05-25T13:59:30.283Z"
+  "updatedAt": "2026-06-02T11:48:55.331Z"
 }

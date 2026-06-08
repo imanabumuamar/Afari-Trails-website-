@@ -13,9 +13,38 @@ export async function listInquiries(req, res, next) {
     const data = await inquiryService.listInquirySubmissions({
       source: typeof req.query.source === "string" ? req.query.source : undefined,
       limit: req.query.limit,
+      archived: req.query.archived === "true",
     });
     res.json(data);
   } catch (err) {
+    next(err);
+  }
+}
+
+export async function patchInquiry(req, res, next) {
+  try {
+    const archived = req.body?.archived;
+    if (typeof archived !== "boolean") {
+      return res.status(400).json({ error: "archived (boolean) is required" });
+    }
+    const data = await inquiryService.setInquiryArchived(req.params.id, archived);
+    res.json(data);
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
+    next(err);
+  }
+}
+
+export async function deleteInquiry(req, res, next) {
+  try {
+    await inquiryService.deleteInquirySubmission(req.params.id);
+    res.status(204).send();
+  } catch (err) {
+    if (err.status === 404) {
+      return res.status(404).json({ error: err.message });
+    }
     next(err);
   }
 }

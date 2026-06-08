@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FooterSubscribe } from "@/components/layout/FooterSubscribe";
 import { Logo } from "@/components/ui/Logo";
 import { footerLinks, site } from "@/lib/data/site";
 
@@ -37,31 +38,7 @@ export function Footer() {
             <FooterColumn title="Explore" links={footerLinks.explore} />
             <FooterColumn title="Company" links={footerLinks.company} />
             <FooterColumn title="Support" links={footerLinks.support} />
-            <div>
-              <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.3em] text-charcoal/50">
-                Join the Journey
-              </p>
-              <p className="mb-4 text-sm leading-relaxed text-charcoal/60">
-                Field notes, expedition updates, and stories from the trail.
-              </p>
-              <form className="flex flex-col gap-2">
-                <label htmlFor="footer-email" className="sr-only">
-                  Email
-                </label>
-                <input
-                  id="footer-email"
-                  type="email"
-                  placeholder="Your email address"
-                  className="border border-charcoal/15 bg-white px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/35 focus:border-charcoal/30 focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="bg-matte-black px-6 py-3 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-charcoal"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
+            <FooterSubscribe />
           </div>
         </div>
 

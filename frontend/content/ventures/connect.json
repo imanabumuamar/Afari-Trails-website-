@@ -7,7 +7,7 @@
         "heading": "Let's Build Something Meaningful Together.",
         "subheading": "For hospitality, conservation, community, agriculture, and aligned investment — we welcome conversations with those who share a long-term vision for Africa.",
         "cta": "Begin the Conversation",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
+        "image": "/images/ventures/connect/venturesConnectConfig-hero-image.png?v=1780520332036",
         "imageAlt": "Luxury lodge architecture overlooking the Zambezi valley"
       },
       "intro": {
@@ -71,34 +71,13 @@
         "submitLabel": "Begin the Conversation",
         "successMessage": "Thank you. We review every partnership inquiry with care and will reach out when there is alignment.",
         "inquiryOptions": [
-          {
-            "value": "hospitality",
-            "label": "Hospitality Development"
-          },
-          {
-            "value": "conservation",
-            "label": "Conservation"
-          },
-          {
-            "value": "community",
-            "label": "Community Empowerment"
-          },
-          {
-            "value": "agriculture",
-            "label": "Sustainable Agriculture"
-          },
-          {
-            "value": "investment",
-            "label": "Investment"
-          },
-          {
-            "value": "media",
-            "label": "Media & Storytelling"
-          },
-          {
-            "value": "general",
-            "label": "General Partnership"
-          }
+          { "value": "hospitality", "label": "Hospitality Development" },
+          { "value": "conservation", "label": "Conservation" },
+          { "value": "community", "label": "Community Empowerment" },
+          { "value": "agriculture", "label": "Sustainable Agriculture" },
+          { "value": "investment", "label": "Investment" },
+          { "value": "media", "label": "Media & Storytelling" },
+          { "value": "general", "label": "General Partnership" }
         ]
       },
       "direct": {
@@ -138,5 +117,5 @@
       }
     }
   },
-  "updatedAt": "2026-05-25T13:59:30.288Z"
+  "updatedAt": "2026-06-03T20:58:58.805Z"
 }

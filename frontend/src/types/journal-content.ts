@@ -39,11 +39,17 @@ export type JournalPageContent = {
     image: string;
   };
   categories: JournalCategory[];
+  /** How many latest stories show before "Show more" on /journal */
+  latestInitialCount: number;
 };
 
 export type JournalContentData = {
   page: JournalPageContent;
   stories: JournalStoryRecord[];
+  /** Ordered slugs for the Latest Stories grid; empty = all non-featured published */
+  latestStorySlugs: string[];
+  /** Up to 3 stories on the homepage "From the Journal" section */
+  homepageStorySlugs: string[];
 };
 
 export type JournalContentDocument = {

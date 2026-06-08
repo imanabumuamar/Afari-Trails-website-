@@ -2,7 +2,6 @@ import { CommunityClosing } from "@/components/ventures/community/CommunityClosi
 import { CommunityCraftsmanship } from "@/components/ventures/community/CommunityCraftsmanship";
 import { CommunityCta } from "@/components/ventures/community/CommunityCta";
 import { CommunityFocusAreas } from "@/components/ventures/community/CommunityFocusAreas";
-import { CommunityGallery } from "@/components/ventures/community/CommunityGallery";
 import { CommunityHero } from "@/components/ventures/community/CommunityHero";
 import { CommunityInitiatives } from "@/components/ventures/community/CommunityInitiatives";
 import { CommunityPartners } from "@/components/ventures/community/CommunityPartners";
@@ -24,7 +23,6 @@ export default function CommunityPage() {
       <CommunityStories />
       <CommunityCraftsmanship />
       <CommunityInitiatives />
-      <CommunityGallery />
       <CommunityPartners />
       <CommunityCta />
       <CommunityClosing />

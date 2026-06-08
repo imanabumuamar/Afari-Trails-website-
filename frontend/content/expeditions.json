@@ -5,14 +5,14 @@
       "hero": {
         "heading": "Journeys Into the Wild.",
         "subtext": "Curated expeditions across Zambia and beyond — designed for travelers seeking deeper encounters with Africa's landscapes, cultures, and untamed beauty.",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80"
+        "image": "/images/expeditions/page/hero-image.png"
       },
       "ourPromise": {
         "label": "Our Promise",
         "heading": "More than a trip. A return to what truly matters.",
         "body": "Every expedition is designed to reconnect people with nature, stillness, adventure, and the spirit of exploration — paced for presence, not performance.",
         "approachHref": "#approach",
-        "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80"
+        "image": "/images/expeditions/page/ourPromise-image.png"
       },
       "categoryBar": [
         {
@@ -66,15 +66,48 @@
         "quote": "The wilderness has a way of returning us to ourselves.",
         "readyLabel": "Ready to begin your journey?",
         "boxText": "Let us design a private expedition tailored to your pace, interests, and style.",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80"
+        "image": "/images/expeditions/page/expeditionsCta-image.png"
+      }
+    },
+    "allPage": {
+      "hero": {
+        "label": "Expeditions",
+        "heading": "All journeys",
+        "subtext": "Every expedition is a world of its own — curated for presence, guided with care, and paced for the wild. Choose the journey that calls to you.",
+        "image": "/images/expeditions/all/allPage-hero-image.png?v=1780563428947",
+        "imageAlt": "African wilderness at golden hour",
+        "backLabel": "← Back to expeditions"
+      },
+      "gridIntro": {
+        "label": "Curated for you",
+        "description": "handcrafted expeditions across Zambia — each with its own rhythm, landscape, and story."
+      },
+      "regions": [
+        {
+          "id": "all",
+          "label": "All"
+        },
+        {
+          "id": "zambia",
+          "label": "Zambia"
+        },
+        {
+          "id": "region-1780909309882",
+          "label": "kenya"
+        }
+      ],
+      "cta": {
+        "heading": "Not sure where to begin?",
+        "body": "Tell us what you hope to feel — we will help you choose the right trail.",
+        "buttonLabel": "Connect With Afari"
       }
     },
     "featuredIds": [
       "south-luangwa",
-      "lower-zambezi",
+      "lusaka-tour",
       "livingstone",
-      "kafue",
-      "cultural-heritage"
+      "cultural-heritage",
+      "lower-zambezi"
     ],
     "expeditions": [
       {
@@ -1002,8 +1035,81 @@
         ],
         "closingQuote": "Some journeys stay with you long after the trail ends.",
         "published": true
+      },
+      {
+        "id": "lusaka-tour",
+        "regionId": "zambia",
+        "published": true,
+        "name": "lusaka tour",
+        "title": "lusaka tour",
+        "tagline": "",
+        "metaDescription": "",
+        "heroImage": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+        "quickDetails": [
+          "Zambia",
+          "5 Days",
+          "Small Group",
+          "Guided Experience"
+        ],
+        "intro": {
+          "statement": "",
+          "body": ""
+        },
+        "highlights": [
+          {
+            "label": "Duration",
+            "value": "5 Days"
+          },
+          {
+            "label": "Group Size",
+            "value": "6 – 8 Guests"
+          },
+          {
+            "label": "Location",
+            "value": "Zambia"
+          },
+          {
+            "label": "Accommodation",
+            "value": "Safari Camp"
+          },
+          {
+            "label": "Best Season",
+            "value": "May – October"
+          },
+          {
+            "label": "Style",
+            "value": "Safari"
+          }
+        ],
+        "visualStrip": [],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Arrival",
+            "description": ""
+          }
+        ],
+        "accommodation": {
+          "heading": "Where you stay",
+          "body": "",
+          "image": "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=1600&q=85",
+          "imageAlt": "Safari camp"
+        },
+        "experiences": [],
+        "gallery": [],
+        "included": [],
+        "philosophy": {
+          "quote": ""
+        },
+        "faq": [],
+        "inquiry": {
+          "heading": "Plan this journey",
+          "subtext": "Tell us when you would like to travel."
+        },
+        "relatedIds": [],
+        "closingQuote": ""
       }
     ]
   },
-  "updatedAt": "2026-05-25T13:59:30.295Z"
+  "updatedAt": "2026-06-08T09:02:02.426Z"
 }

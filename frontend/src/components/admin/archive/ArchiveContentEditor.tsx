@@ -191,6 +191,7 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
         <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
           <ArchiveGalleryListManager
             images={data.images}
+            defaultCategory={data.collections[0]?.id ?? "wildlife"}
             selectedId={selectedImageId}
             readOnly={readOnly}
             onSelect={setSelectedImageId}
@@ -201,6 +202,7 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
             <ArchiveGalleryImageEditor
               key={selectedImage.id}
               image={selectedImage}
+              collections={data.collections}
               readOnly={readOnly}
               onSave={patchImage}
               onDocumentSynced={(next) => setData(next)}

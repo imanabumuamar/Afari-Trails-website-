@@ -4,15 +4,24 @@
     "communityHero": {
       "label": "Community Empowerment",
       "heading": "Building Growth Through Culture, Collaboration, and Opportunity.",
+      "image": "/images/ventures/community/communityHero-image.jpg?v=1780393514961",
       "subheading": "Afari Trails believes meaningful experiences should uplift local communities, preserve cultural identity, and create long-term impact rooted in partnership and respect.",
       "exploreCta": "Explore Our Focus",
+      "exploreHref": "#who-we-are",
       "partnerCta": "Partner With Us",
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
+      "partnerHref": "/ventures/partner",
       "imageAlt": "Artisan hands at work in warm natural light"
     },
     "communityPhilosophy": {
       "label": "Our Philosophy",
       "statement": "We believe communities should not exist at the edges of exploration experiences, but at the center of them.",
+      "body": "",
+      "partnerCta": "",
+      "deckCta": "",
+      "partnerHref": "/ventures/partner",
+      "deckHref": "/ventures/connect",
+      "image": "/images/ventures/community/communityPhilosophy-image.jpg?v=1780394731780",
+      "imageAlt": "",
       "themes": [
         "Dignity in every partnership",
         "Local leadership, not outside direction",
@@ -25,42 +34,43 @@
     "communityFocusAreas": {
       "label": "Key Focus Areas",
       "heading": "Where collaboration becomes impact.",
+      "intro": "",
       "items": [
         {
           "id": "employment",
           "title": "Local Employment",
           "description": "Supporting guides, hospitality teams, creatives, and local expertise across every venture.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/community/communityFocusAreas-items-0-image.jpg?v=1780393390053"
         },
         {
           "id": "culture",
           "title": "Cultural Preservation",
           "description": "Protecting stories, traditions, languages, and craftsmanship for generations to come.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/community/communityFocusAreas-items-1-image.jpg?v=1780393402375"
         },
         {
           "id": "artisan",
           "title": "Artisan Collaborations",
           "description": "Working with local makers and designers to create goods rooted in place and identity.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/community/communityFocusAreas-items-2-image.jpg?v=1780393445553"
         },
         {
           "id": "youth",
           "title": "Youth Opportunities",
           "description": "Future mentorship in storytelling, tourism, conservation, and creative education.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/community/communityFocusAreas-items-3-image.jpg?v=1780394771885"
         },
         {
           "id": "women",
           "title": "Women-Led Initiatives",
           "description": "Supporting women entrepreneurs, artisans, and local leadership across our ecosystem.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/community/communityFocusAreas-items-4-image.png?v=1780394788586"
         },
         {
           "id": "growth",
           "title": "Sustainable Economic Growth",
           "description": "Creating enduring value through ethical partnerships — not one-time charity.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80"
+          "image": "/images/ventures/community/communityFocusAreas-items-5-image.jpg?v=1780394947460"
         }
       ]
     },
@@ -87,6 +97,11 @@
           "quote": "I document what the land teaches — light, patience, and the quiet moments most people rush past.",
           "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80"
         }
+      ],
+      "items": [
+        {
+          "image": "/images/ventures/community/communityStories-items-0-image.jpg?v=1780394980366"
+        }
       ]
     },
     "communityCraftsmanship": {
@@ -94,23 +109,20 @@
       "heading": "Made by hand. Rooted in place.",
       "body": "Textiles, weaving, natural materials, and traditional techniques — craftsmanship that connects our store, archive, eco lodge vision, and brand identity to the hands and histories behind them.",
       "highlights": [
-        "Handwoven textiles",
-        "Natural dyes & fibers",
-        "Traditional techniques",
-        "Collaborative design"
+        ""
       ],
       "images": [
         {
-          "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
-          "alt": "Textile textures and natural fibers"
+          "src": "/images/ventures/community/communityCraftsmanship-moodboard-0-src.jpg?v=1780394967378",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
-          "alt": "Artisan at work"
+          "src": "/images/ventures/community/communityCraftsmanship-moodboard-1-src.jpg?v=1780396555268",
+          "alt": ""
         },
         {
-          "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
-          "alt": "Handcrafted objects and materials"
+          "src": "/images/ventures/community/communityCraftsmanship-images-2-src.jpg?v=1780398771720",
+          "alt": ""
         }
       ]
     },
@@ -177,5 +189,5 @@
       "quote": "Strong communities shape meaningful journeys."
     }
   },
-  "updatedAt": "2026-05-25T13:59:30.282Z"
+  "updatedAt": "2026-06-02T11:12:56.495Z"
 }

@@ -17,7 +17,7 @@ export default async function AdminExpeditionsPage() {
         <p className="mt-3 max-w-2xl text-sm text-charcoal/65">
           {readOnly
             ? "You have read-only access."
-            : "Manage the main expeditions page, choose featured journeys, and add or edit every expedition shown on View All Expeditions and detail pages."}
+            : "Manage the main expeditions page, the All journeys page, featured picks, and each expedition in the catalog."}
         </p>
       </div>
 

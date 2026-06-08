@@ -1,10 +1,8 @@
 import { HospitalityClosing } from "@/components/ventures/hospitality/HospitalityClosing";
 import { HospitalityDesign } from "@/components/ventures/hospitality/HospitalityDesign";
-import { HospitalityDestinations } from "@/components/ventures/hospitality/HospitalityDestinations";
 import { HospitalityEcosystem } from "@/components/ventures/hospitality/HospitalityEcosystem";
 import { HospitalityExperience } from "@/components/ventures/hospitality/HospitalityExperience";
 import { HospitalityFocusAreas } from "@/components/ventures/hospitality/HospitalityFocusAreas";
-import { HospitalityGallery } from "@/components/ventures/hospitality/HospitalityGallery";
 import { HospitalityHero } from "@/components/ventures/hospitality/HospitalityHero";
 import { HospitalityPartnership } from "@/components/ventures/hospitality/HospitalityPartnership";
 import { HospitalityPhilosophy } from "@/components/ventures/hospitality/HospitalityPhilosophy";
@@ -24,9 +22,7 @@ export default function HospitalityPage() {
       <HospitalityFocusAreas />
       <HospitalityDesign />
       <HospitalityExperience />
-      <HospitalityDestinations />
       <HospitalitySustainability />
-      <HospitalityGallery />
       <HospitalityPartnership />
       <HospitalityEcosystem />
       <HospitalityClosing />

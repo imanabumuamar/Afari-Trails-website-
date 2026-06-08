@@ -1,10 +1,5 @@
-export type CollectionId =
-  | "wildlife"
-  | "landscapes"
-  | "expedition-life"
-  | "culture-people"
-  | "the-afari-lens"
-  | "behind-afari";
+/** URL slug for an archive collection (e.g. wildlife, landscapes). */
+export type CollectionId = string;
 
 export type ArchiveGridCategory = CollectionId | "all";
 

@@ -6,7 +6,7 @@
         "label": "Archive",
         "heading": "Collected Moments From the Trail.",
         "description": "A visual journey through landscapes, wildlife, people, and the spirit of Africa.",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80"
+        "image": "/images/archive/page/hero-image.png"
       },
       "collectionsSection": {
         "label": "Explore Collections",
@@ -19,7 +19,7 @@
         "title": "Morning Mist, South Luangwa",
         "photographer": "Chileshe Mwansa",
         "story": "First light through mahogany smoke — a moment of stillness before the valley wakes. Selected from our community edition.",
-        "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+        "image": "/images/archive/page/afariLens-image.jpg",
         "submitHref": "/archive/submit",
         "entriesHref": "/archive#grid",
         "editionsHref": "/archive#grid"
@@ -48,42 +48,42 @@
         "title": "Wildlife",
         "description": "The untamed. In their natural world.",
         "icon": "wildlife",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/archive/collections/wildlife/image.png"
       },
       {
         "id": "landscapes",
         "title": "Landscapes",
         "description": "Earth in its rawest, most beautiful form.",
         "icon": "landscapes",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/archive/collections/landscapes/image.png"
       },
       {
         "id": "expedition-life",
         "title": "Expedition Life",
         "description": "The moments between destinations.",
         "icon": "expedition",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/archive/collections/expedition-life/image.png"
       },
       {
         "id": "culture-people",
         "title": "Culture & People",
         "description": "The soul of Africa, its people, its stories.",
         "icon": "culture",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/archive/collections/culture-people/image.png"
       },
       {
         "id": "the-afari-lens",
         "title": "The Afari Lens",
         "description": "Community perspectives. Captured by you.",
         "icon": "lens",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/archive/collections/the-afari-lens/image.jpg"
       },
       {
         "id": "behind-afari",
         "title": "Behind Afari",
         "description": "Behind the scenes. The journey within.",
         "icon": "behind",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/archive/collections/behind-afari/image.jpg"
       }
     ],
     "latestMoments": [
@@ -205,20 +205,6 @@
         "published": true
       },
       {
-        "id": "leopard-dusk",
-        "title": "Leopard Hour",
-        "location": "South Luangwa, Zambia",
-        "photographer": "Afari Trails",
-        "caption": "When the valley belongs to shadow.",
-        "category": "wildlife",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
-        "related": {
-          "label": "The Art of Patience",
-          "href": "/journal/the-art-of-patience"
-        },
-        "published": true
-      },
-      {
         "id": "desert-line",
         "title": "Desert Horizon",
         "location": "Namibia",
@@ -281,8 +267,18 @@
           "href": "/journal/guardians-of-the-wild"
         },
         "published": true
+      },
+      {
+        "id": "img-1780649366511",
+        "title": "New photograph",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "category": "wildlife",
+        "image": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1200&q=85",
+        "published": true
       }
     ]
   },
-  "updatedAt": "2026-05-25T13:59:30.309Z"
+  "updatedAt": "2026-06-05T08:49:57.902Z"
 }

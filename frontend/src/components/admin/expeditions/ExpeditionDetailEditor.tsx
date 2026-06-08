@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { AdminField } from "@/components/admin/ventures/AdminField";
 import { ExpeditionImageField } from "@/components/admin/expeditions/ExpeditionImageField";
+import { slugifyExpeditionId } from "@/lib/expeditions/expedition-slug";
+import type { ExpeditionRegion } from "@/lib/data/expeditions-all-page";
 import type {
   ExpeditionDetailRecord,
   ExpeditionsContentData,
@@ -14,16 +16,21 @@ const textareaClass = `${inputClass} resize-y`;
 
 type ExpeditionDetailEditorProps = {
   expedition: ExpeditionDetailRecord;
+  /** Stable id from CMS until save (used for image uploads while slug is being edited). */
+  originalId: string;
   allIds: string[];
+  regions: ExpeditionRegion[];
   readOnly?: boolean;
-  onSave: (expedition: ExpeditionDetailRecord) => void;
+  onSave: (expedition: ExpeditionDetailRecord) => void | Promise<void>;
   onDocumentSynced?: (data: ExpeditionsContentData) => void;
   onStatus: (message: string) => void;
 };
 
 export function ExpeditionDetailEditor({
   expedition,
+  originalId,
   allIds,
+  regions,
   readOnly = false,
   onSave,
   onDocumentSynced,
@@ -40,13 +47,20 @@ export function ExpeditionDetailEditor({
 
   function syncFromDocument(data: ExpeditionsContentData) {
     onDocumentSynced?.(data);
-    const updated = data.expeditions.find((e) => e.id === draft.id);
+    const updated = data.expeditions.find(
+      (e) => e.id === draft.id || e.id === originalId,
+    );
     if (updated) setDraft(updated);
   }
 
-  function handleStructuredSave(e: React.FormEvent) {
+  async function handleStructuredSave(e: React.FormEvent) {
     e.preventDefault();
-    onSave(draft);
+    const slug = slugifyExpeditionId(draft.id);
+    if (!slug) {
+      onStatus("URL slug cannot be empty.");
+      return;
+    }
+    await onSave({ ...draft, id: slug });
   }
 
   function openJsonMode() {
@@ -64,8 +78,10 @@ export function ExpeditionDetailEditor({
         return;
       }
       setJsonError(null);
-      setDraft(parsed);
-      onSave(parsed);
+      const slug = slugifyExpeditionId(parsed.id);
+      const normalized = { ...parsed, id: slug };
+      setDraft(normalized);
+      void onSave(normalized);
       setJsonMode(false);
     } catch (err) {
       setJsonError(err instanceof Error ? err.message : "Invalid JSON");
@@ -132,8 +148,24 @@ export function ExpeditionDetailEditor({
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <AdminField label="URL slug (id)">
-          <input className={inputClass} value={draft.id} disabled readOnly />
+        <AdminField label="URL slug">
+          <input
+            className={inputClass}
+            value={draft.id}
+            disabled={readOnly}
+            onChange={(e) =>
+              setDraft({ ...draft, id: slugifyExpeditionId(e.target.value) })
+            }
+          />
+          <p className="mt-1 text-xs text-charcoal/45">
+            Page URL: /expeditions/{draft.id || "…"}
+            {draft.id !== originalId && (
+              <span className="text-gold-muted">
+                {" "}
+                · saves as rename from &ldquo;{originalId}&rdquo;
+              </span>
+            )}
+          </p>
         </AdminField>
         <AdminField label="Short name">
           <input
@@ -144,6 +176,33 @@ export function ExpeditionDetailEditor({
           />
         </AdminField>
       </div>
+
+      <AdminField label="Region (All journeys filter)">
+        <select
+          className={inputClass}
+          value={
+            regions.some((r) => r.id === draft.regionId)
+              ? (draft.regionId ?? "")
+              : (regions.find((r) => r.id !== "all")?.id ?? "")
+          }
+          disabled={readOnly || regions.filter((r) => r.id !== "all").length === 0}
+          onChange={(e) =>
+            setDraft({ ...draft, regionId: e.target.value })
+          }
+        >
+          {regions
+            .filter((r) => r.id !== "all")
+            .map((r) => (
+              <option key={r.id} value={r.id}>
+                {r.label}
+              </option>
+            ))}
+        </select>
+        <p className="mt-1 text-xs text-charcoal/45">
+          Controls which region filter shows this expedition on{" "}
+          <code className="text-charcoal">/expeditions/all</code>.
+        </p>
+      </AdminField>
 
       <AdminField label="Page title">
         <input
@@ -174,7 +233,7 @@ export function ExpeditionDetailEditor({
       </AdminField>
 
       <ExpeditionImageField
-        expeditionId={draft.id}
+        expeditionId={originalId}
         fieldPath="heroImage"
         label="Hero image"
         src={draft.heroImage}
@@ -263,7 +322,7 @@ export function ExpeditionDetailEditor({
             <div key={i} className="rounded border border-charcoal/10 p-4">
               <p className="mb-3 text-xs text-charcoal/45">Image {i + 1}</p>
               <ExpeditionImageField
-                expeditionId={draft.id}
+                expeditionId={originalId}
                 fieldPath={`visualStrip.${i}.src`}
                 label={`Strip image ${i + 1}`}
                 src={frame.src}
@@ -407,7 +466,7 @@ export function ExpeditionDetailEditor({
             />
           </AdminField>
           <ExpeditionImageField
-            expeditionId={draft.id}
+            expeditionId={originalId}
             fieldPath="accommodation.image"
             label="Accommodation image"
             src={draft.accommodation.image}
@@ -448,7 +507,7 @@ export function ExpeditionDetailEditor({
                 />
               </AdminField>
               <ExpeditionImageField
-                expeditionId={draft.id}
+                expeditionId={originalId}
                 fieldPath={`experiences.${i}.image`}
                 label="Experience image"
                 src={exp.image}
@@ -497,7 +556,7 @@ export function ExpeditionDetailEditor({
           {draft.gallery.map((frame, i) => (
             <div key={i} className="rounded border border-charcoal/10 p-4">
               <ExpeditionImageField
-                expeditionId={draft.id}
+                expeditionId={originalId}
                 fieldPath={`gallery.${i}.src`}
                 label={`Gallery image ${i + 1}`}
                 src={frame.src}
@@ -542,7 +601,7 @@ export function ExpeditionDetailEditor({
                 .split(",")
                 .map((s) => s.trim())
                 .filter(Boolean)
-                .filter((id) => allIds.includes(id)),
+                .filter((id) => allIds.includes(id) || id === draft.id),
             })
           }
         />

@@ -1,17 +1,38 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import type { JournalStoryRecord } from "@/types/journal-content";
 
 type StoriesGridProps = {
   stories: JournalStoryRecord[];
   showViewAll?: boolean;
+  /** How many stories to show before "Show more" */
+  initialCount?: number;
+  isSearchActive?: boolean;
 };
 
-export function StoriesGrid({ stories, showViewAll = true }: StoriesGridProps) {
+export function StoriesGrid({
+  stories,
+  showViewAll = true,
+  initialCount = 4,
+  isSearchActive = false,
+}: StoriesGridProps) {
+  const [expanded, setExpanded] = useState(false);
+  const visibleCount = Math.max(1, initialCount);
+  const hasMore = !isSearchActive && stories.length > visibleCount;
+  const visible =
+    isSearchActive || expanded
+      ? stories
+      : stories.slice(0, visibleCount);
+
   if (stories.length === 0) {
     return (
-      <p className="py-24 text-center text-sm text-charcoal/50">
-        No stories match your search.
+      <p className="py-24 text-center text-sm text-charcoal/50" role="status">
+        {isSearchActive
+          ? "No stories match your search. Try another word or clear the search box above."
+          : "No stories in this category yet."}
       </p>
     );
   }
@@ -20,7 +41,7 @@ export function StoriesGrid({ stories, showViewAll = true }: StoriesGridProps) {
     <>
       <div className="mb-14 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <h2 className="font-serif text-3xl font-light text-charcoal md:text-4xl">
-          Latest Stories
+          {isSearchActive ? "Search results" : "Latest Stories"}
         </h2>
         {showViewAll && (
           <Link
@@ -33,7 +54,7 @@ export function StoriesGrid({ stories, showViewAll = true }: StoriesGridProps) {
       </div>
 
       <div className="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-20">
-        {stories.map((story) => (
+        {visible.map((story) => (
           <Link
             key={story.slug}
             href={`/journal/${story.slug}`}
@@ -63,6 +84,18 @@ export function StoriesGrid({ stories, showViewAll = true }: StoriesGridProps) {
           </Link>
         ))}
       </div>
+
+      {hasMore && !expanded && (
+        <div className="mt-16 text-center">
+          <button
+            type="button"
+            onClick={() => setExpanded(true)}
+            className="inline-block border border-charcoal/25 px-10 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-charcoal transition-colors hover:border-gold hover:text-gold"
+          >
+            Show more stories
+          </button>
+        </div>
+      )}
     </>
   );
 }

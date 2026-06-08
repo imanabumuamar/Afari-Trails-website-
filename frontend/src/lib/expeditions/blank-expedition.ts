@@ -6,6 +6,7 @@ export function createBlankExpedition(
 ): ExpeditionDetailRecord {
   return {
     id,
+    regionId: "zambia",
     published: true,
     name,
     title: name,

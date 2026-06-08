@@ -6,15 +6,17 @@ import type {
   JournalContentData,
   JournalStoryRecord,
 } from "@/types/journal-content";
+import { JournalDisplaySettings } from "@/components/admin/journal/JournalDisplaySettings";
 import { JournalPageEditor } from "@/components/admin/journal/JournalPageEditor";
 import { JournalStoriesListManager } from "@/components/admin/journal/JournalStoriesListManager";
 import { JournalStoryEditor } from "@/components/admin/journal/JournalStoryEditor";
+import { mergeJournalData } from "@/lib/journal/merge-journal-data";
 
 type JournalContentEditorProps = {
   readOnly?: boolean;
 };
 
-type Tab = "main-page" | "stories";
+type Tab = "main-page" | "display" | "stories";
 
 export function JournalContentEditor({ readOnly = false }: JournalContentEditorProps) {
   const [tab, setTab] = useState<Tab>("main-page");
@@ -37,7 +39,7 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
     }
 
     const doc = await res.json();
-    setData(doc.data as JournalContentData);
+    setData(mergeJournalData(doc.data as Partial<JournalContentData>));
     setUpdatedAt(doc.updatedAt ?? null);
     setSelectedSlug((prev) => {
       if (prev) return prev;
@@ -63,7 +65,7 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
     }
 
     const doc = await res.json();
-    setData(doc.data as JournalContentData);
+    setData(mergeJournalData(doc.data as Partial<JournalContentData>));
     setUpdatedAt(doc.updatedAt ?? null);
     setStatus("Saved.");
     setTimeout(() => setStatus(""), 2500);
@@ -139,6 +141,17 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
           </button>
           <button
             type="button"
+            onClick={() => setTab("display")}
+            className={`px-4 py-2 text-xs uppercase tracking-[0.2em] ${
+              tab === "display"
+                ? "bg-charcoal text-ivory"
+                : "border border-charcoal/20 text-charcoal/70"
+            }`}
+          >
+            Display
+          </button>
+          <button
+            type="button"
             onClick={() => setTab("stories")}
             className={`px-4 py-2 text-xs uppercase tracking-[0.2em] ${
               tab === "stories"
@@ -161,15 +174,33 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
         <JournalPageEditor
           page={data.page}
           readOnly={readOnly}
-          onSave={(page) => patch({ page })}
-          onDocumentSynced={(next) => setData(next)}
+          onSave={(page) => patch({ page: { ...data.page, ...page } })}
+          onDocumentSynced={(next) => setData(mergeJournalData(next))}
           onStatus={setStatus}
         />
       )}
 
+      {tab === "display" && (
+        <JournalDisplaySettings
+          stories={data.stories}
+          latestStorySlugs={data.latestStorySlugs}
+          homepageStorySlugs={data.homepageStorySlugs}
+          latestInitialCount={data.page.latestInitialCount}
+          readOnly={readOnly}
+          onSave={({ latestStorySlugs, homepageStorySlugs, latestInitialCount }) =>
+            patch({
+              latestStorySlugs,
+              homepageStorySlugs,
+              page: { ...data.page, latestInitialCount },
+            })
+          }
+        />
+      )}
+
       {tab === "stories" && (
-        <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
+        <div className="grid gap-10 lg:grid-cols-[minmax(260px,320px)_1fr]">
           <JournalStoriesListManager
+            key="journal-stories-list"
             stories={data.stories}
             selectedSlug={selectedSlug}
             readOnly={readOnly}
@@ -183,7 +214,7 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
               story={selected}
               readOnly={readOnly}
               onSave={patchStory}
-              onDocumentSynced={(next) => setData(next)}
+              onDocumentSynced={(next) => setData(mergeJournalData(next))}
               onStatus={setStatus}
             />
           ) : (

@@ -8,6 +8,8 @@ import {
   submitInquiry,
   type InquirySource,
 } from "@/lib/inquiry/submit-inquiry";
+import { venturesConnectConfig } from "@/lib/data/connect-ventures";
+import { CONNECT_CONTENT_DEFAULTS } from "@/lib/data/connect-defaults";
 import type { ConnectPageConfig } from "@/types/connect-page";
 
 const inputClass =
@@ -16,13 +18,20 @@ const inputClass =
 type ConnectFormProps = {
   config: ConnectPageConfig;
   source: InquirySource;
+  compact?: boolean;
 };
 
-function ConnectFormInner({ config, source }: ConnectFormProps) {
+function ConnectFormInner({ config, source, compact = false }: ConnectFormProps) {
   const { form } = config;
+  const inquiryOptions =
+    form.inquiryOptions?.length
+      ? form.inquiryOptions
+      : source === "ventures-connect"
+        ? venturesConnectConfig.form.inquiryOptions
+        : CONNECT_CONTENT_DEFAULTS.expeditions.form.inquiryOptions;
   const searchParams = useSearchParams();
   const inquiryParam = searchParams.get("inquiry");
-  const validInquiry = form.inquiryOptions.some((o) => o.value === inquiryParam);
+  const validInquiry = inquiryOptions.some((o) => o.value === inquiryParam);
   const defaultInquiry = validInquiry ? inquiryParam! : "";
 
   const [submitted, setSubmitted] = useState(false);
@@ -47,7 +56,10 @@ function ConnectFormInner({ config, source }: ConnectFormProps) {
   }
 
   return (
-    <section id="form" className="scroll-mt-24 bg-ivory py-24 lg:py-36">
+    <section
+      id="form"
+      className={`scroll-mt-24 bg-ivory ${compact ? "py-12 lg:py-16" : "py-24 lg:py-36"}`}
+    >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="mx-auto max-w-xl text-center">
           <SectionLabel>{form.label}</SectionLabel>
@@ -155,7 +167,7 @@ function ConnectFormInner({ config, source }: ConnectFormProps) {
                 <option value="" disabled>
                   Select
                 </option>
-                {form.inquiryOptions.map((opt) => (
+                {inquiryOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>
                     {opt.label}
                   </option>
@@ -204,10 +216,11 @@ function ConnectFormInner({ config, source }: ConnectFormProps) {
 export function ConnectForm({
   config,
   source,
+  compact = false,
 }: ConnectFormProps) {
   return (
     <Suspense fallback={<div className="min-h-[480px] bg-ivory" />}>
-      <ConnectFormInner config={config} source={source} />
+      <ConnectFormInner config={config} source={source} compact={compact} />
     </Suspense>
   );
 }

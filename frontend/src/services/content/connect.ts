@@ -8,7 +8,7 @@ import type {
   ConnectContentDocument,
 } from "@/types/connect-content";
 
-function mergeConnectPage(
+export function mergeConnectPage(
   defaults: ConnectPageConfig,
   remote?: Partial<ConnectPageConfig>,
 ): ConnectPageConfig {

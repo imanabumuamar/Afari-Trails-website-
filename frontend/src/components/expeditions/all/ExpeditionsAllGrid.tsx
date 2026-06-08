@@ -2,20 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ROUTES } from "@/config/routes";
-import type { ExpeditionCatalogItem } from "@/lib/data/expedition-details";
+import type { ExpeditionsAllPageContent } from "@/lib/data/expedition-defaults";
+import type { ExpeditionCatalogItem } from "@/types/expeditions-content";
 
 type ExpeditionsAllGridProps = {
   expeditions: ExpeditionCatalogItem[];
+  allPage: ExpeditionsAllPageContent;
 };
 
-export function ExpeditionsAllGrid({ expeditions }: ExpeditionsAllGridProps) {
+export function ExpeditionsAllGrid({ expeditions, allPage }: ExpeditionsAllGridProps) {
+  const { gridIntro, cta } = allPage;
   return (
     <section className="bg-ivory py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <SectionLabel>Curated for you</SectionLabel>
+        <SectionLabel>{gridIntro.label}</SectionLabel>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-charcoal/60">
-          {expeditions.length} handcrafted expeditions across Zambia — each with
-          its own rhythm, landscape, and story.
+          {expeditions.length} {gridIntro.description}
         </p>
 
         <ul className="mt-14 space-y-20 lg:mt-20 lg:space-y-28">
@@ -87,17 +89,16 @@ export function ExpeditionsAllGrid({ expeditions }: ExpeditionsAllGridProps) {
 
         <div className="mt-24 border-t border-charcoal/10 pt-16 text-center">
           <p className="font-serif text-2xl font-light text-charcoal md:text-3xl">
-            Not sure where to begin?
+            {cta.heading}
           </p>
           <p className="mx-auto mt-4 max-w-md text-sm text-charcoal/60">
-            Tell us what you hope to feel — we will help you choose the right
-            trail.
+            {cta.body}
           </p>
           <Link
             href={ROUTES.expeditionsConnect}
             className="mt-10 inline-block border border-charcoal/25 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-charcoal transition-colors hover:border-gold hover:text-gold"
           >
-            Connect With Afari
+            {cta.buttonLabel}
           </Link>
         </div>
       </div>

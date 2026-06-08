@@ -93,8 +93,8 @@ export default async function AdminDashboardPage() {
             </h3>
             <p className="mt-2 font-serif text-xl font-light">Messages</p>
             <p className="mt-2 text-sm text-charcoal/60">
-              Read contact, connect, partner, expedition, and newsletter form
-              submissions.
+              Read contact, connect, partner, expedition, newsletter, and Afari
+              Lens photo submissions.
             </p>
           </Link>
         )}

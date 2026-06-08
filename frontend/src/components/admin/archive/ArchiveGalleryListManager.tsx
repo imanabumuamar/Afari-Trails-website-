@@ -6,6 +6,7 @@ import { createBlankArchiveImage } from "@/lib/archive/blank-image";
 
 type ArchiveGalleryListManagerProps = {
   images: ArchiveImageRecord[];
+  defaultCategory?: string;
   selectedId: string | null;
   readOnly?: boolean;
   onSelect: (id: string) => void;
@@ -21,6 +22,7 @@ function isPublished(img: ArchiveImageRecord): boolean {
 
 export function ArchiveGalleryListManager({
   images,
+  defaultCategory = "wildlife",
   selectedId,
   readOnly = false,
   onSelect,
@@ -94,7 +96,7 @@ export function ArchiveGalleryListManager({
           className="w-full border border-dashed border-charcoal/25 py-2 text-xs uppercase tracking-[0.2em] text-charcoal/55 hover:border-charcoal/40"
           onClick={() => {
             const id = `img-${Date.now()}`;
-            onAdd(createBlankArchiveImage(id));
+            onAdd(createBlankArchiveImage(id, defaultCategory));
             onSelect(id);
           }}
         >

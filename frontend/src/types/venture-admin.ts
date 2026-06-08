@@ -22,6 +22,9 @@ export type VentureSectionType =
   | "quote-block"
   | "location-block"
   | "partner-cta"
+  | "community-stories"
+  | "string-list-block"
+  | "craftsmanship-block"
   | "connect-page";
 
 export type VentureSectionConfig = {
@@ -29,6 +32,8 @@ export type VentureSectionConfig = {
   type: VentureSectionType;
   title: string;
   description?: string;
+  /** Show a photo uploader for section types that render an image (e.g. philosophy-block). */
+  hasImage?: boolean;
 };
 
 export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> = {
@@ -66,12 +71,11 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
   ],
   community: [
     { key: "communityHero", type: "sub-hero", title: "Hero" },
-    { key: "communityPhilosophy", type: "philosophy-block", title: "Philosophy" },
+    { key: "communityPhilosophy", type: "philosophy-block", title: "Philosophy", hasImage: true },
     { key: "communityFocusAreas", type: "focus-items", title: "Focus areas" },
-    { key: "communityStories", type: "experience-grid", title: "Stories" },
-    { key: "communityCraftsmanship", type: "design-moodboard", title: "Craftsmanship" },
-    { key: "communityInitiatives", type: "text-block", title: "Initiatives" },
-    { key: "communityGallery", type: "image-gallery", title: "Gallery" },
+    { key: "communityStories", type: "community-stories", title: "Local stories", description: "Heading text, plus pick which archive photos appear as stories." },
+    { key: "communityCraftsmanship", type: "craftsmanship-block", title: "Craftsmanship", description: "Text, highlight list, and three moodboard photos." },
+    { key: "communityInitiatives", type: "string-list-block", title: "Future initiatives", description: "Label, heading, intro, and the list of initiative items." },
     { key: "communityPartners", type: "text-block", title: "Partners" },
     { key: "communityCta", type: "partner-cta", title: "Call to action" },
     { key: "communityClosing", type: "quote-block", title: "Closing quote" },
@@ -81,8 +85,8 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
     { key: "agricultureApproach", type: "text-block", title: "Approach" },
     { key: "agricultureFocusAreas", type: "focus-items", title: "Focus areas" },
     { key: "agricultureLand", type: "location-block", title: "The land" },
-    { key: "agricultureCommunity", type: "text-block", title: "Community" },
-    { key: "agricultureInitiatives", type: "text-block", title: "Initiatives" },
+    { key: "agricultureCommunity", type: "location-block", title: "Community impact" },
+    { key: "agricultureInitiatives", type: "string-list-block", title: "Future initiatives", description: "Label, heading, intro, and the list of initiative items." },
     { key: "agricultureGallery", type: "image-gallery", title: "Gallery" },
     { key: "agriculturePartners", type: "text-block", title: "Partners" },
     { key: "agricultureEcosystem", type: "pillars-block", title: "Ecosystem" },
@@ -90,13 +94,11 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
   ],
   hospitality: [
     { key: "hospitalityHero", type: "sub-hero", title: "Hero" },
-    { key: "hospitalityPhilosophy", type: "philosophy-block", title: "Philosophy" },
+    { key: "hospitalityPhilosophy", type: "philosophy-block", title: "Philosophy", hasImage: true },
     { key: "hospitalityFocusAreas", type: "focus-items", title: "Focus areas" },
-    { key: "hospitalityDesign", type: "design-moodboard", title: "Design" },
+    { key: "hospitalityDesign", type: "location-block", title: "Architecture & design", description: "Label, heading, body, and one section photo." },
     { key: "hospitalityExperience", type: "quote-block", title: "Experience quote" },
-    { key: "hospitalityDestinations", type: "text-block", title: "Destinations" },
     { key: "hospitalitySustainability", type: "pillars-block", title: "Sustainability" },
-    { key: "hospitalityGallery", type: "image-gallery", title: "Gallery" },
     { key: "hospitalityPartnership", type: "partner-cta", title: "Partnership" },
     { key: "hospitalityEcosystem", type: "text-block", title: "Ecosystem" },
     { key: "hospitalityClosing", type: "quote-block", title: "Closing quote" },
@@ -104,9 +106,7 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
   partner: [
     { key: "partnerHero", type: "sub-hero", title: "Hero" },
     { key: "partnerIntro", type: "text-block", title: "Introduction" },
-    { key: "partnershipTypes", type: "card-list", title: "Partnership types" },
     { key: "partnerVision", type: "quote-block", title: "Vision" },
-    { key: "partnerMoodboard", type: "image-gallery", title: "Moodboard" },
     { key: "partnerCollaborators", type: "text-block", title: "Collaborators" },
     { key: "partnerForm", type: "text-block", title: "Form copy" },
     { key: "partnerClosing", type: "quote-block", title: "Closing quote" },

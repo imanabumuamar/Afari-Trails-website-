@@ -9,7 +9,7 @@ import { StoriesGrid } from "@/components/journal/StoriesGrid";
 import {
   getFeaturedSideStories,
   getFeaturedStory,
-  getLatestStories,
+  getLatestStoriesForGrid,
   getPublishedStories,
 } from "@/lib/journal/helpers";
 import type { JournalCategoryId, JournalContentData } from "@/types/journal-content";
@@ -38,36 +38,42 @@ export function JournalPageContent({ content }: JournalPageContentProps) {
   );
 
   const latestStories = useMemo(
-    () => getLatestStories(content.stories),
-    [content.stories],
+    () =>
+      getLatestStoriesForGrid(content.stories, content.latestStorySlugs),
+    [content.stories, content.latestStorySlugs],
   );
 
-  const filteredLatest = useMemo(() => {
-    let pool =
-      active === "all"
-        ? latestStories
-        : published.filter(
-            (s) =>
-              !s.featured &&
-              !s.featuredSide &&
-              s.category === active,
-          );
+  const isSearching = search.trim().length > 0;
 
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      pool = pool.filter(
-        (s) =>
+  const filteredLatest = useMemo(() => {
+    const q = search.trim().toLowerCase();
+
+    if (q) {
+      return published.filter((s) => {
+        if (active !== "all" && s.category !== active) return false;
+        return (
           s.title.toLowerCase().includes(q) ||
           s.excerpt.toLowerCase().includes(q) ||
-          s.categoryLabel.toLowerCase().includes(q),
-      );
+          s.categoryLabel.toLowerCase().includes(q) ||
+          (s.body?.toLowerCase().includes(q) ?? false)
+        );
+      });
     }
 
-    return pool;
+    if (active === "all") {
+      return latestStories;
+    }
+
+    return published.filter(
+      (s) =>
+        !s.featured &&
+        !s.featuredSide &&
+        s.category === active,
+    );
   }, [active, search, latestStories, published]);
 
   const showFeatured =
-    active === "all" && !search.trim() && featuredStory;
+    active === "all" && !isSearching && featuredStory;
 
   return (
     <>
@@ -89,7 +95,9 @@ export function JournalPageContent({ content }: JournalPageContentProps) {
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <StoriesGrid
             stories={filteredLatest}
-            showViewAll={active === "all" && !search.trim()}
+            showViewAll={active === "all" && !isSearching}
+            initialCount={content.page.latestInitialCount}
+            isSearchActive={isSearching}
           />
         </div>
       </section>

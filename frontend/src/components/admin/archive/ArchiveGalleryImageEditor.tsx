@@ -4,26 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import { AdminField } from "@/components/admin/ventures/AdminField";
 import { ArchiveImageField } from "@/components/admin/archive/ArchiveImageField";
 import type {
+  ArchiveCollection,
   ArchiveContentData,
   ArchiveImageRecord,
-  CollectionId,
 } from "@/types/archive-content";
 
 const inputClass =
   "w-full border border-charcoal/20 bg-ivory px-3 py-2 text-sm text-charcoal focus:border-gold/50 focus:outline-none";
 const textareaClass = `${inputClass} resize-y`;
 
-const CATEGORIES: { id: CollectionId; label: string }[] = [
-  { id: "wildlife", label: "Wildlife" },
-  { id: "landscapes", label: "Landscapes" },
-  { id: "expedition-life", label: "Expedition Life" },
-  { id: "culture-people", label: "Culture & People" },
-  { id: "the-afari-lens", label: "The Afari Lens" },
-  { id: "behind-afari", label: "Behind Afari" },
-];
-
 type ArchiveGalleryImageEditorProps = {
   image: ArchiveImageRecord;
+  collections: ArchiveCollection[];
   readOnly?: boolean;
   onSave: (image: ArchiveImageRecord) => void;
   onDocumentSynced?: (data: ArchiveContentData) => void;
@@ -32,6 +24,7 @@ type ArchiveGalleryImageEditorProps = {
 
 export function ArchiveGalleryImageEditor({
   image,
+  collections,
   readOnly = false,
   onSave,
   onDocumentSynced,
@@ -129,20 +122,28 @@ export function ArchiveGalleryImageEditor({
       <AdminField label="Category">
         <select
           className={inputClass}
-          value={draft.category}
-          disabled={readOnly}
+          value={
+            collections.some((c) => c.id === draft.category)
+              ? draft.category
+              : (collections[0]?.id ?? "")
+          }
+          disabled={readOnly || collections.length === 0}
           onChange={(e) =>
             setDraft({
               ...draft,
-              category: e.target.value as CollectionId,
+              category: e.target.value,
             })
           }
         >
-          {CATEGORIES.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.label}
-            </option>
-          ))}
+          {collections.length === 0 ? (
+            <option value="">Add a collection first</option>
+          ) : (
+            collections.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.title}
+              </option>
+            ))
+          )}
         </select>
       </AdminField>
 

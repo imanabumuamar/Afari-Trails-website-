@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { EXPEDITIONS_CONTENT_DEFAULTS } from "@/lib/data/expedition-defaults";
+import { mergeExpeditionsData } from "@/lib/expeditions/merge-expeditions-data";
 import { fetchCmsJson } from "@/lib/api/fetch-content";
 import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 import type {
@@ -10,45 +11,7 @@ import type {
 } from "@/types/expeditions-content";
 import type { ExpeditionCatalogItem } from "@/types/expeditions-content";
 
-function mergePage<T extends Record<string, unknown>>(
-  defaults: T,
-  remote?: Partial<T>,
-): T {
-  if (!remote) return defaults;
-  return { ...defaults, ...remote };
-}
-
-function mergeExpeditionsData(
-  remote?: Partial<ExpeditionsContentData> | null,
-): ExpeditionsContentData {
-  const defaults = EXPEDITIONS_CONTENT_DEFAULTS;
-  if (!remote) return defaults;
-
-  const page = (remote.page ?? {}) as Partial<ExpeditionsContentData["page"]>;
-  return {
-    page: {
-      hero: mergePage(defaults.page.hero, page.hero),
-      ourPromise: mergePage(defaults.page.ourPromise, page.ourPromise),
-      categoryBar:
-        Array.isArray(page.categoryBar) && page.categoryBar.length > 0
-          ? page.categoryBar
-          : defaults.page.categoryBar,
-      expeditionApproach: mergePage(
-        defaults.page.expeditionApproach,
-        page.expeditionApproach,
-      ),
-      expeditionsCta: mergePage(defaults.page.expeditionsCta, page.expeditionsCta),
-    },
-    featuredIds:
-      Array.isArray(remote.featuredIds) && remote.featuredIds.length > 0
-        ? remote.featuredIds
-        : defaults.featuredIds,
-    expeditions:
-      Array.isArray(remote.expeditions) && remote.expeditions.length > 0
-        ? remote.expeditions
-        : defaults.expeditions,
-  };
-}
+export { mergeExpeditionsData } from "@/lib/expeditions/merge-expeditions-data";
 
 export function getExpeditionsContentLocal(): ExpeditionsContentData {
   try {
@@ -109,6 +72,7 @@ export function toCatalogItem(exp: ExpeditionDetailRecord): ExpeditionCatalogIte
     style: highlightValue(exp, "Style"),
     heroImage: exp.heroImage,
     intro: exp.intro.statement,
+    regionId: exp.regionId ?? "zambia",
   };
 }
 

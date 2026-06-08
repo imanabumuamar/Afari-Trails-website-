@@ -14,6 +14,9 @@ export const hospitalityPhilosophy = {
   label: "Our Philosophy",
   statement:
     "We believe hospitality should create a sense of belonging, connection, and immersion within the landscapes and cultures that surround it.",
+  image:
+    "https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1200&q=85",
+  imageAlt: "Riverside lodge deck at golden hour",
   themes: [
     "Slow luxury shaped by place",
     "Immersive design and emotional experience",
@@ -79,24 +82,9 @@ export const hospitalityDesign = {
   label: "Architecture & Design",
   heading: "Built to belong.",
   body: "Natural materials, open-air architecture, earthy textures, and handcrafted interiors — structures that blend into landscape through local craftsmanship and sustainable design. Every space is considered: light, air, silence, and the view beyond the deck.",
-  moodboard: [
-    {
-      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
-      alt: "Natural wood and linen interior textures",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
-      alt: "Earthy stone and warm interior light",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
-      alt: "Handcrafted architectural details",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
-      alt: "Fire-lit evening atmosphere",
-    },
-  ],
+  image:
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
+  imageAlt: "Natural wood and linen interior textures",
 } as const;
 
 export const hospitalityExperience = {

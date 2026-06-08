@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { VentureSlug } from "@/lib/data/venture-defaults";
+import { venturesConnectConfig } from "@/lib/data/connect-ventures";
 import type { VentureSectionConfig } from "@/types/venture-admin";
 import {
   AdminField,
@@ -11,6 +12,7 @@ import {
   textareaClass,
 } from "@/components/admin/ventures/AdminField";
 import { VentureImageField } from "@/components/admin/ventures/VentureImageField";
+import { ArchiveStoryPicker } from "@/components/admin/ventures/ArchiveStoryPicker";
 
 type VentureSectionEditorProps = {
   slug: VentureSlug;
@@ -208,6 +210,8 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
         deckCta: asString(d.deckCta),
         partnerHref: asString(d.partnerHref || "/ventures/partner"),
         deckHref: asString(d.deckHref || "/ventures/connect"),
+        image: asString(d.image),
+        imageAlt: asString(d.imageAlt),
         themes: Array.isArray(d.themes)
           ? d.themes.map((t) => asString(t))
           : [],
@@ -273,6 +277,50 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
                 };
               })
             : [{ id: "", title: "", image: "" }],
+      };
+    }
+    case "community-stories": {
+      const d = asRecord(data);
+      return {
+        label: asString(d.label),
+        heading: asString(d.heading),
+        intro: asString(d.intro),
+        archiveIds: Array.isArray(d.archiveIds)
+          ? d.archiveIds.map((x) => asString(x)).filter(Boolean)
+          : [],
+      };
+    }
+    case "string-list-block": {
+      const d = asRecord(data);
+      const items = Array.isArray(d.items) ? d.items.map((x) => asString(x)) : [];
+      return {
+        label: asString(d.label),
+        heading: asString(d.heading),
+        intro: asString(d.intro),
+        items: items.length > 0 ? items : [""],
+      };
+    }
+    case "craftsmanship-block": {
+      const d = asRecord(data);
+      const rawImages = Array.isArray(d.images)
+        ? d.images
+        : Array.isArray(d.moodboard)
+          ? d.moodboard
+          : [];
+      const images = rawImages.map((item) => {
+        const r = asRecord(item);
+        return { src: asString(r.src), alt: asString(r.alt) };
+      });
+      while (images.length < 3) images.push({ src: "", alt: "" });
+      const highlights = Array.isArray(d.highlights)
+        ? d.highlights.map((x) => asString(x))
+        : [];
+      return {
+        label: asString(d.label),
+        heading: asString(d.heading),
+        body: asString(d.body),
+        highlights: highlights.length > 0 ? highlights : [""],
+        images: images.slice(0, 3),
       };
     }
     case "design-moodboard": {
@@ -392,6 +440,10 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
           subtext: asString(form.subtext),
           submitLabel: asString(form.submitLabel),
           successMessage: asString(form.successMessage),
+          inquiryOptions:
+            Array.isArray(form.inquiryOptions) && form.inquiryOptions.length > 0
+              ? form.inquiryOptions
+              : [...venturesConnectConfig.form.inquiryOptions],
         },
       };
     }
@@ -986,6 +1038,13 @@ export function VentureSectionEditor({
       case "philosophy-block": {
         const d = draft as Record<string, unknown>;
         const themes = Array.isArray(d.themes) ? (d.themes as string[]) : null;
+        const showCtas =
+          !section.hasImage ||
+          Boolean(
+            asString(d.body) ||
+              asString(d.partnerCta) ||
+              asString(d.deckCta),
+          );
         return (
           <div className="space-y-6">
             <AdminField label="Label">
@@ -1005,51 +1064,81 @@ export function VentureSectionEditor({
                 onChange={(e) => setDraft({ ...d, statement: e.target.value })}
               />
             </AdminField>
-            <AdminField label="Body">
-              <textarea
-                className={textareaClass}
-                rows={4}
-                value={asString(d.body)}
-                disabled={readOnly}
-                onChange={(e) => setDraft({ ...d, body: e.target.value })}
-              />
-            </AdminField>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <AdminField label="Primary CTA label">
-                <input
-                  className={inputClass}
-                  value={asString(d.partnerCta)}
-                  disabled={readOnly}
-                  onChange={(e) => setDraft({ ...d, partnerCta: e.target.value })}
+            {section.hasImage && (
+              <>
+                <VentureImageField
+                  slug={slug}
+                  fieldPath={fp(key, "image")}
+                  label="Section photo"
+                  src={asString(d.image)}
+                  alt={asString(d.imageAlt)}
+                  readOnly={readOnly}
+                  onUploaded={(src) => setDraft({ ...d, image: src })}
+                  onStatus={onStatus}
                 />
-              </AdminField>
-              <AdminField label="Secondary CTA label">
-                <input
-                  className={inputClass}
-                  value={asString(d.deckCta)}
-                  disabled={readOnly}
-                  onChange={(e) => setDraft({ ...d, deckCta: e.target.value })}
-                />
-              </AdminField>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <AdminField label="Primary CTA link (href)">
-                <input
-                  className={inputClass}
-                  value={asString(d.partnerHref)}
-                  disabled={readOnly}
-                  onChange={(e) => setDraft({ ...d, partnerHref: e.target.value })}
-                />
-              </AdminField>
-              <AdminField label="Secondary CTA link (href)">
-                <input
-                  className={inputClass}
-                  value={asString(d.deckHref)}
-                  disabled={readOnly}
-                  onChange={(e) => setDraft({ ...d, deckHref: e.target.value })}
-                />
-              </AdminField>
-            </div>
+                <AdminField label="Photo alt text">
+                  <input
+                    className={inputClass}
+                    value={asString(d.imageAlt)}
+                    disabled={readOnly}
+                    onChange={(e) => setDraft({ ...d, imageAlt: e.target.value })}
+                  />
+                </AdminField>
+              </>
+            )}
+            {showCtas && (
+              <>
+                <AdminField label="Body">
+                  <textarea
+                    className={textareaClass}
+                    rows={4}
+                    value={asString(d.body)}
+                    disabled={readOnly}
+                    onChange={(e) => setDraft({ ...d, body: e.target.value })}
+                  />
+                </AdminField>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <AdminField label="Primary CTA label">
+                    <input
+                      className={inputClass}
+                      value={asString(d.partnerCta)}
+                      disabled={readOnly}
+                      onChange={(e) =>
+                        setDraft({ ...d, partnerCta: e.target.value })
+                      }
+                    />
+                  </AdminField>
+                  <AdminField label="Secondary CTA label">
+                    <input
+                      className={inputClass}
+                      value={asString(d.deckCta)}
+                      disabled={readOnly}
+                      onChange={(e) => setDraft({ ...d, deckCta: e.target.value })}
+                    />
+                  </AdminField>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <AdminField label="Primary CTA link (href)">
+                    <input
+                      className={inputClass}
+                      value={asString(d.partnerHref)}
+                      disabled={readOnly}
+                      onChange={(e) =>
+                        setDraft({ ...d, partnerHref: e.target.value })
+                      }
+                    />
+                  </AdminField>
+                  <AdminField label="Secondary CTA link (href)">
+                    <input
+                      className={inputClass}
+                      value={asString(d.deckHref)}
+                      disabled={readOnly}
+                      onChange={(e) => setDraft({ ...d, deckHref: e.target.value })}
+                    />
+                  </AdminField>
+                </div>
+              </>
+            )}
             {themes !== null && (
               <div className="space-y-4">
                 <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
@@ -1967,6 +2056,225 @@ export function VentureSectionEditor({
                     />
                   )}
                 </AdminField>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      case "community-stories": {
+        const d = draft as {
+          label: string;
+          heading: string;
+          intro: string;
+          archiveIds: string[];
+        };
+        return (
+          <div className="space-y-6">
+            <AdminField label="Label">
+              <input
+                className={inputClass}
+                value={d.label}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, label: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Heading">
+              <input
+                className={inputClass}
+                value={d.heading}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, heading: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Intro">
+              <textarea
+                className={textareaClass}
+                rows={3}
+                value={d.intro}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, intro: e.target.value })}
+              />
+            </AdminField>
+            <ArchiveStoryPicker
+              value={d.archiveIds}
+              readOnly={readOnly}
+              onChange={(archiveIds) => setDraft({ ...d, archiveIds })}
+            />
+          </div>
+        );
+      }
+
+      case "string-list-block": {
+        const d = draft as {
+          label: string;
+          heading: string;
+          intro: string;
+          items: string[];
+        };
+        return (
+          <div className="space-y-6">
+            <AdminField label="Label">
+              <input
+                className={inputClass}
+                value={d.label}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, label: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Heading">
+              <input
+                className={inputClass}
+                value={d.heading}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, heading: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Intro">
+              <textarea
+                className={textareaClass}
+                rows={3}
+                value={d.intro}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, intro: e.target.value })}
+              />
+            </AdminField>
+            <div className="space-y-4 border-t border-charcoal/10 pt-6">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+                Items
+              </p>
+              {d.items.map((item, i) => (
+                <AdminField key={i} label={`Item ${i + 1}`}>
+                  <input
+                    className={inputClass}
+                    value={item}
+                    disabled={readOnly}
+                    onChange={(e) => {
+                      const items = [...d.items];
+                      items[i] = e.target.value;
+                      setDraft({ ...d, items });
+                    }}
+                  />
+                </AdminField>
+              ))}
+              <AddRemoveButtons
+                readOnly={readOnly}
+                canRemove={d.items.length > 1}
+                onAdd={() => setDraft({ ...d, items: [...d.items, ""] })}
+                onRemove={() => setDraft({ ...d, items: d.items.slice(0, -1) })}
+              />
+            </div>
+          </div>
+        );
+      }
+
+      case "craftsmanship-block": {
+        const d = draft as {
+          label: string;
+          heading: string;
+          body: string;
+          highlights: string[];
+          images: { src: string; alt: string }[];
+        };
+        const imageLabels = [
+          "Photo 1 (top left)",
+          "Photo 2 (top right)",
+          "Photo 3 (wide, bottom)",
+        ];
+        return (
+          <div className="space-y-6">
+            <AdminField label="Label">
+              <input
+                className={inputClass}
+                value={d.label}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, label: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Heading">
+              <input
+                className={inputClass}
+                value={d.heading}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, heading: e.target.value })}
+              />
+            </AdminField>
+            <AdminField label="Body">
+              <textarea
+                className={textareaClass}
+                rows={4}
+                value={d.body}
+                disabled={readOnly}
+                onChange={(e) => setDraft({ ...d, body: e.target.value })}
+              />
+            </AdminField>
+
+            <div className="space-y-4 border-t border-charcoal/10 pt-6">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+                Highlights (bullet list)
+              </p>
+              {d.highlights.map((item, i) => (
+                <AdminField key={i} label={`Highlight ${i + 1}`}>
+                  <input
+                    className={inputClass}
+                    value={item}
+                    disabled={readOnly}
+                    onChange={(e) => {
+                      const highlights = [...d.highlights];
+                      highlights[i] = e.target.value;
+                      setDraft({ ...d, highlights });
+                    }}
+                  />
+                </AdminField>
+              ))}
+              <AddRemoveButtons
+                readOnly={readOnly}
+                canRemove={d.highlights.length > 1}
+                onAdd={() =>
+                  setDraft({ ...d, highlights: [...d.highlights, ""] })
+                }
+                onRemove={() =>
+                  setDraft({ ...d, highlights: d.highlights.slice(0, -1) })
+                }
+              />
+            </div>
+
+            <div className="space-y-8 border-t border-charcoal/10 pt-6">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+                Moodboard photos (3)
+              </p>
+              {d.images.map((img, i) => (
+                <div key={i} className="space-y-4 border-b border-charcoal/10 pb-6">
+                  <p className="text-sm font-medium text-charcoal">
+                    {imageLabels[i] ?? `Photo ${i + 1}`}
+                  </p>
+                  <AdminField label="Alt text">
+                    <input
+                      className={inputClass}
+                      value={img.alt}
+                      disabled={readOnly}
+                      onChange={(e) => {
+                        const images = [...d.images];
+                        images[i] = { ...img, alt: e.target.value };
+                        setDraft({ ...d, images });
+                      }}
+                    />
+                  </AdminField>
+                  <VentureImageField
+                    slug={slug}
+                    fieldPath={fp(key, "images", i, "src")}
+                    label={imageLabels[i] ?? `Photo ${i + 1}`}
+                    src={img.src}
+                    alt={img.alt}
+                    readOnly={readOnly}
+                    onUploaded={(src) => {
+                      const images = [...d.images];
+                      images[i] = { ...img, src };
+                      setDraft({ ...d, images });
+                    }}
+                    onStatus={onStatus}
+                  />
+                </div>
               ))}
             </div>
           </div>

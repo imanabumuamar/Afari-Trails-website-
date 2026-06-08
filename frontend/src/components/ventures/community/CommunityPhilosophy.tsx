@@ -28,8 +28,10 @@ export async function CommunityPhilosophy() {
         </div>
         <div className="relative aspect-[4/5] overflow-hidden bg-charcoal/10 lg:col-span-5">
           <Image
-            src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=1200&q=85"
-            alt="Warm community gathering in natural light"
+            src={communityPhilosophy.image ?? default_communityPhilosophy.image}
+            alt={
+              communityPhilosophy.imageAlt ?? default_communityPhilosophy.imageAlt
+            }
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 40vw"

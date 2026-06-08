@@ -82,11 +82,18 @@ export function JournalStoriesListManager({
     <div className="space-y-4">
       <div>
         <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/55">
-          Stories
+          All stories ({counts.all})
         </h3>
         <p className="mt-1 text-xs text-charcoal/45">
-          Select any story to edit — published and drafts alike.
+          Select a story in this list to edit it. Scroll if you don&apos;t see
+          every title.
         </p>
+        {filtered.length !== stories.length && (
+          <p className="mt-2 text-xs text-gold-muted">
+            Showing {filtered.length} of {stories.length}
+            {search.trim() ? " (search active)" : ` (${filter} filter)`}.
+          </p>
+        )}
       </div>
 
       <div className="flex flex-wrap gap-1">
@@ -120,9 +127,30 @@ export function JournalStoriesListManager({
         className="w-full border border-charcoal/20 px-3 py-2 text-sm"
       />
 
-      <ul className="max-h-[55vh] space-y-1 overflow-y-auto">
+      <ul className="max-h-[min(70vh,640px)] min-h-[200px] space-y-1 overflow-y-auto border border-charcoal/10 bg-ivory/50">
         {filtered.length === 0 ? (
-          <li className="px-2 py-4 text-sm text-charcoal/50">No stories match.</li>
+          <li className="space-y-3 px-3 py-6 text-sm text-charcoal/50">
+            <p>No stories match this filter.</p>
+            {stories.length > 0 && (
+              <button
+                type="button"
+                className="text-xs uppercase tracking-[0.2em] text-charcoal underline-offset-2 hover:underline"
+                onClick={() => {
+                  setFilter("all");
+                  setSearch("");
+                }}
+              >
+                Show all {counts.all} stories
+              </button>
+            )}
+            {selectedSlug &&
+              !filtered.some((s) => s.slug === selectedSlug) &&
+              stories.some((s) => s.slug === selectedSlug) && (
+                <p className="text-xs text-charcoal/45">
+                  The story you&apos;re editing is hidden by the current filter.
+                </p>
+              )}
+          </li>
         ) : (
           filtered.map((story) => (
             <li key={story.slug}>

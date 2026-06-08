@@ -1,5 +1,8 @@
 import type { ExpeditionDetail } from "@/types/expedition-detail";
-import type { ExpeditionsPageContent } from "@/lib/data/expedition-defaults";
+import type {
+  ExpeditionsAllPageContent,
+  ExpeditionsPageContent,
+} from "@/lib/data/expedition-defaults";
 
 export type ExpeditionDetailRecord = ExpeditionDetail & {
   published?: boolean;
@@ -7,6 +10,7 @@ export type ExpeditionDetailRecord = ExpeditionDetail & {
 
 export type ExpeditionsContentData = {
   page: ExpeditionsPageContent;
+  allPage: ExpeditionsAllPageContent;
   featuredIds: string[];
   expeditions: ExpeditionDetailRecord[];
 };
@@ -35,4 +39,5 @@ export type ExpeditionCatalogItem = {
   style: string;
   heroImage: string;
   intro: string;
+  regionId: string;
 };

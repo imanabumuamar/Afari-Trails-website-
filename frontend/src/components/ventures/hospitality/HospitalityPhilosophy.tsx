@@ -28,8 +28,11 @@ export async function HospitalityPhilosophy() {
         </div>
         <div className="relative aspect-[4/5] overflow-hidden bg-charcoal/10 lg:col-span-5">
           <Image
-            src="https://images.unsplash.com/photo-1540541338287-417e03dee08f?w=1200&q=85"
-            alt="Riverside lodge deck at golden hour"
+            src={hospitalityPhilosophy.image ?? default_hospitalityPhilosophy.image}
+            alt={
+              hospitalityPhilosophy.imageAlt ??
+              default_hospitalityPhilosophy.imageAlt
+            }
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 40vw"
