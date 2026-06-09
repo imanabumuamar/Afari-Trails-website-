@@ -56,7 +56,7 @@ export default async function JournalArticlePage({ params }: PageProps) {
           </p>
           {hasBody ? (
             <div className="mt-10 space-y-6">
-              {paragraphs.map((paragraph) => (
+              {paragraphs.map((paragraph: string) => (
                 <p
                   key={paragraph.slice(0, 48)}
                   className="text-sm leading-[1.9] text-charcoal/70 md:text-base"

@@ -18,46 +18,9 @@ export const expeditionsConnectConfig: ConnectPageConfig = {
     body: "Share your dates, interests, group size, and dream destinations. Our team will help shape a curated itinerary across Zambia and beyond — paced for stillness, not rush.",
   },
   categories: {
-    label: "How We Can Help",
-    heading: "Choose your starting point.",
-    items: [
-      {
-        id: "custom",
-        title: "Custom Safari",
-        description: "A journey built entirely around you.",
-        image:
-          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
-        href: "#form",
-        inquiry: "custom-safari",
-      },
-      {
-        id: "group",
-        title: "Group Expedition",
-        description: "Travel with a curated small group.",
-        image:
-          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
-        href: "#form",
-        inquiry: "group",
-      },
-      {
-        id: "private",
-        title: "Private Journey",
-        description: "Exclusive access and bespoke pacing.",
-        image:
-          "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
-        href: "#form",
-        inquiry: "private",
-      },
-      {
-        id: "questions",
-        title: "Questions & Guidance",
-        description: "Not sure where to begin — we're here.",
-        image:
-          "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
-        href: "#form",
-        inquiry: "general",
-      },
-    ],
+    label: "",
+    heading: "",
+    items: [],
   },
   form: {
     label: "Your Journey",
@@ -84,24 +47,7 @@ export const expeditionsConnectConfig: ConnectPageConfig = {
       { label: "Pinterest", href: "https://pinterest.com" },
     ],
   },
-  gallery: [
-    {
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-      alt: "Wildlife on the savanna",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-      alt: "River valley expedition",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-      alt: "Campfire on the trail",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-      alt: "Mountain wilderness",
-    },
-  ],
+  gallery: [],
   newsletter: {
     heading: "Stories From the Trail",
     subtext: "Expedition inspiration, field notes, and new journeys across Africa.",

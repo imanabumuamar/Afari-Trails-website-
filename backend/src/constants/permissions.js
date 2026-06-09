@@ -26,6 +26,13 @@ export function permissionsFromContentAreas(areas, accessLevel) {
     }
   }
 
+  if (
+    unique.includes("connect") &&
+    (accessLevel === "edit" || accessLevel === "admin")
+  ) {
+    perms.push("inbox:read", "inbox:write");
+  }
+
   return [...new Set(perms)];
 }
 

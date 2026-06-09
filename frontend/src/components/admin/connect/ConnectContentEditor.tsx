@@ -5,6 +5,11 @@ import Link from "next/link";
 import { ConnectPageEditor } from "@/components/admin/connect/ConnectPageEditor";
 import { SaveButton } from "@/components/admin/ventures/AdminField";
 import { readAdminApiError } from "@/lib/admin/cms-client-error";
+import { mergeConnectData } from "@/lib/connect/merge-connect-data";
+import {
+  CONNECT_PAGE_SECTION_LABELS,
+  visibleConnectSections,
+} from "@/lib/connect/connect-page-sections";
 import type { ConnectContentData } from "@/types/connect-content";
 import type { ConnectPageConfig } from "@/types/connect-page";
 
@@ -71,11 +76,22 @@ export function ConnectContentEditor({ readOnly = false }: ConnectContentEditorP
       return;
     }
 
-    const doc = await res.json();
-    setData(doc.data as ConnectContentData);
+    const doc = (await res.json()) as {
+      data?: ConnectContentData;
+      updatedAt?: string;
+      warning?: string;
+      error?: string;
+    };
+
+    if (!doc.data) {
+      setStatus(doc.error ?? "Save failed.");
+      return;
+    }
+
+    setData(mergeConnectData(doc.data));
     setUpdatedAt(doc.updatedAt ?? null);
-    setStatus("Saved.");
-    setTimeout(() => setStatus(""), 2500);
+    setStatus(doc.warning ?? "Saved.");
+    setTimeout(() => setStatus(""), doc.warning ? 5000 : 2500);
   }
 
   if (loading) {
@@ -108,13 +124,18 @@ export function ConnectContentEditor({ readOnly = false }: ConnectContentEditorP
       </div>
 
       <p className="text-sm text-charcoal/60">
-        The ventures connect page at{" "}
-        <Link href="/ventures/connect" className="underline hover:text-gold">
-          /ventures/connect
-        </Link>{" "}
-        is edited under{" "}
+        Ventures connect is edited under{" "}
         <Link href="/admin/ventures" className="underline hover:text-gold">
           Ventures → Connect
+        </Link>
+        . Each tab below matches the live page — only sections that appear on
+        the site are shown.{" "}
+        <strong className="font-normal">
+          Form submissions (Begin the Conversation) do not appear here
+        </strong>
+        — read them in{" "}
+        <Link href="/admin/messages?source=contact" className="underline hover:text-gold">
+          Admin → Messages → Contact
         </Link>
         .
       </p>
@@ -136,13 +157,20 @@ export function ConnectContentEditor({ readOnly = false }: ConnectContentEditorP
         ))}
       </div>
 
+      <p className="text-xs text-charcoal/50">
+        <span className="uppercase tracking-[0.16em]">On this page: </span>
+        {visibleConnectSections(tab)
+          .map((key) => CONNECT_PAGE_SECTION_LABELS[key])
+          .join(" · ")}
+      </p>
+
       <div className="space-y-8">
         <ConnectPageEditor
           pageKey={tab}
           config={pageConfig}
           readOnly={readOnly}
           onChange={(config) => updatePage(tab, config)}
-          onDocumentSynced={(synced) => setData(synced)}
+          onDocumentSynced={(synced) => setData(mergeConnectData(synced))}
           onStatus={setStatus}
         />
         {!readOnly && (

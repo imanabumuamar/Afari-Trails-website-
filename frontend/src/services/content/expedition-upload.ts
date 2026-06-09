@@ -4,6 +4,7 @@ import { fieldPathToFilename, setNestedValue } from "@/lib/admin/venture-nested"
 import type {
   ExpeditionDetailRecord,
   ExpeditionsContentData,
+  ExpeditionsContentDocument,
 } from "@/types/expeditions-content";
 import {
   getExpeditionsContentLocal,
@@ -21,7 +22,7 @@ export function updateExpeditionsImageField(
   fieldPath: string,
   file: Buffer,
   mimeType: string,
-): { src: string; data: ExpeditionsContentData } {
+): { src: string; data: ExpeditionsContentData; doc: ExpeditionsContentDocument } {
   const ext = imageExtension(mimeType);
   const filename = `${fieldPathToFilename(fieldPath)}.${ext}`;
   const content = getExpeditionsContentLocal();
@@ -42,7 +43,7 @@ export function updateExpeditionsImageField(
     mkdirSync(publicDir, { recursive: true });
     writeFileSync(path.join(publicDir, filename), file);
 
-    const src = `/images/expeditions/${expeditionId}/${filename}`;
+    const src = `/images/expeditions/${expeditionId}/${filename}?v=${Date.now()}`;
     const expedition = content.expeditions[index];
     const updated = setNestedValue(
       expedition as unknown as Record<string, unknown>,
@@ -53,8 +54,8 @@ export function updateExpeditionsImageField(
     const expeditions = [...content.expeditions];
     expeditions[index] = updated;
     const next: ExpeditionsContentData = { ...content, expeditions };
-    saveExpeditionsContentLocal(next);
-    return { src, data: next };
+    const doc = saveExpeditionsContentLocal(next);
+    return { src, data: next, doc };
   }
 
   if (fieldPath.startsWith("allPage.")) {
@@ -77,8 +78,8 @@ export function updateExpeditionsImageField(
     ) as ExpeditionsContentData["allPage"];
 
     const next: ExpeditionsContentData = { ...content, allPage };
-    saveExpeditionsContentLocal(next);
-    return { src, data: next };
+    const doc = saveExpeditionsContentLocal(next);
+    return { src, data: next, doc };
   }
 
   const pageDir = path.join(
@@ -91,7 +92,7 @@ export function updateExpeditionsImageField(
   mkdirSync(pageDir, { recursive: true });
   writeFileSync(path.join(pageDir, filename), file);
 
-  const src = `/images/expeditions/page/${filename}`;
+  const src = `/images/expeditions/page/${filename}?v=${Date.now()}`;
   const page = setNestedValue(
     content.page as unknown as Record<string, unknown>,
     fieldPath,
@@ -99,6 +100,6 @@ export function updateExpeditionsImageField(
   ) as ExpeditionsContentData["page"];
 
   const next: ExpeditionsContentData = { ...content, page };
-  saveExpeditionsContentLocal(next);
-  return { src, data: next };
+  const doc = saveExpeditionsContentLocal(next);
+  return { src, data: next, doc };
 }

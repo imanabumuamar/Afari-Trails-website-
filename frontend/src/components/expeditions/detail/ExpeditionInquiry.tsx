@@ -160,9 +160,9 @@ export function ExpeditionInquiry({ expedition }: ExpeditionInquiryProps) {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-charcoal px-8 py-4 text-xs font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:bg-charcoal/90 disabled:opacity-50"
+              className="w-full bg-safari-green px-8 py-4 text-xs font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:bg-safari-green-deep disabled:opacity-50"
             >
-              {submitting ? "Sending…" : "Begin Your Journey"}
+              {submitting ? "Sending…" : "Enquire now"}
             </button>
           </form>
         )}

@@ -15,7 +15,9 @@
     "ecoLodgeWhoWeAre": {
       "label": "Who We Are",
       "heading": "Building the Future of Sustainable Luxury Hospitality",
-      "body": "Afari Trails is an eco hospitality and destination development venture focused on creating world-class luxury eco lodges and immersive safari experiences across Africa.\n\nWe combine sustainable design, hospitality innovation, conservation-focused development, and experiential tourism to create destinations that generate long-term environmental, cultural, and economic value.\n\nOur approach merges nature, architecture, and storytelling into meaningful hospitality experiences designed for the modern global traveler."
+      "body": "Afari Trails is an eco hospitality and destination development venture focused on creating world-class luxury eco lodges and immersive safari experiences across Africa.\n\nWe combine sustainable design, hospitality innovation, conservation-focused development, and experiential tourism to create destinations that generate long-term environmental, cultural, and economic value.\n\nOur approach merges nature, architecture, and storytelling into meaningful hospitality experiences designed for the modern global traveler.",
+      "image": "/images/ventures/eco-lodge/ecoLodgeWhoWeAre-image.jpg?v=1780955326318",
+      "imageAlt": ""
     },
     "ecoLodgeWhatWeDo": {
       "label": "What We Do",
@@ -146,5 +148,5 @@
       "image": "/images/ventures/eco-lodge/ecoLodgeFinalCta-image.jpg?v=1780264702177"
     }
   },
-  "updatedAt": "2026-05-31T22:00:34.610Z"
+  "updatedAt": "2026-06-08T21:48:50.727Z"
 }

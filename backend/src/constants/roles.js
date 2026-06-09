@@ -20,6 +20,8 @@ export const PERMISSIONS = [
   "content:support:write",
   "content:connect:read",
   "content:connect:write",
+  "inbox:read",
+  "inbox:write",
   "users:read",
   "users:write",
 ];
@@ -67,6 +69,8 @@ export const ROLE_PERMISSIONS = {
     "content:support:write",
     "content:connect:read",
     "content:connect:write",
+    "inbox:read",
+    "inbox:write",
   ],
   viewer: [
     "admin:access",

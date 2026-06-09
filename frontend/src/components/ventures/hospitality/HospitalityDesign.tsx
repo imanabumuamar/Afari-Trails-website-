@@ -23,7 +23,10 @@ function resolveImage(data: Record<string, unknown>): DesignImage {
       };
     }
   }
-  return default_hospitalityDesign.image;
+  return {
+    src: default_hospitalityDesign.image,
+    alt: default_hospitalityDesign.imageAlt,
+  };
 }
 
 export async function HospitalityDesign() {

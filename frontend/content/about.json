@@ -5,7 +5,7 @@
       "label": "About Afari Trails",
       "heading": "Built Between Journeys, Landscapes, and Stories.",
       "subtext": "Afari Trails was created to explore the connection between wilderness, identity, culture, and the spirit of discovery.",
-      "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80"
+      "image": "/images/about/hero-image.png"
     },
     "brandStory": {
       "label": "The Brand Story",
@@ -29,23 +29,23 @@
       "sectionLabel": "Visual Storytelling Strip",
       "images": [
         {
-          "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
+          "src": "/images/about/visualStrip-images-0-src.jpg",
           "alt": "Winding road through valley"
         },
         {
-          "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+          "src": "/images/about/visualStrip-images-1-src.jpg",
           "alt": "Campfire at night"
         },
         {
-          "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+          "src": "/images/about/visualStrip-images-2-src.jpg",
           "alt": "Worn hiking boots"
         },
         {
-          "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+          "src": "/images/about/visualStrip-images-3-src.jpg",
           "alt": "Portrait in traditional jewelry"
         },
         {
-          "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+          "src": "/images/about/visualStrip-images-4-src.jpg",
           "alt": "Fabric in the wind"
         }
       ]
@@ -77,19 +77,26 @@
     },
     "whyWeExist": {
       "quote": "We believe the wilderness has the power to reconnect people with stillness, perspective, and themselves.",
-      "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80"
+      "image": "/images/about/whyWeExist-image.jpg"
     },
     "behindTheBrand": {
       "heading": "Behind the Brand",
       "images": [
-        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80"
+        {
+          "src": "/images/about/behindTheBrand-images-0-src.png?v=1781025105285",
+          "name": "Iman Abu Muamar ",
+          "position": "Founder and Managing Director "
+        },
+        {
+          "src": "/images/about/behindTheBrand-images-1-src.png?v=1781025679507",
+          "name": "John Mwansa ",
+          "position": "Lead Safari Guide"
+        },
+        {
+          "src": "/images/about/behindTheBrand-images-2-src.png?v=1781026586847",
+          "name": "Lewis Phiri ",
+          "position": "Expedition Coordinator "
+        }
       ]
     },
     "futureVision": {
@@ -128,5 +135,5 @@
       "href": "/contact"
     }
   },
-  "updatedAt": "2026-05-25T13:59:30.312Z"
+  "updatedAt": "2026-06-09T17:37:14.867Z"
 }

@@ -26,7 +26,7 @@ export function updateAboutImageField(
   mkdirSync(publicDir, { recursive: true });
   writeFileSync(path.join(publicDir, filename), file);
 
-  const src = `/images/about/${filename}`;
+  const src = `/images/about/${filename}?v=${Date.now()}`;
   const data = setNestedValue(
     content as unknown as Record<string, unknown>,
     fieldPath,

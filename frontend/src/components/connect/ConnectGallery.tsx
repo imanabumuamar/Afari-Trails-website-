@@ -6,6 +6,8 @@ type ConnectGalleryProps = {
 };
 
 export function ConnectGallery({ config }: ConnectGalleryProps) {
+  if (!config.gallery.length) return null;
+
   return (
     <section className="overflow-hidden bg-matte-black py-4 lg:py-6" aria-label="Visual storytelling">
       <div className="flex gap-1 overflow-x-auto scrollbar-none lg:gap-1.5">

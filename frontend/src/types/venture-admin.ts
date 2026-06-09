@@ -48,8 +48,18 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
   ],
   "eco-lodge": [
     { key: "ecoLodgeHero", type: "sub-hero", title: "Hero" },
-    { key: "ecoLodgeWhoWeAre", type: "text-block", title: "Who we are" },
-    { key: "ecoLodgeWhatWeDo", type: "service-grid", title: "What we do" },
+    {
+      key: "ecoLodgeWhoWeAre",
+      type: "location-block",
+      title: "Who we are",
+      description: "Label, heading, body, and section photo.",
+    },
+    {
+      key: "ecoLodgeWhatWeDo",
+      type: "focus-items",
+      title: "What we do",
+      description: "Service cards with photo, title, and description.",
+    },
     { key: "ecoLodgeWhyAfrica", type: "location-block", title: "Why Africa" },
     { key: "ecoLodgeApproach", type: "pillars-block", title: "Our approach" },
     { key: "ecoLodgeInvestment", type: "philosophy-block", title: "Investment & partnerships" },
@@ -82,7 +92,12 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
   ],
   agriculture: [
     { key: "agricultureHero", type: "sub-hero", title: "Hero" },
-    { key: "agricultureApproach", type: "text-block", title: "Approach" },
+    {
+      key: "agricultureApproach",
+      type: "text-block",
+      title: "Approach",
+      description: "Label, statement, and supporting paragraph.",
+    },
     { key: "agricultureFocusAreas", type: "focus-items", title: "Focus areas" },
     { key: "agricultureLand", type: "location-block", title: "The land" },
     { key: "agricultureCommunity", type: "location-block", title: "Community impact" },

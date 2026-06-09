@@ -4,28 +4,25 @@ import { getAboutContent } from "@/services/content/about";
 export async function VisualStrip() {
   const { visualStrip } = await getAboutContent();
 
+  if (visualStrip.images.length === 0) return null;
+
   return (
-    <section className="bg-[#e8dfd0] pb-20 lg:pb-28">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <p className="mb-8 text-center text-[10px] font-medium uppercase tracking-[0.32em] text-charcoal/45">
-          {visualStrip.sectionLabel}
-        </p>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-5 md:gap-4">
-          {visualStrip.images.map((img, i) => (
-            <div
-              key={i}
-              className="relative aspect-square overflow-hidden md:aspect-[4/5]"
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 50vw, 20vw"
-              />
-            </div>
-          ))}
-        </div>
+    <section className="bg-[#e8dfd0]">
+      <div className="flex w-full">
+        {visualStrip.images.map((img, i) => (
+          <div
+            key={i}
+            className="relative aspect-[4/3] min-w-0 flex-1 overflow-hidden"
+          >
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              className="object-cover"
+              sizes="20vw"
+            />
+          </div>
+        ))}
       </div>
     </section>
   );

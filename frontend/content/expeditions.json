@@ -66,7 +66,7 @@
         "quote": "The wilderness has a way of returning us to ourselves.",
         "readyLabel": "Ready to begin your journey?",
         "boxText": "Let us design a private expedition tailored to your pace, interests, and style.",
-        "image": "/images/expeditions/page/expeditionsCta-image.png"
+        "image": "/images/expeditions/page/expeditionsCta-image.jpg?v=1781038260753"
       }
     },
     "allPage": {
@@ -74,7 +74,7 @@
         "label": "Expeditions",
         "heading": "All journeys",
         "subtext": "Every expedition is a world of its own — curated for presence, guided with care, and paced for the wild. Choose the journey that calls to you.",
-        "image": "/images/expeditions/all/allPage-hero-image.png?v=1780563428947",
+        "image": "/images/expeditions/all/allPage-hero-image.jpg?v=1781038512675",
         "imageAlt": "African wilderness at golden hour",
         "backLabel": "← Back to expeditions"
       },
@@ -117,6 +117,29 @@
         "tagline": "Walking safaris and leopard country.",
         "metaDescription": "A cinematic journey through Zambia's South Luangwa — walking safaris, river systems, and intimate wilderness camps paced for presence.",
         "heroImage": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
+        "locationLabel": "Zambia • South Luangwa National Park",
+        "heroStats": [
+          {
+            "label": "Duration",
+            "value": "7 Days"
+          },
+          {
+            "label": "Best Season",
+            "value": "Jun – Oct"
+          },
+          {
+            "label": "Difficulty",
+            "value": "Moderate"
+          },
+          {
+            "label": "Group Size",
+            "value": "2 – 8"
+          }
+        ],
+        "sections": {
+          "overviewHeading": "An intimate wilderness experience",
+          "accommodationLabel": "Accommodation"
+        },
         "quickDetails": [
           "Zambia",
           "7 Days",
@@ -210,10 +233,31 @@
           }
         ],
         "accommodation": {
-          "heading": "Camps in the heart of the valley",
+          "heading": "Luxury in the wild",
           "body": "Intimate safari camps designed for stillness, comfort, and immersion within the landscape. Canvas and timber blend with the bush; meals are shared under stars; sustainability and community partnership guide every stay. This is luxury measured in presence — not excess.",
           "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
-          "imageAlt": "Safari camp at twilight in the Luangwa Valley"
+          "imageAlt": "Safari camp at twilight in the Luangwa Valley",
+          "features": [
+            "En-suite canvas suites with river views",
+            "Private verandas and outdoor showers",
+            "Guided bush dinners under the stars",
+            "Solar-powered, low-impact camp design",
+            "Locally sourced cuisine and campfire evenings"
+          ],
+          "sideImages": [
+            {
+              "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+              "alt": "Tent interior at safari camp"
+            },
+            {
+              "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
+              "alt": "Camp deck overlooking the valley"
+            },
+            {
+              "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+              "alt": "Evening campfire at camp"
+            }
+          ]
         },
         "experiences": [
           {
@@ -291,10 +335,41 @@
           "Gratuities",
           "Personal purchases"
         ],
+        "map": {
+          "image": "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80",
+          "imageAlt": "South Luangwa expedition route map",
+          "mapsUrl": "https://maps.google.com/?q=South+Luangwa+National+Park"
+        },
+        "pricing": {
+          "amount": "3,950",
+          "currency": "USD",
+          "note": "per person · shared safari vehicle"
+        },
+        "stories": [
+          {
+            "quote": "Walking through leopard country at dawn — quiet enough to hear every branch — was the most alive I've ever felt in Africa.",
+            "name": "Elena M.",
+            "location": "London, UK"
+          },
+          {
+            "quote": "The guides knew every bend of the river. We never felt rushed; every sighting felt earned.",
+            "name": "James & Priya K.",
+            "location": "Toronto, Canada"
+          },
+          {
+            "quote": "Camp evenings under a sky full of stars, with stories and firelight — that's the part I'll remember longest.",
+            "name": "Sofia R.",
+            "location": "Lisbon, Portugal"
+          }
+        ],
         "philosophy": {
           "quote": "We believe meaningful exploration is less about rushing between destinations and more about reconnecting with the rhythm of the landscape."
         },
         "faq": [
+          {
+            "question": "Is this safari suitable for families?",
+            "answer": "Families with older children who enjoy walking and wildlife are welcome. We tailor pacing and activities; please share ages and interests when you enquire."
+          },
           {
             "question": "Best time to visit?",
             "answer": "The dry season (May–October) offers excellent wildlife viewing and comfortable temperatures. The emerald season brings lush scenery and fewer visitors — ideal for photographers who love atmosphere."
@@ -1111,5 +1186,5 @@
       }
     ]
   },
-  "updatedAt": "2026-06-08T09:02:02.426Z"
+  "updatedAt": "2026-06-09T20:55:12.701Z"
 }

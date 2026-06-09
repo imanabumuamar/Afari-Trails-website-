@@ -1,6 +1,8 @@
 import { ConnectPageView } from "@/components/connect/ConnectPageView";
 import { getConnectContent } from "@/services/content/connect";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Plan Your Journey",
   description:

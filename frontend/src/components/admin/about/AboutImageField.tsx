@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { AdminField } from "@/components/admin/ventures/AdminField";
+import { useEffect, useRef, useState } from "react";
 import type { AboutContentData } from "@/types/about-content";
 
 type AboutImageFieldProps = {
@@ -38,22 +37,23 @@ export function AboutImageField({
 }: AboutImageFieldProps) {
   const [uploading, setUploading] = useState(false);
   const [urlDraft, setUrlDraft] = useState(src);
+  const [showUrl, setShowUrl] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setUrlDraft(src);
   }, [src]);
 
-  async function handleUpload(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    formData.set("field", fieldPath);
-
-    const file = formData.get("image");
-    if (!file || !(file instanceof File) || file.size === 0) {
-      onStatus("Choose an image file to upload.");
+  async function uploadFile(file: File) {
+    if (file.size === 0) return;
+    if (!file.type.startsWith("image/")) {
+      onStatus("Please choose a JPG, PNG, or WebP image.");
       return;
     }
+
+    const formData = new FormData();
+    formData.set("field", fieldPath);
+    formData.set("image", file);
 
     setUploading(true);
     onStatus(`Uploading ${label}…`);
@@ -65,22 +65,35 @@ export function AboutImageField({
 
     setUploading(false);
 
-    if (!res.ok) {
-      onStatus(`Upload failed for ${label}.`);
+    const doc = (await res.json()) as {
+      data?: AboutContentData;
+      error?: string;
+      warning?: string;
+    };
+
+    if (!res.ok || !doc.data) {
+      onStatus(
+        doc.error ??
+          `Upload failed for ${label}. Use a JPG, PNG, or WebP image.`,
+      );
       return;
     }
 
-    const doc = await res.json();
-    const data = doc.data as AboutContentData;
+    const data = doc.data;
     onDocumentSynced?.(data);
 
     const newSrc =
       resolvePath(data as unknown as Record<string, unknown>, fieldPath) ?? src;
     onUploaded(newSrc);
     setUrlDraft(newSrc);
-    onStatus(`${label} image updated.`);
-    form.reset();
-    setTimeout(() => onStatus(""), 2500);
+    onStatus(doc.warning ?? `${label} updated and saved.`);
+    setTimeout(() => onStatus(""), doc.warning ? 5000 : 2500);
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) void uploadFile(file);
+    e.target.value = "";
   }
 
   return (
@@ -93,34 +106,59 @@ export function AboutImageField({
           <Image src={src} alt={alt} fill className="object-cover" sizes="400px" />
         </div>
       )}
+      {src ? (
+        <p className="break-all text-xs text-charcoal/50">{src}</p>
+      ) : (
+        <p className="text-xs text-charcoal/45">No image yet</p>
+      )}
+
       {!readOnly && (
         <>
-          <form onSubmit={handleUpload} className="space-y-3">
-            <input
-              name="image"
-              type="file"
-              accept="image/png,image/jpeg,image/webp"
-              className="block w-full text-sm"
-            />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <div className="flex flex-wrap items-center gap-3">
             <button
-              type="submit"
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
               disabled={uploading}
               className="bg-charcoal px-5 py-2 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
             >
-              {uploading ? "Uploading…" : "Upload image"}
+              {uploading ? "Uploading…" : src ? "Replace photo" : "Choose photo"}
             </button>
-          </form>
-          <AdminField label="Or paste image URL">
-            <input
-              type="url"
-              value={urlDraft}
-              onChange={(e) => {
-                setUrlDraft(e.target.value);
-                onUploaded(e.target.value);
-              }}
-              className="w-full border border-charcoal/20 bg-ivory px-3 py-2 text-sm"
-            />
-          </AdminField>
+            <span className="text-xs text-charcoal/55">
+              Photos save automatically — no need to click Save.
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowUrl((v) => !v)}
+            className="text-[10px] uppercase tracking-[0.2em] text-charcoal/45 underline-offset-2 hover:underline"
+          >
+            {showUrl ? "Hide URL option" : "Or paste an image URL"}
+          </button>
+          {showUrl && (
+            <div>
+              <input
+                type="url"
+                value={urlDraft}
+                placeholder="https://…"
+                onChange={(e) => {
+                  setUrlDraft(e.target.value);
+                  onUploaded(e.target.value);
+                }}
+                className="mt-1 w-full border border-charcoal/20 bg-ivory px-3 py-2 text-sm"
+              />
+              <p className="mt-1 text-[10px] text-charcoal/45">
+                After pasting a URL, click Save about page to keep it.
+              </p>
+            </div>
+          )}
         </>
       )}
     </div>

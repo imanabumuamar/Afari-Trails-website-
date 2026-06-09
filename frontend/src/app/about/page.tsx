@@ -6,6 +6,8 @@ import { GetInTouch } from "@/components/about/GetInTouch";
 import { PhilosophyWhySplit } from "@/components/about/PhilosophyWhySplit";
 import { VisualStrip } from "@/components/about/VisualStrip";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "About",
   description:

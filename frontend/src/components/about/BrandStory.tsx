@@ -4,7 +4,7 @@ export async function BrandStory() {
   const { brandStory } = await getAboutContent();
 
   return (
-    <section className="bg-[#e8dfd0] py-20 lg:py-28">
+    <section className="bg-[#e8dfd0] pt-20 pb-0 lg:pt-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <p className="text-center text-[10px] font-medium uppercase tracking-[0.32em] text-charcoal/50">
           {brandStory.label}

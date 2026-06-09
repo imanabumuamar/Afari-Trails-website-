@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { MessageActions } from "@/components/admin/messages/MessageActions";
 import { backendFetch } from "@/lib/api/backend";
-import { roleAtLeast } from "@/lib/auth/rbac";
+import { hasPermission } from "@/lib/auth/rbac";
 import { getStaffSession } from "@/lib/auth/staff-session";
 
 type InquirySource =
@@ -95,8 +95,9 @@ export default async function AdminMessagesPage({
 }) {
   const session = await getStaffSession();
   const role = session?.user?.role ?? null;
+  const permissions = session?.user?.permissions;
 
-  if (!role || !roleAtLeast(role, "admin")) {
+  if (!role || !hasPermission(role, "inbox:read", permissions)) {
     redirect("/admin/forbidden");
   }
 
@@ -139,9 +140,11 @@ export default async function AdminMessagesPage({
       <div>
         <h2 className="font-serif text-3xl font-light">Messages</h2>
         <p className="mt-3 max-w-xl text-sm text-charcoal/65">
-          Form submissions from the website — contact, connect, partner, expedition
-          requests, newsletter sign-ups, and Afari Lens photo submissions. Archive to
-          hide from the inbox, or delete to remove permanently.
+          Form submissions from the website live here — not in the Connect content
+          editor. Use the <strong className="font-normal">Contact</strong> filter for
+          messages from Begin the Conversation on /contact. Newsletter sign-ups (Stay
+          Close to the Trail) appear under Newsletter and only include an email.
+          Refresh this page after testing a form.
         </p>
       </div>
 
@@ -298,7 +301,7 @@ export default async function AdminMessagesPage({
                 </dl>
               )}
 
-              {s.message && (
+              {s.message ? (
                 <div className="mt-3">
                   {s.source === "archive-submit" && (
                     <p className="mb-1 text-[10px] uppercase tracking-[0.15em] text-charcoal/45">
@@ -309,7 +312,11 @@ export default async function AdminMessagesPage({
                     {s.message}
                   </p>
                 </div>
-              )}
+              ) : s.source === "newsletter" ? (
+                <p className="mt-3 text-sm text-charcoal/55">
+                  Newsletter signup — email only, no message.
+                </p>
+              ) : null}
             </li>
           ))}
         </ul>

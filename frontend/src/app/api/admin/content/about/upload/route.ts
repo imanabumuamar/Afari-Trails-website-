@@ -36,6 +36,12 @@ export async function POST(request: Request) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const { data } = updateAboutImageField(field, buffer, file.type);
 
+    const localDoc: AboutContentDocument = {
+      key: "main",
+      data,
+      updatedAt: new Date().toISOString(),
+    };
+
     const { data: synced, ok } = await backendFetch<AboutContentDocument>(
       "/content/about",
       {
@@ -46,13 +52,13 @@ export async function POST(request: Request) {
     );
 
     if (!ok || !synced) {
-      return NextResponse.json(
-        { error: "Image saved locally but API sync failed." },
-        { status: 502 },
-      );
+      return NextResponse.json({
+        ...localDoc,
+        warning: "Image saved on this site. Remote sync failed — is the backend running?",
+      });
     }
 
-    return NextResponse.json(synced);
+    return NextResponse.json(localDoc);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Upload failed";
     return NextResponse.json({ error: message }, { status: 400 });

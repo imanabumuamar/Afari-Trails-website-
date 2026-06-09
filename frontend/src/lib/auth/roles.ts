@@ -22,6 +22,8 @@ export const PERMISSIONS = [
   "content:support:write",
   "content:connect:read",
   "content:connect:write",
+  "inbox:read",
+  "inbox:write",
   "users:read",
   "users:write",
 ] as const;
@@ -64,6 +66,8 @@ const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     "content:support:write",
     "content:connect:read",
     "content:connect:write",
+    "inbox:read",
+    "inbox:write",
   ],
   editor: [
     "admin:access",
@@ -85,6 +89,8 @@ const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     "content:support:write",
     "content:connect:read",
     "content:connect:write",
+    "inbox:read",
+    "inbox:write",
   ],
   viewer: [
     "admin:access",

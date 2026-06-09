@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AdminField } from "@/components/admin/ventures/AdminField";
+import {
+  AddRemoveButtons,
+  AdminField,
+} from "@/components/admin/ventures/AdminField";
+import { ExpeditionDetailSectionsForm } from "@/components/admin/expeditions/ExpeditionDetailSectionsForm";
+import { ExpeditionSectionVisibilityEditor } from "@/components/admin/expeditions/ExpeditionSectionVisibilityEditor";
 import { ExpeditionImageField } from "@/components/admin/expeditions/ExpeditionImageField";
 import { slugifyExpeditionId } from "@/lib/expeditions/expedition-slug";
 import type { ExpeditionRegion } from "@/lib/data/expeditions-all-page";
@@ -13,6 +18,12 @@ import type {
 const inputClass =
   "w-full border border-charcoal/20 bg-ivory px-3 py-2 text-sm text-charcoal focus:border-gold/50 focus:outline-none";
 const textareaClass = `${inputClass} resize-y`;
+
+function renumberItineraryDays(
+  days: ExpeditionDetailRecord["itinerary"],
+): ExpeditionDetailRecord["itinerary"] {
+  return days.map((day, index) => ({ ...day, day: index + 1 }));
+}
 
 type ExpeditionDetailEditorProps = {
   expedition: ExpeditionDetailRecord;
@@ -146,6 +157,12 @@ export function ExpeditionDetailEditor({
         />
         Published (show in View All expeditions)
       </label>
+
+      <ExpeditionSectionVisibilityEditor
+        draft={draft}
+        readOnly={readOnly}
+        setDraft={setDraft}
+      />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <AdminField label="URL slug">
@@ -371,13 +388,56 @@ export function ExpeditionDetailEditor({
       </div>
 
       <div>
-        <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
-          Itinerary days
-        </h4>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+            Itinerary days
+          </h4>
+          <AddRemoveButtons
+            readOnly={readOnly}
+            canRemove={draft.itinerary.length > 0}
+            onAdd={() =>
+              setDraft({
+                ...draft,
+                itinerary: [
+                  ...draft.itinerary,
+                  {
+                    day: draft.itinerary.length + 1,
+                    title: "",
+                    description: "",
+                  },
+                ],
+              })
+            }
+            onRemove={() =>
+              setDraft({
+                ...draft,
+                itinerary: renumberItineraryDays(draft.itinerary.slice(0, -1)),
+              })
+            }
+          />
+        </div>
         <div className="mt-4 space-y-6">
           {draft.itinerary.map((day, i) => (
             <div key={i} className="space-y-2 border-t border-charcoal/10 pt-4">
-              <p className="text-xs text-charcoal/45">Day {day.day}</p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs text-charcoal/45">Day {day.day}</p>
+                {!readOnly && (
+                  <button
+                    type="button"
+                    className="text-[10px] uppercase tracking-[0.12em] text-red-800/70"
+                    onClick={() =>
+                      setDraft({
+                        ...draft,
+                        itinerary: renumberItineraryDays(
+                          draft.itinerary.filter((_, idx) => idx !== i),
+                        ),
+                      })
+                    }
+                  >
+                    Remove day
+                  </button>
+                )}
+              </div>
               <input
                 className={inputClass}
                 placeholder="Title"
@@ -386,6 +446,17 @@ export function ExpeditionDetailEditor({
                 onChange={(e) => {
                   const itinerary = [...draft.itinerary];
                   itinerary[i] = { ...day, title: e.target.value };
+                  setDraft({ ...draft, itinerary });
+                }}
+              />
+              <input
+                className={inputClass}
+                placeholder="Day label (e.g. DAY 2 – 3)"
+                value={day.dayLabel ?? ""}
+                disabled={readOnly}
+                onChange={(e) => {
+                  const itinerary = [...draft.itinerary];
+                  itinerary[i] = { ...day, dayLabel: e.target.value };
                   setDraft({ ...draft, itinerary });
                 }}
               />
@@ -401,29 +472,23 @@ export function ExpeditionDetailEditor({
                   setDraft({ ...draft, itinerary });
                 }}
               />
+              <ExpeditionImageField
+                expeditionId={originalId}
+                fieldPath={`itinerary.${i}.image`}
+                label="Day image"
+                src={day.image ?? ""}
+                alt={day.imageAlt ?? day.title}
+                readOnly={readOnly}
+                onUploaded={(src) => {
+                  const itinerary = [...draft.itinerary];
+                  itinerary[i] = { ...day, image: src };
+                  setDraft({ ...draft, itinerary });
+                }}
+                onDocumentSynced={syncFromDocument}
+                onStatus={onStatus}
+              />
             </div>
           ))}
-          {!readOnly && (
-            <button
-              type="button"
-              className="text-xs uppercase tracking-[0.2em] text-charcoal/55"
-              onClick={() =>
-                setDraft({
-                  ...draft,
-                  itinerary: [
-                    ...draft.itinerary,
-                    {
-                      day: draft.itinerary.length + 1,
-                      title: "",
-                      description: "",
-                    },
-                  ],
-                })
-              }
-            >
-              + Add day
-            </button>
-          )}
         </div>
       </div>
 
@@ -465,10 +530,30 @@ export function ExpeditionDetailEditor({
               }
             />
           </AdminField>
+          <AdminField label="Features (one per line)">
+            <textarea
+              className={textareaClass}
+              rows={4}
+              value={(draft.accommodation.features ?? []).join("\n")}
+              disabled={readOnly}
+              onChange={(e) =>
+                setDraft({
+                  ...draft,
+                  accommodation: {
+                    ...draft.accommodation,
+                    features: e.target.value
+                      .split("\n")
+                      .map((s) => s.trim())
+                      .filter(Boolean),
+                  },
+                })
+              }
+            />
+          </AdminField>
           <ExpeditionImageField
             expeditionId={originalId}
             fieldPath="accommodation.image"
-            label="Accommodation image"
+            label="Main accommodation image"
             src={draft.accommodation.image}
             alt={draft.accommodation.imageAlt}
             readOnly={readOnly}
@@ -481,6 +566,53 @@ export function ExpeditionDetailEditor({
             onDocumentSynced={syncFromDocument}
             onStatus={onStatus}
           />
+          <div className="space-y-4">
+            <p className="text-xs text-charcoal/45">Side images (up to 3)</p>
+            {(draft.accommodation.sideImages ?? []).map((img, i) => (
+              <ExpeditionImageField
+                key={i}
+                expeditionId={originalId}
+                fieldPath={`accommodation.sideImages.${i}.src`}
+                label={`Side image ${i + 1}`}
+                src={img.src}
+                alt={img.alt}
+                readOnly={readOnly}
+                onUploaded={(src) => {
+                  const sideImages = [...(draft.accommodation.sideImages ?? [])];
+                  sideImages[i] = { ...img, src };
+                  setDraft({
+                    ...draft,
+                    accommodation: {
+                      ...draft.accommodation,
+                      sideImages,
+                    },
+                  });
+                }}
+                onDocumentSynced={syncFromDocument}
+                onStatus={onStatus}
+              />
+            ))}
+            {!readOnly && (draft.accommodation.sideImages ?? []).length < 3 && (
+              <button
+                type="button"
+                className="text-xs uppercase tracking-[0.2em] text-charcoal/55"
+                onClick={() =>
+                  setDraft({
+                    ...draft,
+                    accommodation: {
+                      ...draft.accommodation,
+                      sideImages: [
+                        ...(draft.accommodation.sideImages ?? []),
+                        { src: "", alt: "" },
+                      ],
+                    },
+                  })
+                }
+              >
+                + Add side image
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -502,6 +634,19 @@ export function ExpeditionDetailEditor({
                   onChange={(e) => {
                     const experiences = [...draft.experiences];
                     experiences[i] = { ...exp, title: e.target.value };
+                    setDraft({ ...draft, experiences });
+                  }}
+                />
+              </AdminField>
+              <AdminField label="Description">
+                <textarea
+                  className={textareaClass}
+                  rows={3}
+                  value={exp.body}
+                  disabled={readOnly}
+                  onChange={(e) => {
+                    const experiences = [...draft.experiences];
+                    experiences[i] = { ...exp, body: e.target.value };
                     setDraft({ ...draft, experiences });
                   }}
                 />
@@ -588,6 +733,155 @@ export function ExpeditionDetailEditor({
           )}
         </div>
       </div>
+
+      <div>
+        <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+          Included & not included
+        </h4>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <AdminField label="What's included (one per line)">
+            <textarea
+              className={textareaClass}
+              rows={8}
+              value={draft.included.join("\n")}
+              disabled={readOnly}
+              onChange={(e) =>
+                setDraft({
+                  ...draft,
+                  included: e.target.value
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
+            />
+          </AdminField>
+          <AdminField label="What's not included (one per line)">
+            <textarea
+              className={textareaClass}
+              rows={8}
+              value={(draft.notIncluded ?? []).join("\n")}
+              disabled={readOnly}
+              onChange={(e) =>
+                setDraft({
+                  ...draft,
+                  notIncluded: e.target.value
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
+            />
+          </AdminField>
+        </div>
+      </div>
+
+      <div>
+        <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+          FAQ
+        </h4>
+        <div className="mt-4 space-y-6">
+          {draft.faq.map((item, i) => (
+            <div key={i} className="space-y-2 border-t border-charcoal/10 pt-4">
+              <input
+                className={inputClass}
+                placeholder="Question"
+                value={item.question}
+                disabled={readOnly}
+                onChange={(e) => {
+                  const faq = [...draft.faq];
+                  faq[i] = { ...item, question: e.target.value };
+                  setDraft({ ...draft, faq });
+                }}
+              />
+              <textarea
+                className={textareaClass}
+                rows={3}
+                placeholder="Answer"
+                value={item.answer}
+                disabled={readOnly}
+                onChange={(e) => {
+                  const faq = [...draft.faq];
+                  faq[i] = { ...item, answer: e.target.value };
+                  setDraft({ ...draft, faq });
+                }}
+              />
+              {!readOnly && (
+                <button
+                  type="button"
+                  className="text-[10px] uppercase tracking-[0.12em] text-red-800/70"
+                  onClick={() =>
+                    setDraft({
+                      ...draft,
+                      faq: draft.faq.filter((_, idx) => idx !== i),
+                    })
+                  }
+                >
+                  Remove question
+                </button>
+              )}
+            </div>
+          ))}
+          {!readOnly && (
+            <button
+              type="button"
+              className="text-xs uppercase tracking-[0.2em] text-charcoal/55"
+              onClick={() =>
+                setDraft({
+                  ...draft,
+                  faq: [...draft.faq, { question: "", answer: "" }],
+                })
+              }
+            >
+              + Add FAQ item
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+          Inquiry form
+        </h4>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <AdminField label="Heading">
+            <input
+              className={inputClass}
+              value={draft.inquiry.heading}
+              disabled={readOnly}
+              onChange={(e) =>
+                setDraft({
+                  ...draft,
+                  inquiry: { ...draft.inquiry, heading: e.target.value },
+                })
+              }
+            />
+          </AdminField>
+          <AdminField label="Subtext">
+            <textarea
+              className={textareaClass}
+              rows={2}
+              value={draft.inquiry.subtext}
+              disabled={readOnly}
+              onChange={(e) =>
+                setDraft({
+                  ...draft,
+                  inquiry: { ...draft.inquiry, subtext: e.target.value },
+                })
+              }
+            />
+          </AdminField>
+        </div>
+      </div>
+
+      <ExpeditionDetailSectionsForm
+        draft={draft}
+        originalId={originalId}
+        readOnly={readOnly}
+        setDraft={setDraft}
+        onDocumentSynced={syncFromDocument}
+        onStatus={onStatus}
+      />
 
       <AdminField label="Related expedition IDs (comma-separated)">
         <input

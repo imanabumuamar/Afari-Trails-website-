@@ -60,13 +60,21 @@ export function ExpeditionImageField({
 
     setUploading(false);
 
-    if (!res.ok) {
-      onStatus(`Upload failed for ${label}. Use a JPG, PNG, or WebP image.`);
+    const doc = (await res.json()) as {
+      data?: ExpeditionsContentData;
+      error?: string;
+      warning?: string;
+    };
+
+    if (!res.ok || !doc.data) {
+      onStatus(
+        doc.error ??
+          `Upload failed for ${label}. Use a JPG, PNG, or WebP image.`,
+      );
       return;
     }
 
-    const doc = await res.json();
-    const data = doc.data as ExpeditionsContentData;
+    const data = doc.data;
     onDocumentSynced?.(data);
 
     let newSrc = src;
@@ -88,7 +96,8 @@ export function ExpeditionImageField({
 
     onUploaded(newSrc);
     setUrlDraft(newSrc);
-    onStatus(`${label} updated and saved.`);
+    onStatus(doc.warning ?? `${label} updated and saved.`);
+    setTimeout(() => onStatus(""), doc.warning ? 5000 : 2500);
   }
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {

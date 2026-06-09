@@ -14,6 +14,9 @@ export function createBlankExpedition(
     metaDescription: "",
     heroImage:
       "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+    locationLabel: "",
+    heroStats: [],
+    brochureUrl: "",
     quickDetails: ["Zambia", "5 Days", "Small Group", "Guided Experience"],
     intro: {
       statement: "",
@@ -41,10 +44,24 @@ export function createBlankExpedition(
       image:
         "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=1600&q=85",
       imageAlt: "Safari camp",
+      features: [],
+      sideImages: [],
     },
     experiences: [],
     gallery: [],
     included: [],
+    notIncluded: [],
+    map: {
+      image: "",
+      imageAlt: "Route map",
+      mapsUrl: "",
+    },
+    pricing: {
+      amount: "",
+      currency: "USD",
+      note: "per person",
+    },
+    stories: [],
     philosophy: { quote: "" },
     faq: [],
     inquiry: {

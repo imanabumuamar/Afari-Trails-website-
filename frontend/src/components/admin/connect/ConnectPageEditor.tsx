@@ -7,6 +7,7 @@ import {
   textareaClass,
 } from "@/components/admin/ventures/AdminField";
 import { ConnectImageField } from "@/components/admin/connect/ConnectImageField";
+import { CONNECT_PAGE_SECTIONS } from "@/lib/connect/connect-page-sections";
 import type { ConnectContentData } from "@/types/connect-content";
 import type { ConnectPageConfig } from "@/types/connect-page";
 
@@ -44,6 +45,7 @@ export function ConnectPageEditor({
     onChange({ ...config, ...partial });
   }
 
+  const show = CONNECT_PAGE_SECTIONS[pageKey];
   const hero = config.hero;
   const intro = config.intro;
   const categories = config.categories;
@@ -55,6 +57,7 @@ export function ConnectPageEditor({
 
   return (
     <div className="space-y-10">
+      {show.hero && (
       <div className="space-y-6">
         <h3 className="text-sm font-medium text-charcoal">Hero</h3>
         {(["label", "heading", "cta", "imageAlt"] as const).map((field) => (
@@ -91,7 +94,9 @@ export function ConnectPageEditor({
           onStatus={onStatus}
         />
       </div>
+      )}
 
+      {show.intro && (
       <div className="space-y-6 border-t border-charcoal/10 pt-8">
         <h3 className="text-sm font-medium text-charcoal">Intro</h3>
         <AdminField label="Label">
@@ -125,7 +130,9 @@ export function ConnectPageEditor({
           />
         </AdminField>
       </div>
+      )}
 
+      {show.categories && (
       <div className="space-y-6 border-t border-charcoal/10 pt-8">
         <h3 className="text-sm font-medium text-charcoal">Categories</h3>
         <AdminField label="Section label">
@@ -223,7 +230,9 @@ export function ConnectPageEditor({
           }
         />
       </div>
+      )}
 
+      {show.form && (
       <div className="space-y-6 border-t border-charcoal/10 pt-8">
         <h3 className="text-sm font-medium text-charcoal">Form</h3>
         {(
@@ -309,7 +318,9 @@ export function ConnectPageEditor({
           }
         />
       </div>
+      )}
 
+      {show.direct && (
       <div className="space-y-6 border-t border-charcoal/10 pt-8">
         <h3 className="text-sm font-medium text-charcoal">Direct contact</h3>
         <AdminField label="Email">
@@ -383,7 +394,9 @@ export function ConnectPageEditor({
           }
         />
       </div>
+      )}
 
+      {show.gallery && (
       <div className="space-y-6 border-t border-charcoal/10 pt-8">
         <h3 className="text-sm font-medium text-charcoal">Gallery</h3>
         {gallery.map((img, i) => (
@@ -428,7 +441,9 @@ export function ConnectPageEditor({
           onRemove={() => patch({ gallery: gallery.slice(0, -1) })}
         />
       </div>
+      )}
 
+      {show.newsletter && (
       <div className="space-y-6 border-t border-charcoal/10 pt-8">
         <h3 className="text-sm font-medium text-charcoal">Newsletter</h3>
         {!newsletter ? (
@@ -494,7 +509,9 @@ export function ConnectPageEditor({
           </>
         )}
       </div>
+      )}
 
+      {show.closing && (
       <div className="space-y-6 border-t border-charcoal/10 pt-8">
         <h3 className="text-sm font-medium text-charcoal">Closing quote</h3>
         <AdminField label="Quote">
@@ -509,6 +526,7 @@ export function ConnectPageEditor({
           />
         </AdminField>
       </div>
+      )}
     </div>
   );
 }

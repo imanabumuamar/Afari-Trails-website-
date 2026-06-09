@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { SectionLabel } from "@/components/ui/SectionLabel";
+import { ExpeditionEyebrow } from "@/components/expeditions/detail/ExpeditionEyebrow";
+import { resolveSectionCopy } from "@/lib/expeditions/resolve-expedition-display";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 type ExpeditionExperiencesProps = {
@@ -7,47 +8,38 @@ type ExpeditionExperiencesProps = {
 };
 
 export function ExpeditionExperiences({ expedition }: ExpeditionExperiencesProps) {
+  if (expedition.experiences.length === 0) return null;
+  const sections = resolveSectionCopy(expedition);
+
   return (
-    <section className="bg-ivory py-24 lg:py-36">
+    <section className="bg-ivory py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <SectionLabel>What Awaits</SectionLabel>
-        <h2 className="max-w-2xl font-serif text-4xl font-light text-charcoal md:text-5xl">
-          The experience
+        <ExpeditionEyebrow>{sections.experiencesLabel}</ExpeditionEyebrow>
+        <h2 className="mt-4 max-w-2xl font-serif text-4xl font-light text-charcoal md:text-5xl">
+          {sections.experiencesHeading}
         </h2>
 
-        <div className="mt-16 space-y-24 lg:mt-24 lg:space-y-32">
-          {expedition.experiences.map((item, index) => {
-            const imageFirst = index % 2 === 1;
-
-            return (
-              <div
-                key={item.title}
-                className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
-              >
-                <div
-                  className={`relative aspect-[5/4] overflow-hidden ${
-                    imageFirst ? "lg:order-2" : ""
-                  }`}
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                <div className={imageFirst ? "lg:order-1 lg:pr-8" : "lg:pl-8"}>
-                  <h3 className="font-serif text-3xl font-light text-charcoal md:text-4xl">
-                    {item.title}
-                  </h3>
-                  <p className="mt-6 text-sm leading-[1.9] text-charcoal/70 md:text-base">
-                    {item.body}
-                  </p>
-                </div>
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
+          {expedition.experiences.map((item) => (
+            <div
+              key={item.title}
+              className="group relative aspect-[3/5] overflow-hidden bg-charcoal/10"
+            >
+              <Image
+                src={item.image}
+                alt={item.imageAlt}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 640px) 50vw, 16vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-matte-black/85 via-matte-black/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-4">
+                <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-ivory/90">
+                  {item.title}
+                </p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>

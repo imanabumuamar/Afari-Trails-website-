@@ -36,9 +36,16 @@ export type AboutWhyWeExist = {
   image: string;
 };
 
+export type AboutBehindImage = {
+  src: string;
+  name: string;
+  /** Role or title shown under the name (e.g. Founder, Creative Director). */
+  position: string;
+};
+
 export type AboutBehindTheBrand = {
   heading: string;
-  images: string[];
+  images: AboutBehindImage[];
 };
 
 export type AboutPillar = {

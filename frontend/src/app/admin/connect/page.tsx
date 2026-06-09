@@ -17,7 +17,7 @@ export default async function AdminConnectPage() {
         <p className="mt-3 max-w-2xl text-sm text-charcoal/65">
           {readOnly
             ? "You can view contact and expeditions connect content. Ask a super admin for editor access to make changes."
-            : "Edit the main contact page and expeditions connect page — one save updates both."}
+            : "Edit the contact page and expeditions connect page. Each tab shows only the sections visitors see on the live site."}
         </p>
       </div>
       <ConnectContentEditor readOnly={readOnly} />

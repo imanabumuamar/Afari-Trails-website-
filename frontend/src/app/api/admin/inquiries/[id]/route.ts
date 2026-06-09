@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
-import { roleAtLeast } from "@/lib/auth/rbac";
+import { hasPermission } from "@/lib/auth/rbac";
 import { AuthError, requireSession } from "@/lib/auth/require-session";
 
 function authResponse(error: unknown) {
@@ -14,8 +14,8 @@ function authResponse(error: unknown) {
 }
 
 async function requireMessagesAdmin() {
-  const { role, token } = await requireSession();
-  if (!roleAtLeast(role, "admin")) {
+  const { role, permissions, token } = await requireSession();
+  if (!hasPermission(role, "inbox:write", permissions)) {
     throw new AuthError("Forbidden", 403);
   }
   return { token };

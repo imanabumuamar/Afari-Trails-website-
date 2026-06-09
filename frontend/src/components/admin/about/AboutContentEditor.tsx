@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AdminField } from "@/components/admin/ventures/AdminField";
 import { AboutImageField } from "@/components/admin/about/AboutImageField";
 import { readAdminApiError } from "@/lib/admin/cms-client-error";
+import { mergeAboutData } from "@/lib/about/merge-about-data";
 import type { AboutContentData } from "@/types/about-content";
 
 const inputClass =
@@ -23,6 +24,7 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("");
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -37,7 +39,7 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
     }
 
     const doc = await res.json();
-    setData(doc.data as AboutContentData);
+    setData(mergeAboutData(doc.data as AboutContentData));
     setUpdatedAt(doc.updatedAt ?? null);
   }, []);
 
@@ -45,7 +47,7 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
     void load();
   }, [load]);
 
-  async function save(next: AboutContentData) {
+  const persist = useCallback(async (next: AboutContentData) => {
     setStatus("Saving…");
     const res = await fetch("/api/admin/content/about", {
       method: "PUT",
@@ -53,16 +55,57 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
       body: JSON.stringify({ data: next }),
     });
 
-    if (!res.ok) {
-      setStatus(await readAdminApiError(res, "Save failed."));
+    const doc = (await res.json()) as {
+      data?: AboutContentData;
+      updatedAt?: string;
+      warning?: string;
+      error?: string;
+    };
+
+    if (!res.ok || !doc.data) {
+      setStatus(doc.error ?? "Save failed.");
       return;
     }
 
-    const doc = await res.json();
-    setData(doc.data as AboutContentData);
+    setData(mergeAboutData(doc.data));
     setUpdatedAt(doc.updatedAt ?? null);
-    setStatus("Saved.");
-    setTimeout(() => setStatus(""), 2500);
+    setStatus(doc.warning ?? "Saved.");
+    setTimeout(() => setStatus(""), doc.warning ? 5000 : 2500);
+  }, []);
+
+  async function save(next: AboutContentData) {
+    await persist(next);
+  }
+
+  function schedulePersist(next: AboutContentData) {
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      void persist(next);
+    }, 500);
+  }
+
+  function mergeSyncedBehindPeople(
+    current: AboutContentData,
+    synced: AboutContentData,
+  ): AboutContentData {
+    const images = mergeAboutData(synced).behindTheBrand.images.map(
+      (syncedImg, idx) => {
+        const draft = current.behindTheBrand.images[idx];
+        if (!draft) return syncedImg;
+        return {
+          ...syncedImg,
+          name: draft.name || syncedImg.name,
+          position: draft.position || syncedImg.position,
+        };
+      },
+    );
+    return {
+      ...mergeAboutData(synced),
+      behindTheBrand: {
+        ...mergeAboutData(synced).behindTheBrand,
+        images,
+      },
+    };
   }
 
   if (loading) {
@@ -279,7 +322,10 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
         </section>
 
         <section>
-          <h3 className="font-serif text-2xl font-light">Philosophy</h3>
+          <h3 className="font-serif text-2xl font-light">Afari Philosophy</h3>
+          <p className="mt-2 text-xs text-charcoal/50">
+            Dark panel with principles on the left; quote and photo on the right.
+          </p>
           <div className="mt-6 space-y-4">
             <AdminField label="Heading">
               <input
@@ -334,13 +380,7 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
                 </AdminField>
               </div>
             ))}
-          </div>
-        </section>
-
-        <section>
-          <h3 className="font-serif text-2xl font-light">Why we exist</h3>
-          <div className="mt-6 space-y-4">
-            <AdminField label="Quote">
+            <AdminField label="Quote (over photo)">
               <textarea
                 className={textareaClass}
                 rows={3}
@@ -356,7 +396,7 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
             </AdminField>
             <AboutImageField
               fieldPath="whyWeExist.image"
-              label="Background image"
+              label="Philosophy section photo"
               src={data.whyWeExist.image}
               readOnly={readOnly}
               onUploaded={(src) =>
@@ -372,7 +412,14 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
         </section>
 
         <section>
-          <h3 className="font-serif text-2xl font-light">Behind the brand</h3>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h3 className="font-serif text-2xl font-light">Behind the brand</h3>
+            <p className="text-xs text-charcoal/50">
+              {data.behindTheBrand.images.length}{" "}
+              {data.behindTheBrand.images.length === 1 ? "person" : "people"} —
+              photo, name, and position each (name & position auto-save)
+            </p>
+          </div>
           <div className="mt-6 space-y-4">
             <AdminField label="Heading">
               <input
@@ -390,25 +437,120 @@ export function AboutContentEditor({ readOnly = false }: AboutContentEditorProps
                 }
               />
             </AdminField>
-            {data.behindTheBrand.images.map((src, i) => (
-              <AboutImageField
+            {data.behindTheBrand.images.map((img, i) => (
+              <div
                 key={i}
-                fieldPath={`behindTheBrand.images.${i}`}
-                label={`Grid image ${i + 1}`}
-                src={src}
-                readOnly={readOnly}
-                onUploaded={(newSrc) => {
-                  const images = [...data.behindTheBrand.images];
-                  images[i] = newSrc;
-                  setData({
-                    ...data,
-                    behindTheBrand: { ...data.behindTheBrand, images },
-                  });
-                }}
-                onDocumentSynced={setData}
-                onStatus={setStatus}
-              />
+                className="space-y-3 rounded border border-charcoal/10 bg-beige/30 p-4"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+                    Person {i + 1}
+                  </p>
+                  {!readOnly && (
+                    <button
+                      type="button"
+                      className="text-[10px] uppercase tracking-[0.12em] text-red-800/70 hover:text-red-900"
+                      onClick={() => {
+                        const next = {
+                          ...data,
+                          behindTheBrand: {
+                            ...data.behindTheBrand,
+                            images: data.behindTheBrand.images.filter(
+                              (_, idx) => idx !== i,
+                            ),
+                          },
+                        };
+                        setData(next);
+                        void persist(next);
+                      }}
+                    >
+                      Delete person
+                    </button>
+                  )}
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <AdminField label="Name">
+                    <input
+                      className={inputClass}
+                      value={img.name}
+                      placeholder="e.g. Sarah Mwale"
+                      disabled={readOnly}
+                      onChange={(e) => {
+                        const images = [...data.behindTheBrand.images];
+                        images[i] = { ...img, name: e.target.value };
+                        const next = {
+                          ...data,
+                          behindTheBrand: { ...data.behindTheBrand, images },
+                        };
+                        setData(next);
+                        schedulePersist(next);
+                      }}
+                    />
+                  </AdminField>
+                  <AdminField label="Position">
+                    <input
+                      className={inputClass}
+                      value={img.position}
+                      placeholder="e.g. Founder"
+                      disabled={readOnly}
+                      onChange={(e) => {
+                        const images = [...data.behindTheBrand.images];
+                        images[i] = { ...img, position: e.target.value };
+                        const next = {
+                          ...data,
+                          behindTheBrand: { ...data.behindTheBrand, images },
+                        };
+                        setData(next);
+                        schedulePersist(next);
+                      }}
+                    />
+                  </AdminField>
+                </div>
+                <AboutImageField
+                  fieldPath={`behindTheBrand.images.${i}.src`}
+                  label="Photo"
+                  src={img.src}
+                  alt={img.name || img.position}
+                  readOnly={readOnly}
+                  onUploaded={(newSrc) => {
+                    const images = [...data.behindTheBrand.images];
+                    images[i] = { ...img, src: newSrc };
+                    const next = {
+                      ...data,
+                      behindTheBrand: { ...data.behindTheBrand, images },
+                    };
+                    setData(next);
+                    schedulePersist(next);
+                  }}
+                  onDocumentSynced={(next) =>
+                    setData(mergeSyncedBehindPeople(data, next))
+                  }
+                  onStatus={setStatus}
+                />
+              </div>
             ))}
+            {!readOnly && (
+              <button
+                type="button"
+                className="text-xs uppercase tracking-[0.2em] text-charcoal/55"
+                onClick={() => {
+                  const next = {
+                    ...data,
+                    behindTheBrand: {
+                      ...data.behindTheBrand,
+                      images: [
+                        ...data.behindTheBrand.images,
+                        { src: "", name: "", position: "" },
+                      ],
+                    },
+                  };
+                  setData(next);
+                  void persist(next);
+                }}
+              >
+                + Add person
+              </button>
+            )}
           </div>
         </section>
 

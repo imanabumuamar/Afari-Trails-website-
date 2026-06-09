@@ -6,6 +6,7 @@ import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 import type {
   JournalContentData,
   JournalContentDocument,
+  JournalStoryRecord,
 } from "@/types/journal-content";
 
 export { mergeJournalData } from "@/lib/journal/merge-journal-data";

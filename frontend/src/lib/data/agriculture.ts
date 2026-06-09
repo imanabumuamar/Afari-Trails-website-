@@ -14,14 +14,7 @@ export const agricultureApproach = {
   label: "Our Approach",
   statement:
     "We believe agriculture should nourish communities, protect ecosystems, and create sustainable opportunities for future generations.",
-  themes: [
-    "Regenerative systems that restore soil and biodiversity",
-    "Land stewardship rooted in respect",
-    "Ethical production and fair partnership",
-    "Innovation guided by local knowledge",
-    "Resilience for people and place",
-    "Long-term thinking over short-term yield",
-  ],
+  body: "Our approach is grounded in regenerative systems that restore soil and biodiversity, land stewardship rooted in respect, and ethical production built on fair partnership. We pursue innovation guided by local knowledge, cultivating resilience for people and place — with long-term thinking always ahead of short-term yield.",
 } as const;
 
 export const agricultureFocusAreas = {

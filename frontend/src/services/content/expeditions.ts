@@ -24,11 +24,28 @@ export function getExpeditionsContentLocal(): ExpeditionsContentData {
 
 export const getExpeditionsContent = cache(
   async (): Promise<ExpeditionsContentData> => {
+    let localDoc: ExpeditionsContentDocument | null = null;
+    try {
+      localDoc = readJsonFile<ExpeditionsContentDocument>("expeditions.json");
+    } catch {
+      localDoc = null;
+    }
+
+    const local = localDoc
+      ? mergeExpeditionsData(localDoc.data)
+      : EXPEDITIONS_CONTENT_DEFAULTS;
+
     const doc = await fetchCmsJson<ExpeditionsContentDocument>(
       "/content/expeditions",
     );
-    if (doc?.data) return mergeExpeditionsData(doc.data);
-    return getExpeditionsContentLocal();
+    if (!doc?.data) return local;
+
+    const remote = mergeExpeditionsData(doc.data);
+    if (!localDoc?.updatedAt) return remote;
+
+    const localTime = new Date(localDoc.updatedAt).getTime();
+    const remoteTime = new Date(doc.updatedAt ?? 0).getTime();
+    return localTime >= remoteTime ? local : remote;
   },
 );
 

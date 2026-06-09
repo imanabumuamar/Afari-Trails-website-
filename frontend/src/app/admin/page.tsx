@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CMS_CONTENT_AREAS } from "@/lib/auth/content-areas";
-import { hasPermission, isSuperAdmin, roleAtLeast } from "@/lib/auth/rbac";
+import { hasPermission, isSuperAdmin } from "@/lib/auth/rbac";
 import { ROLE_DESCRIPTIONS, ROLE_LABELS } from "@/lib/auth/roles";
 import { getStaffSession } from "@/lib/auth/staff-session";
 
@@ -16,7 +16,7 @@ const SECTION_BLURBS: Record<string, string> = {
   store: "Edit hero, collections, curated picks, products, and World of Afari.",
   support: "Edit FAQ, shipping policy, and returns — all in one place.",
   connect:
-    "Edit contact and expeditions connect — hero, form copy, categories, and gallery.",
+    "Edit contact and expeditions connect — hero, form copy, and newsletter text.",
 };
 
 export default async function AdminDashboardPage() {
@@ -24,7 +24,9 @@ export default async function AdminDashboardPage() {
   const role = session?.user?.role ?? null;
   const permissions = session?.user?.permissions;
   const canManageUsers = isSuperAdmin(role);
-  const canViewMessages = role ? roleAtLeast(role, "admin") : false;
+  const canViewMessages = role
+    ? hasPermission(role, "inbox:read", permissions)
+    : false;
 
   const visibleSections = CMS_CONTENT_AREAS.filter((area) =>
     role ? hasPermission(role, `content:${area.id}:read`, permissions) : false,

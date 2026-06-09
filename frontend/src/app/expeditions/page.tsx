@@ -5,6 +5,8 @@ import { ExpeditionsHero } from "@/components/expeditions/ExpeditionsHero";
 import { FeaturedExpeditions } from "@/components/expeditions/FeaturedExpeditions";
 import { OurPromise } from "@/components/expeditions/OurPromise";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Expeditions",
   description:

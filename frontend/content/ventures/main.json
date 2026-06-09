@@ -29,7 +29,7 @@
       },
       {
         "value": "1000+",
-        "label": "Lives Impacted"
+        "label": "lives impacted "
       }
     ],
     "focusAreasSection": {
@@ -95,5 +95,5 @@
       "ctaHref": "/ventures/connect"
     }
   },
-  "updatedAt": "2026-05-31T21:54:07.160Z"
+  "updatedAt": "2026-06-08T21:17:00.183Z"
 }

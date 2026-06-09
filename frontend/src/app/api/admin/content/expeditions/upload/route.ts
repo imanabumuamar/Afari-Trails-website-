@@ -40,30 +40,31 @@ export async function POST(request: Request) {
 
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
-    const { data } = updateExpeditionsImageField(
+    const { doc } = updateExpeditionsImageField(
       expeditionId,
       field,
       buffer,
       file.type,
     );
 
-    const { data: synced, ok } = await backendFetch<ExpeditionsContentDocument>(
+    const { ok } = await backendFetch<ExpeditionsContentDocument>(
       "/content/expeditions",
       {
         method: "PUT",
         token,
-        body: JSON.stringify({ data }),
+        body: JSON.stringify({ data: doc.data }),
       },
     );
 
-    if (!ok || !synced) {
-      return NextResponse.json(
-        { error: "Image saved locally but API sync failed." },
-        { status: 502 },
-      );
+    if (!ok) {
+      return NextResponse.json({
+        ...doc,
+        warning:
+          "Image saved on this site. Remote sync failed — is the backend running?",
+      });
     }
 
-    return NextResponse.json(synced);
+    return NextResponse.json(doc);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Upload failed";
     return NextResponse.json({ error: message }, { status: 400 });

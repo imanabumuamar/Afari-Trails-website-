@@ -1,7 +1,11 @@
 "use client";
 
-import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Accordion } from "@/components/ui/Accordion";
+import Image from "next/image";
+import { ExpeditionEyebrow } from "@/components/expeditions/detail/ExpeditionEyebrow";
+import {
+  resolveItineraryDayLabel,
+  resolveSectionCopy,
+} from "@/lib/expeditions/resolve-expedition-display";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 type ExpeditionItineraryProps = {
@@ -9,26 +13,64 @@ type ExpeditionItineraryProps = {
 };
 
 export function ExpeditionItinerary({ expedition }: ExpeditionItineraryProps) {
-  const items = expedition.itinerary.map((day) => ({
-    id: `day-${day.day}`,
-    title: `Day ${day.day} — ${day.title}`,
-    content: day.description,
-  }));
+  const sections = resolveSectionCopy(expedition);
 
   return (
-    <section id="itinerary" className="scroll-mt-24 bg-ivory py-24 lg:py-36">
+    <section id="itinerary" className="scroll-mt-24 bg-beige py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="max-w-xl">
-          <SectionLabel>The Journey</SectionLabel>
-          <h2 className="font-serif text-4xl font-light text-charcoal md:text-5xl">
-            Itinerary
-          </h2>
-          <p className="mt-6 text-sm leading-relaxed text-charcoal/60">
-            A rhythm of days — atmospheric, unhurried, and open to the unexpected.
-          </p>
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-xl">
+            <ExpeditionEyebrow>{sections.itineraryLabel}</ExpeditionEyebrow>
+            <h2 className="mt-4 font-serif text-4xl font-light text-charcoal md:text-5xl">
+              {sections.itineraryHeading}
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-charcoal/60">
+              {sections.itinerarySubtext}
+            </p>
+          </div>
+          <a
+            href="#inquiry"
+            className="shrink-0 border border-charcoal/20 px-6 py-3 text-[10px] font-medium uppercase tracking-[0.22em] text-charcoal/70 transition-colors hover:border-charcoal/40 hover:text-charcoal"
+          >
+            {sections.itineraryCtaLabel}
+          </a>
         </div>
-        <div className="mt-14 lg:mt-20">
-          <Accordion items={items} />
+
+        <div className="mt-12 flex gap-5 overflow-x-auto pb-4 lg:mt-16 lg:gap-6">
+          {expedition.itinerary.map((day, index) => {
+            const image =
+              day.image ||
+              expedition.visualStrip[index % expedition.visualStrip.length]?.src ||
+              expedition.heroImage;
+
+            return (
+              <article
+                key={`${day.day}-${index}`}
+                className="w-[min(300px,78vw)] shrink-0 border border-charcoal/10 bg-ivory"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/5">
+                  <Image
+                    src={image}
+                    alt={day.imageAlt || day.title}
+                    fill
+                    className="object-cover"
+                    sizes="300px"
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-gold-muted">
+                    {resolveItineraryDayLabel(day)}
+                  </p>
+                  <h3 className="mt-2 font-serif text-xl font-light text-charcoal">
+                    {day.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-charcoal/65">
+                    {day.description}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

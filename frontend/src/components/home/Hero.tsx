@@ -101,7 +101,7 @@ export async function Hero() {
         </div>
       </div>
 
-      <div className="relative pb-16 lg:pb-20">
+      <div className="relative pb-0">
         <FeatureCards />
       </div>
     </section>

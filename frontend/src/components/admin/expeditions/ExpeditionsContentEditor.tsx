@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import type {
   ExpeditionDetailRecord,
@@ -24,15 +25,48 @@ type ExpeditionsContentEditorProps = {
 
 type Tab = "main-page" | "all-journeys" | "expeditions";
 
-export function ExpeditionsContentEditor({
+function parseTab(value: string | null): Tab {
+  if (value === "all-journeys" || value === "expeditions") return value;
+  return "main-page";
+}
+
+function ExpeditionsContentEditorInner({
   readOnly = false,
 }: ExpeditionsContentEditorProps) {
-  const [tab, setTab] = useState<Tab>("main-page");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const expFromUrl = searchParams.get("exp");
+  const tabFromUrl = parseTab(searchParams.get("tab"));
+
+  const [tab, setTab] = useState<Tab>(() =>
+    expFromUrl ? "expeditions" : tabFromUrl,
+  );
   const [data, setData] = useState<ExpeditionsContentData | null>(null);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("");
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(expFromUrl);
+
+  function syncUrl(nextTab: Tab, nextExp: string | null) {
+    const params = new URLSearchParams();
+    if (nextTab !== "main-page") params.set("tab", nextTab);
+    if (nextTab === "expeditions" && nextExp) params.set("exp", nextExp);
+    const qs = params.toString();
+    router.replace(qs ? `/admin/expeditions?${qs}` : "/admin/expeditions", {
+      scroll: false,
+    });
+  }
+
+  function changeTab(nextTab: Tab) {
+    setTab(nextTab);
+    syncUrl(nextTab, nextTab === "expeditions" ? selectedId : null);
+  }
+
+  function selectExpedition(id: string) {
+    setSelectedId(id);
+    setTab("expeditions");
+    syncUrl("expeditions", id);
+  }
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -50,14 +84,32 @@ export function ExpeditionsContentEditor({
     setData(mergeExpeditionsData(doc.data as Partial<ExpeditionsContentData>));
     setUpdatedAt(doc.updatedAt ?? null);
     setSelectedId((prev) => {
-      if (prev) return prev;
-      return doc.data?.expeditions?.[0]?.id ?? null;
+      const expeditions = doc.data?.expeditions ?? [];
+      const candidate = prev ?? expFromUrl;
+      if (
+        candidate &&
+        expeditions.some((e: ExpeditionDetailRecord) => e.id === candidate)
+      ) {
+        return candidate;
+      }
+      return expeditions[0]?.id ?? null;
     });
   }, []);
 
   useEffect(() => {
     void load();
   }, [load]);
+
+  useEffect(() => {
+    const urlExp = searchParams.get("exp");
+    const urlTab = parseTab(searchParams.get("tab"));
+    if (urlExp) {
+      setTab("expeditions");
+      setSelectedId(urlExp);
+      return;
+    }
+    setTab(urlTab);
+  }, [searchParams]);
 
   async function save(next: ExpeditionsContentData) {
     setStatus("Saving…");
@@ -67,16 +119,22 @@ export function ExpeditionsContentEditor({
       body: JSON.stringify({ data: next }),
     });
 
-    if (!res.ok) {
-      setStatus(await readAdminApiError(res, "Save failed."));
+    const doc = (await res.json()) as {
+      data?: Partial<ExpeditionsContentData>;
+      updatedAt?: string;
+      warning?: string;
+      error?: string;
+    };
+
+    if (!res.ok || !doc.data) {
+      setStatus(doc.error ?? "Save failed.");
       return;
     }
 
-    const doc = await res.json();
-    setData(mergeExpeditionsData(doc.data as Partial<ExpeditionsContentData>));
+    setData(mergeExpeditionsData(doc.data));
     setUpdatedAt(doc.updatedAt ?? null);
-    setStatus("Saved.");
-    setTimeout(() => setStatus(""), 2500);
+    setStatus(doc.warning ?? "Saved.");
+    setTimeout(() => setStatus(""), doc.warning ? 5000 : 2500);
   }
 
   function patch(partial: Partial<ExpeditionsContentData>) {
@@ -104,6 +162,7 @@ export function ExpeditionsContentEditor({
 
     if (previousId !== newId) {
       setSelectedId(newId);
+      syncUrl("expeditions", newId);
       const res = await fetch("/api/admin/content/expeditions/rename-slug", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -125,8 +184,7 @@ export function ExpeditionsContentEditor({
     }
     const expeditions = [...data.expeditions, expedition];
     patch({ expeditions });
-    setSelectedId(expedition.id);
-    setTab("expeditions");
+    selectExpedition(expedition.id);
   }
 
   function removeExpedition(id: string) {
@@ -135,7 +193,9 @@ export function ExpeditionsContentEditor({
     const featuredIds = data.featuredIds.filter((fid) => fid !== id);
     patch({ expeditions, featuredIds });
     if (selectedId === id) {
-      setSelectedId(expeditions[0]?.id ?? null);
+      const nextId = expeditions[0]?.id ?? null;
+      setSelectedId(nextId);
+      if (tab === "expeditions") syncUrl("expeditions", nextId);
     }
   }
 
@@ -155,7 +215,7 @@ export function ExpeditionsContentEditor({
         <div className="flex gap-2">
           <button
             type="button"
-            onClick={() => setTab("main-page")}
+            onClick={() => changeTab("main-page")}
             className={`px-4 py-2 text-xs uppercase tracking-[0.2em] ${
               tab === "main-page"
                 ? "bg-charcoal text-ivory"
@@ -166,7 +226,7 @@ export function ExpeditionsContentEditor({
           </button>
           <button
             type="button"
-            onClick={() => setTab("all-journeys")}
+            onClick={() => changeTab("all-journeys")}
             className={`px-4 py-2 text-xs uppercase tracking-[0.2em] ${
               tab === "all-journeys"
                 ? "bg-charcoal text-ivory"
@@ -177,7 +237,7 @@ export function ExpeditionsContentEditor({
           </button>
           <button
             type="button"
-            onClick={() => setTab("expeditions")}
+            onClick={() => changeTab("expeditions")}
             className={`px-4 py-2 text-xs uppercase tracking-[0.2em] ${
               tab === "expeditions"
                 ? "bg-charcoal text-ivory"
@@ -211,6 +271,7 @@ export function ExpeditionsContentEditor({
             featuredIds={data.featuredIds}
             readOnly={readOnly}
             onSave={(featuredIds) => patch({ featuredIds })}
+            onEditExpedition={selectExpedition}
           />
         </div>
       )}
@@ -237,20 +298,12 @@ export function ExpeditionsContentEditor({
 
       {tab === "expeditions" && (
         <div className="space-y-10">
-          <ExpeditionRegionsEditor
-            regions={data.allPage.regions}
-            readOnly={readOnly}
-            onSave={(regions) =>
-              patch({ allPage: { ...data.allPage, regions } })
-            }
-            onStatus={setStatus}
-          />
           <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
           <ExpeditionsListManager
             expeditions={data.expeditions}
             selectedId={selectedId}
             readOnly={readOnly}
-            onSelect={setSelectedId}
+            onSelect={selectExpedition}
             onAdd={addExpedition}
             onRemove={removeExpedition}
           />
@@ -275,5 +328,13 @@ export function ExpeditionsContentEditor({
         </div>
       )}
     </div>
+  );
+}
+
+export function ExpeditionsContentEditor(props: ExpeditionsContentEditorProps) {
+  return (
+    <Suspense fallback={<p className="text-sm text-charcoal/60">Loading expeditions…</p>}>
+      <ExpeditionsContentEditorInner {...props} />
+    </Suspense>
   );
 }

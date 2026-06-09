@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { SectionLabel } from "@/components/ui/SectionLabel";
+import { ExpeditionEyebrow } from "@/components/expeditions/detail/ExpeditionEyebrow";
+import { resolveSectionCopy } from "@/lib/expeditions/resolve-expedition-display";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 type ExpeditionGalleryProps = {
@@ -7,26 +8,24 @@ type ExpeditionGalleryProps = {
 };
 
 export function ExpeditionGallery({ expedition }: ExpeditionGalleryProps) {
+  if (expedition.gallery.length === 0) return null;
+  const sections = resolveSectionCopy(expedition);
+
   return (
-    <section
-      id="gallery"
-      className="scroll-mt-24 bg-matte-black py-24 lg:py-32"
-    >
+    <section id="gallery" className="scroll-mt-24 bg-beige py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <SectionLabel light>Gallery</SectionLabel>
-        <h2 className="font-serif text-4xl font-light text-ivory md:text-5xl">
-          Moments from the trail
+        <ExpeditionEyebrow>{sections.galleryLabel}</ExpeditionEyebrow>
+        <h2 className="mt-4 font-serif text-4xl font-light text-charcoal md:text-5xl">
+          {sections.galleryHeading}
         </h2>
       </div>
 
-      <div className="mx-auto mt-14 max-w-[1600px] px-3 lg:mt-20 lg:px-6">
+      <div className="mx-auto mt-12 max-w-[1600px] px-3 lg:mt-16 lg:px-6">
         <div className="columns-1 gap-2 sm:columns-2 lg:columns-3 lg:gap-3">
-          {expedition.gallery.map((frame) => (
+          {expedition.gallery.map((frame, index) => (
             <div
-              key={frame.src}
-              className={`relative mb-2 break-inside-avoid overflow-hidden lg:mb-3 ${
-                frame.wide ? "sm:col-span-2" : ""
-              }`}
+              key={`${frame.src}-${index}`}
+              className="relative mb-2 break-inside-avoid overflow-hidden lg:mb-3"
             >
               <div
                 className={`relative w-full ${
@@ -37,13 +36,22 @@ export function ExpeditionGallery({ expedition }: ExpeditionGalleryProps) {
                   src={frame.src}
                   alt={frame.alt}
                   fill
-                  className="object-cover opacity-95 transition-opacity duration-700 hover:opacity-100"
+                  className="object-cover"
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
               </div>
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="mt-12 text-center">
+        <a
+          href="#gallery"
+          className="inline-block border border-charcoal/20 px-8 py-3.5 text-[10px] font-medium uppercase tracking-[0.22em] text-charcoal/70 transition-colors hover:border-charcoal/40 hover:text-charcoal"
+        >
+          {sections.galleryCtaLabel}
+        </a>
       </div>
     </section>
   );

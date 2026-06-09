@@ -29,24 +29,36 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing image file" }, { status: 400 });
   }
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const { data } = updateConnectImageField(field, buffer, file.type);
+  try {
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const { data } = updateConnectImageField(field, buffer, file.type);
 
-  const { data: saved, ok, status } = await backendFetch<ConnectContentDocument>(
-    "/content/connect",
-    {
-      method: "PUT",
-      token,
-      body: JSON.stringify({ data }),
-    },
-  );
+    const localDoc: ConnectContentDocument = {
+      key: "main",
+      data,
+      updatedAt: new Date().toISOString(),
+    };
 
-  if (!ok || !saved) {
-    return NextResponse.json(
-      { error: "Image saved locally but API sync failed" },
-      { status: status || 502 },
+    const { ok } = await backendFetch<ConnectContentDocument>(
+      "/content/connect",
+      {
+        method: "PUT",
+        token,
+        body: JSON.stringify({ data }),
+      },
     );
-  }
 
-  return NextResponse.json(saved);
+    if (!ok) {
+      return NextResponse.json({
+        ...localDoc,
+        warning:
+          "Image saved on this site. Remote sync failed — is the backend running?",
+      });
+    }
+
+    return NextResponse.json(localDoc);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Upload failed";
+    return NextResponse.json({ error: message }, { status: 400 });
+  }
 }
