@@ -23,18 +23,18 @@ export function AfariLens({ afariLens }: AfariLensProps) {
           <p className="mt-8 text-sm leading-[1.85] text-charcoal/70 md:text-base">
             {afariLens.story}
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+          <div className="mt-10 flex flex-col items-start gap-3">
             <Link
               href={afariLens.entriesHref}
               className="inline-flex justify-center bg-charcoal px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-matte-black"
             >
-              View This Month&apos;s Entries
+              {afariLens.entriesLabel}
             </Link>
             <Link
               href={afariLens.editionsHref}
-              className="inline-flex justify-center text-xs font-medium uppercase tracking-[0.2em] text-charcoal/60 transition-colors hover:text-gold"
+              className="inline-flex text-xs font-medium uppercase tracking-[0.2em] text-charcoal/60 transition-colors hover:text-gold"
             >
-              Explore Previous Editions →
+              {afariLens.editionsLabel}
             </Link>
           </div>
         </div>

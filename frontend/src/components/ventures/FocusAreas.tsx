@@ -7,7 +7,7 @@ import { focusAreas as default_focusAreas } from "@/lib/data/ventures";
 
 function focusAreaHref(area: (typeof default_focusAreas)[number]): string {
   if ("href" in area && typeof area.href === "string") return area.href;
-  return "/ventures/connect";
+  return "/contact";
 }
 
 export async function FocusAreas() {

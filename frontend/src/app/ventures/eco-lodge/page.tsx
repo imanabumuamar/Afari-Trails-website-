@@ -1,6 +1,5 @@
 import { EcoLodgeApproach } from "@/components/ventures/eco-lodge/EcoLodgeApproach";
 import { EcoLodgeFinalCta } from "@/components/ventures/eco-lodge/EcoLodgeFinalCta";
-import { EcoLodgeGallery } from "@/components/ventures/eco-lodge/EcoLodgeGallery";
 import { EcoLodgeHero } from "@/components/ventures/eco-lodge/EcoLodgeHero";
 import { EcoLodgeInvestment } from "@/components/ventures/eco-lodge/EcoLodgeInvestment";
 import { EcoLodgeWhatWeDo } from "@/components/ventures/eco-lodge/EcoLodgeWhatWeDo";
@@ -22,7 +21,6 @@ export default function EcoLodgePage() {
       <EcoLodgeApproach />
       <EcoLodgeInvestment />
       <EcoLodgeWhyAfrica />
-      <EcoLodgeGallery />
       <EcoLodgeFinalCta />
     </>
   );

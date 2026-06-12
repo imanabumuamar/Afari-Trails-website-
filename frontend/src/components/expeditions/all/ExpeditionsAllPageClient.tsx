@@ -58,7 +58,7 @@ export function ExpeditionsAllPageClient({
                     <div className="absolute inset-0 bg-gradient-to-t from-matte-black/70 via-matte-black/10 to-transparent" />
                     <div className="absolute inset-x-0 bottom-0 p-5">
                       <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-ivory/55">
-                        {exp.location}
+                        {exp.comingSoon ? "Coming soon" : exp.location}
                       </p>
                       <h2 className="mt-2 font-serif text-xl font-light text-ivory md:text-2xl">
                         {exp.name}
@@ -70,7 +70,7 @@ export function ExpeditionsAllPageClient({
                       {exp.tagline}
                     </p>
                     <p className="mt-3 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-charcoal/45 transition-colors group-hover:text-gold">
-                      {exp.duration}
+                      {exp.comingSoon ? "Preview journey" : exp.duration}
                       <span className="transition-transform group-hover:translate-x-0.5">
                         →
                       </span>

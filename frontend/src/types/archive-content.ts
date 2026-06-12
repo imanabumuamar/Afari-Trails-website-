@@ -9,12 +9,8 @@ export type ArchiveCollection = {
   description: string;
   icon: string;
   image: string;
-};
-
-export type ArchiveLatestMoment = {
-  id: string;
-  alt: string;
-  image: string;
+  /** When true, hidden from the live archive page and gallery filters. */
+  hidden?: boolean;
 };
 
 export type ArchiveImageRecord = {
@@ -23,7 +19,8 @@ export type ArchiveImageRecord = {
   location: string;
   photographer: string;
   caption: string;
-  category: CollectionId;
+  /** Collections this photo appears in (one or more). */
+  categories: CollectionId[];
   image: string;
   span?: "tall" | "wide";
   published?: boolean;
@@ -52,9 +49,11 @@ export type ArchivePageContent = {
     photographer: string;
     story: string;
     image: string;
-    submitHref: string;
+    entriesLabel: string;
     entriesHref: string;
+    editionsLabel: string;
     editionsHref: string;
+    submitHref: string;
   };
   latestMomentsSection: {
     label: string;
@@ -78,7 +77,8 @@ export type ArchivePageContent = {
 export type ArchiveContentData = {
   page: ArchivePageContent;
   collections: ArchiveCollection[];
-  latestMoments: ArchiveLatestMoment[];
+  /** Ordered gallery image IDs shown in the Latest Moments strip. */
+  latestMoments: string[];
   images: ArchiveImageRecord[];
 };
 

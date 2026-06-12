@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductCard } from "@/components/store/ProductCard";
+import { isStoreCollectionVisible } from "@/lib/store/store-visibility";
 import {
   getStoreContent,
   getStoreContentLocal,
@@ -13,7 +14,9 @@ type PageProps = {
 
 export async function generateStaticParams() {
   const { collections } = getStoreContentLocal();
-  return collections.map((c) => ({ slug: c.slug }));
+  return collections
+    .filter(isStoreCollectionVisible)
+    .map((c) => ({ slug: c.slug }));
 }
 
 export default async function CollectionPage({ params }: PageProps) {
@@ -21,7 +24,7 @@ export default async function CollectionPage({ params }: PageProps) {
   const { collections, products } = await getStoreContent();
   const collection = collections.find((c) => c.slug === slug);
 
-  if (!collection) notFound();
+  if (!collection || !isStoreCollectionVisible(collection)) notFound();
 
   const collectionProducts = products.filter((p) => p.collection === slug);
 

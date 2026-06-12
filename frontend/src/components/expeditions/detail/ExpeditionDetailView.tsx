@@ -1,4 +1,5 @@
 import { ExpeditionAccommodation } from "@/components/expeditions/detail/ExpeditionAccommodation";
+import { ExpeditionComingSoon } from "@/components/expeditions/detail/ExpeditionComingSoon";
 import { ExpeditionDetailFooterCta } from "@/components/expeditions/detail/ExpeditionDetailFooterCta";
 import { ExpeditionDetailHero } from "@/components/expeditions/detail/ExpeditionDetailHero";
 import { ExpeditionExperiences } from "@/components/expeditions/detail/ExpeditionExperiences";
@@ -10,7 +11,10 @@ import { ExpeditionItinerary } from "@/components/expeditions/detail/ExpeditionI
 import { ExpeditionMapPricing } from "@/components/expeditions/detail/ExpeditionMapPricing";
 import { ExpeditionRelated } from "@/components/expeditions/detail/ExpeditionRelated";
 import { ExpeditionStories } from "@/components/expeditions/detail/ExpeditionStories";
-import { isExpeditionSectionVisible } from "@/lib/expeditions/expedition-page-sections";
+import {
+  isExpeditionComingSoon,
+  isExpeditionSectionVisible,
+} from "@/lib/expeditions/expedition-page-sections";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 type ExpeditionDetailViewProps = {
@@ -20,6 +24,15 @@ type ExpeditionDetailViewProps = {
 export async function ExpeditionDetailView({
   expedition,
 }: ExpeditionDetailViewProps) {
+  if (isExpeditionComingSoon(expedition)) {
+    return (
+      <>
+        <ExpeditionDetailHero expedition={expedition} comingSoonMode />
+        <ExpeditionComingSoon expedition={expedition} />
+      </>
+    );
+  }
+
   return (
     <>
       {isExpeditionSectionVisible(expedition, "hero") && (

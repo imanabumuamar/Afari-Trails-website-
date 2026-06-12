@@ -17,7 +17,7 @@ export default async function AdminArchivePage() {
         <p className="mt-3 max-w-2xl text-sm text-charcoal/65">
           {readOnly
             ? "You can view archive content. Ask a super admin for editor access to make changes."
-            : "Edit the archive page — hero, collections, Afari Lens spotlight, latest moments, submit CTA, and every gallery image."}
+            : "Edit the archive page — hero, collections, photograph of the month, latest moments, submit CTA, and every gallery image."}
         </p>
       </div>
       <ArchiveContentEditor readOnly={readOnly} />

@@ -31,7 +31,7 @@ export async function VenturesCTA() {
             {venturesCta.body}
           </p>
         <Link
-          href={venturesCta.ctaHref ?? "/ventures/connect"}
+          href={venturesCta.ctaHref ?? "/contact"}
           className="mt-8 inline-block border border-ivory/50 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10"
         >
           {venturesCta.ctaLabel ?? "Get In Touch →"}

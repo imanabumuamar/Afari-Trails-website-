@@ -8,6 +8,7 @@ export function createBlankExpedition(
     id,
     regionId: "zambia",
     published: true,
+    comingSoon: false,
     name,
     title: name,
     tagline: "",

@@ -1,11 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { readAdminApiError } from "@/lib/admin/cms-client-error";
+import { normalizeArchiveImage } from "@/lib/archive/image-categories";
+import { upsertSpotlightGalleryImage } from "@/lib/archive/spotlight-gallery";
 import type {
   ArchiveContentData,
   ArchiveImageRecord,
 } from "@/types/archive-content";
+import { ArchiveAfariLensEditor } from "@/components/admin/archive/ArchiveAfariLensEditor";
 import { ArchivePageEditor } from "@/components/admin/archive/ArchivePageEditor";
 import { ArchiveCollectionsEditor } from "@/components/admin/archive/ArchiveCollectionsEditor";
 import { ArchiveLatestMomentsEditor } from "@/components/admin/archive/ArchiveLatestMomentsEditor";
@@ -16,7 +19,7 @@ type ArchiveContentEditorProps = {
   readOnly?: boolean;
 };
 
-type Tab = "page" | "collections" | "moments" | "gallery";
+type Tab = "page" | "potm" | "collections" | "moments" | "gallery";
 
 export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorProps) {
   const [tab, setTab] = useState<Tab>("page");
@@ -25,6 +28,12 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
   const [status, setStatus] = useState("");
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
+  const dataRef = useRef<ArchiveContentData | null>(null);
+  const saveGenerationRef = useRef(0);
+
+  useEffect(() => {
+    dataRef.current = data;
+  }, [data]);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -39,7 +48,9 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
     }
 
     const doc = await res.json();
-    setData(doc.data as ArchiveContentData);
+    const loaded = doc.data as ArchiveContentData;
+    dataRef.current = loaded;
+    setData(loaded);
     setUpdatedAt(doc.updatedAt ?? null);
     setSelectedImageId((prev) => {
       if (prev && doc.data?.images?.some((i: ArchiveImageRecord) => i.id === prev)) {
@@ -54,7 +65,9 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
   }, [load]);
 
   async function save(next: ArchiveContentData) {
+    const generation = ++saveGenerationRef.current;
     setStatus("Saving…");
+
     const res = await fetch("/api/admin/content/archive", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -62,55 +75,114 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
     });
 
     if (!res.ok) {
-      setStatus(await readAdminApiError(res, "Save failed."));
+      if (generation === saveGenerationRef.current) {
+        setStatus(await readAdminApiError(res, "Save failed."));
+      }
       return;
     }
 
     const doc = await res.json();
-    setData(doc.data as ArchiveContentData);
+
+    if (generation !== saveGenerationRef.current) {
+      const latest = dataRef.current;
+      if (latest) void save(latest);
+      return;
+    }
+
+    const saved = doc.data as ArchiveContentData;
+    dataRef.current = saved;
+    setData(saved);
     setUpdatedAt(doc.updatedAt ?? null);
     setStatus("Saved.");
     setTimeout(() => setStatus(""), 2500);
   }
 
-  function patch(partial: Partial<ArchiveContentData>) {
-    if (!data) return;
-    const next = { ...data, ...partial };
+  function syncFromUpload(
+    next: ArchiveContentData,
+    updatedAt?: string | null,
+  ) {
+    saveGenerationRef.current += 1;
+    dataRef.current = next;
+    setData(next);
+    if (updatedAt) setUpdatedAt(updatedAt);
+  }
+
+  function patch(next: ArchiveContentData) {
+    dataRef.current = next;
     setData(next);
     void save(next);
   }
 
+  function patchPartial(partial: Partial<ArchiveContentData>) {
+    if (!data) return;
+    patch({ ...data, ...partial });
+  }
+
+  function patchAfariLens(afariLens: ArchiveContentData["page"]["afariLens"]) {
+    if (!data) return;
+    let next: ArchiveContentData = {
+      ...data,
+      page: { ...data.page, afariLens },
+    };
+    if (afariLens.image.trim()) {
+      next = upsertSpotlightGalleryImage(next, afariLens.image);
+    }
+    patch(next);
+  }
+
   function patchImage(image: ArchiveImageRecord) {
     if (!data) return;
-    const normalized = { ...image, published: image.published !== false };
+    const normalized = normalizeArchiveImage(image);
     const images = data.images.map((i) =>
       i.id === normalized.id ? normalized : i,
     );
     if (!images.some((i) => i.id === normalized.id)) {
       images.push(normalized);
     }
-    patch({ images });
+    patchPartial({ images });
   }
 
   function addImage(image: ArchiveImageRecord) {
     if (!data) return;
-    if (data.images.some((i) => i.id === image.id)) {
+    const normalized = normalizeArchiveImage(image);
+    if (data.images.some((i) => i.id === normalized.id)) {
       setStatus("An image with this id already exists.");
       return;
     }
-    patch({ images: [...data.images, image] });
+    patchPartial({ images: [...data.images, normalized] });
     setSelectedImageId(image.id);
     setTab("gallery");
   }
 
   function removeImage(id: string) {
     if (!data) return;
-    patch({ images: data.images.filter((i) => i.id !== id) });
+    patchPartial({
+      images: data.images.filter((i) => i.id !== id),
+      latestMoments: data.latestMoments.filter((momentId) => momentId !== id),
+    });
     if (selectedImageId === id) {
       setSelectedImageId(
         data.images.find((i) => i.id !== id)?.id ?? null,
       );
     }
+  }
+
+  function reorderImage(id: string, direction: -1 | 1) {
+    if (!data) return;
+    const index = data.images.findIndex((i) => i.id === id);
+    const target = index + direction;
+    if (index < 0 || target < 0 || target >= data.images.length) return;
+    const images = [...data.images];
+    [images[index], images[target]] = [images[target], images[index]];
+    patchPartial({ images });
+  }
+
+  function toggleImagePublished(id: string) {
+    if (!data) return;
+    const images = data.images.map((img) =>
+      img.id === id ? { ...img, published: img.published === false } : img,
+    );
+    patchPartial({ images });
   }
 
   const selectedImage = data?.images.find((i) => i.id === selectedImageId);
@@ -125,6 +197,7 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
 
   const tabs: { id: Tab; label: string }[] = [
     { id: "page", label: "Page copy" },
+    { id: "potm", label: "Photo of the month" },
     { id: "collections", label: "Collections" },
     { id: "moments", label: "Latest moments" },
     { id: "gallery", label: "Gallery" },
@@ -161,8 +234,18 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
         <ArchivePageEditor
           page={data.page}
           readOnly={readOnly}
-          onSave={(page) => patch({ page })}
-          onDocumentSynced={(next) => setData(next)}
+          onSave={(page) => patchPartial({ page })}
+          onDocumentSynced={syncFromUpload}
+          onStatus={setStatus}
+        />
+      )}
+
+      {tab === "potm" && (
+        <ArchiveAfariLensEditor
+          afariLens={data.page.afariLens}
+          readOnly={readOnly}
+          onSave={patchAfariLens}
+          onDocumentSynced={syncFromUpload}
           onStatus={setStatus}
         />
       )}
@@ -171,18 +254,18 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
         <ArchiveCollectionsEditor
           collections={data.collections}
           readOnly={readOnly}
-          onSave={(collections) => patch({ collections })}
-          onDocumentSynced={(next) => setData(next)}
+          onSave={(collections) => patchPartial({ collections })}
+          onDocumentSynced={syncFromUpload}
           onStatus={setStatus}
         />
       )}
 
       {tab === "moments" && (
         <ArchiveLatestMomentsEditor
-          moments={data.latestMoments}
+          momentIds={data.latestMoments}
+          galleryImages={data.images}
           readOnly={readOnly}
-          onSave={(latestMoments) => patch({ latestMoments })}
-          onDocumentSynced={(next) => setData(next)}
+          onSave={(latestMoments) => patchPartial({ latestMoments })}
           onStatus={setStatus}
         />
       )}
@@ -191,12 +274,18 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
         <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
           <ArchiveGalleryListManager
             images={data.images}
-            defaultCategory={data.collections[0]?.id ?? "wildlife"}
+            defaultCategory={
+              data.collections.find((c) => c.hidden !== true)?.id ??
+              data.collections[0]?.id ??
+              "wildlife"
+            }
             selectedId={selectedImageId}
             readOnly={readOnly}
             onSelect={setSelectedImageId}
             onAdd={addImage}
             onRemove={removeImage}
+            onReorder={reorderImage}
+            onTogglePublished={toggleImagePublished}
           />
           {selectedImage ? (
             <ArchiveGalleryImageEditor
@@ -205,7 +294,7 @@ export function ArchiveContentEditor({ readOnly = false }: ArchiveContentEditorP
               collections={data.collections}
               readOnly={readOnly}
               onSave={patchImage}
-              onDocumentSynced={(next) => setData(next)}
+              onDocumentSynced={syncFromUpload}
               onStatus={setStatus}
             />
           ) : (

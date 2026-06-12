@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CollectionIcon } from "@/components/archive/CollectionIcon";
+import { ARCHIVE_COLLECTIONS_PREVIEW_COUNT } from "@/lib/archive/archive-visibility";
 import type {
   ArchiveCollection,
   ArchiveGridCategory,
@@ -20,6 +22,15 @@ export function FeaturedCollections({
   section,
   onSelect,
 }: FeaturedCollectionsProps) {
+  const [expanded, setExpanded] = useState(false);
+  const visible = collections;
+  const hasMore = visible.length > ARCHIVE_COLLECTIONS_PREVIEW_COUNT;
+  const displayed = expanded
+    ? visible
+    : visible.slice(0, ARCHIVE_COLLECTIONS_PREVIEW_COUNT);
+
+  if (visible.length === 0) return null;
+
   return (
     <section id="collections" className="scroll-mt-24 bg-matte-black py-16 lg:py-20">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
@@ -39,7 +50,7 @@ export function FeaturedCollections({
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-          {collections.map((col) => (
+          {displayed.map((col) => (
             <button
               key={col.id}
               type="button"
@@ -69,6 +80,20 @@ export function FeaturedCollections({
             </button>
           ))}
         </div>
+
+        {hasMore && (
+          <div className="mt-10 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setExpanded((value) => !value)}
+              className="border border-ivory/35 px-8 py-3 text-[10px] font-medium uppercase tracking-[0.22em] text-ivory/80 transition-colors hover:border-ivory hover:text-ivory"
+            >
+              {expanded
+                ? "Show fewer collections"
+                : `Show ${visible.length - ARCHIVE_COLLECTIONS_PREVIEW_COUNT} more collections`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

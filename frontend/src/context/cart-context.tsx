@@ -9,7 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { CartItemInput, CartLine } from "@/types/cart";
+import { cartLineKey, type CartItemInput, type CartLine } from "@/types/cart";
 
 const STORAGE_KEY = "afari-cart-v1";
 
@@ -18,8 +18,8 @@ type CartContextValue = {
   itemCount: number;
   subtotal: number;
   addItem: (item: CartItemInput, quantity?: number) => void;
-  setQuantity: (slug: string, quantity: number) => void;
-  removeItem: (slug: string) => void;
+  setQuantity: (lineKey: string, quantity: number) => void;
+  removeItem: (lineKey: string) => void;
   clearCart: () => void;
 };
 
@@ -56,11 +56,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addItem = useCallback((item: CartItemInput, quantity = 1) => {
     const qty = Math.max(1, Math.min(99, Math.floor(quantity)));
+    const key = cartLineKey(item);
     setLines((prev) => {
-      const existing = prev.find((l) => l.slug === item.slug);
+      const existing = prev.find((l) => cartLineKey(l) === key);
       if (existing) {
         return prev.map((l) =>
-          l.slug === item.slug
+          cartLineKey(l) === key
             ? { ...l, quantity: Math.min(99, l.quantity + qty) }
             : l,
         );
@@ -69,21 +70,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const setQuantity = useCallback((slug: string, quantity: number) => {
+  const setQuantity = useCallback((lineKey: string, quantity: number) => {
     const qty = Math.floor(quantity);
     if (qty < 1) {
-      setLines((prev) => prev.filter((l) => l.slug !== slug));
+      setLines((prev) => prev.filter((l) => cartLineKey(l) !== lineKey));
       return;
     }
     setLines((prev) =>
       prev.map((l) =>
-        l.slug === slug ? { ...l, quantity: Math.min(99, qty) } : l,
+        cartLineKey(l) === lineKey ? { ...l, quantity: Math.min(99, qty) } : l,
       ),
     );
   }, []);
 
-  const removeItem = useCallback((slug: string) => {
-    setLines((prev) => prev.filter((l) => l.slug !== slug));
+  const removeItem = useCallback((lineKey: string) => {
+    setLines((prev) => prev.filter((l) => cartLineKey(l) !== lineKey));
   }, []);
 
   const clearCart = useCallback(() => setLines([]), []);

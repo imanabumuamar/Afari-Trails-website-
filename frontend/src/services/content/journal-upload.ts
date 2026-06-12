@@ -42,7 +42,7 @@ export function updateJournalImageField(
     mkdirSync(publicDir, { recursive: true });
     writeFileSync(path.join(publicDir, filename), file);
 
-    const src = `/images/journal/${storySlug}/${filename}`;
+    const src = `/images/journal/${storySlug}/${filename}?v=${Date.now()}`;
     const story = content.stories[index];
     const updated = setNestedValue(
       story as unknown as Record<string, unknown>,
@@ -67,7 +67,7 @@ export function updateJournalImageField(
   mkdirSync(publicDir, { recursive: true });
   writeFileSync(path.join(publicDir, filename), file);
 
-  const src = `/images/journal/page/${filename}`;
+  const src = `/images/journal/page/${filename}?v=${Date.now()}`;
   const page = setNestedValue(
     content.page as unknown as Record<string, unknown>,
     fieldPath,

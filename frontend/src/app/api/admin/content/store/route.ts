@@ -2,7 +2,17 @@ import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
 import { cmsLoadError } from "@/lib/admin/cms-api-error";
 import { AuthError, requirePermission } from "@/lib/auth/require-session";
+import { mergeStoreContentData } from "@/lib/store/merge-store-content";
 import type { StoreContentDocument } from "@/types/store-content";
+
+function normalizeStoreDocument(
+  doc: StoreContentDocument,
+): StoreContentDocument {
+  return {
+    ...doc,
+    data: mergeStoreContentData(doc.data),
+  };
+}
 
 function authResponse(error: unknown) {
   if (error instanceof AuthError) {
@@ -28,7 +38,7 @@ export async function GET() {
         { status: status || 502 },
       );
     }
-    return NextResponse.json(data);
+    return NextResponse.json(normalizeStoreDocument(data));
   } catch (error) {
     const res = authResponse(error);
     if (res) return res;
@@ -55,7 +65,7 @@ export async function PUT(request: Request) {
         { status: status || 502 },
       );
     }
-    return NextResponse.json(data);
+    return NextResponse.json(normalizeStoreDocument(data));
   } catch (error) {
     const res = authResponse(error);
     if (res) return res;

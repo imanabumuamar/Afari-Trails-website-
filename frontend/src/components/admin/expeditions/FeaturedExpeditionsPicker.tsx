@@ -1,6 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import {
+  expeditionListingStatusLabel,
+  getExpeditionListingStatus,
+  isExpeditionListed,
+} from "@/lib/expeditions/expedition-listing-status";
 import type { ExpeditionDetailRecord } from "@/types/expeditions-content";
 
 type FeaturedExpeditionsPickerProps = {
@@ -19,7 +24,7 @@ export function FeaturedExpeditionsPicker({
   onEditExpedition,
 }: FeaturedExpeditionsPickerProps) {
   const [draft, setDraft] = useState(featuredIds);
-  const published = expeditions.filter((e) => e.published !== false);
+  const published = expeditions.filter(isExpeditionListed);
 
   function toggle(id: string) {
     if (readOnly) return;
@@ -54,7 +59,7 @@ export function FeaturedExpeditionsPicker({
           section on the <code className="text-charcoal">home page</code> and the{" "}
           <code className="text-charcoal">/expeditions</code> page. The home page
           shows the first four. Order controls left-to-right layout. Only
-          published expeditions are listed.
+          Published and coming soon expeditions are listed (hidden ones are not).
         </p>
       </div>
 
@@ -77,6 +82,9 @@ export function FeaturedExpeditionsPicker({
                 />
                 <span className="text-sm text-charcoal">
                   <strong>{exp.name}</strong>
+                  <span className="ml-2 text-[10px] uppercase tracking-[0.12em] text-gold-muted">
+                    {expeditionListingStatusLabel(getExpeditionListingStatus(exp))}
+                  </span>
                   <span className="ml-2 text-charcoal/50">{exp.tagline}</span>
                 </span>
               </label>

@@ -6,6 +6,8 @@ import {
   getStoryBySlug,
 } from "@/services/content/journal";
 
+export const dynamic = "force-dynamic";
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };

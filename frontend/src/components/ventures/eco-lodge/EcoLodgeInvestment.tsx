@@ -46,13 +46,13 @@ export async function EcoLodgeInvestment() {
             </blockquote>
             <div className="mt-12 flex flex-wrap gap-4">
               <Link
-                href={section.partnerHref ?? "/ventures/partner"}
+                href={section.partnerHref ?? "/contact"}
                 className="inline-flex items-center justify-center bg-charcoal px-8 py-3.5 text-xs font-medium uppercase tracking-[0.22em] text-ivory transition-colors hover:bg-matte-black"
               >
                 {section.partnerCta}
               </Link>
               <Link
-                href={section.deckHref ?? "/ventures/connect"}
+                href={section.deckHref ?? "/contact"}
                 className="inline-flex items-center justify-center border border-charcoal/40 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.22em] text-charcoal transition-colors hover:border-charcoal hover:bg-charcoal/5"
               >
                 {section.deckCta}

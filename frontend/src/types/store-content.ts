@@ -19,6 +19,8 @@ export type CollectionIconType =
   | "trail"
   | "book";
 
+export type StorePageMode = "coming-soon" | "live";
+
 export type StoreHero = {
   label: string;
   heading: string;
@@ -32,8 +34,11 @@ export type EditorialCollection = {
   description: string;
   image: string;
   icon: CollectionIconType;
+  /** When true, hidden from the live store page but kept in the CMS. */
+  hidden?: boolean;
 };
 
+/** @deprecated Migrated to newArrivals — kept for reading legacy CMS JSON. */
 export type CuratedEssential = {
   slug: string;
   name: string;
@@ -49,6 +54,12 @@ export type WorldOfAfari = {
   cta: string;
   ctaHref: string;
   image: string;
+};
+
+/** Named choice list on a product, e.g. Size or Color. */
+export type ProductOption = {
+  name: string;
+  values: string[];
 };
 
 export type Product = {
@@ -67,14 +78,19 @@ export type Product = {
   collection: string;
   category: StoreCategory;
   gearType: GearType;
+  /** Shopper choices such as Size or Color (label + list of values). */
+  options?: ProductOption[];
   isNew?: boolean;
   related: string[];
 };
 
 export type StoreContentData = {
+  /** Public /store layout: hero-only coming soon vs full storefront. */
+  pageMode: StorePageMode;
   hero: StoreHero;
   collections: EditorialCollection[];
-  curatedEssentials: CuratedEssential[];
+  /** Product slugs featured in the New Arrivals section (order matters). */
+  newArrivals: string[];
   worldOfAfari: WorldOfAfari;
   products: Product[];
 };

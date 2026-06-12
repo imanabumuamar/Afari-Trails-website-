@@ -5,7 +5,7 @@
       "label": "STORE",
       "heading": "Designed for the Journey.",
       "subtext": "Safari-inspired apparel and expedition essentials rooted in Africa.",
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80"
+      "image": "/images/store/hero-image.jpg"
     },
     "collections": [
       {
@@ -49,44 +49,6 @@
         "description": "Journals, keepsakes, and objects that hold the rhythm of the road.",
         "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
         "icon": "book"
-      }
-    ],
-    "curatedEssentials": [
-      {
-        "slug": "expedition-field-jacket",
-        "name": "Expedition Field Jacket",
-        "color": "Khaki",
-        "priceDisplay": "$75"
-      },
-      {
-        "slug": "canvas-duffel",
-        "name": "Canvas Journey Bag",
-        "color": "Stone",
-        "priceDisplay": "$15"
-      },
-      {
-        "slug": "safari-cap",
-        "name": "Safari Cap",
-        "color": "Olive",
-        "priceDisplay": "$10"
-      },
-      {
-        "slug": "safari-shirt-dress",
-        "name": "Functional Shirt Dress",
-        "color": "Clay",
-        "priceDisplay": "$16"
-      },
-      {
-        "slug": "field-notebook",
-        "name": "Field Notebook Trio",
-        "color": "Tan",
-        "priceDisplay": "$16"
-      },
-      {
-        "slug": "expedition-scarf",
-        "name": "Lightweight Expedition Scarf",
-        "color": "Ivory",
-        "priceDisplay": "$18"
       }
     ],
     "worldOfAfari": {
@@ -360,7 +322,15 @@
           "enamel-camp-mug"
         ]
       }
+    ],
+    "newArrivals": [
+      "expedition-field-jacket",
+      "canvas-duffel",
+      "safari-cap",
+      "safari-shirt-dress",
+      "field-notebook",
+      "expedition-scarf"
     ]
   },
-  "updatedAt": "2026-05-25T19:57:01.246Z"
+  "updatedAt": "2026-06-12T14:13:10.754Z"
 }

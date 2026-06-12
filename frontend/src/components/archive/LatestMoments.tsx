@@ -1,16 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
+import { resolveLatestMoments } from "@/lib/archive/latest-moments";
 import type {
-  ArchiveLatestMoment,
+  ArchiveImageRecord,
   ArchivePageContent,
 } from "@/types/archive-content";
 
 type LatestMomentsProps = {
-  moments: ArchiveLatestMoment[];
+  momentIds: string[];
+  images: ArchiveImageRecord[];
   section: ArchivePageContent["latestMomentsSection"];
 };
 
-export function LatestMoments({ moments, section }: LatestMomentsProps) {
+export function LatestMoments({ momentIds, images, section }: LatestMomentsProps) {
+  const moments = resolveLatestMoments(momentIds, images);
+
+  if (moments.length === 0) return null;
+
   return (
     <section className="bg-beige py-16 lg:py-20">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

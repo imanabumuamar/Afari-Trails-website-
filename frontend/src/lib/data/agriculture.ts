@@ -90,49 +90,6 @@ export const agricultureCommunity = {
   imageAlt: "Farmers walking through crops at golden hour",
 } as const;
 
-export const agricultureInitiatives = {
-  label: "Future Initiatives",
-  heading: "Seeds of what comes next.",
-  intro:
-    "Visionary directions we are building toward — connected to hospitality, exploration, and place.",
-  items: [
-    "Sustainable Farm Projects",
-    "Agricultural Education Programs",
-    "Irrigation Innovation",
-    "Agroforestry",
-    "Community Food Networks",
-    "Eco-Agriculture Partnerships",
-    "Farm-to-Table Hospitality",
-  ],
-} as const;
-
-export const agricultureGallery = [
-  {
-    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-    alt: "Crops moving in wind at sunrise",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-    alt: "Soil textures in warm light",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-    alt: "Farmers working in the field",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-    alt: "River and farmland horizon",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-    alt: "Local food preparation",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-    alt: "Open landscape and sustainable systems",
-  },
-] as const;
-
 export const agriculturePartners = {
   label: "Partnerships",
   heading: "Growing alliances.",

@@ -4,7 +4,7 @@ import { getVenturePageContent } from "@/services/content/ventures";
 import { partnershipTypes as default_partnershipTypes } from "@/lib/data/partner";
 
 export async function PartnerTypes() {
-  const content = await getVenturePageContent("partner");
+  const content = await getVenturePageContent("connect");
   const partnershipTypes = content.partnershipTypes as typeof default_partnershipTypes;
 
   return (

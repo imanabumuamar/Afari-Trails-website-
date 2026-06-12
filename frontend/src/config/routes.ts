@@ -5,7 +5,7 @@
 export const ROUTES = {
   home: "/",
   ventures: "/ventures",
-  venturesPartner: "/ventures/partner",
+  venturesPartner: "/contact",
   venturesEcoLodge: "/ventures/eco-lodge",
   venturesConservation: "/ventures/conservation",
   venturesCommunity: "/ventures/community",
@@ -27,7 +27,8 @@ export const ROUTES = {
   contact: "/contact",
   connect: "/contact",
   expeditionsConnect: "/expeditions/connect",
-  venturesConnect: "/ventures/connect",
+  venturesConnect: "/contact",
+  ventureProject: (slug: string) => `/ventures/projects/${slug}`,
   faq: "/faq",
   shipping: "/shipping",
   returns: "/returns",
@@ -69,7 +70,6 @@ export const footerLinks = {
 export const DARK_HERO_PATHS: readonly string[] = [
   ROUTES.home,
   ROUTES.ventures,
-  ROUTES.venturesPartner,
   ROUTES.venturesEcoLodge,
   ROUTES.venturesConservation,
   ROUTES.venturesCommunity,
@@ -83,7 +83,6 @@ export const DARK_HERO_PATHS: readonly string[] = [
   ROUTES.about,
   ROUTES.contact,
   ROUTES.expeditionsConnect,
-  ROUTES.venturesConnect,
 ];
 
 /** Expedition detail pages use fullscreen cinematic heroes */
@@ -94,4 +93,8 @@ export function isExpeditionDetailPath(pathname: string): boolean {
     pathname !== ROUTES.expeditionsAll &&
     pathname !== ROUTES.expeditionsConnect
   );
+}
+
+export function isVentureProjectPath(pathname: string): boolean {
+  return pathname.startsWith("/ventures/projects/");
 }

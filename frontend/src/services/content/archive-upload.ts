@@ -5,10 +5,8 @@ import type {
   ArchiveContentData,
   ArchiveImageRecord,
 } from "@/types/archive-content";
-import {
-  getArchiveContentLocal,
-  saveArchiveContentLocal,
-} from "@/services/content/archive";
+import { upsertSpotlightGalleryImage } from "@/lib/archive/spotlight-gallery";
+import { saveArchiveContentLocal } from "@/services/content/archive";
 
 function imageExtension(mimeType: string): string {
   if (mimeType === "image/png") return "png";
@@ -16,31 +14,36 @@ function imageExtension(mimeType: string): string {
   return "jpg";
 }
 
+/** Same filename on re-upload — bust browser cache so replacements show immediately. */
+function versionedSrc(basePath: string, filename: string): string {
+  return `${basePath}/${filename}?v=${Date.now()}`;
+}
+
 type UploadTarget = {
   fieldPath: string;
   imageId?: string;
   collectionId?: string;
-  momentId?: string;
 };
 
 export function updateArchiveImageField(
+  base: ArchiveContentData,
   target: UploadTarget,
   file: Buffer,
   mimeType: string,
 ): { src: string; data: ArchiveContentData } {
   const ext = imageExtension(mimeType);
   const filename = `${fieldPathToFilename(target.fieldPath)}.${ext}`;
-  const content = getArchiveContentLocal();
+  const content = base;
 
   if (target.imageId) {
     const index = content.images.findIndex((img) => img.id === target.imageId);
     if (index < 0) throw new Error("Gallery image not found");
 
     const folder = path.join("public", "images", "archive", target.imageId);
-    mkdirSync(folder, { recursive: true });
+    mkdirSync(path.join(process.cwd(), folder), { recursive: true });
     writeFileSync(path.join(process.cwd(), folder, filename), file);
 
-    const src = `/images/archive/${target.imageId}/${filename}`;
+    const src = versionedSrc(`/images/archive/${target.imageId}`, filename);
     const record = content.images[index];
     const updated = setNestedValue(
       record as unknown as Record<string, unknown>,
@@ -71,34 +74,17 @@ export function updateArchiveImageField(
     mkdirSync(path.join(process.cwd(), folder), { recursive: true });
     writeFileSync(path.join(process.cwd(), folder, filename), file);
 
-    const src = `/images/archive/collections/${target.collectionId}/${filename}`;
+    const src = versionedSrc(
+      `/images/archive/collections/${target.collectionId}`,
+      filename,
+    );
     const collections = [...content.collections];
-    collections[index] = { ...collections[index], image: src };
+    collections[index] = setNestedValue(
+      collections[index] as unknown as Record<string, unknown>,
+      target.fieldPath,
+      src,
+    ) as (typeof collections)[number];
     const next = { ...content, collections };
-    saveArchiveContentLocal(next);
-    return { src, data: next };
-  }
-
-  if (target.momentId) {
-    const index = content.latestMoments.findIndex(
-      (m) => m.id === target.momentId,
-    );
-    if (index < 0) throw new Error("Moment not found");
-
-    const folder = path.join(
-      "public",
-      "images",
-      "archive",
-      "moments",
-      target.momentId,
-    );
-    mkdirSync(path.join(process.cwd(), folder), { recursive: true });
-    writeFileSync(path.join(process.cwd(), folder, filename), file);
-
-    const src = `/images/archive/moments/${target.momentId}/${filename}`;
-    const latestMoments = [...content.latestMoments];
-    latestMoments[index] = { ...latestMoments[index], image: src };
-    const next = { ...content, latestMoments };
     saveArchiveContentLocal(next);
     return { src, data: next };
   }
@@ -107,14 +93,17 @@ export function updateArchiveImageField(
   mkdirSync(folder, { recursive: true });
   writeFileSync(path.join(folder, filename), file);
 
-  const src = `/images/archive/page/${filename}`;
+  const src = versionedSrc("/images/archive/page", filename);
   const page = setNestedValue(
     content.page as unknown as Record<string, unknown>,
     target.fieldPath,
     src,
   ) as ArchiveContentData["page"];
 
-  const next = { ...content, page };
+  let next: ArchiveContentData = { ...content, page };
+  if (target.fieldPath === "afariLens.image") {
+    next = upsertSpotlightGalleryImage(next, src);
+  }
   saveArchiveContentLocal(next);
   return { src, data: next };
 }

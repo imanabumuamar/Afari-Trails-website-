@@ -13,7 +13,7 @@ const SECTION_BLURBS: Record<string, string> = {
   archive:
     "Edit collections, gallery images, Afari Lens copy, and submit page text.",
   about: "Edit hero, brand story, philosophy, vision pillars, and contact CTA.",
-  store: "Edit hero, collections, curated picks, products, and World of Afari.",
+  store: "Edit page copy, collections, new arrivals, and store items.",
   support: "Edit FAQ, shipping policy, and returns — all in one place.",
   connect:
     "Edit contact and expeditions connect — hero, form copy, and newsletter text.",

@@ -1,6 +1,8 @@
 import { JournalPageContent } from "@/components/journal/JournalPageContent";
 import { getJournalContent } from "@/services/content/journal";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Journal",
   description:

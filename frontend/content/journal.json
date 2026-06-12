@@ -6,7 +6,7 @@
         "label": "Stories From the Trail",
         "heading": "Journal",
         "description": "Thoughts, stories, and field notes from our journeys across Africa. Reflections on nature, culture, conservation, and the human experience.",
-        "image": "/images/journal/page/hero-image.png"
+        "image": "/images/journal/page/hero-image.png?v=1781183927123"
       },
       "newsletter": {
         "heading": "Stories. Inspiration. Africa.",
@@ -56,7 +56,7 @@
         "image": "/images/journal/rhythm-of-the-zambezi/image.png",
         "featured": true,
         "body": "The Rhythm of the Zambezi\n\nThere are rivers that simply flow, and then there is the Zambezi.\n\nStretching across the heart of Southern Africa, the Zambezi is more than a waterway—it is a living force that shapes landscapes, sustains wildlife, and inspires generations. Its rhythm can be heard in the rush of rapids, the distant call of fish eagles, and the gentle movement of water against the riverbanks at sunset.\n\nAlong its course, life unfolds in perfect harmony. Elephants gather to drink at dawn, hippos emerge from the water as evening approaches, and countless species depend on the river's seasonal pulse. The Zambezi is the lifeblood of the wilderness, connecting ecosystems across vast distances.\n\nFor travelers, the river offers a different measure of time. Here, schedules fade into the background and nature sets the pace. A sunrise cruise becomes an opportunity to witness the awakening of the wild. A quiet afternoon on the riverbank becomes a moment of reflection. Every bend in the river reveals a new story waiting to be discovered.\n\nPerhaps nowhere is the river's power more evident than where it plunges dramatically over the edge of one of the world's greatest natural wonders, Victoria Falls. Known locally as \"The Smoke That Thunders,\" the falls embody the raw energy and spirit of the Zambezi.\n\nYet beyond its dramatic moments, the river's true magic lies in its balance. It can be powerful and peaceful, untamed and welcoming, ancient and ever-changing. This duality creates an experience that resonates with all who encounter it.\n\nAt Afari Trails, we view the Zambezi as more than a destination. It is a journey through some of Africa's most remarkable landscapes, where adventure, wildlife, culture, and conservation come together. Each expedition along its waters reveals a deeper connection to the natural world and a greater appreciation for its delicate rhythms.\n\nTo follow the Zambezi is to embrace the pulse of Africa itself. Its rhythm is timeless, carrying stories of the past while guiding those who seek new discoveries.\n\nAnd for those willing to listen, the river never stops speaking.\n",
-        "published": true
+        "published": false
       },
       {
         "slug": "guardians-of-the-wild",
@@ -69,7 +69,7 @@
         "image": "/images/journal/guardians-of-the-wild/image.png",
         "featuredSide": true,
         "body": "Guardians of the Wild\n\nIn the vast expanse of untamed landscapes, there exists a quiet force that holds everything together. Not always seen, often underappreciated, but absolutely essential. These are the guardians of the wild.\n\nThey are not defined by a single role. Some move on foot through dense bush tracking wildlife movements and protecting fragile ecosystems. Others work behind the scenes, studying patterns, restoring habitats, and ensuring that the balance between nature and human activity is not broken. Together, they form an invisible shield around the natural world.\n\nTo be a guardian of the wild is to understand responsibility in its purest form. It means recognizing that every animal, every tree, and every river is part of a system that depends on careful protection. Nothing exists in isolation. Every action has consequences that ripple far beyond what can immediately be seen.\n\nThese guardians often work in conditions that demand patience, resilience, and deep respect for nature. Long days under the sun, nights spent listening to the sounds of the wilderness, and constant awareness of subtle changes in the environment are part of their reality. Their work is not driven by recognition, but by purpose.\n\nYet guardianship is not limited to professionals alone. It extends to local communities who have lived alongside wildlife for generations, guided by traditional knowledge and an intimate understanding of the land. It includes guides who interpret the wilderness for others, travelers who choose responsible exploration, and organizations committed to preserving what remains.\n\nEvery protected habitat, every recovered species, every restored ecosystem is a reflection of this shared responsibility. Conservation is not a distant idea—it is a daily commitment carried by many hands working quietly and consistently.\n\nAt Afari Trails, we see these guardians as the foundation of every meaningful journey. Without them, the wilderness would not remain wild. Their efforts ensure that future generations will still have the opportunity to experience landscapes where nature leads and humans listen.\n\nThe role of a guardian is not about control. It is about care. It is about standing between what is fragile and what threatens to disrupt it, and choosing to protect rather than exploit.\n\nThe wild does not survive by chance. It survives because someone chooses to guard it.\n\nAnd in that choice, the future of the wilderness is secured.\n",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -83,7 +83,7 @@
         "image": "/images/journal/traditions-that-endure/image.png",
         "featuredSide": true,
         "body": "Traditions That Endure\n\nIn a rapidly changing world, there are traditions that continue to stand the test of time. Passed from one generation to the next, they serve as living connections to history, identity, and community.\n\nAcross Africa, traditions are woven into everyday life. They can be found in stories shared around evening fires, in the craftsmanship of skilled artisans, in ceremonies that mark life's milestones, and in the deep respect shown to both elders and the natural world. These practices are more than customs—they are expressions of collective wisdom accumulated over centuries.\n\nTraditions endure because they provide a sense of belonging. They remind communities of who they are and where they come from. While modern influences continue to shape societies, many cultural practices remain deeply rooted, adapting without losing their essence.\n\nIn Zambia and throughout the continent, cultural heritage is reflected in music, dance, language, cuisine, and celebration. Seasonal gatherings, traditional knowledge, and community values continue to play an important role in daily life, preserving stories that might otherwise be forgotten.\n\nFor travelers, these traditions offer something that cannot be replicated or manufactured: authenticity. They provide opportunities to engage with local cultures in meaningful ways, fostering understanding and respect between people from different backgrounds.\n\nAt Afari Trails, we believe that every journey should go beyond the landscape. While Africa's wildlife and wilderness inspire awe, its cultural heritage provides depth and context to the experience. By embracing local traditions and supporting communities, travel becomes not only an adventure but also a bridge between worlds.\n\nThe endurance of tradition is a testament to resilience. It reflects the ability of cultures to preserve their identity while navigating change. These enduring practices continue to enrich communities, strengthen connections, and inspire future generations.\n\nAs visitors and custodians of these stories, we have the privilege of learning from them. In doing so, we discover that tradition is not merely a reflection of the past—it is a living part of the present and a foundation for the future.\n\nSome things change with time. The most meaningful traditions endure.\n",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -97,7 +97,7 @@
         "image": "/images/journal/in-the-presence-of-giants/image.png",
         "featuredSide": true,
         "body": " The Presence of the Giants\n\nAcross the vast wilderness of Africa, there is a feeling that words often fail to capture. It is not simply the beauty of the landscape, nor the thrill of adventure. It is something deeper—the undeniable presence of the giants.\n\nFrom the towering elephants that shape entire ecosystems to the ancient baobab trees that have witnessed centuries of history, Africa's giants command respect. Their presence reminds us that nature operates on a scale far greater than ourselves.\n\nStanding before a mature bull elephant as it moves silently through the bush is a humbling experience. Every step carries strength, wisdom, and a connection to generations that came before. These magnificent creatures are not only symbols of Africa's wild heritage but also vital guardians of the ecosystems they inhabit.\n\nYet the giants are not limited to wildlife. The landscapes themselves possess a grandeur that inspires awe. Endless savannahs, rugged escarpments, mighty rivers, and ancient forests tell stories written over millions of years. They are reminders of a world that existed long before us and will continue long after.\n\nAt Afari Trails, we believe that true adventure is not about conquering nature—it is about experiencing it with respect and wonder. Our expeditions are designed to bring travelers closer to these remarkable places and creatures, creating meaningful encounters that leave lasting impressions.\n\nThe presence of the giants teaches patience, resilience, and perspective. In their company, we are reminded of our place within a much larger story—one of wilderness, conservation, and coexistence.\n\nTo witness these giants is a privilege. To protect them is a responsibility. And to share their world, even for a moment, is an experience that stays with us forever.\n\nThe giants are still here. Their footsteps still echo across the wild landscapes of Africa. The question is not whether they exist, but whether we are willing to listen.\n",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -110,7 +110,7 @@
         "dateDisplay": "MAR 22, 2026",
         "image": "/images/journal/the-art-of-patience/image.png",
         "body": "# The Art of Patience\n\nThe wilderness moves at its own pace.\n\nIn a world driven by speed, instant results, and constant activity, the natural world offers a different lesson—one of patience. It is a lesson that has shaped life across Africa's landscapes for thousands of years and continues to reveal itself to those willing to slow down and observe.\n\nPatience is at the heart of every meaningful encounter in the wild. A leopard may remain hidden for hours before emerging from the shadows. A herd of elephants may appear only after a long, quiet wait beside a waterhole. The most extraordinary moments often arrive not through pursuit, but through presence.\n\nFor experienced guides, patience is an essential skill. Understanding animal behavior requires careful observation, attention to subtle signs, and the willingness to allow nature to unfold on its own terms. The bush rewards those who wait, revealing stories that would otherwise go unnoticed.\n\nYet the art of patience extends beyond wildlife. It is found in the gradual growth of ancient trees, the seasonal return of migratory birds, and the slow shaping of landscapes by wind, water, and time. Nature reminds us that lasting beauty and strength are rarely created overnight.\n\nTravel itself becomes richer when approached with patience. Rather than rushing from one destination to another, we begin to appreciate the details—the distant call of a fish eagle, the tracks left in the sand at dawn, the changing colors of the sky as day gives way to evening. These moments, often overlooked, become the most memorable.\n\nAt Afari Trails, we believe that the greatest adventures are not measured by how much ground is covered, but by the depth of the experience. Patience allows travelers to connect more deeply with the landscapes they explore, the people they meet, and the stories they encounter along the way.\n\nThe wilderness teaches that not everything can be hurried. Some discoveries require time. Some experiences demand stillness. Some rewards come only to those willing to wait.\n\nIn learning the art of patience, we find something increasingly rare: the ability to be fully present.\n\nAnd often, that is where the true journey begins.\n",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -123,7 +123,7 @@
         "dateDisplay": "MAR 15, 2026",
         "image": "/images/journal/life-around-the-campfire/image.png",
         "body": "Life Around the Campfire\n\nAs the sun slips below the horizon and the African wilderness settles into the evening, a campfire comes to life. Its warm glow pushes back the darkness, creating a gathering place where stories are shared, friendships are formed, and memories are made.\n\nFor generations, the campfire has been at the heart of life in the wild. Long before modern comforts existed, people gathered around its flames for warmth, protection, and companionship. Today, it remains one of the most authentic and meaningful experiences of a safari journey.\n\nThere is something timeless about sitting beneath a sky filled with stars, listening to the distant sounds of the bush. The crackle of burning wood blends with the calls of nocturnal wildlife, creating a soundtrack that cannot be found anywhere else. In these moments, the pace of everyday life begins to fade.\n\nAround the campfire, stories naturally emerge. Guides share tales of remarkable wildlife encounters. Travelers recount the highlights of the day’s adventures. Conversations flow freely, unhurried by schedules or distractions. Strangers often become friends, connected by a shared appreciation for the wilderness that surrounds them.\n\nThe campfire is also a place of reflection. As flames dance against the night, there is an opportunity to pause and absorb the experiences of the journey. The excitement of a close wildlife sighting, the beauty of a sunrise over the savannah, and the simple joy of being immersed in nature take on a deeper meaning.\n\nIn Africa, where storytelling has long been an important part of cultural heritage, the campfire continues to serve as a place where knowledge, traditions, and experiences are passed from one generation to the next. It is a reminder that some of the most valuable moments in life are not found in grand events, but in shared experiences.\n\nAt Afari Trails, we believe that the campfire represents more than an evening ritual. It symbolizes connection—to nature, to culture, and to one another. It is where adventure meets reflection and where the spirit of the journey truly comes alive.\n\nLong after the fire has faded and the embers have cooled, the memories created around it remain. They travel with us, becoming part of the stories we carry long after we leave the wilderness behind.\n\nFor many travelers, the safari may begin with the landscape. But it is life around the campfire that often stays in the heart forever.\n",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -136,7 +136,7 @@
         "dateDisplay": "MAR 8, 2026",
         "image": "/images/journal/voices-of-the-delta/image.png",
         "body": "Voices of the Delta\n\nThere are places where nature speaks in a language all its own. The delta is one of them.\n\nIts voice is not found in words, but in the rustle of reeds moving with the wind, the gentle flow of water through hidden channels, and the distant calls of wildlife echoing across the floodplains. Together, these sounds create a rhythm that has defined life here for centuries.\n\nA delta is a place of connection—a meeting point between land and water, movement and stillness, wilderness and life. It is an ever-changing landscape where each season brings new stories. Rising waters reshape pathways, attract migrating species, and breathe life into one of nature’s most remarkable ecosystems.\n\nAt dawn, the delta awakens slowly. Birds fill the air with song as the first light spreads across the water. Antelope emerge from the mist-covered grasslands, while elephants navigate ancient routes between islands and channels. Every sound contributes to a living symphony that unfolds with the passing of the day.\n\nYet the voices of the delta are not only those of wildlife. They include the people who have long called these landscapes home. Generations of local communities have developed a deep understanding of the waterways, seasons, and natural cycles that sustain life. Their knowledge and traditions are woven into the story of the delta itself.\n\nTo travel through a delta is to enter a world that encourages observation and patience. The landscape does not reveal everything at once. Its beauty lies in quiet discoveries—a hidden lagoon, the flash of wings above the reeds, the movement of water beneath a traditional canoe. The more carefully one listens, the more the delta has to say.\n\nAt Afari Trails, we believe that the most meaningful journeys are those that foster a connection with place. Exploring the delta offers an opportunity to experience nature in its purest form, where every sound, movement, and encounter contributes to a deeper understanding of the wild.\n\nThe voices of the delta remind us that wilderness is not silent. It is alive with stories, relationships, and rhythms that have endured for generations.\n\nAll we need to do is listen.\n\nFor those who do, the delta speaks volumes.\n",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -149,7 +149,7 @@
         "dateDisplay": "FEB 28, 2026",
         "image": "/images/journal/guides-of-the-trail/image.png",
         "body": "Guides of the Trail\n\nEvery great journey has its guides.\n\nBeyond the landscapes, the wildlife, and the destinations themselves, there are individuals whose knowledge and passion transform an expedition into a truly memorable experience. They are the guides of the trail—the people who help travelers see beyond what is visible and understand the deeper stories of the wilderness.\n\nA skilled guide does far more than lead the way. They interpret the landscape, read the signs left behind by wildlife, and reveal the intricate connections that exist within nature. A broken branch, a distant call, or a set of tracks pressed into the earth can tell a story that might otherwise go unnoticed.\n\nYears of experience often lie behind this knowledge. Many guides develop an extraordinary understanding of the environments they work within, learning to recognize subtle details that escape the untrained eye. Their expertise is built through patience, observation, and a lifelong respect for the natural world.\n\nYet the role of a guide extends beyond knowledge alone. Great guides are storytellers, educators, and ambassadors of the places they call home. They share local history, cultural traditions, conservation efforts, and personal experiences that bring depth and meaning to every journey.\n\nIn remote wilderness areas, guides also provide something invaluable: confidence. Their presence allows travelers to explore unfamiliar environments with a sense of safety and trust. Whether navigating a river, crossing a savannah, or tracking wildlife on foot, they help create experiences that are both exciting and responsible.\n\nAt Afari Trails, we recognize that exceptional guides are at the heart of exceptional adventures. Their passion, professionalism, and dedication shape every expedition, turning moments into memories and journeys into lasting connections with the natural world.\n\nThe most remarkable guides understand that the trail is not simply a route from one place to another. It is an opportunity for discovery. Every path has a story, every landscape holds a lesson, and every journey offers a chance to see the world from a new perspective.\n\nLong after the tracks have faded and the expedition has ended, the wisdom shared by the guides of the trail remains.\n\nFor it is often the people who lead the journey who leave the greatest impression.\n",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -162,7 +162,7 @@
         "dateDisplay": "FEB 14, 2026",
         "image": "/images/journal/conservation-is-community/image.png",
         "body": "",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -175,7 +175,7 @@
         "dateDisplay": "JAN 30, 2026",
         "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
         "body": " Why We Walk Slower\n\nIn the modern world, speed is often celebrated. We move quickly, make decisions rapidly, and measure success by how much we can accomplish in the shortest amount of time. Yet in the wilderness, a different approach reveals itself.\n\nWe walk slower.\n\nNot because we have less to do, but because there is more to see.\n\nA slower pace allows us to notice the details that are often missed. The fresh tracks crossing a sandy path. The movement of leaves that signals a hidden animal nearby. The distant call of a bird announcing the start of a new day. These small moments are easy to overlook when rushing through the landscape.\n\nWalking slowly is also a sign of respect. The wilderness is not a place to be conquered or hurried through. It is a living environment with its own rhythms and patterns. By moving at a measured pace, we become guests rather than intruders, allowing nature to reveal itself naturally.\n\nMany of the most memorable safari experiences occur when there is no rush. A quiet encounter with a grazing elephant. The sight of a giraffe emerging from behind an acacia tree. The realization that a landscape is far more alive than it first appeared. These moments cannot be scheduled or forced—they are discovered through patience and presence.\n\nA slower journey also creates space for reflection. The noise of everyday life begins to fade, replaced by the sounds of the natural world. Conversations become more meaningful. Observations become sharper. The simple act of walking becomes an opportunity to reconnect with our surroundings.\n\nAt Afari Trails, we believe that travel is not about moving from one destination to the next as quickly as possible. It is about experiencing a place fully. By slowing down, we gain a deeper understanding of the landscapes, wildlife, and cultures that make each journey unique.\n\nThe wilderness teaches us that not every path is meant to be rushed. Some are meant to be explored carefully, step by step, with curiosity and appreciation.\n\nWe walk slower because the journey itself matters.\n\nAnd sometimes, the slower we move, the more we discover.\n",
-        "published": true,
+        "published": false,
         "featured": false
       },
       {
@@ -188,15 +188,21 @@
         "readTime": "5 MIN READ",
         "dateDisplay": "JAN 1, 2026",
         "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=85",
-        "published": true
+        "published": false,
+        "featured": false
       }
     ],
-    "latestStorySlugs": [],
+    "latestStorySlugs": [
+      "rhythm-of-the-zambezi",
+      "in-the-presence-of-giants",
+      "traditions-that-endure",
+      "guardians-of-the-wild"
+    ],
     "homepageStorySlugs": [
       "rhythm-of-the-zambezi",
       "guardians-of-the-wild",
       "traditions-that-endure"
     ]
   },
-  "updatedAt": "2026-06-04T15:48:27.531Z"
+  "updatedAt": "2026-06-12T16:33:27.679Z"
 }

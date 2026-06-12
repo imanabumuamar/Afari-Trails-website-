@@ -1,7 +1,6 @@
 export type {
   ArchiveGridCategory,
   ArchiveCollection,
-  ArchiveLatestMoment,
   ArchiveImageRecord,
   ArchiveImageRecord as ArchiveImage,
   ArchivePageContent,

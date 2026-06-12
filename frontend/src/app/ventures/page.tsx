@@ -1,4 +1,5 @@
-import { FeaturedProject } from "@/components/ventures/FeaturedProject";
+import { FeaturedProjects } from "@/components/ventures/FeaturedProjects";
+import { VenturesPartnersCollaborations } from "@/components/ventures/VenturesPartnersCollaborations";
 import { FocusAreas } from "@/components/ventures/FocusAreas";
 import { VenturesCTA } from "@/components/ventures/VenturesCTA";
 import { VenturesHero } from "@/components/ventures/VenturesHero";
@@ -18,7 +19,8 @@ export default function VenturesPage() {
       <VenturesMission />
       <VenturesStats />
       <FocusAreas />
-      <FeaturedProject />
+      <FeaturedProjects />
+      <VenturesPartnersCollaborations />
       <VenturesCTA />
     </>
   );

@@ -2,6 +2,7 @@
 
 import {
   EXPEDITION_PAGE_SECTIONS,
+  isExpeditionComingSoon,
   resolveExpeditionSectionVisibility,
   type ExpeditionPageSectionKey,
 } from "@/lib/expeditions/expedition-page-sections";
@@ -19,6 +20,7 @@ export function ExpeditionSectionVisibilityEditor({
   setDraft,
 }: ExpeditionSectionVisibilityEditorProps) {
   const visibility = resolveExpeditionSectionVisibility(draft);
+  const comingSoon = isExpeditionComingSoon(draft);
 
   function setVisible(key: ExpeditionPageSectionKey, visible: boolean) {
     setDraft({
@@ -45,6 +47,12 @@ export function ExpeditionSectionVisibilityEditor({
             Choose which sections appear on the public expedition page. Hidden
             sections keep their content saved — you can turn them back on anytime.
           </p>
+          {comingSoon && (
+            <p className="mt-3 max-w-xl rounded border border-gold/30 bg-gold/10 px-3 py-2 text-xs leading-relaxed text-charcoal/70">
+              Coming soon is on — visitors see the full hero plus a coming soon
+              section below. These toggles apply after you turn coming soon off.
+            </p>
+          )}
         </div>
         <p className="text-xs text-charcoal/45">
           {visibleCount} of {EXPEDITION_PAGE_SECTIONS.length} visible

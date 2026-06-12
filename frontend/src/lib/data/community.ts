@@ -143,21 +143,6 @@ export const communityCraftsmanship = {
   ],
 } as const;
 
-export const communityInitiatives = {
-  label: "Future Initiatives",
-  heading: "Directions we are building toward.",
-  intro:
-    "Conceptual today — foundational tomorrow. Initiatives shaped with community leaders and creative partners.",
-  items: [
-    "Photography Mentorships",
-    "Artisan Collaborations",
-    "Cultural Storytelling Projects",
-    "Local Expedition Training",
-    "Scholarship Programs",
-    "Community Tourism Partnerships",
-  ],
-} as const;
-
 export const communityGallery = [
   {
     src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",

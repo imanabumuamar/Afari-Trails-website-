@@ -16,5 +16,6 @@ export function createBlankArchiveCollection(): ArchiveCollection {
     description: "",
     icon: "wildlife",
     image: "",
+    hidden: false,
   };
 }

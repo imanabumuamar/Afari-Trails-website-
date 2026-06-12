@@ -109,3 +109,15 @@ export function isExpeditionSectionVisible(
 ): boolean {
   return resolveExpeditionSectionVisibility(expedition)[key];
 }
+
+export function isExpeditionComingSoon(expedition: ExpeditionDetail): boolean {
+  return expedition.comingSoon === true;
+}
+
+export {
+  applyExpeditionListingStatus,
+  expeditionListingStatusLabel,
+  getExpeditionListingStatus,
+  isExpeditionListed,
+  type ExpeditionListingStatus,
+} from "@/lib/expeditions/expedition-listing-status";

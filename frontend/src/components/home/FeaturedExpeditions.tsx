@@ -41,10 +41,10 @@ export async function FeaturedExpeditions() {
                   {exp.name}
                 </h3>
                 <p className="mt-1 text-[11px] uppercase tracking-[0.15em] text-charcoal/50">
-                  Zambia
+                  {exp.comingSoon ? "Coming soon" : "Zambia"}
                 </p>
                 <span className="mt-3 inline-block text-[10px] uppercase tracking-[0.2em] text-charcoal/60 transition-colors group-hover:text-gold">
-                  View Expedition →
+                  {exp.comingSoon ? "Preview journey →" : "View Expedition →"}
                 </span>
               </div>
             </Link>

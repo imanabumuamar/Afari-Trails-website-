@@ -66,7 +66,7 @@
         "quote": "The wilderness has a way of returning us to ourselves.",
         "readyLabel": "Ready to begin your journey?",
         "boxText": "Let us design a private expedition tailored to your pace, interests, and style.",
-        "image": "/images/expeditions/page/expeditionsCta-image.jpg?v=1781038260753"
+        "image": "/images/expeditions/page/expeditionsCta-image.jpg?v=1781124622578"
       }
     },
     "allPage": {
@@ -74,7 +74,7 @@
         "label": "Expeditions",
         "heading": "All journeys",
         "subtext": "Every expedition is a world of its own — curated for presence, guided with care, and paced for the wild. Choose the journey that calls to you.",
-        "image": "/images/expeditions/all/allPage-hero-image.jpg?v=1781038512675",
+        "image": "/images/expeditions/all/allPage-hero-image.jpg?v=1781125091545",
         "imageAlt": "African wilderness at golden hour",
         "backLabel": "← Back to expeditions"
       },
@@ -116,7 +116,7 @@
         "title": "South Luangwa Wilderness Expedition",
         "tagline": "Walking safaris and leopard country.",
         "metaDescription": "A cinematic journey through Zambia's South Luangwa — walking safaris, river systems, and intimate wilderness camps paced for presence.",
-        "heroImage": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
+        "heroImage": "/images/expeditions/south-luangwa/heroImage.jpg?v=1781117853410",
         "locationLabel": "Zambia • South Luangwa National Park",
         "heroStats": [
           {
@@ -400,7 +400,8 @@
           "kafue"
         ],
         "closingQuote": "The wilderness changes more than scenery.",
-        "published": true
+        "published": false,
+        "comingSoon": true
       },
       {
         "id": "lower-zambezi",
@@ -408,7 +409,7 @@
         "title": "Lower Zambezi River Expedition",
         "tagline": "River channels and golden-hour canoes.",
         "metaDescription": "Canoe the Zambezi, track wildlife along forested banks, and settle into riverside camps on an unhurried Lower Zambezi expedition.",
-        "heroImage": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
+        "heroImage": "/images/expeditions/lower-zambezi/heroImage.jpg?v=1781117960406",
         "quickDetails": [
           "Zambia",
           "5 Days",
@@ -583,7 +584,8 @@
           "livingstone"
         ],
         "closingQuote": "Some journeys stay with you long after the trail ends.",
-        "published": true
+        "published": false,
+        "comingSoon": true
       },
       {
         "id": "livingstone",
@@ -591,7 +593,7 @@
         "title": "Livingstone & Victoria Falls Expedition",
         "tagline": "Victoria Falls and the edge of adventure.",
         "metaDescription": "Stand before Victoria Falls, explore the Zambezi, and discover Livingstone — where natural wonder meets thoughtful adventure.",
-        "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
+        "heroImage": "/images/expeditions/livingstone/heroImage.jpg?v=1781125228953",
         "quickDetails": [
           "Zambia",
           "4 Days",
@@ -749,7 +751,8 @@
           "cultural-heritage"
         ],
         "closingQuote": "The wilderness changes more than scenery.",
-        "published": true
+        "published": false,
+        "comingSoon": true
       },
       {
         "id": "kafue",
@@ -757,7 +760,7 @@
         "title": "Kafue Wilderness Expedition",
         "tagline": "Floodplains, cheetah, and vast wilderness.",
         "metaDescription": "Explore Zambia's vast Kafue — remote floodplains, cheetah country, and luxury bush camps far from the crowds.",
-        "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
+        "heroImage": "/images/expeditions/kafue/heroImage.jpg?v=1781125349344",
         "quickDetails": [
           "Zambia",
           "8 Days",
@@ -939,7 +942,8 @@
           "lower-zambezi"
         ],
         "closingQuote": "Some journeys stay with you long after the trail ends.",
-        "published": true
+        "published": false,
+        "comingSoon": true
       },
       {
         "id": "cultural-heritage",
@@ -947,7 +951,7 @@
         "title": "Zambian Cultural Heritage Expedition",
         "tagline": "Traditions, artisans, and living heritage.",
         "metaDescription": "Connect with Zambia's living heritage — artisans, communities, and landscapes woven into a thoughtful cultural expedition.",
-        "heroImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
+        "heroImage": "/images/expeditions/cultural-heritage/heroImage.jpg?v=1781125555727",
         "quickDetails": [
           "Zambia",
           "5 Days",
@@ -1109,17 +1113,19 @@
           "south-luangwa"
         ],
         "closingQuote": "Some journeys stay with you long after the trail ends.",
-        "published": true
+        "published": false,
+        "brochureUrl": "https://maps.app.goo.gl/KbSK14xudRnaoTYY9",
+        "comingSoon": true
       },
       {
         "id": "lusaka-tour",
         "regionId": "zambia",
-        "published": true,
+        "published": false,
         "name": "lusaka tour",
         "title": "lusaka tour",
         "tagline": "",
         "metaDescription": "",
-        "heroImage": "https://images.unsplash.com/photo-1516426122078-c23e178198bf?w=2400&q=85",
+        "heroImage": "/images/expeditions/lusaka-tour/heroImage.jpg?v=1781125390622",
         "quickDetails": [
           "Zambia",
           "5 Days",
@@ -1182,9 +1188,10 @@
           "subtext": "Tell us when you would like to travel."
         },
         "relatedIds": [],
-        "closingQuote": ""
+        "closingQuote": "",
+        "comingSoon": true
       }
     ]
   },
-  "updatedAt": "2026-06-09T20:55:12.701Z"
+  "updatedAt": "2026-06-11T09:05:47.458Z"
 }

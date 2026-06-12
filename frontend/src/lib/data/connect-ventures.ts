@@ -62,14 +62,6 @@ export const venturesConnectConfig: ConnectPageConfig = {
         href: "#form",
         inquiry: "investment",
       },
-      {
-        id: "partner",
-        title: "Full Partnership Vision",
-        description: "Explore our partner philosophy in depth.",
-        image:
-          "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
-        href: "/ventures/partner",
-      },
     ],
   },
   form: {

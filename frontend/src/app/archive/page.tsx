@@ -1,8 +1,12 @@
+import { Suspense } from "react";
 import { ArchivePageContent } from "@/components/archive/ArchivePageContent";
 import {
   getArchiveContent,
   getPublishedImages,
+  getVisibleCollections,
 } from "@/services/content/archive";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Archive",
@@ -13,13 +17,16 @@ export const metadata = {
 export default async function ArchivePage() {
   const content = await getArchiveContent();
   const images = getPublishedImages(content.images);
+  const collections = getVisibleCollections(content.collections);
 
   return (
-    <ArchivePageContent
-      page={content.page}
-      collections={content.collections}
-      latestMoments={content.latestMoments}
-      images={images}
-    />
+    <Suspense fallback={null}>
+      <ArchivePageContent
+        page={content.page}
+        collections={collections}
+        latestMoments={content.latestMoments}
+        images={images}
+      />
+    </Suspense>
   );
 }

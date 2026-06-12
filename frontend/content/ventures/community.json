@@ -22,14 +22,7 @@
       "deckHref": "/ventures/connect",
       "image": "/images/ventures/community/communityPhilosophy-image.jpg?v=1780394731780",
       "imageAlt": "",
-      "themes": [
-        "Dignity in every partnership",
-        "Local leadership, not outside direction",
-        "Cultural preservation as shared responsibility",
-        "Long-term opportunity over short-term optics",
-        "Storytelling that honors real lives",
-        "Economic growth built on trust"
-      ]
+      "themes": []
     },
     "communityFocusAreas": {
       "label": "Key Focus Areas",
@@ -126,19 +119,6 @@
         }
       ]
     },
-    "communityInitiatives": {
-      "label": "Future Initiatives",
-      "heading": "Directions we are building toward.",
-      "intro": "Conceptual today — foundational tomorrow. Initiatives shaped with community leaders and creative partners.",
-      "items": [
-        "Photography Mentorships",
-        "Artisan Collaborations",
-        "Cultural Storytelling Projects",
-        "Local Expedition Training",
-        "Scholarship Programs",
-        "Community Tourism Partnerships"
-      ]
-    },
     "communityGallery": [
       {
         "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
@@ -189,5 +169,5 @@
       "quote": "Strong communities shape meaningful journeys."
     }
   },
-  "updatedAt": "2026-06-02T11:12:56.495Z"
+  "updatedAt": "2026-06-11T20:52:37.869Z"
 }

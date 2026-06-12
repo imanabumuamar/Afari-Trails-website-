@@ -69,7 +69,7 @@ export function VenturesStructuredEditor({
     slug === "main"
       ? "/ventures"
       : slug === "connect"
-        ? "/ventures/connect"
+        ? "/contact"
         : `/ventures/${slug}`;
 
   const sections = VENTURE_PAGE_SECTIONS[slug];

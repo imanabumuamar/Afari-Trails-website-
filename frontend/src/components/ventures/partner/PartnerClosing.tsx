@@ -2,7 +2,7 @@ import { partnerClosing as default_partnerClosing } from "@/lib/data/partner";
 import { getVenturePageContent } from "@/services/content/ventures";
 
 export async function PartnerClosing() {
-  const content = await getVenturePageContent("partner");
+  const content = await getVenturePageContent("connect");
   const partnerClosing = content.partnerClosing as typeof default_partnerClosing;
 
   return (

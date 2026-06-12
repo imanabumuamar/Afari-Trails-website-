@@ -54,13 +54,6 @@
             "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80",
             "href": "#form",
             "inquiry": "investment"
-          },
-          {
-            "id": "partner",
-            "title": "Full Partnership Vision",
-            "description": "Explore our partner philosophy in depth.",
-            "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=900&q=80",
-            "href": "/ventures/partner"
           }
         ]
       },
@@ -115,6 +108,22 @@
       "closing": {
         "quote": "The strongest ventures are built where vision, land, and people meet."
       }
+    },
+    "partnerVision": {
+      "quote": "We believe Africa's future belongs to experiences that protect, inspire, and reconnect people with the land."
+    },
+    "partnerCollaborators": {
+      "label": "Who We Work With",
+      "heading": "Aligned partners across the continent.",
+      "body": "We are currently building relationships with partners across exploration, conservation, design, and hospitality sectors.",
+      "placeholders": [
+        "Conservation organizations",
+        "Safari camps & lodges",
+        "Photographers & filmmakers",
+        "Creative studios",
+        "Tourism boards",
+        "Hospitality brands"
+      ]
     }
   },
   "updatedAt": "2026-06-03T20:58:58.805Z"

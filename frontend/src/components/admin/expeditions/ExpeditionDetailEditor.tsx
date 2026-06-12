@@ -8,6 +8,11 @@ import {
 import { ExpeditionDetailSectionsForm } from "@/components/admin/expeditions/ExpeditionDetailSectionsForm";
 import { ExpeditionSectionVisibilityEditor } from "@/components/admin/expeditions/ExpeditionSectionVisibilityEditor";
 import { ExpeditionImageField } from "@/components/admin/expeditions/ExpeditionImageField";
+import {
+  applyExpeditionListingStatus,
+  EXPEDITION_LISTING_STATUS_OPTIONS,
+  getExpeditionListingStatus,
+} from "@/lib/expeditions/expedition-listing-status";
 import { slugifyExpeditionId } from "@/lib/expeditions/expedition-slug";
 import type { ExpeditionRegion } from "@/lib/data/expeditions-all-page";
 import type {
@@ -146,17 +151,60 @@ export function ExpeditionDetailEditor({
         </button>
       </div>
 
-      <label className="flex items-center gap-2 text-sm">
-        <input
-          type="checkbox"
-          checked={draft.published !== false}
-          disabled={readOnly}
-          onChange={(e) =>
-            setDraft({ ...draft, published: e.target.checked })
-          }
-        />
-        Published (show in View All expeditions)
-      </label>
+      <div className="space-y-4 rounded border border-charcoal/12 bg-beige/30 p-5">
+        <div>
+          <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+            Public status
+          </h4>
+          <p className="mt-2 text-xs leading-relaxed text-charcoal/55">
+            Choose one status. You can keep editing all sections below regardless of
+            which is selected.
+          </p>
+        </div>
+        <div className="space-y-3">
+          {EXPEDITION_LISTING_STATUS_OPTIONS.map((option) => {
+            const selected =
+              getExpeditionListingStatus(draft) === option.value;
+            return (
+              <label
+                key={option.value}
+                className={`flex cursor-pointer gap-3 rounded border px-4 py-3 transition-colors ${
+                  selected
+                    ? "border-safari-green/35 bg-ivory"
+                    : "border-charcoal/10 bg-ivory/60"
+                } ${readOnly ? "cursor-default" : "hover:border-charcoal/25"}`}
+              >
+                <input
+                  type="radio"
+                  name="expedition-listing-status"
+                  className="mt-0.5 shrink-0"
+                  checked={selected}
+                  disabled={readOnly}
+                  onChange={() =>
+                    setDraft(applyExpeditionListingStatus(draft, option.value))
+                  }
+                />
+                <span className="min-w-0">
+                  <span className="block text-sm font-medium text-charcoal">
+                    {option.label}
+                  </span>
+                  <span className="mt-1 block text-xs leading-relaxed text-charcoal/50">
+                    {option.description}
+                  </span>
+                </span>
+              </label>
+            );
+          })}
+        </div>
+        {!readOnly && (
+          <button
+            type="submit"
+            className="bg-charcoal px-5 py-2.5 text-xs font-medium uppercase tracking-[0.2em] text-ivory hover:bg-matte-black"
+          >
+            Save status
+          </button>
+        )}
+      </div>
 
       <ExpeditionSectionVisibilityEditor
         draft={draft}

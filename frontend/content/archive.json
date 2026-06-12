@@ -6,7 +6,7 @@
         "label": "Archive",
         "heading": "Collected Moments From the Trail.",
         "description": "A visual journey through landscapes, wildlife, people, and the spirit of Africa.",
-        "image": "/images/archive/page/hero-image.png"
+        "image": "/images/archive/page/hero-image.jpg"
       },
       "collectionsSection": {
         "label": "Explore Collections",
@@ -19,10 +19,12 @@
         "title": "Morning Mist, South Luangwa",
         "photographer": "Chileshe Mwansa",
         "story": "First light through mahogany smoke — a moment of stillness before the valley wakes. Selected from our community edition.",
-        "image": "/images/archive/page/afariLens-image.jpg",
+        "image": "/images/archive/page/afariLens-image.jpg?v=1781258271415",
         "submitHref": "/archive/submit",
         "entriesHref": "/archive#grid",
-        "editionsHref": "/archive#grid"
+        "editionsHref": "/archive#grid",
+        "entriesLabel": "View Community Lens ",
+        "editionsLabel": "Explore Previous Editions "
       },
       "latestMomentsSection": {
         "label": "Latest Moments",
@@ -48,42 +50,56 @@
         "title": "Wildlife",
         "description": "The untamed. In their natural world.",
         "icon": "wildlife",
-        "image": "/images/archive/collections/wildlife/image.png"
+        "image": "/images/archive/collections/wildlife/image.jpg",
+        "hidden": false
       },
       {
         "id": "landscapes",
         "title": "Landscapes",
         "description": "Earth in its rawest, most beautiful form.",
         "icon": "landscapes",
-        "image": "/images/archive/collections/landscapes/image.png"
+        "image": "/images/archive/collections/landscapes/image.jpg?v=1781265705495",
+        "hidden": false
       },
       {
         "id": "expedition-life",
         "title": "Expedition Life",
         "description": "The moments between destinations.",
         "icon": "expedition",
-        "image": "/images/archive/collections/expedition-life/image.png"
+        "image": "/images/archive/collections/expedition-life/image.jpg",
+        "hidden": false
       },
       {
         "id": "culture-people",
-        "title": "Culture & People",
+        "title": "Community Lens",
         "description": "The soul of Africa, its people, its stories.",
         "icon": "culture",
-        "image": "/images/archive/collections/culture-people/image.png"
+        "image": "/images/archive/collections/culture-people/image.jpg",
+        "hidden": false
       },
       {
         "id": "the-afari-lens",
         "title": "The Afari Lens",
         "description": "Community perspectives. Captured by you.",
         "icon": "lens",
-        "image": "/images/archive/collections/the-afari-lens/image.jpg"
+        "image": "/images/archive/collections/the-afari-lens/image.jpg?v=1781272169385",
+        "hidden": false
       },
       {
         "id": "behind-afari",
         "title": "Behind Afari",
         "description": "Behind the scenes. The journey within.",
         "icon": "behind",
-        "image": "/images/archive/collections/behind-afari/image.jpg"
+        "image": "/images/archive/collections/behind-afari/image.jpg",
+        "hidden": false
+      },
+      {
+        "id": "collection-1781251681795",
+        "title": "South Africa",
+        "description": "",
+        "icon": "wildlife",
+        "image": "/images/archive/collections/collection-1781251681795/image.jpg",
+        "hidden": false
       }
     ],
     "latestMoments": [
@@ -130,155 +146,125 @@
     ],
     "images": [
       {
-        "id": "elephant-dawn",
-        "title": "Elephant at Dawn",
-        "location": "South Luangwa, Zambia",
-        "photographer": "Afari Trails",
-        "caption": "First light on the floodplain — giants moving through mist.",
-        "category": "wildlife",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-        "span": "tall",
-        "related": {
-          "label": "In the Presence of Giants",
-          "href": "/journal/in-the-presence-of-giants"
-        },
-        "published": true
-      },
-      {
-        "id": "zambezi-aerial",
-        "title": "Zambezi from Above",
-        "location": "Lower Zambezi, Zambia",
-        "photographer": "Afari Trails",
-        "caption": "The river as a living map — silver at dusk.",
-        "category": "landscapes",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-        "span": "wide",
-        "related": {
-          "label": "Lower Zambezi Expedition",
-          "href": "/expeditions/lower-zambezi"
-        },
-        "published": true
-      },
-      {
-        "id": "dust-road",
-        "title": "Dust on the Trail",
-        "location": "Kafue, Zambia",
-        "photographer": "Afari Trails",
-        "caption": "Between camps — the road as ritual.",
-        "category": "expedition-life",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
-        "published": true
-      },
-      {
-        "id": "artisan-hands",
-        "title": "Artisan Hands",
-        "location": "Livingstone, Zambia",
-        "photographer": "Community",
-        "caption": "Craft passed through generations of touch.",
-        "category": "culture-people",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-        "related": {
-          "label": "Traditions That Endure",
-          "href": "/journal/traditions-that-endure"
-        },
-        "published": true
-      },
-      {
-        "id": "lens-feature",
-        "title": "Valley Silence",
-        "location": "South Luangwa, Zambia",
+        "id": "afari-lens-potm",
+        "title": "Morning Mist, South Luangwa",
+        "location": "Zambia",
         "photographer": "Chileshe Mwansa",
-        "caption": "The Afari Lens — March edition.",
-        "category": "the-afari-lens",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
-        "span": "tall",
+        "caption": "First light through mahogany smoke — a moment of stillness before the valley wakes. Selected from our community edition.",
+        "categories": [
+          "culture-people"
+        ],
+        "image": "/images/archive/page/afariLens-image.jpg?v=1781258271415",
         "published": true
       },
       {
-        "id": "camp-evening",
-        "title": "Evening at Camp",
-        "location": "Okavango Delta, Botswana",
-        "photographer": "Afari Trails",
-        "caption": "Lantern light and the sound of distant water.",
-        "category": "expedition-life",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
-        "published": true
-      },
-      {
-        "id": "desert-line",
-        "title": "Desert Horizon",
-        "location": "Namibia",
-        "photographer": "Afari Trails",
-        "caption": "Earth and sky in a single breath.",
-        "category": "landscapes",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
-        "span": "wide",
-        "published": true
-      },
-      {
-        "id": "guide-portrait",
-        "title": "Guide at First Light",
-        "location": "Lower Zambezi, Zambia",
-        "photographer": "Afari Trails",
-        "caption": "Those who read the land before the sun rises.",
-        "category": "culture-people",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-        "related": {
-          "label": "Guides of the Trail",
-          "href": "/journal/guides-of-the-trail"
-        },
-        "published": true
-      },
-      {
-        "id": "behind-brand",
-        "title": "Field Notes",
-        "location": "Livingstone, Zambia",
-        "photographer": "Afari Trails",
-        "caption": "Behind Afari — sketches of what we are building.",
-        "category": "behind-afari",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
-        "related": {
-          "label": "Our Ventures",
-          "href": "/ventures"
-        },
-        "published": true
-      },
-      {
-        "id": "wetland",
-        "title": "Wetland Mirror",
-        "location": "Kafue, Zambia",
-        "photographer": "Afari Trails",
-        "caption": "Still water holding the sky.",
-        "category": "landscapes",
-        "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
-        "span": "tall",
-        "published": true
-      },
-      {
-        "id": "conservation",
-        "title": "On Patrol",
-        "location": "Lower Zambezi, Zambia",
-        "photographer": "Afari Trails",
-        "caption": "Guardianship as daily practice.",
-        "category": "wildlife",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-        "related": {
-          "label": "Guardians of the Wild",
-          "href": "/journal/guardians-of-the-wild"
-        },
-        "published": true
-      },
-      {
-        "id": "img-1780649366511",
-        "title": "New photograph",
+        "id": "img-1781263290612",
+        "title": "Alone in the park",
         "location": "Zambia",
         "photographer": "Afari Trails",
         "caption": "",
         "category": "wildlife",
-        "image": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1200&q=85",
+        "image": "/images/archive/img-1781263290612/image.jpg?v=1781269043156",
+        "published": true
+      },
+      {
+        "id": "img-1781258927188",
+        "title": "The Falls Rainbow ",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "The colours of the falls charm.",
+        "category": "landscapes",
+        "image": "/images/archive/img-1781258927188/image.jpg?v=1781258957237",
+        "published": true
+      },
+      {
+        "id": "img-1781263129712",
+        "title": "The Sunrise of Hippos",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "category": "wildlife",
+        "image": "/images/archive/img-1781263129712/image.jpg?v=1781263194038",
+        "published": true
+      },
+      {
+        "id": "img-1781269212865",
+        "title": "New photograph",
+        "location": "Elephants hurrying up",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "category": "wildlife",
+        "image": "/images/archive/img-1781269212865/image.jpg?v=1781269231144",
+        "published": true
+      },
+      {
+        "id": "img-1781269270340",
+        "title": "Another winter trail",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "category": "landscapes",
+        "image": "/images/archive/img-1781269270340/image.jpg?v=1781269283110",
+        "published": true
+      },
+      {
+        "id": "img-1781269318761",
+        "title": "Painting of nature ",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "category": "wildlife",
+        "image": "/images/archive/img-1781269318761/image.jpg?v=1781269334130",
+        "published": true
+      },
+      {
+        "id": "img-1781269357025",
+        "title": "Wild Sunset",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "category": "landscapes",
+        "image": "/images/archive/img-1781269357025/image.jpg?v=1781269466324",
+        "published": true
+      },
+      {
+        "id": "img-1781269501258",
+        "title": "Leopards of park",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "image": "/images/archive/img-1781269501258/image.jpg?v=1781269555411",
+        "published": true,
+        "categories": [
+          "wildlife",
+          "the-afari-lens"
+        ]
+      },
+      {
+        "id": "img-1781269976619",
+        "title": "Guides Of The Wild",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "categories": [
+          "wildlife"
+        ],
+        "image": "/images/archive/img-1781269976619/image.jpg?v=1781269997824",
+        "published": true
+      },
+      {
+        "id": "img-1781270137809",
+        "title": "The wild of the wild ",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "categories": [
+          "wildlife"
+        ],
+        "image": "/images/archive/img-1781270137809/image.jpg?v=1781270179466",
         "published": true
       }
     ]
   },
-  "updatedAt": "2026-06-05T08:49:57.902Z"
+  "updatedAt": "2026-06-12T13:49:33.052Z"
 }

@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CollectionIcon } from "@/components/store/CollectionIcon";
+import { visibleStoreCollections } from "@/lib/store/store-visibility";
 import { getStoreContent } from "@/services/content/store";
 
 export async function FeaturedCollectionsGrid() {
-  const { collections: editorialCollections } = await getStoreContent();
+  const { collections } = await getStoreContent();
+  const editorialCollections = visibleStoreCollections(collections);
   return (
     <section id="collections" className="scroll-mt-24 bg-matte-black py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

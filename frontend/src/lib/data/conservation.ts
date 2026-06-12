@@ -14,6 +14,9 @@ export const conservationPhilosophy = {
   label: "Our Philosophy",
   statement:
     "We believe meaningful exploration must contribute to the protection of landscapes, wildlife, and cultural heritage for future generations.",
+  image:
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+  imageAlt: "African wilderness landscape at golden hour",
   themes: [
     "Coexistence between people and wild places",
     "Preservation rooted in respect, not performance",
@@ -85,48 +88,6 @@ export const conservationCommunity = {
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
   imageAlt: "Community members in warm natural light",
 } as const;
-
-export const conservationInitiatives = {
-  label: "Future Initiatives",
-  heading: "A long horizon of intent.",
-  intro:
-    "Visionary today — foundational tomorrow. Initiatives we are building toward with aligned partners.",
-  items: [
-    "Conservation Expeditions",
-    "Wildlife Photography Grants",
-    "Reforestation Partnerships",
-    "Eco-Lodge Sustainability Systems",
-    "Youth Nature Programs",
-    "Community Storytelling Projects",
-  ],
-} as const;
-
-export const conservationGallery = [
-  {
-    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-    alt: "Wildlife in natural habitat",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-    alt: "Aerial wilderness landscape",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-    alt: "River ecosystem at dusk",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-    alt: "Sunrise over savanna",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-    alt: "Local culture near nature",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-    alt: "Untouched wetland horizon",
-  },
-] as const;
 
 export const conservationPartners = {
   label: "Partners & Collaborations",

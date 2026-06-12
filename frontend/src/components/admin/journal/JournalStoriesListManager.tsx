@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { JournalStoryRecord } from "@/types/journal-content";
 import { createBlankStory } from "@/lib/journal/blank-story";
+import { isJournalStoryPublished } from "@/lib/journal/journal-story-status";
+import type { JournalStoryRecord } from "@/types/journal-content";
 
 type JournalStoriesListManagerProps = {
   stories: JournalStoryRecord[];
@@ -13,7 +14,7 @@ type JournalStoriesListManagerProps = {
   onRemove: (slug: string) => void;
 };
 
-type StoryFilter = "all" | "published" | "drafts";
+type StoryFilter = "all" | "published" | "hidden";
 
 function slugify(value: string): string {
   return value
@@ -21,10 +22,6 @@ function slugify(value: string): string {
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-}
-
-function isPublished(story: JournalStoryRecord): boolean {
-  return story.published !== false;
 }
 
 export function JournalStoriesListManager({
@@ -43,9 +40,9 @@ export function JournalStoriesListManager({
   const filtered = useMemo(() => {
     let list = stories;
     if (filter === "published") {
-      list = list.filter(isPublished);
-    } else if (filter === "drafts") {
-      list = list.filter((s) => !isPublished(s));
+      list = list.filter(isJournalStoryPublished);
+    } else if (filter === "hidden") {
+      list = list.filter((s) => !isJournalStoryPublished(s));
     }
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -62,8 +59,8 @@ export function JournalStoriesListManager({
   const counts = useMemo(
     () => ({
       all: stories.length,
-      published: stories.filter(isPublished).length,
-      drafts: stories.filter((s) => !isPublished(s)).length,
+      published: stories.filter(isJournalStoryPublished).length,
+      hidden: stories.filter((s) => !isJournalStoryPublished(s)).length,
     }),
     [stories],
   );
@@ -75,7 +72,7 @@ export function JournalStoriesListManager({
     onAdd(createBlankStory(slug, newTitle.trim() || "New Story"));
     setNewTitle("");
     setShowAdd(false);
-    setFilter("drafts");
+    setFilter("hidden");
   }
 
   return (
@@ -101,7 +98,7 @@ export function JournalStoriesListManager({
           [
             ["all", `All (${counts.all})`],
             ["published", `Published (${counts.published})`],
-            ["drafts", `Drafts (${counts.drafts})`],
+            ["hidden", `Hidden (${counts.hidden})`],
           ] as const
         ).map(([id, label]) => (
           <button
@@ -165,7 +162,7 @@ export function JournalStoriesListManager({
               >
                 <span className="flex items-center gap-2">
                   <span className="block font-medium">{story.title}</span>
-                  {isPublished(story) ? (
+                  {isJournalStoryPublished(story) ? (
                     <span
                       className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] uppercase tracking-wider ${
                         selectedSlug === story.slug
@@ -173,7 +170,7 @@ export function JournalStoriesListManager({
                           : "bg-safari-green-deep/10 text-safari-green-deep"
                       }`}
                     >
-                      Live
+                      Published
                     </span>
                   ) : (
                     <span
@@ -183,7 +180,7 @@ export function JournalStoriesListManager({
                           : "bg-charcoal/8 text-charcoal/45"
                       }`}
                     >
-                      Draft
+                      Hidden
                     </span>
                   )}
                 </span>

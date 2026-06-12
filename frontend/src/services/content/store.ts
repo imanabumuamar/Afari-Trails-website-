@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { STORE_CONTENT_DEFAULTS } from "@/lib/data/store-defaults";
+import { mergeStoreContentData } from "@/lib/store/merge-store-content";
 import { fetchCmsJson } from "@/lib/api/fetch-content";
 import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 import type {
@@ -8,37 +9,12 @@ import type {
   StoreContentDocument,
 } from "@/types/store-content";
 
-function mergeSection<T extends Record<string, unknown>>(
-  defaults: T,
-  remote?: Partial<T>,
-): T {
-  if (!remote) return defaults;
-  return { ...defaults, ...remote };
-}
-
-function mergeStoreData(
-  remote?: Partial<StoreContentData> | null,
-): StoreContentData {
-  const d: StoreContentData = STORE_CONTENT_DEFAULTS;
-  if (!remote) return d;
-
-  return {
-    hero: mergeSection(d.hero, remote.hero),
-    collections:
-      remote.collections?.length ? remote.collections : d.collections,
-    curatedEssentials:
-      remote.curatedEssentials?.length
-        ? remote.curatedEssentials
-        : d.curatedEssentials,
-    worldOfAfari: mergeSection(d.worldOfAfari, remote.worldOfAfari),
-    products: remote.products?.length ? remote.products : d.products,
-  };
-}
+export { mergeStoreContentData } from "@/lib/store/merge-store-content";
 
 export function getStoreContentLocal(): StoreContentData {
   try {
     const doc = readJsonFile<Partial<StoreContentDocument>>("store.json");
-    return mergeStoreData(doc.data);
+    return mergeStoreContentData(doc.data);
   } catch {
     return STORE_CONTENT_DEFAULTS;
   }
@@ -46,7 +22,7 @@ export function getStoreContentLocal(): StoreContentData {
 
 export const getStoreContent = cache(async (): Promise<StoreContentData> => {
   const doc = await fetchCmsJson<StoreContentDocument>("/content/store");
-  if (doc?.data) return mergeStoreData(doc.data);
+  if (doc?.data) return mergeStoreContentData(doc.data);
   return getStoreContentLocal();
 });
 

@@ -38,7 +38,7 @@ export async function EcoLodgeHero() {
               {hero.exploreCta}
             </a>
             <Link
-              href={hero.partnerHref ?? "/ventures/partner"}
+              href={hero.partnerHref ?? "/contact"}
               className="inline-flex items-center justify-center bg-sand px-8 py-3.5 text-xs font-medium uppercase tracking-[0.24em] text-charcoal transition-colors hover:bg-sand-light"
             >
               {hero.partnerCta}

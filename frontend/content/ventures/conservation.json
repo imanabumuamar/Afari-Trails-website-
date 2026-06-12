@@ -15,11 +15,8 @@
     "conservationPhilosophy": {
       "label": "Our Philosophy",
       "statement": "We believe meaningful exploration must contribute to the protection of landscapes, wildlife, and cultural heritage for future generations.",
-      "body": "",
-      "partnerCta": "",
-      "deckCta": "",
-      "partnerHref": "/ventures/partner",
-      "deckHref": "/ventures/connect",
+      "image": "/images/ventures/conservation/conservationGallery-0-src.jpg?v=1780265118935",
+      "imageAlt": "African wilderness landscape at golden hour",
       "themes": [
         "Coexistence between people and wild places",
         "Preservation rooted in respect, not performance",
@@ -76,19 +73,6 @@
       "body": "Wild places endure when the people who live beside them thrive. Afari Trails supports local guides, artisans, and community-led initiatives — building ethical partnerships, fair employment, and cultural preservation that travel alongside every expedition and venture. We do not speak for communities. We listen, collaborate, and invest in shared outcomes.",
       "image": "/images/ventures/conservation/conservationCommunity-image.jpg?v=1780265546900",
       "imageAlt": "Community members in warm natural light"
-    },
-    "conservationInitiatives": {
-      "label": "Future Initiatives",
-      "heading": "A long horizon of intent.",
-      "intro": "Visionary today — foundational tomorrow. Initiatives we are building toward with aligned partners.",
-      "items": [
-        "Conservation Expeditions",
-        "Wildlife Photography Grants",
-        "Reforestation Partnerships",
-        "Eco-Lodge Sustainability Systems",
-        "Youth Nature Programs",
-        "Community Storytelling Projects"
-      ]
     },
     "conservationGallery": [
       {
@@ -161,5 +145,5 @@
       "quote": "The future of exploration depends on the future of the wilderness."
     }
   },
-  "updatedAt": "2026-05-31T22:12:30.481Z"
+  "updatedAt": "2026-06-11T20:44:52.398Z"
 }

@@ -3,6 +3,10 @@
 import { useState } from "react";
 import type { ExpeditionDetailRecord } from "@/types/expeditions-content";
 import { createBlankExpedition } from "@/lib/expeditions/blank-expedition";
+import {
+  expeditionListingStatusLabel,
+  getExpeditionListingStatus,
+} from "@/lib/expeditions/expedition-listing-status";
 import { slugifyExpeditionId } from "@/lib/expeditions/expedition-slug";
 
 type ExpeditionsListManagerProps = {
@@ -58,7 +62,8 @@ export function ExpeditionsListManager({
                 }`}
               >
                 {exp.id}
-                {exp.published === false ? " · hidden" : ""}
+                {" · "}
+                {expeditionListingStatusLabel(getExpeditionListingStatus(exp))}
               </span>
             </button>
           </li>

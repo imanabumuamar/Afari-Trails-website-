@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { EXPEDITIONS_CONTENT_DEFAULTS } from "@/lib/data/expedition-defaults";
+import { isExpeditionListed } from "@/lib/expeditions/expedition-listing-status";
 import { mergeExpeditionsData } from "@/lib/expeditions/merge-expeditions-data";
 import { fetchCmsJson } from "@/lib/api/fetch-content";
 import { readJsonFile, writeJsonFile } from "@/services/content/repository";
@@ -75,6 +76,7 @@ export function toFeaturedCard(exp: ExpeditionDetailRecord): FeaturedExpeditionC
     tagline: exp.tagline,
     duration: highlightValue(exp, "Duration"),
     image: exp.heroImage,
+    comingSoon: exp.comingSoon === true,
   };
 }
 
@@ -90,12 +92,13 @@ export function toCatalogItem(exp: ExpeditionDetailRecord): ExpeditionCatalogIte
     heroImage: exp.heroImage,
     intro: exp.intro.statement,
     regionId: exp.regionId ?? "zambia",
+    comingSoon: exp.comingSoon === true,
   };
 }
 
 export async function getPublishedExpeditions(): Promise<ExpeditionDetailRecord[]> {
   const { expeditions } = await getExpeditionsContent();
-  return expeditions.filter((e) => e.published !== false);
+  return expeditions.filter(isExpeditionListed);
 }
 
 export async function getExpeditionBySlug(
@@ -121,7 +124,7 @@ export async function getFeaturedExpeditionCards(): Promise<FeaturedExpeditionCa
   return featuredIds
     .map((id) => byId.get(id))
     .filter((e): e is ExpeditionDetailRecord => Boolean(e))
-    .filter((e) => e.published !== false)
+    .filter(isExpeditionListed)
     .map(toFeaturedCard);
 }
 

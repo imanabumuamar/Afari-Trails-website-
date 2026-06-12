@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AdminField } from "@/components/admin/ventures/AdminField";
 import { ArchiveImageField } from "@/components/admin/archive/ArchiveImageField";
 import type { ArchiveContentData, ArchivePageContent } from "@/types/archive-content";
@@ -13,7 +13,10 @@ type ArchivePageEditorProps = {
   page: ArchivePageContent;
   readOnly?: boolean;
   onSave: (page: ArchivePageContent) => void;
-  onDocumentSynced?: (data: ArchiveContentData) => void;
+  onDocumentSynced?: (
+    data: ArchiveContentData,
+    updatedAt?: string | null,
+  ) => void;
   onStatus: (message: string) => void;
 };
 
@@ -25,10 +28,29 @@ export function ArchivePageEditor({
   onStatus,
 }: ArchivePageEditorProps) {
   const [draft, setDraft] = useState(page);
+  const heroImageRef = useRef(page.hero.image);
 
   useEffect(() => {
-    setDraft(page);
-  }, [page]);
+    if (page.hero.image !== heroImageRef.current) {
+      heroImageRef.current = page.hero.image;
+      setDraft((prev) => ({
+        ...prev,
+        hero: { ...prev.hero, image: page.hero.image },
+      }));
+    }
+  }, [page.hero.image]);
+
+  function syncFromDocument(
+    data: ArchiveContentData,
+    updatedAt?: string | null,
+  ) {
+    onDocumentSynced?.(data, updatedAt);
+    heroImageRef.current = data.page.hero.image;
+    setDraft((prev) => ({
+      ...prev,
+      hero: { ...prev.hero, image: data.page.hero.image },
+    }));
+  }
 
   return (
     <form
@@ -83,7 +105,7 @@ export function ArchivePageEditor({
             onUploaded={(src) =>
               setDraft({ ...draft, hero: { ...draft.hero, image: src } })
             }
-            onDocumentSynced={onDocumentSynced}
+            onDocumentSynced={syncFromDocument}
             onStatus={onStatus}
           />
         </div>
@@ -136,98 +158,6 @@ export function ArchivePageEditor({
                     ...draft.collectionsSection,
                     viewAllHref: e.target.value,
                   },
-                })
-              }
-            />
-          </AdminField>
-        </div>
-      </section>
-
-      <section>
-        <h3 className="font-serif text-2xl font-light">Afari Lens spotlight</h3>
-        <div className="mt-6 space-y-4">
-          {(
-            [
-              ["label", "Label"],
-              ["heading", "Section heading"],
-              ["title", "Photo title"],
-              ["photographer", "Photographer"],
-            ] as const
-          ).map(([key, label]) => (
-            <AdminField key={key} label={label}>
-              <input
-                className={inputClass}
-                value={draft.afariLens[key]}
-                disabled={readOnly}
-                onChange={(e) =>
-                  setDraft({
-                    ...draft,
-                    afariLens: { ...draft.afariLens, [key]: e.target.value },
-                  })
-                }
-              />
-            </AdminField>
-          ))}
-          <AdminField label="Story">
-            <textarea
-              className={textareaClass}
-              rows={4}
-              value={draft.afariLens.story}
-              disabled={readOnly}
-              onChange={(e) =>
-                setDraft({
-                  ...draft,
-                  afariLens: { ...draft.afariLens, story: e.target.value },
-                })
-              }
-            />
-          </AdminField>
-          <ArchiveImageField
-            fieldPath="afariLens.image"
-            label="Spotlight image"
-            src={draft.afariLens.image}
-            readOnly={readOnly}
-            onUploaded={(src) =>
-              setDraft({ ...draft, afariLens: { ...draft.afariLens, image: src } })
-            }
-            onDocumentSynced={onDocumentSynced}
-            onStatus={onStatus}
-          />
-          <AdminField label="Entries link">
-            <input
-              className={inputClass}
-              value={draft.afariLens.entriesHref}
-              disabled={readOnly}
-              onChange={(e) =>
-                setDraft({
-                  ...draft,
-                  afariLens: { ...draft.afariLens, entriesHref: e.target.value },
-                })
-              }
-            />
-          </AdminField>
-          <AdminField label="Editions link">
-            <input
-              className={inputClass}
-              value={draft.afariLens.editionsHref}
-              disabled={readOnly}
-              onChange={(e) =>
-                setDraft({
-                  ...draft,
-                  afariLens: { ...draft.afariLens, editionsHref: e.target.value },
-                })
-              }
-            />
-          </AdminField>
-          <AdminField label="Submit link">
-            <input
-              className={inputClass}
-              value={draft.afariLens.submitHref}
-              disabled={readOnly}
-              onChange={(e) =>
-                setDraft({
-                  ...draft,
-                  afariLens: { ...draft.afariLens, submitHref: e.target.value },
                 })
               }
             />

@@ -3,7 +3,7 @@ import { getVenturePageContent } from "@/services/content/ventures";
 import { partnerMoodboard as default_partnerMoodboard } from "@/lib/data/partner";
 
 export async function PartnerMoodboard() {
-  const content = await getVenturePageContent("partner");
+  const content = await getVenturePageContent("connect");
   const partnerMoodboard = content.partnerMoodboard as typeof default_partnerMoodboard;
 
   return (

@@ -30,7 +30,7 @@ export async function ConservationInvolvement() {
             {conservationInvolvement.secondaryCta}
           </Link>
           <a
-            href="#initiatives"
+            href="#partners"
             className="inline-flex items-center justify-center px-4 py-3.5 text-xs font-medium uppercase tracking-[0.22em] text-charcoal/60 transition-colors hover:text-gold"
           >
             {conservationInvolvement.tertiaryCta} →

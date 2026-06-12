@@ -6,6 +6,8 @@ import {
   getExpeditionBySlug,
 } from "@/services/content/expeditions";
 
+export const dynamic = "force-dynamic";
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };

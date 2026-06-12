@@ -83,9 +83,11 @@ export const afariLens = {
     "First light through mahogany smoke — a moment of stillness before the valley wakes. Selected from our community edition.",
   image:
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+  entriesLabel: "View Community Lens",
+  entriesHref: "/archive?collection=culture-people#grid",
+  editionsLabel: "Explore Previous Editions →",
+  editionsHref: "/archive?collection=culture-people#grid",
   submitHref: "/archive/submit",
-  entriesHref: "/archive#grid",
-  editionsHref: "/archive#grid",
 } as const;
 
 export const latestMomentsSection = {

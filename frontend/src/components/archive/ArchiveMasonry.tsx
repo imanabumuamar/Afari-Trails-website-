@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { COMMUNITY_LENS_COLLECTION_ID } from "@/lib/archive/collection-filter";
+import { imageBelongsToCollection } from "@/lib/archive/image-categories";
 import type {
   ArchiveCollection,
   ArchiveGridCategory,
@@ -25,12 +27,16 @@ export function ArchiveMasonry({
   const filtered =
     active === "all"
       ? images
-      : images.filter((img) => img.category === active);
+      : images.filter((img) => imageBelongsToCollection(img, active));
 
+  const activeCollectionMeta = collections.find((c) => c.id === active);
+  const isCommunityLens = active === COMMUNITY_LENS_COLLECTION_ID;
   const activeLabel =
     active === "all"
       ? "All Moments"
-      : collections.find((c) => c.id === active)?.title ?? "Collection";
+      : isCommunityLens
+        ? "Previous Editions"
+        : (activeCollectionMeta?.title ?? "Collection");
 
   return (
     <section id="grid" className="scroll-mt-24 bg-beige py-20 lg:py-28">
@@ -38,11 +44,16 @@ export function ArchiveMasonry({
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-[10px] uppercase tracking-[0.28em] text-charcoal/45">
-              Full Gallery
+              {isCommunityLens ? "The Afari Lens" : "Full Gallery"}
             </p>
             <h2 className="mt-3 font-serif text-3xl font-light text-charcoal md:text-4xl">
               {activeLabel}
             </h2>
+            {isCommunityLens && activeCollectionMeta?.description ? (
+              <p className="mt-4 max-w-lg text-sm leading-relaxed text-charcoal/65">
+                {activeCollectionMeta.description}
+              </p>
+            ) : null}
           </div>
           <div className="flex flex-wrap gap-4">
             <button

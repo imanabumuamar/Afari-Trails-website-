@@ -9,7 +9,7 @@
       "exploreCta": "Explore Our Vision",
       "exploreHref": "#who-we-are",
       "partnerCta": "Partner With Us",
-      "partnerHref": "/ventures/partner",
+      "partnerHref": "/contact",
       "imageAlt": "Luxury safari lodge overlooking African wilderness at sunset"
     },
     "ecoLodgeWhoWeAre": {
@@ -89,8 +89,8 @@
       ],
       "partnerCta": "Partner With Us",
       "deckCta": "Request Investment Deck",
-      "partnerHref": "/ventures/partner",
-      "deckHref": "/ventures/connect"
+      "partnerHref": "/contact",
+      "deckHref": "/contact"
     },
     "ecoLodgeWhyAfrica": {
       "label": "Why Africa",
@@ -99,52 +99,13 @@
       "image": "/images/ventures/eco-lodge/ecoLodgeWhyAfrica-image.jpg?v=1780264618099",
       "imageAlt": "African savanna at golden hour"
     },
-    "ecoLodgeGalleryIntro": {
-      "label": "Visual Gallery",
-      "heading": "Inspired by Nature",
-      "body": ""
-    },
-    "ecoLodgeGallery": [
-      {
-        "src": "/images/ventures/eco-lodge/ecoLodgeGallery-0-src.jpg?v=1780264807610",
-        "alt": "Luxury safari lodge architecture"
-      },
-      {
-        "src": "/images/ventures/eco-lodge/ecoLodgeGallery-1-src.jpg?v=1780264818376",
-        "alt": "Luxury tented camp in the wilderness"
-      },
-      {
-        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Open-air lounge at sunset"
-      },
-      {
-        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Sustainable lodge interior"
-      },
-      {
-        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Wildlife encounter on safari"
-      },
-      {
-        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Sunset dining experience"
-      },
-      {
-        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Eco spa and wellness concept"
-      },
-      {
-        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
-        "alt": "Wilderness expedition scene"
-      }
-    ],
     "ecoLodgeFinalCta": {
       "heading": "From Untouched Landscapes to World-Class Eco Destinations",
       "body": "Afari Trails is redefining sustainable luxury hospitality through visionary eco lodge development and immersive African travel experiences.\n\nJoin us in building the future of eco tourism.",
       "cta": "Connect With Us",
       "secondaryCta": "Become a Partner",
-      "ctaHref": "/ventures/connect",
-      "secondaryCtaHref": "/ventures/partner",
+      "ctaHref": "/contact",
+      "secondaryCtaHref": "/contact",
       "image": "/images/ventures/eco-lodge/ecoLodgeFinalCta-image.jpg?v=1780264702177"
     }
   },

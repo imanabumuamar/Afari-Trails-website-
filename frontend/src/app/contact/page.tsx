@@ -1,4 +1,4 @@
-import { ConnectPageView } from "@/components/connect/ConnectPageView";
+import { PartnerConnectPageView } from "@/components/connect/PartnerConnectPageView";
 import { getConnectContent } from "@/services/content/connect";
 
 export const dynamic = "force-dynamic";
@@ -6,12 +6,10 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Connect With Us",
   description:
-    "Begin the conversation with Afari Trails — expeditions, partnerships, media, and meaningful collaborations across Africa.",
+    "Partner with Afari Trails or get in touch — hospitality, conservation, collaborations, and meaningful connections across Africa.",
 };
 
 export default async function ConnectPage() {
   const content = await getConnectContent();
-  return (
-    <ConnectPageView config={content.contact} inquirySource="contact" />
-  );
+  return <PartnerConnectPageView config={content.contact} />;
 }

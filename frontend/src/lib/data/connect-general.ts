@@ -6,7 +6,7 @@ export const generalConnectConfig: ConnectPageConfig = {
     label: "Connect With Afari",
     heading: "Every Meaningful Journey Begins With a Conversation.",
     subheading:
-      "Whether you're exploring partnerships, expeditions, creative collaborations, or future ventures, we'd love to hear from you.",
+      "Whether you're exploring partnerships, creative collaborations, hospitality, or future ventures — we'd love to hear from you.",
     cta: "Begin the Conversation",
     image:
       "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2400&q=80",
@@ -16,7 +16,7 @@ export const generalConnectConfig: ConnectPageConfig = {
     label: "Welcome",
     statement:
       "Afari Trails exists through connection — between people, landscapes, stories, and ideas.",
-    body: "Reach out for expedition inquiries, hospitality and venture partnerships, media and storytelling collaborations, conservation and community initiatives, or simply to share a vision. We read every message with care.",
+    body: "Reach out for hospitality and venture partnerships, media and storytelling collaborations, conservation and community initiatives, or simply to share a vision. We read every message with care.",
   },
   categories: {
     label: "",
@@ -32,11 +32,13 @@ export const generalConnectConfig: ConnectPageConfig = {
     successMessage:
       "Thank you. Your message has been received — we will be in touch when the trail aligns.",
     inquiryOptions: [
-      { value: "expeditions", label: "Expeditions" },
       { value: "partnerships", label: "Partnerships" },
-      { value: "media", label: "Media" },
-      { value: "hospitality", label: "Hospitality" },
+      { value: "hospitality", label: "Hospitality Development" },
       { value: "conservation", label: "Conservation" },
+      { value: "community", label: "Community" },
+      { value: "agriculture", label: "Sustainable Agriculture" },
+      { value: "investment", label: "Investment" },
+      { value: "media", label: "Media" },
       { value: "store", label: "Store" },
       { value: "general", label: "General Inquiry" },
     ],

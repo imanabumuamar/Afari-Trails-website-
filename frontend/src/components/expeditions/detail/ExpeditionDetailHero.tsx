@@ -10,6 +10,8 @@ import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 type ExpeditionDetailHeroProps = {
   expedition: ExpeditionDetail;
+  /** Hero looks the same; CTAs scroll to the coming-soon section instead. */
+  comingSoonMode?: boolean;
 };
 
 function StatIcon({ label }: { label: string }) {
@@ -39,10 +41,15 @@ function StatIcon({ label }: { label: string }) {
   );
 }
 
-export function ExpeditionDetailHero({ expedition }: ExpeditionDetailHeroProps) {
+export function ExpeditionDetailHero({
+  expedition,
+  comingSoonMode = false,
+}: ExpeditionDetailHeroProps) {
   const sections = resolveSectionCopy(expedition);
   const stats = resolveHeroStats(expedition);
   const locationLabel = resolveLocationLabel(expedition);
+  const actionHref = comingSoonMode ? "#coming-soon" : "#inquiry";
+  const showBrochure = comingSoonMode || Boolean(expedition.brochureUrl);
 
   return (
     <section className="relative min-h-[88vh] lg:min-h-screen">
@@ -89,22 +96,23 @@ export function ExpeditionDetailHero({ expedition }: ExpeditionDetailHeroProps) 
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href="#inquiry"
+              href={actionHref}
               className="inline-flex items-center justify-center bg-safari-green px-8 py-3.5 text-[10px] font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:bg-safari-green-deep"
             >
               {sections.enquireLabel}
             </a>
-            {expedition.brochureUrl ? (
+            {showBrochure && (
               <a
-                href={expedition.brochureUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={comingSoonMode ? actionHref : expedition.brochureUrl}
+                {...(comingSoonMode
+                  ? {}
+                  : { target: "_blank", rel: "noopener noreferrer" })}
                 className="inline-flex items-center justify-center gap-2 border border-ivory/45 bg-transparent px-8 py-3.5 text-[10px] font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10"
               >
                 {sections.brochureLabel}
                 <span aria-hidden>↓</span>
               </a>
-            ) : null}
+            )}
           </div>
         </div>
 

@@ -1,8 +1,45 @@
 import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
 import { AuthError, requirePermission } from "@/lib/auth/require-session";
+import { normalizeArchiveImage } from "@/lib/archive/image-categories";
+import { getArchiveContentLocal } from "@/services/content/archive";
 import { updateArchiveImageField } from "@/services/content/archive-upload";
-import type { ArchiveContentDocument } from "@/types/archive-content";
+import type {
+  ArchiveContentData,
+  ArchiveContentDocument,
+  ArchiveImageRecord,
+} from "@/types/archive-content";
+
+function parseGalleryRecord(raw: FormDataEntryValue | null): ArchiveImageRecord | undefined {
+  if (typeof raw !== "string" || !raw) return undefined;
+  try {
+    const parsed = JSON.parse(raw) as ArchiveImageRecord;
+    if (typeof parsed.id === "string" && parsed.id.length > 0) {
+      return normalizeArchiveImage(parsed);
+    }
+  } catch {
+    // ignore
+  }
+  return undefined;
+}
+
+function ensureGalleryImageInBase(
+  base: ArchiveContentData,
+  imageId: string,
+  galleryRecord?: ArchiveImageRecord,
+): ArchiveContentData {
+  if (base.images.some((img) => img.id === imageId)) return base;
+  if (!galleryRecord || galleryRecord.id !== imageId) {
+    throw new Error("Gallery image not found. Save the image first.");
+  }
+  return {
+    ...base,
+    images: [
+      ...base.images,
+      normalizeArchiveImage(galleryRecord),
+    ],
+  };
+}
 
 export async function POST(request: Request) {
   let token: string;
@@ -23,7 +60,7 @@ export async function POST(request: Request) {
   const file = formData.get("image");
   const imageIdRaw = formData.get("imageId");
   const collectionIdRaw = formData.get("collectionId");
-  const momentIdRaw = formData.get("momentId");
+  const galleryRecord = parseGalleryRecord(formData.get("galleryRecord"));
 
   if (typeof field !== "string" || !field) {
     return NextResponse.json({ error: "Invalid field" }, { status: 400 });
@@ -43,15 +80,20 @@ export async function POST(request: Request) {
     typeof collectionIdRaw === "string" && collectionIdRaw.length > 0
       ? collectionIdRaw
       : undefined;
-  const momentId =
-    typeof momentIdRaw === "string" && momentIdRaw.length > 0
-      ? momentIdRaw
-      : undefined;
-
   try {
+    const { data: current } = await backendFetch<ArchiveContentDocument>(
+      "/content/archive",
+      { token },
+    );
+    let base = current?.data ?? getArchiveContentLocal();
+    if (imageId) {
+      base = ensureGalleryImageInBase(base, imageId, galleryRecord);
+    }
+
     const buffer = Buffer.from(await file.arrayBuffer());
-    const { data } = updateArchiveImageField(
-      { fieldPath: field, imageId, collectionId, momentId },
+    const { data: merged } = updateArchiveImageField(
+      base,
+      { fieldPath: field, imageId, collectionId },
       buffer,
       file.type,
     );
@@ -61,7 +103,7 @@ export async function POST(request: Request) {
       {
         method: "PUT",
         token,
-        body: JSON.stringify({ data }),
+        body: JSON.stringify({ data: merged }),
       },
     );
 

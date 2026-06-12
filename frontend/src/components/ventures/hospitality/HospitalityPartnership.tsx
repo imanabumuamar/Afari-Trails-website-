@@ -34,7 +34,7 @@ export async function HospitalityPartnership() {
             {hospitalityPartnership.primaryCta}
           </Link>
           <Link
-            href={`${ROUTES.venturesPartner}#conversation`}
+            href={`${ROUTES.venturesConnect}#form`}
             className="inline-flex items-center justify-center border border-ivory/50 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.22em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10"
           >
             {hospitalityPartnership.secondaryCta}

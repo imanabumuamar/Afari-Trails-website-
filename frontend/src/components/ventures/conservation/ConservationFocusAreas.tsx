@@ -8,7 +8,7 @@ export async function ConservationFocusAreas() {
   const conservationFocusAreas = content.conservationFocusAreas as typeof default_conservationFocusAreas;
 
   return (
-    <section className="bg-beige py-24 lg:py-36">
+    <section id="focus-areas" className="scroll-mt-24 bg-beige pt-14 pb-24 lg:pt-16 lg:pb-36">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="max-w-xl">
           <SectionLabel>{conservationFocusAreas.label}</SectionLabel>

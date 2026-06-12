@@ -6,7 +6,8 @@ const ghostBtn =
   "inline-flex items-center gap-2 border border-ivory/55 px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10";
 
 export async function StoreHero() {
-  const { hero: storeHero } = await getStoreContent();
+  const { hero: storeHero, pageMode } = await getStoreContent();
+  const showCtas = pageMode === "live";
 
   return (
     <section className="relative flex min-h-screen items-center">
@@ -31,16 +32,18 @@ export async function StoreHero() {
         <p className="mt-8 max-w-md text-sm leading-relaxed text-ivory/70 md:text-base">
           {storeHero.subtext}
         </p>
-        <div className="mt-12 flex flex-wrap items-center gap-4">
-          <Link href="#collections" className={ghostBtn}>
-            Explore Collection
-            <span aria-hidden>→</span>
-          </Link>
-          <Link href="#products" className={ghostBtn}>
-            View New Arrivals
-            <span aria-hidden>→</span>
-          </Link>
-        </div>
+        {showCtas && (
+          <div className="mt-12 flex flex-wrap items-center gap-4">
+            <Link href="#collections" className={ghostBtn}>
+              Explore Collection
+              <span aria-hidden>→</span>
+            </Link>
+            <Link href="#products" className={ghostBtn}>
+              View New Arrivals
+              <span aria-hidden>→</span>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

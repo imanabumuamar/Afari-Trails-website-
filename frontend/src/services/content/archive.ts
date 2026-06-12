@@ -1,5 +1,8 @@
 import { cache } from "react";
 import { ARCHIVE_CONTENT_DEFAULTS } from "@/lib/data/archive-defaults";
+import { COMMUNITY_LENS_EDITIONS_HREF } from "@/lib/archive/collection-filter";
+import { normalizeArchiveImage } from "@/lib/archive/image-categories";
+import { normalizeLatestMoments } from "@/lib/archive/latest-moments";
 import { fetchCmsJson } from "@/lib/api/fetch-content";
 import { readJsonFile, writeJsonFile } from "@/services/content/repository";
 import type {
@@ -7,7 +10,6 @@ import type {
   ArchiveContentData,
   ArchiveContentDocument,
   ArchiveImageRecord,
-  ArchiveLatestMoment,
 } from "@/types/archive-content";
 
 function mergePage<T extends Record<string, unknown>>(
@@ -18,31 +20,49 @@ function mergePage<T extends Record<string, unknown>>(
   return { ...defaults, ...remote };
 }
 
+function normalizeAfariLens(
+  afariLens: ArchiveContentData["page"]["afariLens"],
+  defaults: ArchiveContentData["page"]["afariLens"],
+): ArchiveContentData["page"]["afariLens"] {
+  const href = afariLens.editionsHref.trim();
+  const editionsHref =
+    href === "/archive#grid" || href === "#grid" || href === "/archive"
+      ? COMMUNITY_LENS_EDITIONS_HREF
+      : afariLens.editionsHref;
+
+  return {
+    ...defaults,
+    ...afariLens,
+    editionsHref,
+    entriesLabel: afariLens.entriesLabel?.trim() || defaults.entriesLabel,
+    editionsLabel: afariLens.editionsLabel?.trim() || defaults.editionsLabel,
+  };
+}
+
 function mergeArchiveImages(
   defaults: ArchiveImageRecord[],
   remote: ArchiveImageRecord[] | undefined,
 ): ArchiveImageRecord[] {
-  if (!remote || remote.length === 0) return defaults;
+  // Never saved a gallery — use defaults. An empty saved array means no photos.
+  if (remote === undefined) return defaults;
+  if (remote.length === 0) return [];
 
-  const remoteById = new Map(remote.map((img) => [img.id, img]));
-  const merged = defaults.map((img) => {
-    const patch = remoteById.get(img.id);
-    if (!patch) return img;
-    return {
-      ...img,
-      ...patch,
-      published: patch.published !== false,
-      related: patch.related ?? img.related,
-    };
+  // Saved gallery is authoritative — do not re-add defaults the editor removed.
+  const defaultsById = new Map(defaults.map((img) => [img.id, img]));
+  return remote.map((img) => {
+    const base = defaultsById.get(img.id);
+    const merged = base
+      ? {
+          ...base,
+          ...img,
+          published: img.published !== false,
+          related: img.related ?? base.related,
+        }
+      : { ...img, published: img.published !== false };
+    return normalizeArchiveImage(
+      merged as Parameters<typeof normalizeArchiveImage>[0],
+    );
   });
-
-  for (const img of remote) {
-    if (!defaults.some((d) => d.id === img.id)) {
-      merged.push({ ...img, published: img.published !== false });
-    }
-  }
-
-  return merged;
 }
 
 function mergeArchiveData(
@@ -52,6 +72,8 @@ function mergeArchiveData(
   if (!remote) return defaults;
 
   const page = (remote.page ?? {}) as Partial<ArchiveContentData["page"]>;
+  const images = mergeArchiveImages(defaults.images, remote.images);
+
   return {
     page: {
       hero: mergePage(defaults.page.hero, page.hero),
@@ -59,7 +81,10 @@ function mergeArchiveData(
         defaults.page.collectionsSection,
         page.collectionsSection,
       ),
-      afariLens: mergePage(defaults.page.afariLens, page.afariLens),
+      afariLens: normalizeAfariLens(
+        mergePage(defaults.page.afariLens, page.afariLens),
+        defaults.page.afariLens,
+      ),
       latestMomentsSection: mergePage(
         defaults.page.latestMomentsSection,
         page.latestMomentsSection,
@@ -71,11 +96,12 @@ function mergeArchiveData(
       Array.isArray(remote.collections) && remote.collections.length > 0
         ? remote.collections
         : defaults.collections,
-    latestMoments:
-      Array.isArray(remote.latestMoments) && remote.latestMoments.length > 0
-        ? remote.latestMoments
-        : defaults.latestMoments,
-    images: mergeArchiveImages(defaults.images, remote.images),
+    images,
+    latestMoments: normalizeLatestMoments(
+      remote.latestMoments,
+      defaults.latestMoments,
+      images,
+    ),
   };
 }
 
@@ -90,7 +116,9 @@ export function getArchiveContentLocal(): ArchiveContentData {
 
 export const getArchiveContent = cache(
   async (): Promise<ArchiveContentData> => {
-    const doc = await fetchCmsJson<ArchiveContentDocument>("/content/archive");
+    const doc = await fetchCmsJson<ArchiveContentDocument>("/content/archive", {
+      revalidate: false,
+    });
     if (doc?.data) return mergeArchiveData(doc.data);
     return getArchiveContentLocal();
   },
@@ -108,15 +136,14 @@ export function saveArchiveContentLocal(
   return doc;
 }
 
-export function getPublishedImages(
-  images: ArchiveImageRecord[],
-): ArchiveImageRecord[] {
-  return images.filter((img) => img.published !== false);
-}
+export {
+  getPublishedImages,
+  getVisibleCollections,
+  isArchiveCollectionVisible,
+} from "@/lib/archive/archive-visibility";
 
 export type {
   ArchiveCollection,
   ArchiveContentData,
   ArchiveImageRecord,
-  ArchiveLatestMoment,
 };

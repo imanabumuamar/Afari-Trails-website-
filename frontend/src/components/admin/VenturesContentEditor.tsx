@@ -93,7 +93,7 @@ export function VenturesContentEditor({
     slug === "main"
       ? "/ventures"
       : slug === "connect"
-        ? "/ventures/connect"
+        ? "/contact"
         : `/ventures/${slug}`;
 
   return (

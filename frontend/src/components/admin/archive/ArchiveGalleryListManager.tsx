@@ -12,6 +12,8 @@ type ArchiveGalleryListManagerProps = {
   onSelect: (id: string) => void;
   onAdd: (image: ArchiveImageRecord) => void;
   onRemove: (id: string) => void;
+  onReorder: (id: string, direction: -1 | 1) => void;
+  onTogglePublished: (id: string) => void;
 };
 
 type ImageFilter = "all" | "published" | "hidden";
@@ -28,6 +30,8 @@ export function ArchiveGalleryListManager({
   onSelect,
   onAdd,
   onRemove,
+  onReorder,
+  onTogglePublished,
 }: ArchiveGalleryListManagerProps) {
   const [filter, setFilter] = useState<ImageFilter>("all");
   const [search, setSearch] = useState("");
@@ -59,6 +63,11 @@ export function ArchiveGalleryListManager({
 
   return (
     <div className="space-y-4">
+      <p className="text-xs leading-relaxed text-charcoal/55">
+        Reorder with ↑↓. Hide photos with the toggle — hidden images stay saved
+        but are removed from the public gallery.
+      </p>
+
       <div className="flex flex-wrap gap-2">
         {(
           [
@@ -105,53 +114,81 @@ export function ArchiveGalleryListManager({
       )}
 
       <ul className="max-h-[60vh] space-y-1 overflow-y-auto border border-charcoal/10">
-        {filtered.map((img) => (
-          <li key={img.id}>
-            <button
-              type="button"
-              onClick={() => onSelect(img.id)}
-              className={`flex w-full items-start justify-between gap-2 px-3 py-2.5 text-left text-sm ${
-                selectedId === img.id
-                  ? "bg-charcoal text-ivory"
-                  : "hover:bg-charcoal/5"
-              }`}
-            >
-              <span>
-                <span className="block font-medium">{img.title}</span>
-                <span
-                  className={`text-xs ${
-                    selectedId === img.id ? "text-ivory/60" : "text-charcoal/45"
-                  }`}
-                >
-                  {img.id}
-                  {!isPublished(img) && " · hidden"}
+        {filtered.map((img) => {
+          const index = images.findIndex((i) => i.id === img.id);
+          return (
+            <li key={img.id}>
+              <button
+                type="button"
+                onClick={() => onSelect(img.id)}
+                className={`flex w-full items-start justify-between gap-2 px-3 py-2.5 text-left text-sm ${
+                  selectedId === img.id
+                    ? "bg-charcoal text-ivory"
+                    : "hover:bg-charcoal/5"
+                }`}
+              >
+                <span>
+                  <span className="block font-medium">{img.title}</span>
+                  <span
+                    className={`text-xs ${
+                      selectedId === img.id ? "text-ivory/60" : "text-charcoal/45"
+                    }`}
+                  >
+                    {img.id}
+                    {!isPublished(img) && " · hidden"}
+                  </span>
                 </span>
-              </span>
+              </button>
+
               {!readOnly && (
-                <button
-                  type="button"
-                  className={`shrink-0 text-xs uppercase ${
-                    selectedId === img.id
-                      ? "text-ivory/70 hover:text-ivory"
-                      : "text-red-800/60 hover:text-red-900"
+                <div
+                  className={`flex flex-wrap items-center gap-2 px-3 pb-2 ${
+                    selectedId === img.id ? "text-ivory/70" : "text-charcoal/50"
                   }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (
-                      window.confirm(
-                        `Remove "${img.title}" from the gallery?`,
-                      )
-                    ) {
-                      onRemove(img.id);
-                    }
-                  }}
                 >
-                  Del
-                </button>
+                  <button
+                    type="button"
+                    className="border border-current/25 px-2 py-0.5 text-[10px]"
+                    disabled={index <= 0}
+                    onClick={() => onReorder(img.id, -1)}
+                    aria-label="Move up"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    className="border border-current/25 px-2 py-0.5 text-[10px]"
+                    disabled={index < 0 || index >= images.length - 1}
+                    onClick={() => onReorder(img.id, 1)}
+                    aria-label="Move down"
+                  >
+                    ↓
+                  </button>
+                  <button
+                    type="button"
+                    className="text-[10px] uppercase tracking-[0.1em] underline-offset-2 hover:underline"
+                    onClick={() => onTogglePublished(img.id)}
+                  >
+                    {isPublished(img) ? "Hide" : "Show"}
+                  </button>
+                  <button
+                    type="button"
+                    className="text-[10px] uppercase tracking-[0.1em] text-red-800/70 hover:text-red-900"
+                    onClick={() => {
+                      if (
+                        window.confirm(`Remove "${img.title}" from the gallery?`)
+                      ) {
+                        onRemove(img.id);
+                      }
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
               )}
-            </button>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

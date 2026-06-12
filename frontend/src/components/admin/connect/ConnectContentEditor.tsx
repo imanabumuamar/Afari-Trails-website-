@@ -16,8 +16,8 @@ import type { ConnectPageConfig } from "@/types/connect-page";
 type Tab = keyof ConnectContentData;
 
 const TABS: { id: Tab; label: string; preview: string }[] = [
-  { id: "contact", label: "Contact", preview: "/contact" },
-  { id: "expeditions", label: "Expeditions connect", preview: "/expeditions/connect" },
+  { id: "contact", label: "Partner & Get in Touch", preview: "/contact" },
+  { id: "expeditions", label: "Plan Your Journey", preview: "/expeditions/connect" },
 ];
 
 type ConnectContentEditorProps = {

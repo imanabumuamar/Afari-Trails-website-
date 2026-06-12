@@ -5,7 +5,7 @@
       "hero": {
         "label": "Connect With Afari",
         "heading": "Every Meaningful Journey Begins With a Conversation.",
-        "subheading": "Whether you're exploring partnerships, expeditions, creative collaborations, or future ventures, we'd love to hear from you.",
+        "subheading": "Whether you're exploring partnerships, creative collaborations, hospitality, or future ventures — we'd love to hear from you.",
         "cta": "Begin the Conversation",
         "image": "/images/connect/contact-hero-image.png?v=1781027810274",
         "imageAlt": "Travelers gathered around a campfire at dusk"
@@ -13,7 +13,7 @@
       "intro": {
         "label": "Welcome",
         "statement": "Afari Trails exists through connection — between people, landscapes, stories, and ideas.",
-        "body": "Reach out for expedition inquiries, hospitality and venture partnerships, media and storytelling collaborations, conservation and community initiatives, or simply to share a vision. We read every message with care."
+        "body": "Reach out for hospitality and venture partnerships, media and storytelling collaborations, conservation and community initiatives, or simply to share a vision. We read every message with care."
       },
       "categories": {
         "label": "",
@@ -28,24 +28,32 @@
         "successMessage": "Thank you. Your message has been received — we will be in touch when the trail aligns.",
         "inquiryOptions": [
           {
-            "value": "expeditions",
-            "label": "Expeditions"
-          },
-          {
             "value": "partnerships",
             "label": "Partnerships"
           },
           {
-            "value": "media",
-            "label": "Media"
-          },
-          {
             "value": "hospitality",
-            "label": "Hospitality"
+            "label": "Hospitality Development"
           },
           {
             "value": "conservation",
             "label": "Conservation"
+          },
+          {
+            "value": "community",
+            "label": "Community"
+          },
+          {
+            "value": "agriculture",
+            "label": "Sustainable Agriculture"
+          },
+          {
+            "value": "investment",
+            "label": "Investment"
+          },
+          {
+            "value": "media",
+            "label": "Media"
           },
           {
             "value": "store",

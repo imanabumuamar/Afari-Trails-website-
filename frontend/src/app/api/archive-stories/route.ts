@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { primaryImageCategory } from "@/lib/archive/image-categories";
 import { getArchiveContent, getPublishedImages } from "@/services/content/archive";
 
 /**
@@ -13,7 +14,7 @@ export async function GET() {
     location: img.location,
     photographer: img.photographer,
     caption: img.caption,
-    category: img.category,
+    category: primaryImageCategory(img),
     image: img.image,
   }));
 

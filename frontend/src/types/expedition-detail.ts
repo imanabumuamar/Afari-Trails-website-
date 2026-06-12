@@ -83,6 +83,8 @@ export type ExpeditionDetail = {
   id: string;
   regionId?: string;
   published?: boolean;
+  /** When true, the public page shows only the hero image while other content stays saved in CMS. */
+  comingSoon?: boolean;
   name: string;
   title: string;
   tagline: string;

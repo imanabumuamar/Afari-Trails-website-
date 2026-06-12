@@ -13,6 +13,15 @@ import {
 } from "@/components/admin/ventures/AdminField";
 import { VentureImageField } from "@/components/admin/ventures/VentureImageField";
 import { ArchiveStoryPicker } from "@/components/admin/ventures/ArchiveStoryPicker";
+import { FeaturedProjectsEditor } from "@/components/admin/ventures/FeaturedProjectsEditor";
+import { PartnersCollaborationsEditor } from "@/components/admin/ventures/PartnersCollaborationsEditor";
+import {
+  normalizeFeaturedProject,
+  resolveFeaturedProjects,
+} from "@/lib/ventures/venture-projects-shared";
+import { resolveVenturesPartnersCollaborations } from "@/lib/ventures/ventures-partners-shared";
+import type { VenturesPartnersCollaborations } from "@/types/ventures-partners";
+import type { VentureFeaturedProject } from "@/types/venture-project";
 
 type VentureSectionEditorProps = {
   slug: VentureSlug;
@@ -154,6 +163,18 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
         ctaLabel: asString(d.ctaLabel || "View Project →"),
       };
     }
+    case "featured-projects": {
+      const arr = Array.isArray(data) ? data : [];
+      if (arr.length > 0) {
+        return arr.map((item, index) => normalizeFeaturedProject(item, index));
+      }
+      return resolveFeaturedProjects(asRecord(data));
+    }
+    case "partners-collaborations": {
+      return resolveVenturesPartnersCollaborations({
+        venturesPartnersCollaborations: data,
+      });
+    }
     case "cta-banner": {
       const d = asRecord(data);
       return {
@@ -162,7 +183,7 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
         body: asString(d.body),
         image: asString(d.image),
         ctaLabel: asString(d.ctaLabel || "Get In Touch →"),
-        ctaHref: asString(d.ctaHref || "/ventures/connect"),
+        ctaHref: asString(d.ctaHref || "/contact"),
       };
     }
     case "sub-hero": {
@@ -184,7 +205,7 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
       if (d.partnerCta || base.partnerCta) {
         base.partnerCta = asString(d.partnerCta || base.partnerCta);
         base.partnerHref = asString(
-          d.partnerHref || base.partnerHref || "/ventures/partner",
+          d.partnerHref || base.partnerHref || "/contact",
         );
       }
       return base;
@@ -208,8 +229,8 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
         body: asString(d.body),
         partnerCta: asString(d.partnerCta),
         deckCta: asString(d.deckCta),
-        partnerHref: asString(d.partnerHref || "/ventures/partner"),
-        deckHref: asString(d.deckHref || "/ventures/connect"),
+        partnerHref: asString(d.partnerHref || "/contact"),
+        deckHref: asString(d.deckHref || "/contact"),
         image: asString(d.image),
         imageAlt: asString(d.imageAlt),
         themes: Array.isArray(d.themes)
@@ -394,8 +415,8 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
         body: asString(d.body),
         cta: asString(d.cta),
         secondaryCta: asString(d.secondaryCta),
-        ctaHref: asString(d.ctaHref || "/ventures/connect"),
-        secondaryCtaHref: asString(d.secondaryCtaHref || "/ventures/partner"),
+        ctaHref: asString(d.ctaHref || "/contact"),
+        secondaryCtaHref: asString(d.secondaryCtaHref || "/contact"),
         image: asString(d.image),
       };
     }
@@ -476,8 +497,7 @@ export function VentureSectionEditor({
     setDraft(initializeDraft(section.type, data));
   }, [data, section.type]);
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function saveDraft() {
     if (readOnly) return;
     setSaving(true);
     try {
@@ -486,6 +506,11 @@ export function VentureSectionEditor({
     } finally {
       setSaving(false);
     }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    await saveDraft();
   }
 
   const key = section.key;
@@ -819,6 +844,32 @@ export function VentureSectionEditor({
               onRemove={() => setDraft(items.slice(0, -1))}
             />
           </div>
+        );
+      }
+
+      case "featured-projects": {
+        return (
+          <FeaturedProjectsEditor
+            slug={slug}
+            draft={draft as VentureFeaturedProject[]}
+            readOnly={readOnly}
+            saving={saving}
+            setDraft={(value) => setDraft(value)}
+            onStatus={onStatus}
+            onSave={saveDraft}
+          />
+        );
+      }
+
+      case "partners-collaborations": {
+        return (
+          <PartnersCollaborationsEditor
+            slug={slug}
+            draft={draft as VenturesPartnersCollaborations}
+            readOnly={readOnly}
+            setDraft={(value) => setDraft(value)}
+            onStatus={onStatus}
+          />
         );
       }
 

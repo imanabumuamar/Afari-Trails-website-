@@ -33,7 +33,7 @@ export async function ConservationHero() {
           </p>
           <div className="mt-12 flex flex-wrap gap-5">
             <a
-              href="#initiatives"
+              href="#focus-areas"
               className="inline-flex items-center justify-center border border-ivory/55 bg-transparent px-8 py-3.5 text-xs font-medium uppercase tracking-[0.24em] text-ivory transition-colors hover:border-ivory hover:bg-ivory/10"
             >
               {conservationHero.exploreCta}

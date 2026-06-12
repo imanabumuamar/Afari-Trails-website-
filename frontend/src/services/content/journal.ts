@@ -22,9 +22,26 @@ export function getJournalContentLocal(): JournalContentData {
 
 export const getJournalContent = cache(
   async (): Promise<JournalContentData> => {
+    let localDoc: JournalContentDocument | null = null;
+    try {
+      localDoc = readJsonFile<JournalContentDocument>("journal.json");
+    } catch {
+      localDoc = null;
+    }
+
+    const local = localDoc
+      ? mergeJournalData(localDoc.data)
+      : JOURNAL_CONTENT_DEFAULTS;
+
     const doc = await fetchCmsJson<JournalContentDocument>("/content/journal");
-    if (doc?.data) return mergeJournalData(doc.data);
-    return getJournalContentLocal();
+    if (!doc?.data) return local;
+
+    const remote = mergeJournalData(doc.data);
+    if (!localDoc?.updatedAt) return remote;
+
+    const localTime = new Date(localDoc.updatedAt).getTime();
+    const remoteTime = new Date(doc.updatedAt ?? 0).getTime();
+    return localTime >= remoteTime ? local : remote;
   },
 );
 
@@ -54,10 +71,12 @@ export async function getStoryBySlug(
   slug: string,
 ): Promise<JournalStoryRecord | undefined> {
   const { stories } = await getJournalContent();
-  return stories.find((s) => s.slug === slug);
+  const story = stories.find((s) => s.slug === slug);
+  if (!story || story.published === false) return undefined;
+  return story;
 }
 
 export async function getAllStorySlugs(): Promise<string[]> {
   const { stories } = await getJournalContent();
-  return stories.map((s) => s.slug);
+  return stories.filter((s) => s.published !== false).map((s) => s.slug);
 }

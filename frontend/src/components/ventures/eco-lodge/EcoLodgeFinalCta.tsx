@@ -7,8 +7,8 @@ export async function EcoLodgeFinalCta() {
   const content = await getVenturePageContent("eco-lodge");
   const section = content.ecoLodgeFinalCta as typeof default_ecoLodgeFinalCta;
   const paragraphs = section.body.split("\n\n").filter(Boolean);
-  const ctaHref = section.ctaHref ?? "/ventures/connect";
-  const secondaryHref = section.secondaryCtaHref ?? "/ventures/partner";
+  const ctaHref = section.ctaHref ?? "/contact";
+  const secondaryHref = section.secondaryCtaHref ?? "/contact";
 
   return (
     <section className="relative min-h-[480px] lg:min-h-[540px]">

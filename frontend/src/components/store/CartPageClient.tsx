@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "@/context/cart-context";
+import { cartLineKey } from "@/types/cart";
 import { ROUTES } from "@/config/routes";
 
 const inputClass =
@@ -166,8 +167,10 @@ export function CartPageClient() {
       </div>
 
       <ul className="divide-y divide-charcoal/10">
-        {lines.map((line) => (
-          <li key={line.slug} className="flex gap-6 py-8">
+        {lines.map((line) => {
+          const key = cartLineKey(line);
+          return (
+          <li key={key} className="flex gap-6 py-8">
             <Link
               href={ROUTES.storeProduct(line.slug)}
               className="relative h-28 w-24 shrink-0 overflow-hidden bg-sand-light/40"
@@ -188,6 +191,14 @@ export function CartPageClient() {
                 {line.name}
               </Link>
               <p className="mt-1 text-sm text-charcoal/55">{line.priceDisplay}</p>
+              {line.selectedOptions &&
+                Object.keys(line.selectedOptions).length > 0 && (
+                  <p className="mt-2 text-xs text-charcoal/50">
+                    {Object.entries(line.selectedOptions)
+                      .map(([name, value]) => `${name}: ${value}`)
+                      .join(" · ")}
+                  </p>
+                )}
               <div className="mt-4 flex flex-wrap items-center gap-4">
                 <label className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-charcoal/50">
                   Qty
@@ -197,14 +208,14 @@ export function CartPageClient() {
                     max={99}
                     value={line.quantity}
                     onChange={(e) =>
-                      setQuantity(line.slug, Number(e.target.value))
+                      setQuantity(key, Number(e.target.value))
                     }
                     className="w-14 border border-charcoal/20 bg-ivory px-2 py-1 text-sm text-charcoal"
                   />
                 </label>
                 <button
                   type="button"
-                  onClick={() => removeItem(line.slug)}
+                  onClick={() => removeItem(key)}
                   className="text-xs uppercase tracking-[0.2em] text-charcoal/45 hover:text-charcoal"
                 >
                   Remove
@@ -215,7 +226,8 @@ export function CartPageClient() {
               {formatMoney(line.price * line.quantity)}
             </p>
           </li>
-        ))}
+        );
+        })}
       </ul>
 
       <div className="mt-10 border-t border-charcoal/10 pt-10">

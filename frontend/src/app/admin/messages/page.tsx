@@ -15,6 +15,8 @@ type InquirySource =
   | "newsletter"
   | "archive-submit";
 
+type MessageGroup = "connect" | "expeditions";
+
 type Submission = {
   id: string;
   source: InquirySource;
@@ -43,36 +45,58 @@ type InquiriesResponse = {
   };
 };
 
-function messagesHref(
-  source: InquirySource | null,
-  view: "inbox" | "archived",
-) {
-  const params = new URLSearchParams();
-  if (source) params.set("source", source);
-  if (view === "archived") params.set("view", "archived");
-  const q = params.toString();
-  return `/admin/messages${q ? `?${q}` : ""}`;
-}
+const MESSAGE_GROUPS: Record<
+  MessageGroup,
+  { label: string; sources: InquirySource[] }
+> = {
+  connect: {
+    label: "Connect messages",
+    sources: ["contact", "ventures-connect", "partner"],
+  },
+  expeditions: {
+    label: "Expedition messages",
+    sources: ["expeditions-connect", "expedition"],
+  },
+};
 
 const SOURCE_LABELS: Record<InquirySource, string> = {
-  contact: "Contact",
-  "expeditions-connect": "Expeditions connect",
-  "ventures-connect": "Ventures connect",
-  partner: "Partner",
+  contact: "Connect",
+  "expeditions-connect": "Plan your journey",
+  "ventures-connect": "Connect (legacy)",
+  partner: "Connect (legacy)",
   expedition: "Expedition request",
   newsletter: "Newsletter",
   "archive-submit": "Afari Lens photo",
 };
 
-const SOURCE_ORDER: InquirySource[] = [
-  "contact",
-  "expeditions-connect",
-  "ventures-connect",
-  "partner",
-  "expedition",
-  "newsletter",
-  "archive-submit",
-];
+const OTHER_SOURCES: InquirySource[] = ["newsletter", "archive-submit"];
+
+function messagesHref({
+  source = null,
+  group = null,
+  view,
+}: {
+  source?: InquirySource | null;
+  group?: MessageGroup | null;
+  view: "inbox" | "archived";
+}) {
+  const params = new URLSearchParams();
+  if (group) params.set("group", group);
+  else if (source) params.set("source", source);
+  if (view === "archived") params.set("view", "archived");
+  const q = params.toString();
+  return `/admin/messages${q ? `?${q}` : ""}`;
+}
+
+function groupCount(
+  group: MessageGroup,
+  bySource: Record<string, number>,
+): number {
+  return MESSAGE_GROUPS[group].sources.reduce(
+    (sum, src) => sum + (bySource[src] ?? 0),
+    0,
+  );
+}
 
 function formatDate(iso: string) {
   try {
@@ -91,7 +115,7 @@ function formatDate(iso: string) {
 export default async function AdminMessagesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ source?: string; view?: string }>;
+  searchParams: Promise<{ source?: string; group?: string; view?: string }>;
 }) {
   const session = await getStaffSession();
   const role = session?.user?.role ?? null;
@@ -102,10 +126,18 @@ export default async function AdminMessagesPage({
   }
 
   const token = session?.accessToken ?? null;
-  const { source, view } = await searchParams;
-  const activeSource = SOURCE_ORDER.includes(source as InquirySource)
-    ? (source as InquirySource)
-    : null;
+  const { source, group, view } = await searchParams;
+  const activeGroup =
+    group === "connect" || group === "expeditions" ? group : null;
+  const activeSource =
+    !activeGroup &&
+    [
+      ...MESSAGE_GROUPS.connect.sources,
+      ...MESSAGE_GROUPS.expeditions.sources,
+      ...OTHER_SOURCES,
+    ].includes(source as InquirySource)
+      ? (source as InquirySource)
+      : null;
   const isArchivedView = view === "archived";
 
   const queryParts: string[] = [];
@@ -131,26 +163,41 @@ export default async function AdminMessagesPage({
     );
   }
 
-  const { submissions, counts } = data;
+  const { counts } = data;
+  let submissions = data.submissions;
+
+  if (activeGroup) {
+    const sources = MESSAGE_GROUPS[activeGroup].sources;
+    submissions = submissions.filter((s) => sources.includes(s.source));
+  }
+
   const inboxCount = counts.inboxTotal ?? counts.total;
   const archivedCount = counts.archived ?? 0;
+  const connectCount = groupCount("connect", counts.bySource);
+  const expeditionsCount = groupCount("expeditions", counts.bySource);
+
+  const activeFilterLabel = activeGroup
+    ? MESSAGE_GROUPS[activeGroup].label
+    : activeSource
+      ? SOURCE_LABELS[activeSource]
+      : null;
 
   return (
     <div className="space-y-8">
       <div>
         <h2 className="font-serif text-3xl font-light">Messages</h2>
-        <p className="mt-3 max-w-xl text-sm text-charcoal/65">
-          Form submissions from the website live here — not in the Connect content
-          editor. Use the <strong className="font-normal">Contact</strong> filter for
-          messages from Begin the Conversation on /contact. Newsletter sign-ups (Stay
-          Close to the Trail) appear under Newsletter and only include an email.
-          Refresh this page after testing a form.
+        <p className="mt-3 max-w-2xl text-sm text-charcoal/65">
+          <strong className="font-normal">Connect messages</strong> come from
+          /contact (partner with us and get in touch).{" "}
+          <strong className="font-normal">Expedition messages</strong> come from
+          /expeditions/connect (plan your journey) and expedition enquiry forms.
+          Newsletter sign-ups only include an email. Refresh after testing a form.
         </p>
       </div>
 
       <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.12em]">
         <Link
-          href={messagesHref(null, "inbox")}
+          href={messagesHref({ view: "inbox" })}
           className={`border px-3 py-1.5 ${
             !isArchivedView
               ? "border-charcoal bg-charcoal text-ivory"
@@ -160,7 +207,7 @@ export default async function AdminMessagesPage({
           Inbox ({inboxCount})
         </Link>
         <Link
-          href={messagesHref(null, "archived")}
+          href={messagesHref({ view: "archived" })}
           className={`border px-3 py-1.5 ${
             isArchivedView
               ? "border-charcoal bg-charcoal text-ivory"
@@ -173,19 +220,41 @@ export default async function AdminMessagesPage({
 
       <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.12em]">
         <Link
-          href={messagesHref(null, isArchivedView ? "archived" : "inbox")}
+          href={messagesHref({
+            view: isArchivedView ? "archived" : "inbox",
+          })}
           className={`border px-3 py-1.5 ${
-            activeSource === null
+            !activeGroup && !activeSource
               ? "border-charcoal/40 bg-charcoal/5 text-charcoal"
               : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
           }`}
         >
           All types
         </Link>
-        {SOURCE_ORDER.map((src) => (
+        {(Object.keys(MESSAGE_GROUPS) as MessageGroup[]).map((key) => (
+          <Link
+            key={key}
+            href={messagesHref({
+              group: key,
+              view: isArchivedView ? "archived" : "inbox",
+            })}
+            className={`border px-3 py-1.5 ${
+              activeGroup === key
+                ? "border-charcoal/40 bg-charcoal/5 text-charcoal"
+                : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
+            }`}
+          >
+            {MESSAGE_GROUPS[key].label} (
+            {key === "connect" ? connectCount : expeditionsCount})
+          </Link>
+        ))}
+        {OTHER_SOURCES.map((src) => (
           <Link
             key={src}
-            href={messagesHref(src, isArchivedView ? "archived" : "inbox")}
+            href={messagesHref({
+              source: src,
+              view: isArchivedView ? "archived" : "inbox",
+            })}
             className={`border px-3 py-1.5 ${
               activeSource === src
                 ? "border-charcoal/40 bg-charcoal/5 text-charcoal"
@@ -200,7 +269,7 @@ export default async function AdminMessagesPage({
       {submissions.length === 0 ? (
         <p className="rounded border border-charcoal/15 bg-ivory p-6 text-sm text-charcoal/65">
           {isArchivedView ? "No archived messages" : "No messages yet"}
-          {activeSource ? ` for ${SOURCE_LABELS[activeSource]}` : ""}.
+          {activeFilterLabel ? ` for ${activeFilterLabel}` : ""}.
         </p>
       ) : (
         <ul className="space-y-4">

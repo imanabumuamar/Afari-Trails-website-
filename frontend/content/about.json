@@ -5,7 +5,7 @@
       "label": "About Afari Trails",
       "heading": "Built Between Journeys, Landscapes, and Stories.",
       "subtext": "Afari Trails was created to explore the connection between wilderness, identity, culture, and the spirit of discovery.",
-      "image": "/images/about/hero-image.png"
+      "image": "/images/about/hero-image.jpg?v=1781255489911"
     },
     "brandStory": {
       "label": "The Brand Story",
@@ -29,23 +29,23 @@
       "sectionLabel": "Visual Storytelling Strip",
       "images": [
         {
-          "src": "/images/about/visualStrip-images-0-src.jpg",
+          "src": "/images/about/visualStrip-images-0-src.jpg?v=1781255560120",
           "alt": "Winding road through valley"
         },
         {
-          "src": "/images/about/visualStrip-images-1-src.jpg",
+          "src": "/images/about/visualStrip-images-1-src.jpg?v=1781255625507",
           "alt": "Campfire at night"
         },
         {
-          "src": "/images/about/visualStrip-images-2-src.jpg",
+          "src": "/images/about/visualStrip-images-2-src.jpg?v=1781255642643",
           "alt": "Worn hiking boots"
         },
         {
-          "src": "/images/about/visualStrip-images-3-src.jpg",
+          "src": "/images/about/visualStrip-images-3-src.jpg?v=1781255664635",
           "alt": "Portrait in traditional jewelry"
         },
         {
-          "src": "/images/about/visualStrip-images-4-src.jpg",
+          "src": "/images/about/visualStrip-images-4-src.jpg?v=1781255686219",
           "alt": "Fabric in the wind"
         }
       ]
@@ -96,6 +96,11 @@
           "src": "/images/about/behindTheBrand-images-2-src.png?v=1781026586847",
           "name": "Lewis Phiri ",
           "position": "Expedition Coordinator "
+        },
+        {
+          "src": "/images/about/behindTheBrand-images-3-src.png?v=1781256201361",
+          "name": "",
+          "position": "Co founder "
         }
       ]
     },
@@ -135,5 +140,5 @@
       "href": "/contact"
     }
   },
-  "updatedAt": "2026-06-09T17:37:14.867Z"
+  "updatedAt": "2026-06-12T09:23:21.939Z"
 }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AddToCartButton } from "@/components/store/AddToCartButton";
+import { ProductPurchase } from "@/components/store/ProductPurchase";
 import { ProductCard } from "@/components/store/ProductCard";
 import {
   getStoreContentLocal,
@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: PageProps) {
               ))}
             </dl>
 
-            <AddToCartButton product={product} />
+            <ProductPurchase product={product} />
           </div>
 
           <div className="lg:col-span-7">

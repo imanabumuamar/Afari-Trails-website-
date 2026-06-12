@@ -2,7 +2,16 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import type { ArchiveContentData } from "@/types/archive-content";
+import { readAdminApiError } from "@/lib/admin/cms-client-error";
+import type {
+  ArchiveContentData,
+  ArchiveImageRecord,
+} from "@/types/archive-content";
+
+export type ArchiveDocumentSyncedHandler = (
+  data: ArchiveContentData,
+  updatedAt?: string | null,
+) => void;
 
 type ArchiveImageFieldProps = {
   fieldPath: string;
@@ -11,10 +20,10 @@ type ArchiveImageFieldProps = {
   alt?: string;
   imageId?: string;
   collectionId?: string;
-  momentId?: string;
+  galleryRecord?: ArchiveImageRecord;
   readOnly?: boolean;
   onUploaded: (src: string) => void;
-  onDocumentSynced?: (data: ArchiveContentData) => void;
+  onDocumentSynced?: ArchiveDocumentSyncedHandler;
   onStatus: (message: string) => void;
 };
 
@@ -25,7 +34,7 @@ export function ArchiveImageField({
   alt = "",
   imageId,
   collectionId,
-  momentId,
+  galleryRecord,
   readOnly = false,
   onUploaded,
   onDocumentSynced,
@@ -52,7 +61,9 @@ export function ArchiveImageField({
     formData.set("image", file);
     if (imageId) formData.set("imageId", imageId);
     if (collectionId) formData.set("collectionId", collectionId);
-    if (momentId) formData.set("momentId", momentId);
+    if (galleryRecord) {
+      formData.set("galleryRecord", JSON.stringify(galleryRecord));
+    }
 
     setUploading(true);
     onStatus(`Uploading ${label}…`);
@@ -65,13 +76,21 @@ export function ArchiveImageField({
     setUploading(false);
 
     if (!res.ok) {
-      onStatus(`Upload failed for ${label}. Use a JPG, PNG, or WebP image.`);
+      onStatus(
+        await readAdminApiError(
+          res,
+          `Upload failed for ${label}. Use a JPG, PNG, or WebP image.`,
+        ),
+      );
       return;
     }
 
-    const doc = await res.json();
-    const data = doc.data as ArchiveContentData;
-    onDocumentSynced?.(data);
+    const doc = (await res.json()) as {
+      data: ArchiveContentData;
+      updatedAt?: string | null;
+    };
+    const data = doc.data;
+    onDocumentSynced?.(data, doc.updatedAt);
 
     let newSrc = src;
     if (imageId) {
@@ -79,9 +98,6 @@ export function ArchiveImageField({
     } else if (collectionId) {
       newSrc =
         data.collections.find((c) => c.id === collectionId)?.image ?? src;
-    } else if (momentId) {
-      newSrc =
-        data.latestMoments.find((m) => m.id === momentId)?.image ?? src;
     } else {
       newSrc =
         resolvePath(data.page as unknown as Record<string, unknown>, fieldPath) ??

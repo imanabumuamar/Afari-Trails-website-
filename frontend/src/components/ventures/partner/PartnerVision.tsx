@@ -2,7 +2,7 @@ import { partnerVision as default_partnerVision } from "@/lib/data/partner";
 import { getVenturePageContent } from "@/services/content/ventures";
 
 export async function PartnerVision() {
-  const content = await getVenturePageContent("partner");
+  const content = await getVenturePageContent("connect");
   const partnerVision = content.partnerVision as typeof default_partnerVision;
 
   return (

@@ -20,74 +20,76 @@ export async function BehindVisionSplit() {
   const people = behindTheBrand.images.filter((img) => img.src);
 
   return (
-    <section className="grid lg:grid-cols-2">
-      <div className="bg-matte-black px-6 py-16 lg:px-10 lg:py-20">
-        <h2 className="font-serif text-3xl font-light text-ivory md:text-4xl">
-          {behindTheBrand.heading}
-        </h2>
-        {people.length > 0 && (
-          <div className="mt-10 grid grid-cols-3 gap-x-4 gap-y-10 sm:gap-x-5 sm:gap-y-12">
-            {people.map((img, i) => (
-              <div
-                key={`${img.src}-${i}`}
-                className="flex flex-col items-center text-center"
-              >
-                <div className="relative aspect-square w-full overflow-hidden">
-                  <Image
-                    src={img.src}
-                    alt={img.name || img.position || "Team member"}
-                    fill
-                    className="object-cover opacity-90"
-                    sizes="(max-width: 1024px) 28vw, 140px"
-                  />
-                </div>
-                {(img.name.trim() || img.position.trim()) && (
-                  <div className="mt-3 w-full px-0.5">
-                    {img.name.trim() ? (
-                      <p className="font-serif text-[13px] font-light leading-snug text-ivory sm:text-sm">
-                        {img.name.trim()}
-                      </p>
-                    ) : null}
-                    {img.position.trim() ? (
-                      <p
-                        className={`text-[9px] uppercase tracking-[0.16em] text-ivory/60 ${
-                          img.name.trim() ? "mt-1" : ""
-                        }`}
-                      >
-                        {img.position.trim()}
-                      </p>
-                    ) : null}
+    <section className="grid bg-matte-black lg:grid-cols-2 lg:items-stretch">
+      <div className="bg-matte-black px-6 py-8 text-ivory lg:px-10 lg:py-10">
+        <div className="w-full max-w-md">
+          <h2 className="font-serif text-2xl font-light md:text-3xl">
+            {behindTheBrand.heading}
+          </h2>
+          {people.length > 0 && (
+            <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-4 sm:gap-3">
+              {people.map((img, i) => (
+                <div
+                  key={`${img.src}-${i}`}
+                  className="flex min-w-0 flex-col text-left"
+                >
+                  <div className="relative aspect-square w-full max-w-[100px] overflow-hidden">
+                    <Image
+                      src={img.src}
+                      alt={img.name || img.position || "Team member"}
+                      fill
+                      className="object-cover opacity-90"
+                      sizes="(max-width: 640px) 45vw, 100px"
+                    />
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+                  {(img.name.trim() || img.position.trim()) && (
+                    <div className="mt-1.5 w-full">
+                      {img.name.trim() ? (
+                        <p className="font-serif text-[12px] font-light leading-snug text-ivory">
+                          {img.name.trim()}
+                        </p>
+                      ) : null}
+                      {img.position.trim() ? (
+                        <p
+                          className={`text-[8px] uppercase tracking-[0.14em] text-ivory/60 ${
+                            img.name.trim() ? "mt-0.5" : ""
+                          }`}
+                        >
+                          {img.position.trim()}
+                        </p>
+                      ) : null}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="flex flex-col justify-between bg-gradient-to-b from-[#d6c7b1] via-[#8b7355] to-[#3c3228] px-6 py-16 text-ivory lg:px-12 lg:py-20">
-        <div>
-          <h2 className="font-serif text-3xl font-light md:text-4xl">
+      <div className="bg-gradient-to-b from-[#d6c7b1] via-[#8b7355] to-[#3c3228] px-6 py-8 text-ivory lg:px-10 lg:py-10">
+        <div className="w-full max-w-md">
+          <h2 className="font-serif text-2xl font-light md:text-3xl">
             {futureVision.heading}
           </h2>
-          <p className="mt-8 max-w-md text-sm leading-[1.9] text-ivory/85 md:text-base">
+          <p className="mt-4 text-xs leading-[1.75] text-ivory/85 md:text-sm">
             {futureVision.body}
           </p>
-        </div>
 
-        <div className="mt-16 flex flex-wrap justify-between gap-8 border-t border-ivory/20 pt-10">
-          {futureVision.pillars.map((pillar) => (
-            <Link
-              key={pillar.href}
-              href={pillar.href ?? "#"}
-              className="flex flex-col items-center gap-3 text-center transition-opacity hover:opacity-80"
-            >
-              <PillarIcon type={pillar.icon} />
-              <span className="text-[10px] uppercase tracking-[0.18em]">
-                {pillar.label}
-              </span>
-            </Link>
-          ))}
+          <div className="mt-6 flex flex-wrap justify-between gap-x-4 gap-y-4 border-t border-ivory/20 pt-5 [&_svg]:h-7 [&_svg]:w-7">
+            {futureVision.pillars.map((pillar) => (
+              <Link
+                key={pillar.href}
+                href={pillar.href ?? "#"}
+                className="flex flex-col items-center gap-1.5 text-center transition-opacity hover:opacity-80"
+              >
+                <PillarIcon type={pillar.icon} />
+                <span className="text-[9px] uppercase tracking-[0.16em]">
+                  {pillar.label}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

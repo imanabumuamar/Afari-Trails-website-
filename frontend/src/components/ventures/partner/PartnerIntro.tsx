@@ -3,7 +3,7 @@ import { getVenturePageContent } from "@/services/content/ventures";
 import { partnerIntro as default_partnerIntro } from "@/lib/data/partner";
 
 export async function PartnerIntro() {
-  const content = await getVenturePageContent("partner");
+  const content = await getVenturePageContent("connect");
   const partnerIntro = content.partnerIntro as typeof default_partnerIntro;
 
   return (

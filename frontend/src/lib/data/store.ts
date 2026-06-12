@@ -25,7 +25,7 @@ export const storeNav = [
 
 export const storeHero = STORE_CONTENT_DEFAULTS.hero;
 export const editorialCollections = STORE_CONTENT_DEFAULTS.collections;
-export const curatedEssentials = STORE_CONTENT_DEFAULTS.curatedEssentials;
+export const newArrivals = STORE_CONTENT_DEFAULTS.newArrivals;
 export const worldOfAfari = STORE_CONTENT_DEFAULTS.worldOfAfari;
 export const products = STORE_CONTENT_DEFAULTS.products;
 

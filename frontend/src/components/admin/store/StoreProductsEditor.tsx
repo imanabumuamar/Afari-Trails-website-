@@ -1,7 +1,9 @@
 "use client";
 
 import { AdminField } from "@/components/admin/ventures/AdminField";
+import { ProductOptionsEditor } from "@/components/admin/store/ProductOptionsEditor";
 import { StoreImageField } from "@/components/admin/store/StoreImageField";
+import { normalizeProductOptions } from "@/lib/store/product-options";
 import type {
   GearType,
   Product,
@@ -46,6 +48,7 @@ function emptyProduct(): Product {
     category: "apparel",
     gearType: "expedition-wear",
     related: [],
+    options: [],
   };
 }
 
@@ -55,6 +58,7 @@ type Props = {
   setData: React.Dispatch<React.SetStateAction<StoreContentData | null>>;
   setStatus: (message: string) => void;
   onDocumentSynced: (data: StoreContentData) => void;
+  onSave: (products: StoreContentData["products"]) => void;
 };
 
 export function StoreProductsEditor({
@@ -63,6 +67,7 @@ export function StoreProductsEditor({
   setData,
   setStatus,
   onDocumentSynced,
+  onSave,
 }: Props) {
   function updateProduct(index: number, patch: Partial<Product>) {
     setData((prev) => {
@@ -269,6 +274,14 @@ export function StoreProductsEditor({
               Mark as new
             </label>
 
+            <ProductOptionsEditor
+              options={product.options ?? []}
+              readOnly={readOnly}
+              onChange={(options) =>
+                updateProduct(index, { options: normalizeProductOptions(options) })
+              }
+            />
+
             <StoreImageField
               fieldPath={`products.${index}.image`}
               label="Main image"
@@ -297,6 +310,16 @@ export function StoreProductsEditor({
           </div>
         ))}
       </div>
+
+      {!readOnly && (
+        <button
+          type="button"
+          onClick={() => onSave(data.products)}
+          className="bg-charcoal px-6 py-3 text-xs font-medium uppercase tracking-[0.2em] text-ivory hover:bg-matte-black"
+        >
+          Save items
+        </button>
+      )}
     </section>
   );
 }

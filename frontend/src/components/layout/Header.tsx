@@ -8,6 +8,7 @@ import { Logo } from "@/components/ui/Logo";
 import {
   DARK_HERO_PATHS,
   isExpeditionDetailPath,
+  isVentureProjectPath,
   navLinks,
   ROUTES,
 } from "@/config/routes";
@@ -57,7 +58,9 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isDarkHero =
-    DARK_HERO_PATHS.includes(pathname) || isExpeditionDetailPath(pathname);
+    DARK_HERO_PATHS.includes(pathname) ||
+    isExpeditionDetailPath(pathname) ||
+    isVentureProjectPath(pathname);
   const isJournal = pathname === "/journal" || pathname.startsWith("/journal/");
   const isArchive = pathname === "/archive";
   const isExpeditions = pathname.startsWith("/expeditions");

@@ -4,6 +4,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AdminField } from "@/components/admin/ventures/AdminField";
 import { JournalImageField } from "@/components/admin/journal/JournalImageField";
+import {
+  applyJournalStoryStatus,
+  getJournalStoryStatus,
+  isJournalStoryPublished,
+  JOURNAL_STORY_STATUS_OPTIONS,
+} from "@/lib/journal/journal-story-status";
 import type {
   JournalContentData,
   JournalStoryRecord,
@@ -61,16 +67,12 @@ export function JournalStoryEditor({
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const normalized: JournalStoryRecord = {
-      ...draft,
-      published: draft.published !== false,
-    };
-    onSave(normalized, normalized.featured === true);
+    onSave(draft, draft.featured === true);
     onStatus("Story saved.");
     setTimeout(() => onStatus(""), 2500);
   }
 
-  const isLive = draft.published !== false;
+  const isLive = isJournalStoryPublished(draft);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
@@ -88,17 +90,59 @@ export function JournalStoryEditor({
         )}
       </div>
 
-      <label className="flex items-center gap-2 text-sm">
-        <input
-          type="checkbox"
-          checked={isLive}
-          disabled={readOnly}
-          onChange={(e) =>
-            setDraft({ ...draft, published: e.target.checked })
-          }
-        />
-        Published (visible on journal page and story URL)
-      </label>
+      <div className="space-y-4 rounded border border-charcoal/12 bg-beige/30 p-5">
+        <div>
+          <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+            Public status
+          </h4>
+          <p className="mt-2 text-xs leading-relaxed text-charcoal/55">
+            Choose one status. You can keep editing all fields below regardless
+            of which is selected.
+          </p>
+        </div>
+        <div className="space-y-3">
+          {JOURNAL_STORY_STATUS_OPTIONS.map((option) => {
+            const selected = getJournalStoryStatus(draft) === option.value;
+            return (
+              <label
+                key={option.value}
+                className={`flex cursor-pointer gap-3 rounded border px-4 py-3 transition-colors ${
+                  selected
+                    ? "border-safari-green/35 bg-ivory"
+                    : "border-charcoal/10 bg-ivory/60"
+                } ${readOnly ? "cursor-default" : "hover:border-charcoal/25"}`}
+              >
+                <input
+                  type="radio"
+                  name="journal-story-status"
+                  className="mt-0.5 shrink-0"
+                  checked={selected}
+                  disabled={readOnly}
+                  onChange={() =>
+                    setDraft(applyJournalStoryStatus(draft, option.value))
+                  }
+                />
+                <span className="min-w-0">
+                  <span className="block text-sm font-medium text-charcoal">
+                    {option.label}
+                  </span>
+                  <span className="mt-1 block text-xs leading-relaxed text-charcoal/50">
+                    {option.description}
+                  </span>
+                </span>
+              </label>
+            );
+          })}
+        </div>
+        {!readOnly && (
+          <button
+            type="submit"
+            className="bg-charcoal px-5 py-2.5 text-xs font-medium uppercase tracking-[0.2em] text-ivory hover:bg-matte-black"
+          >
+            Save status
+          </button>
+        )}
+      </div>
 
       <div className="flex flex-wrap gap-6">
         <label className="flex items-center gap-2 text-sm">

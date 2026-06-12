@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AdminField } from "@/components/admin/ventures/AdminField";
+import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import type { StoreContentData } from "@/types/store-content";
 
 type StoreImageFieldProps = {
@@ -38,22 +39,22 @@ export function StoreImageField({
 }: StoreImageFieldProps) {
   const [uploading, setUploading] = useState(false);
   const [urlDraft, setUrlDraft] = useState(src);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setUrlDraft(src);
   }, [src]);
 
-  async function handleUpload(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    formData.set("field", fieldPath);
-
-    const file = formData.get("image");
-    if (!file || !(file instanceof File) || file.size === 0) {
-      onStatus("Choose an image file to upload.");
+  async function uploadFile(file: File) {
+    if (file.size === 0) return;
+    if (!file.type.startsWith("image/")) {
+      onStatus("Please choose a JPG, PNG, or WebP image.");
       return;
     }
+
+    const formData = new FormData();
+    formData.set("field", fieldPath);
+    formData.set("image", file);
 
     setUploading(true);
     onStatus(`Uploading ${label}…`);
@@ -66,7 +67,12 @@ export function StoreImageField({
     setUploading(false);
 
     if (!res.ok) {
-      onStatus(`Upload failed for ${label}.`);
+      onStatus(
+        await readAdminApiError(
+          res,
+          `Upload failed for ${label}. Use a JPG, PNG, or WebP image.`,
+        ),
+      );
       return;
     }
 
@@ -78,9 +84,14 @@ export function StoreImageField({
       resolvePath(data as unknown as Record<string, unknown>, fieldPath) ?? src;
     onUploaded(newSrc);
     setUrlDraft(newSrc);
-    onStatus(`${label} image updated.`);
-    form.reset();
+    onStatus(`${label} updated and saved.`);
     setTimeout(() => onStatus(""), 2500);
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) void uploadFile(file);
+    e.target.value = "";
   }
 
   return (
@@ -95,21 +106,21 @@ export function StoreImageField({
       )}
       {!readOnly && (
         <>
-          <form onSubmit={handleUpload} className="space-y-3">
-            <input
-              name="image"
-              type="file"
-              accept="image/png,image/jpeg,image/webp"
-              className="block w-full text-sm"
-            />
-            <button
-              type="submit"
-              disabled={uploading}
-              className="bg-charcoal px-5 py-2 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
-            >
-              {uploading ? "Uploading…" : "Upload image"}
-            </button>
-          </form>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="bg-charcoal px-5 py-2 text-xs uppercase tracking-[0.2em] text-ivory disabled:opacity-40"
+          >
+            {uploading ? "Uploading…" : src ? "Replace image" : "Choose image"}
+          </button>
           <AdminField label="Or paste image URL">
             <input
               type="url"

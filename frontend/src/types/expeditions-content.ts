@@ -27,6 +27,7 @@ export type FeaturedExpeditionCard = {
   tagline: string;
   duration: string;
   image: string;
+  comingSoon?: boolean;
 };
 
 export type ExpeditionCatalogItem = {
@@ -40,4 +41,5 @@ export type ExpeditionCatalogItem = {
   heroImage: string;
   intro: string;
   regionId: string;
+  comingSoon?: boolean;
 };

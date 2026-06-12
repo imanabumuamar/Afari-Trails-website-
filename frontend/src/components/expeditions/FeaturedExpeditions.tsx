@@ -49,7 +49,7 @@ export async function FeaturedExpeditions() {
                   {exp.tagline}
                 </p>
                 <p className="mt-3 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2em] text-charcoal/45">
-                  {exp.duration}
+                  {exp.comingSoon ? "Coming soon" : exp.duration}
                   <span className="transition-transform group-hover:translate-x-0.5">
                     →
                   </span>
