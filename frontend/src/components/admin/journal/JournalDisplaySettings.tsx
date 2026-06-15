@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import type { JournalStoryRecord } from "@/types/journal-content";
-import { HOMEPAGE_JOURNAL_STORY_LIMIT } from "@/lib/journal/helpers";
+import { HOMEPAGE_JOURNAL_STORY_LIMIT, pruneStorySlugs } from "@/lib/journal/helpers";
 
 const inputClass =
   "w-full max-w-[120px] border border-charcoal/20 bg-ivory px-3 py-2 text-sm text-charcoal focus:border-gold/50 focus:outline-none";
@@ -38,13 +38,16 @@ function StorySlugPicker({
   onChange: (slugs: string[]) => void;
 }) {
   const published = stories.filter((s) => s.published !== false);
+  const visibleSelected = selectedSlugs.filter((slug) =>
+    published.some((s) => s.slug === slug),
+  );
 
   function toggle(slug: string) {
     if (readOnly) return;
     onChange(
       selectedSlugs.includes(slug)
         ? selectedSlugs.filter((s) => s !== slug)
-        : maxCount && selectedSlugs.length >= maxCount
+        : maxCount && visibleSelected.length >= maxCount
           ? selectedSlugs
           : [...selectedSlugs, slug],
     );
@@ -78,7 +81,7 @@ function StorySlugPicker({
           const orderIndex = selectedSlugs.indexOf(story.slug);
           const atMax =
             maxCount !== undefined &&
-            selectedSlugs.length >= maxCount &&
+            visibleSelected.length >= maxCount &&
             !checked;
 
           return (
@@ -152,16 +155,22 @@ export function JournalDisplaySettings({
   const [initialCount, setInitialCount] = useState(latestInitialCount);
 
   useEffect(() => {
-    setLatestSlugs(latestStorySlugs);
-    setHomeSlugs(homepageStorySlugs);
+    setLatestSlugs(pruneStorySlugs(stories, latestStorySlugs));
+    setHomeSlugs(
+      pruneStorySlugs(stories, homepageStorySlugs, HOMEPAGE_JOURNAL_STORY_LIMIT),
+    );
     setInitialCount(latestInitialCount);
-  }, [latestStorySlugs, homepageStorySlugs, latestInitialCount]);
+  }, [stories, latestStorySlugs, homepageStorySlugs, latestInitialCount]);
 
   function handleSave(e: React.FormEvent) {
     e.preventDefault();
     onSave({
-      latestStorySlugs: latestSlugs,
-      homepageStorySlugs: homeSlugs.slice(0, HOMEPAGE_JOURNAL_STORY_LIMIT),
+      latestStorySlugs: pruneStorySlugs(stories, latestSlugs),
+      homepageStorySlugs: pruneStorySlugs(
+        stories,
+        homeSlugs,
+        HOMEPAGE_JOURNAL_STORY_LIMIT,
+      ),
       latestInitialCount: Math.max(1, initialCount),
     });
   }
@@ -196,7 +205,7 @@ export function JournalDisplaySettings({
 
       <StorySlugPicker
         title="Latest Stories (journal page)"
-        description="Choose and order stories in the Latest Stories grid. Leave empty to show all published stories that are not main/side featured."
+        description="Pin and order stories at the top of the Latest Stories grid. Other published stories (not main/side featured) still appear after these. Leave empty for default order."
         stories={stories}
         selectedSlugs={latestSlugs}
         readOnly={readOnly}

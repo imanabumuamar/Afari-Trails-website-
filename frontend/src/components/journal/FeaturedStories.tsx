@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { JournalStoryRecord } from "@/types/journal-content";
 
 type FeaturedStoriesProps = {
-  featuredStory: JournalStoryRecord;
+  featuredStory?: JournalStoryRecord;
   featuredSideStories: JournalStoryRecord[];
 };
 
@@ -44,6 +44,20 @@ export function FeaturedStories({
   featuredStory,
   featuredSideStories,
 }: FeaturedStoriesProps) {
+  if (!featuredStory) {
+    return (
+      <section className="bg-beige py-16 lg:py-24">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <div className="mx-auto flex max-w-3xl flex-col justify-center gap-10 lg:gap-12">
+            {featuredSideStories.map((story) => (
+              <SideStory key={story.slug} story={story} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="bg-beige py-16 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">

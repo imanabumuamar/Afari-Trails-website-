@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ExpeditionEyebrow } from "@/components/expeditions/detail/ExpeditionEyebrow";
+import { isExpeditionContentItemVisible } from "@/lib/expeditions/expedition-content-item-status";
 import { resolveSectionCopy } from "@/lib/expeditions/resolve-expedition-display";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
@@ -8,7 +9,10 @@ type ExpeditionExperiencesProps = {
 };
 
 export function ExpeditionExperiences({ expedition }: ExpeditionExperiencesProps) {
-  if (expedition.experiences.length === 0) return null;
+  const experiences = expedition.experiences.filter(
+    isExpeditionContentItemVisible,
+  );
+  if (experiences.length === 0) return null;
   const sections = resolveSectionCopy(expedition);
 
   return (
@@ -20,7 +24,7 @@ export function ExpeditionExperiences({ expedition }: ExpeditionExperiencesProps
         </h2>
 
         <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
-          {expedition.experiences.map((item) => (
+          {experiences.map((item) => (
             <div
               key={item.title}
               className="group relative aspect-[3/5] overflow-hidden bg-charcoal/10"

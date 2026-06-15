@@ -9,10 +9,12 @@ import {
 } from "../constants/roles.js";
 import {
   accessLevelFromPermissions,
+  buildUserPermissions,
   CMS_CONTENT_AREAS,
   contentAreasFromPermissions,
   getEffectivePermissions,
-  permissionsFromContentAreas,
+  messageAccessLevelFromPermissions,
+  messageCategoriesFromPermissions,
   validateCustomPermissions,
 } from "../constants/permissions.js";
 import { User } from "../models/User.model.js";
@@ -27,6 +29,8 @@ function sanitizeUser(user) {
     permissions: effective,
     contentAreas: contentAreasFromPermissions(effective),
     accessLevel: accessLevelFromPermissions(effective, user.role),
+    messageCategories: messageCategoriesFromPermissions(effective),
+    messageAccessLevel: messageAccessLevelFromPermissions(effective, user.role),
     createdAt: user.createdAt?.toISOString?.() ?? null,
   };
 }
@@ -117,7 +121,14 @@ export async function getStaffFromToken(identity) {
   return sanitizeUser(user);
 }
 
-function resolveStoredPermissions({ role, contentAreas, accessLevel, permissions }) {
+function resolveStoredPermissions({
+  role,
+  contentAreas,
+  accessLevel,
+  messageCategories,
+  messageAccessLevel,
+  permissions,
+}) {
   if (role === "super_admin") {
     return [];
   }
@@ -126,18 +137,29 @@ function resolveStoredPermissions({ role, contentAreas, accessLevel, permissions
     return validateCustomPermissions(permissions);
   }
 
-  if (Array.isArray(contentAreas)) {
-    const level =
-      accessLevel === "view" || role === "viewer" ? "view" : "edit";
-    return permissionsFromContentAreas(contentAreas, level);
-  }
-
-  return [];
+  return buildUserPermissions({
+    role,
+    contentAreas: contentAreas ?? [],
+    accessLevel,
+    messageCategories: messageCategories ?? [],
+    messageAccessLevel,
+  });
 }
 
 export async function registerStaff(
   actor,
-  { email, password, name, role, currentPassword, contentAreas, accessLevel, permissions },
+  {
+    email,
+    password,
+    name,
+    role,
+    currentPassword,
+    contentAreas,
+    accessLevel,
+    messageCategories,
+    messageAccessLevel,
+    permissions,
+  },
 ) {
   if (!hasPermission(actor.role, "users:write") || actor.role !== "super_admin") {
     const err = new Error("Only super admins can manage users");
@@ -166,10 +188,19 @@ export async function registerStaff(
     throw err;
   }
 
+  if (role === "super_admin") {
+    const err = new Error("Super admin accounts cannot be created from the admin panel");
+    err.status = 403;
+    throw err;
+  }
+
   if (role !== "super_admin") {
     const areas = contentAreas ?? [];
-    if (!areas.length) {
-      const err = new Error("Select at least one content area for this user");
+    const messages = messageCategories ?? [];
+    if (!areas.length && !messages.length) {
+      const err = new Error(
+        "Select at least one content section or message category for this user",
+      );
       err.status = 400;
       throw err;
     }
@@ -187,6 +218,8 @@ export async function registerStaff(
     role,
     contentAreas,
     accessLevel,
+    messageCategories,
+    messageAccessLevel,
     permissions,
   });
 

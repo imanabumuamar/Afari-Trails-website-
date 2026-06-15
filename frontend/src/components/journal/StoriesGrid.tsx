@@ -7,6 +7,7 @@ import type { JournalStoryRecord } from "@/types/journal-content";
 
 type StoriesGridProps = {
   stories: JournalStoryRecord[];
+  heading?: string;
   showViewAll?: boolean;
   /** How many stories to show before "Show more" */
   initialCount?: number;
@@ -15,6 +16,7 @@ type StoriesGridProps = {
 
 export function StoriesGrid({
   stories,
+  heading = "Latest Stories",
   showViewAll = true,
   initialCount = 4,
   isSearchActive = false,
@@ -41,7 +43,7 @@ export function StoriesGrid({
     <>
       <div className="mb-14 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <h2 className="font-serif text-3xl font-light text-charcoal md:text-4xl">
-          {isSearchActive ? "Search results" : "Latest Stories"}
+          {isSearchActive ? "Search results" : heading}
         </h2>
         {showViewAll && (
           <Link

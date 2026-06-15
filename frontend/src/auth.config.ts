@@ -13,6 +13,7 @@ export const authConfig = {
   },
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60 * 8,
   },
   // Store the login as a browser-session cookie (no expiry date) so closing
   // the browser clears it and the admin must sign in again on reopen.

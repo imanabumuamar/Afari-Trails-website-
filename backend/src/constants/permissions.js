@@ -1,4 +1,26 @@
 import { PERMISSIONS, ROLE_PERMISSIONS } from "./roles.js";
+import {
+  INBOX_MESSAGE_CATEGORIES,
+  inboxReadPermission,
+  inboxWritePermission,
+  messageAccessLevelFromPermissions,
+  messageCategoriesFromPermissions,
+  permissionsFromMessageCategories,
+} from "./inbox-categories.js";
+
+export { INBOX_MESSAGE_CATEGORIES } from "./inbox-categories.js";
+export {
+  canReadInboxCategory,
+  canReadInboxSource,
+  canWriteInboxCategory,
+  canWriteInboxSource,
+  getReadableInboxSources,
+  hasAnyInboxRead,
+  messageCategoriesFromPermissions,
+  messageAccessLevelFromPermissions,
+  permissionsFromMessageCategories,
+  sourceToInboxCategory,
+} from "./inbox-categories.js";
 
 export const CMS_CONTENT_AREAS = [
   { id: "homepage", label: "Homepage" },
@@ -26,14 +48,33 @@ export function permissionsFromContentAreas(areas, accessLevel) {
     }
   }
 
-  if (
-    unique.includes("connect") &&
-    (accessLevel === "edit" || accessLevel === "admin")
-  ) {
-    perms.push("inbox:read", "inbox:write");
+  return [...new Set(perms)];
+}
+
+export function buildUserPermissions({
+  role,
+  contentAreas = [],
+  accessLevel = "edit",
+  messageCategories = [],
+  messageAccessLevel,
+}) {
+  if (role === "super_admin") {
+    return [];
   }
 
-  return [...new Set(perms)];
+  const cmsLevel =
+    accessLevel === "view" || role === "viewer" ? "view" : "edit";
+  const inboxLevel =
+    messageAccessLevel === "view" || role === "viewer"
+      ? "view"
+      : (messageAccessLevel ?? cmsLevel);
+
+  const perms = [
+    ...permissionsFromContentAreas(contentAreas, cmsLevel),
+    ...permissionsFromMessageCategories(messageCategories, inboxLevel),
+  ];
+
+  return validateCustomPermissions([...new Set(perms)]);
 }
 
 export function contentAreasFromPermissions(permissionList) {
@@ -58,7 +99,7 @@ export function getEffectivePermissions(user) {
   }
 
   if (Array.isArray(user.permissions) && user.permissions.length > 0) {
-    return user.permissions.filter((p) => PERMISSIONS.includes(p));
+    return validateCustomPermissions(user.permissions);
   }
 
   return ROLE_PERMISSIONS[user.role] ?? ["admin:access"];
@@ -75,9 +116,15 @@ export function validateCustomPermissions(permissions) {
     throw err;
   }
 
-  const allowed = new Set(
-    PERMISSIONS.filter((p) => !p.startsWith("users:")),
-  );
+  const inboxCategoryPerms = INBOX_MESSAGE_CATEGORIES.flatMap((cat) => [
+    inboxReadPermission(cat.id),
+    inboxWritePermission(cat.id),
+  ]);
+
+  const allowed = new Set([
+    ...PERMISSIONS.filter((p) => !p.startsWith("users:")),
+    ...inboxCategoryPerms,
+  ]);
 
   const cleaned = [...new Set(permissions.filter((p) => allowed.has(p)))];
 

@@ -71,29 +71,28 @@
       "label": "Local Stories",
       "heading": "Voices from the trail.",
       "intro": "The people who shape Afari — guides, artisans, storytellers, and partners whose knowledge grounds every journey.",
+      "items": [],
       "profiles": [
         {
           "name": "James Mwamba",
           "role": "River Guide & Storyteller",
           "quote": "Growing up near the river shaped how I understand nature and storytelling — every expedition carries that memory.",
-          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
+          "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+          "published": false
         },
         {
           "name": "Amara Ndlovu",
           "role": "Textile Artisan",
           "quote": "Our patterns hold generations. When travelers learn their meaning, culture travels farther than any object.",
-          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80"
+          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+          "published": false
         },
         {
           "name": "David Chisenga",
           "role": "Field Photographer",
           "quote": "I document what the land teaches — light, patience, and the quiet moments most people rush past.",
-          "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80"
-        }
-      ],
-      "items": [
-        {
-          "image": "/images/ventures/community/communityStories-items-0-image.jpg?v=1780394980366"
+          "image": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
+          "published": false
         }
       ]
     },
@@ -117,6 +116,19 @@
           "src": "/images/ventures/community/communityCraftsmanship-images-2-src.jpg?v=1780398771720",
           "alt": ""
         }
+      ]
+    },
+    "communityInitiatives": {
+      "label": "Future Initiatives",
+      "heading": "Directions we are building toward.",
+      "intro": "Conceptual today — foundational tomorrow. Initiatives shaped with community leaders and creative partners.",
+      "items": [
+        "Photography Mentorships",
+        "Artisan Collaborations",
+        "Cultural Storytelling Projects",
+        "Local Expedition Training",
+        "Scholarship Programs",
+        "Community Tourism Partnerships"
       ]
     },
     "communityGallery": [
@@ -169,5 +181,5 @@
       "quote": "Strong communities shape meaningful journeys."
     }
   },
-  "updatedAt": "2026-06-11T20:52:37.869Z"
+  "updatedAt": "2026-06-14T11:54:57.336Z"
 }

@@ -48,7 +48,7 @@
         "id": "conservation",
         "title": "Conservation",
         "description": "Wildlife preservation and eco-conscious operations across wild places.",
-        "image": "/images/ventures/main/focusAreas-1-image.jpg?v=1780264013500",
+        "image": "/images/ventures/main/focusAreas-1-image.jpg?v=1781435779375",
         "icon": "leaf",
         "href": "/ventures/conservation"
       },
@@ -56,7 +56,7 @@
         "id": "community",
         "title": "Community Empowerment",
         "description": "Local employment, education, and artisan collaborations that endure.",
-        "image": "/images/ventures/main/focusAreas-2-image.png?v=1780263893594",
+        "image": "/images/ventures/main/focusAreas-2-image.jpg?v=1781435842227",
         "icon": "people",
         "href": "/ventures/community"
       },
@@ -64,7 +64,7 @@
         "id": "agriculture",
         "title": "Sustainable Agriculture",
         "description": "Regenerative land stewardship and agricultural partnerships.",
-        "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+        "image": "/images/ventures/main/focusAreas-3-image.png?v=1781435920082",
         "icon": "crop",
         "href": "/ventures/agriculture"
       },
@@ -98,9 +98,9 @@
       {
         "id": "zambezi-lodge",
         "title": "Zambezi Lodge Development",
-        "description": "An eco-lodge vision along the Zambezi corridor — low-impact hospitality designed for stillness, river views, and deep connection to the valley.",
+        "description": "An eco-lodge vision along the Zambezi corridor — low-impact hospitality designed for stillness, river views, and deep connection to the valley. test ",
         "status": "In Development",
-        "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
+        "image": "/images/ventures/main/featuredProjects-0-image.png?v=1781436369326",
         "imageAlt": "River valley at golden hour",
         "ctaLabel": "View Project →",
         "published": true,
@@ -116,39 +116,44 @@
           "timeline": false,
           "cta": false
         },
-        "story": "Along the Zambezi corridor, Afari Trails is developing a low-impact eco-lodge vision — architecture that defers to the river, the forest, and the rhythm of the valley.",
-        "vision": "To create a hospitality destination that protects wild corridors, employs local communities, and offers guests a deeply grounded sense of place.",
+        "story": "Along the Zambezi corridor, Afari Trails is developing a low-impact eco-lodge vision — architecture that defers to the river, the forest, and the rhythm of the valley. test ",
+        "vision": "To create a hospitality destination that protects wild corridors, employs local communities, and offers guests a deeply grounded sense of place. test ",
         "locationLabel": "Location",
-        "locationHeading": "Zambezi Valley, Zambia",
-        "locationBody": "A riverside site selected for minimal ecological disturbance, access to conservation partnerships, and long-term community benefit.",
-        "locationImage": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
+        "locationHeading": "Zambezi river  Zambia",
+        "locationBody": "A riverside site selected for minimal ecological disturbance, access to conservation partnerships, and long-term community benefit. test ",
+        "locationImage": "/images/ventures/main/featuredProjects-0-locationImage.png?v=1781436448160",
         "gallery": [
           {
-            "src": "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
+            "src": "/images/ventures/main/featuredProjects-0-gallery-0-src.jpg?v=1781436462628",
             "alt": "Lodge concept overlooking wilderness"
           },
           {
-            "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80",
-            "alt": "River and forest landscape"
+            "src": "/images/ventures/main/featuredProjects-0-gallery-1-src.jpg?v=1781436468766",
+            "alt": "River and forest landscape test"
           }
         ],
-        "communityImpact": "Local employment in construction and operations, artisan partnerships, and training programs tied to hospitality and conservation skills.",
-        "conservation": "Low-density design, renewable energy targets, waste reduction systems, and collaboration with regional wildlife initiatives.",
+        "communityImpact": "Local employment in construction and operations, artisan partnerships, and training programs tied to hospitality and conservation skills. test",
+        "conservation": "Low-density design, renewable energy targets, waste reduction systems, and collaboration with regional wildlife initiatives. test ",
         "timeline": [
           {
             "date": "2024",
             "title": "Site selection & partnerships",
-            "body": "Land assessment and alignment with conservation stakeholders."
+            "body": "Land assessment and alignment with conservation stakeholders. test"
           },
           {
             "date": "2025",
             "title": "Concept & design development",
-            "body": "Architecture, guest experience planning, and impact framework."
+            "body": "Architecture, guest experience planning, and impact framework. test"
           },
           {
             "date": "2026",
             "title": "In development",
-            "body": "Advancing permits, partnerships, and phased build planning."
+            "body": "Advancing permits, partnerships, and phased build planning. test"
+          },
+          {
+            "date": "2027",
+            "title": "opening ",
+            "body": "test"
           }
         ]
       },
@@ -207,5 +212,5 @@
       "ctaHref": "/contact"
     }
   },
-  "updatedAt": "2026-06-11T20:35:45.056Z"
+  "updatedAt": "2026-06-14T19:53:23.879Z"
 }

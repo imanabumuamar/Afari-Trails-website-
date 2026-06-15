@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AdminChrome } from "@/components/admin/AdminChrome";
 import { ADMIN_NAV_LINKS } from "@/lib/auth/content-areas";
 import { hasPermission, isSuperAdmin } from "@/lib/auth/rbac";
+import { hasAnyInboxRead } from "@/lib/auth/inbox-categories";
 import { getStaffSession } from "@/lib/auth/staff-session";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default async function AdminLayout({
   const permissions = session?.user?.permissions;
   const canManageUsers = isSuperAdmin(role);
   const canViewMessages = role
-    ? hasPermission(role, "inbox:read", permissions)
+    ? hasAnyInboxRead(role, permissions)
     : false;
 
   const navLinks = role

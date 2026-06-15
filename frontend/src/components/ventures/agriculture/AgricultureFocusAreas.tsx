@@ -8,7 +8,7 @@ export async function AgricultureFocusAreas() {
   const agricultureFocusAreas = content.agricultureFocusAreas as typeof default_agricultureFocusAreas;
 
   return (
-    <section id="focus" className="scroll-mt-24 bg-beige py-24 lg:py-36">
+    <section id="focus" className="scroll-mt-24 bg-beige pb-12 lg:pb-16">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="max-w-xl">
           <SectionLabel>{agricultureFocusAreas.label}</SectionLabel>
@@ -17,11 +17,11 @@ export async function AgricultureFocusAreas() {
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {agricultureFocusAreas.items.map((item) => (
             <article
               key={item.id}
-              className="hover-zoom group relative min-h-[380px] overflow-hidden bg-charcoal/10 lg:min-h-[420px]"
+              className="hover-zoom group relative min-h-[320px] overflow-hidden bg-charcoal/10 lg:min-h-[360px]"
             >
               <Image
                 src={item.image}

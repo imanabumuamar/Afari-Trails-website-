@@ -97,6 +97,7 @@ export const communityStories = {
         "Growing up near the river shaped how I understand nature and storytelling — every expedition carries that memory.",
       image:
         "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+      published: true,
     },
     {
       name: "Amara Ndlovu",
@@ -105,6 +106,7 @@ export const communityStories = {
         "Our patterns hold generations. When travelers learn their meaning, culture travels farther than any object.",
       image:
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+      published: true,
     },
     {
       name: "David Chisenga",
@@ -113,6 +115,7 @@ export const communityStories = {
         "I document what the land teaches — light, patience, and the quiet moments most people rush past.",
       image:
         "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80",
+      published: true,
     },
   ],
 } as const;

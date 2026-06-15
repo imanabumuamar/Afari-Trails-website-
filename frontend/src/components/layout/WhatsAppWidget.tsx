@@ -3,16 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { buildWhatsAppHref } from "@/config/whatsapp";
 
 const STORAGE_KEY = "afari-whatsapp-bubble-dismissed";
-const DEFAULT_MESSAGE =
-  "Hello Afari Trails — I'd like to learn more about your expeditions.";
 
-function whatsappHref(number: string, message: string) {
-  const digits = number.replace(/\D/g, "");
-  const text = encodeURIComponent(message);
-  return `https://wa.me/${digits}?text=${text}`;
-}
+type WhatsAppWidgetProps = {
+  number: string;
+  message: string;
+};
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -22,11 +20,8 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export function WhatsAppWidget() {
+export function WhatsAppWidget({ number, message }: WhatsAppWidgetProps) {
   const pathname = usePathname();
-  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.trim() ?? "";
-  const message =
-    process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE?.trim() || DEFAULT_MESSAGE;
 
   const [bubbleOpen, setBubbleOpen] = useState(false);
 
@@ -45,7 +40,8 @@ export function WhatsAppWidget() {
     return null;
   }
 
-  const href = whatsappHref(number, message);
+  const href = buildWhatsAppHref(number, message);
+  if (!href) return null;
 
   function dismissBubble() {
     setBubbleOpen(false);
@@ -69,7 +65,14 @@ export function WhatsAppWidget() {
             className="absolute right-2 top-2 text-charcoal/35 transition-colors hover:text-charcoal/70"
             aria-label="Dismiss"
           >
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <svg
+              viewBox="0 0 24 24"
+              className="h-3.5 w-3.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden
+            >
               <path d="M6 6l12 12M18 6L6 18" />
             </svg>
           </button>
@@ -91,16 +94,24 @@ export function WhatsAppWidget() {
         </div>
       )}
 
-      <Link
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105 hover:bg-[#20bd5a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
-        aria-label="Chat on WhatsApp"
-        onClick={() => setBubbleOpen(false)}
-      >
-        <WhatsAppIcon className="h-7 w-7" />
-      </Link>
+      <div className="relative">
+        {!bubbleOpen && (
+          <span
+            className="absolute inset-0 animate-ping rounded-full bg-[#25D366]/35"
+            aria-hidden
+          />
+        )}
+        <Link
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105 hover:bg-[#20bd5a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
+          aria-label="Chat on WhatsApp"
+          onClick={() => setBubbleOpen(false)}
+        >
+          <WhatsAppIcon className="h-7 w-7" />
+        </Link>
+      </div>
     </div>
   );
 }

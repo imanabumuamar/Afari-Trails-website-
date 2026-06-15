@@ -1,27 +1,26 @@
 "use client";
 
 import Image from "next/image";
+import { buildWhatsAppHref } from "@/config/whatsapp";
 import { resolveSectionCopy } from "@/lib/expeditions/resolve-expedition-display";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 type ExpeditionDetailFooterCtaProps = {
   expedition: ExpeditionDetail;
+  whatsappNumber?: string;
 };
-
-function whatsappHref() {
-  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER?.replace(/\D/g, "");
-  if (!number) return null;
-  const text = encodeURIComponent(
-    `Hello Afari Trails — I'm interested in ${document.title}.`,
-  );
-  return `https://wa.me/${number}?text=${text}`;
-}
 
 export function ExpeditionDetailFooterCta({
   expedition,
+  whatsappNumber = "",
 }: ExpeditionDetailFooterCtaProps) {
   const sections = resolveSectionCopy(expedition);
-  const wa = whatsappHref();
+  const wa = whatsappNumber
+    ? buildWhatsAppHref(
+        whatsappNumber,
+        `Hello Afari Trails — I'm interested in ${expedition.title}.`,
+      )
+    : null;
 
   return (
     <section className="relative overflow-hidden py-24 lg:py-32">

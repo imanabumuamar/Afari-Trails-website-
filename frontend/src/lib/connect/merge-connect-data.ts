@@ -54,6 +54,12 @@ export function mergeConnectData(
   if (!remote) return d;
 
   return {
+    whatsapp: {
+      number:
+        remote.whatsapp?.number?.replace(/\D/g, "") ||
+        d.whatsapp.number,
+      message: remote.whatsapp?.message?.trim() || d.whatsapp.message,
+    },
     contact: mergeConnectPage(d.contact, remote.contact),
     expeditions: mergeConnectPage(d.expeditions, remote.expeditions),
   };

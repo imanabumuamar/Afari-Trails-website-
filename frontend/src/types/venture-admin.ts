@@ -83,7 +83,7 @@ export const VENTURE_PAGE_SECTIONS: Record<VentureSlug, VentureSectionConfig[]> 
     { key: "communityHero", type: "sub-hero", title: "Hero" },
     { key: "communityPhilosophy", type: "philosophy-block", title: "Philosophy", hasImage: true },
     { key: "communityFocusAreas", type: "focus-items", title: "Focus areas" },
-    { key: "communityStories", type: "community-stories", title: "Local stories", description: "Heading text, plus pick which archive photos appear as stories." },
+    { key: "communityStories", type: "community-stories", title: "Local stories", description: "Heading text, archive story picks, and publish/hide controls for Voices from the trail." },
     { key: "communityCraftsmanship", type: "craftsmanship-block", title: "Craftsmanship", description: "Text, highlight list, and three moodboard photos." },
     { key: "communityPartners", type: "text-block", title: "Partners" },
     { key: "communityCta", type: "partner-cta", title: "Call to action" },

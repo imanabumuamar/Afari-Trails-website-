@@ -6,9 +6,14 @@ import { useState } from "react";
 type MessageActionsProps = {
   id: string;
   archived: boolean;
+  canWrite?: boolean;
 };
 
-export function MessageActions({ id, archived }: MessageActionsProps) {
+export function MessageActions({
+  id,
+  archived,
+  canWrite = true,
+}: MessageActionsProps) {
   const router = useRouter();
   const [busy, setBusy] = useState<"archive" | "delete" | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -66,7 +71,8 @@ export function MessageActions({ id, archived }: MessageActionsProps) {
 
   return (
     <div className="flex flex-col items-end gap-2">
-      <div className="flex flex-wrap justify-end gap-2">
+      {canWrite ? (
+        <div className="flex flex-wrap justify-end gap-2">
         {archived ? (
           <button
             type="button"
@@ -95,6 +101,11 @@ export function MessageActions({ id, archived }: MessageActionsProps) {
           {busy === "delete" ? "Deleting…" : "Delete"}
         </button>
       </div>
+      ) : (
+        <p className="text-[10px] uppercase tracking-[0.12em] text-charcoal/45">
+          View only
+        </p>
+      )}
       {error && (
         <p className="text-xs text-red-800/80" role="alert">
           {error}

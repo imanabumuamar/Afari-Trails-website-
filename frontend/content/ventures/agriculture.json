@@ -13,7 +13,14 @@
     "agricultureApproach": {
       "label": "Our Approach",
       "statement": "We believe agriculture should nourish communities, protect ecosystems, and create sustainable opportunities for future generations.",
-      "body": "Our approach is grounded in regenerative systems that restore soil and biodiversity, land stewardship rooted in respect, and ethical production built on fair partnership. We pursue innovation guided by local knowledge, cultivating resilience for people and place — with long-term thinking always ahead of short-term yield."
+      "themes": [
+        "Regenerative systems that restore soil and biodiversity",
+        "Land stewardship rooted in respect",
+        "Ethical production and fair partnership",
+        "Innovation guided by local knowledge",
+        "Resilience for people and place",
+        "Long-term thinking over short-term yield"
+      ]
     },
     "agricultureFocusAreas": {
       "label": "Key Focus Areas",
@@ -62,7 +69,7 @@
       "label": "Land & Environment",
       "heading": "",
       "body": "Agriculture and wilderness are not opposites when guided by balance. We support systems that preserve natural resources, protect wildlife corridors, and honor the coexistence between cultivation and the wild — because the future of food depends on the future of ecosystems.",
-      "image": "/images/ventures/agriculture/agricultureLand-image.png?v=1780399941394",
+      "image": "/images/ventures/agriculture/agricultureLand-image.png?v=1781464165597",
       "imageAlt": "Hands holding rich soil in warm light"
     },
     "agricultureCommunity": {
@@ -71,6 +78,46 @@
       "body": "Local employment, farmer partnerships, skills development, and long-term opportunity — including women-led agriculture and youth initiatives. Communities are partners and leaders in every vision we pursue, shaping how land is tended and how harvests are shared.",
       "image": "/images/ventures/agriculture/agricultureCommunity-image.png?v=1780400531321"
     },
+    "agricultureInitiatives": {
+      "label": "Future Initiatives",
+      "heading": "Seeds of what comes next.",
+      "intro": "Visionary directions we are building toward — connected to hospitality, exploration, and place.",
+      "items": [
+        "Sustainable Farm Projects",
+        "Agricultural Education Programs",
+        "Irrigation Innovation",
+        "Agroforestry",
+        "Community Food Networks",
+        "Eco-Agriculture Partnerships",
+        "Farm-to-Table Hospitality"
+      ]
+    },
+    "agricultureGallery": [
+      {
+        "src": "/images/ventures/agriculture/agricultureGallery-0-src.png?v=1780399966309",
+        "alt": "Crops moving in wind at sunrise"
+      },
+      {
+        "src": "/images/ventures/agriculture/agricultureGallery-1-src.png?v=1780400934971",
+        "alt": "Soil textures in warm light"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Farmers working in the field"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
+        "alt": "River and farmland horizon"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Local food preparation"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Open landscape and sustainable systems"
+      }
+    ],
     "agriculturePartners": {
       "label": "Partnerships",
       "heading": "Growing alliances.",
@@ -103,7 +150,7 @@
         },
         {
           "label": "Partner With Us",
-          "href": "/contact"
+          "href": "/ventures/partner"
         }
       ]
     },
@@ -111,5 +158,5 @@
       "quote": "The future grows from how we care for the land today."
     }
   },
-  "updatedAt": "2026-06-02T11:48:55.331Z"
+  "updatedAt": "2026-06-14T19:09:28.635Z"
 }

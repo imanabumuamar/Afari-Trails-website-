@@ -18,8 +18,56 @@ type AdminChromeProps = {
   children: React.ReactNode;
 };
 
-/** Pages that should render WITHOUT the dashboard header/nav/banner. */
 const BARE_PATHS = new Set(["/admin/login", "/admin/forbidden"]);
+
+function AdminTopBar({
+  email,
+  role,
+  titleHref,
+  showSignOut = false,
+}: {
+  email: string | null;
+  role: Role | null;
+  titleHref?: string;
+  showSignOut?: boolean;
+}) {
+  const title = (
+    <>
+      <p className="text-[10px] uppercase tracking-[0.35em] text-charcoal/45">
+        Afari Trails
+      </p>
+      <h1 className="font-serif text-2xl font-light">Content admin</h1>
+    </>
+  );
+
+  return (
+    <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+      {titleHref ? (
+        <Link href={titleHref} className="block">
+          {title}
+        </Link>
+      ) : (
+        <div>{title}</div>
+      )}
+
+      <div className="flex flex-wrap items-center justify-end gap-3 sm:gap-4">
+        <Link
+          href="/"
+          className="text-xs uppercase tracking-[0.2em] text-charcoal/55 hover:text-charcoal"
+        >
+          View site →
+        </Link>
+        {email && role && (
+          <span className="hidden max-w-[220px] truncate text-xs text-charcoal/45 sm:inline">
+            {email}
+            <span className="ml-2 text-charcoal/35">({ROLE_LABELS[role]})</span>
+          </span>
+        )}
+        {showSignOut && email && <AdminSignOut variant="header" />}
+      </div>
+    </div>
+  );
+}
 
 export function AdminChrome({
   email,
@@ -36,17 +84,7 @@ export function AdminChrome({
     return (
       <div className="min-h-screen bg-beige text-charcoal">
         <header className="border-b border-charcoal/10 bg-ivory">
-          <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.35em] text-charcoal/45">
-                Afari Trails
-              </p>
-              <h1 className="font-serif text-2xl font-light">Content admin</h1>
-            </div>
-            <Link href="/" className="text-xs uppercase tracking-[0.2em] text-charcoal/55 hover:text-charcoal">
-              View site →
-            </Link>
-          </div>
+          <AdminTopBar email={email} role={role} showSignOut />
         </header>
         <div className="mx-auto max-w-5xl px-6 py-10">
           <AdminStackStatus />
@@ -63,27 +101,8 @@ export function AdminChrome({
 
   return (
     <div className="min-h-screen bg-beige text-charcoal">
-      <header className="border-b border-charcoal/10 bg-ivory">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-4">
-          <Link href="/admin" className="block">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-charcoal/45">
-              Afari Trails
-            </p>
-            <h1 className="font-serif text-2xl font-light">Content admin</h1>
-          </Link>
-          <div className="flex items-center gap-4 text-xs uppercase tracking-[0.2em]">
-            <Link href="/" className="text-charcoal/55 hover:text-charcoal">
-              View site →
-            </Link>
-            {email && role && (
-              <span className="hidden text-charcoal/45 sm:inline">
-                {email}
-                <span className="ml-2 text-charcoal/35">({ROLE_LABELS[role]})</span>
-              </span>
-            )}
-            <AdminSignOut />
-          </div>
-        </div>
+      <header className="sticky top-0 z-40 border-b border-charcoal/10 bg-ivory">
+        <AdminTopBar email={email} role={role} titleHref="/admin" />
 
         <nav className="border-t border-charcoal/10 bg-ivory/60">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-1 gap-y-1 px-6 py-2 text-[11px] uppercase tracking-[0.18em]">
@@ -130,13 +149,18 @@ export function AdminChrome({
                 Users
               </Link>
             )}
+            {email && (
+              <span className="ml-1">
+                <AdminSignOut />
+              </span>
+            )}
           </div>
         </nav>
       </header>
       <div className="mx-auto max-w-5xl px-6 py-10">
         <AdminStackStatus />
         {role && email && (
-          <AdminStaffBanner role={role} canManageUsers={canManageUsers} />
+          <AdminStaffBanner role={role} />
         )}
         {children}
       </div>

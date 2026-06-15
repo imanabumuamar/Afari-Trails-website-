@@ -3,19 +3,19 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { MessageActions } from "@/components/admin/messages/MessageActions";
 import { backendFetch } from "@/lib/api/backend";
-import { hasPermission } from "@/lib/auth/rbac";
+import {
+  canReadInboxCategory,
+  canWriteInboxSource,
+  getCategoryForSource,
+  hasAnyInboxRead,
+  MESSAGE_GROUPS,
+  OTHER_INBOX_SOURCES,
+  SOURCE_LABELS,
+  type InquirySource,
+} from "@/lib/auth/inbox-categories";
 import { getStaffSession } from "@/lib/auth/staff-session";
 
-type InquirySource =
-  | "contact"
-  | "expeditions-connect"
-  | "ventures-connect"
-  | "partner"
-  | "expedition"
-  | "newsletter"
-  | "archive-submit";
-
-type MessageGroup = "connect" | "expeditions";
+type MessageGroup = keyof typeof MESSAGE_GROUPS;
 
 type Submission = {
   id: string;
@@ -44,32 +44,6 @@ type InquiriesResponse = {
     bySource: Record<string, number>;
   };
 };
-
-const MESSAGE_GROUPS: Record<
-  MessageGroup,
-  { label: string; sources: InquirySource[] }
-> = {
-  connect: {
-    label: "Connect messages",
-    sources: ["contact", "ventures-connect", "partner"],
-  },
-  expeditions: {
-    label: "Expedition messages",
-    sources: ["expeditions-connect", "expedition"],
-  },
-};
-
-const SOURCE_LABELS: Record<InquirySource, string> = {
-  contact: "Connect",
-  "expeditions-connect": "Plan your journey",
-  "ventures-connect": "Connect (legacy)",
-  partner: "Connect (legacy)",
-  expedition: "Expedition request",
-  newsletter: "Newsletter",
-  "archive-submit": "Afari Lens photo",
-};
-
-const OTHER_SOURCES: InquirySource[] = ["newsletter", "archive-submit"];
 
 function messagesHref({
   source = null,
@@ -121,7 +95,7 @@ export default async function AdminMessagesPage({
   const role = session?.user?.role ?? null;
   const permissions = session?.user?.permissions;
 
-  if (!role || !hasPermission(role, "inbox:read", permissions)) {
+  if (!role || !hasAnyInboxRead(role, permissions)) {
     redirect("/admin/forbidden");
   }
 
@@ -134,7 +108,7 @@ export default async function AdminMessagesPage({
     [
       ...MESSAGE_GROUPS.connect.sources,
       ...MESSAGE_GROUPS.expeditions.sources,
-      ...OTHER_SOURCES,
+      ...OTHER_INBOX_SOURCES,
     ].includes(source as InquirySource)
       ? (source as InquirySource)
       : null;
@@ -167,7 +141,7 @@ export default async function AdminMessagesPage({
   let submissions = data.submissions;
 
   if (activeGroup) {
-    const sources = MESSAGE_GROUPS[activeGroup].sources;
+    const sources = MESSAGE_GROUPS[activeGroup].sources as readonly InquirySource[];
     submissions = submissions.filter((s) => sources.includes(s.source));
   }
 
@@ -175,6 +149,18 @@ export default async function AdminMessagesPage({
   const archivedCount = counts.archived ?? 0;
   const connectCount = groupCount("connect", counts.bySource);
   const expeditionsCount = groupCount("expeditions", counts.bySource);
+
+  const visibleGroups = (Object.keys(MESSAGE_GROUPS) as MessageGroup[]).filter(
+    (key) => canReadInboxCategory(role, key, permissions),
+  );
+  const visibleOtherSources = OTHER_INBOX_SOURCES.filter((src) => {
+    const categoryId = getCategoryForSource(src);
+    return categoryId
+      ? canReadInboxCategory(role, categoryId, permissions)
+      : false;
+  });
+  const showAllTypes =
+    visibleGroups.length + visibleOtherSources.length > 1;
 
   const activeFilterLabel = activeGroup
     ? MESSAGE_GROUPS[activeGroup].label
@@ -219,19 +205,21 @@ export default async function AdminMessagesPage({
       </div>
 
       <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.12em]">
-        <Link
-          href={messagesHref({
-            view: isArchivedView ? "archived" : "inbox",
-          })}
-          className={`border px-3 py-1.5 ${
-            !activeGroup && !activeSource
-              ? "border-charcoal/40 bg-charcoal/5 text-charcoal"
-              : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
-          }`}
-        >
-          All types
-        </Link>
-        {(Object.keys(MESSAGE_GROUPS) as MessageGroup[]).map((key) => (
+        {showAllTypes && (
+          <Link
+            href={messagesHref({
+              view: isArchivedView ? "archived" : "inbox",
+            })}
+            className={`border px-3 py-1.5 ${
+              !activeGroup && !activeSource
+                ? "border-charcoal/40 bg-charcoal/5 text-charcoal"
+                : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
+            }`}
+          >
+            All types
+          </Link>
+        )}
+        {visibleGroups.map((key) => (
           <Link
             key={key}
             href={messagesHref({
@@ -248,7 +236,7 @@ export default async function AdminMessagesPage({
             {key === "connect" ? connectCount : expeditionsCount})
           </Link>
         ))}
-        {OTHER_SOURCES.map((src) => (
+        {visibleOtherSources.map((src) => (
           <Link
             key={src}
             href={messagesHref({
@@ -287,7 +275,11 @@ export default async function AdminMessagesPage({
                     {formatDate(s.createdAt)}
                   </span>
                 </div>
-                <MessageActions id={s.id} archived={isArchivedView} />
+                <MessageActions
+                  id={s.id}
+                  archived={isArchivedView}
+                  canWrite={canWriteInboxSource(role, s.source, permissions)}
+                />
               </div>
 
               <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">

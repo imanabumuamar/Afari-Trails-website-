@@ -24,6 +24,7 @@ const DEFAULT_HERO: HomepageHero = {
     alt: "Safari landscape at golden hour",
   },
   video: "/videos/hero.mp4",
+  backgroundMode: "video",
   overlayOpacity: 45,
   textAlign: "left",
   verticalPosition: "center",
@@ -76,6 +77,13 @@ function normalizeHomepage(raw: Partial<HomepageContent>): HomepageContent {
       ...rawHero,
       eyebrow: typeof rawHero?.eyebrow === "string" ? rawHero.eyebrow : "",
       video: typeof rawHero?.video === "string" ? rawHero.video : DEFAULT_HERO.video,
+      backgroundMode: oneOf(
+        rawHero?.backgroundMode,
+        ["photo", "video"] as const,
+        typeof rawHero?.video === "string" && rawHero.video.trim()
+          ? "video"
+          : "photo",
+      ),
       overlayOpacity: clampOpacity(rawHero?.overlayOpacity),
       textAlign: oneOf(rawHero?.textAlign, ["left", "center"] as const, "left"),
       verticalPosition: oneOf(
@@ -208,7 +216,11 @@ export function updateHomepageVideo(
   const current = getHomepage();
   const next: HomepageContent = {
     ...current,
-    hero: { ...current.hero, video: `/videos/${filename}.mp4?v=${Date.now()}` },
+    hero: {
+      ...current.hero,
+      video: `/videos/${filename}.mp4?v=${Date.now()}`,
+      backgroundMode: "video",
+    },
     updatedAt: new Date().toISOString(),
   };
 

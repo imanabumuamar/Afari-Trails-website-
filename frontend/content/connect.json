@@ -1,6 +1,10 @@
 {
   "key": "main",
   "data": {
+    "whatsapp": {
+      "number": "260974302344",
+      "message": "Hello Afari Trails — I'd like to learn more about your expeditions."
+    },
     "contact": {
       "hero": {
         "label": "Connect With Afari",

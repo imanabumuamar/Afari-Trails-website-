@@ -11,10 +11,13 @@ import { ExpeditionItinerary } from "@/components/expeditions/detail/ExpeditionI
 import { ExpeditionMapPricing } from "@/components/expeditions/detail/ExpeditionMapPricing";
 import { ExpeditionRelated } from "@/components/expeditions/detail/ExpeditionRelated";
 import { ExpeditionStories } from "@/components/expeditions/detail/ExpeditionStories";
+import { ExpeditionVisualStrip } from "@/components/expeditions/detail/ExpeditionVisualStrip";
 import {
   isExpeditionComingSoon,
   isExpeditionSectionVisible,
 } from "@/lib/expeditions/expedition-page-sections";
+import { resolveWhatsAppSettings } from "@/config/whatsapp";
+import { getConnectContent } from "@/services/content/connect";
 import type { ExpeditionDetail } from "@/types/expedition-detail";
 
 type ExpeditionDetailViewProps = {
@@ -24,6 +27,9 @@ type ExpeditionDetailViewProps = {
 export async function ExpeditionDetailView({
   expedition,
 }: ExpeditionDetailViewProps) {
+  const { whatsapp: cmsWhatsApp } = await getConnectContent();
+  const { number: whatsappNumber } = resolveWhatsAppSettings(cmsWhatsApp);
+
   if (isExpeditionComingSoon(expedition)) {
     return (
       <>
@@ -40,6 +46,9 @@ export async function ExpeditionDetailView({
       )}
       {isExpeditionSectionVisible(expedition, "overview") && (
         <ExpeditionIntro expedition={expedition} />
+      )}
+      {isExpeditionSectionVisible(expedition, "visualStrip") && (
+        <ExpeditionVisualStrip expedition={expedition} />
       )}
       {isExpeditionSectionVisible(expedition, "itinerary") && (
         <ExpeditionItinerary expedition={expedition} />
@@ -66,7 +75,10 @@ export async function ExpeditionDetailView({
         <ExpeditionInquiry expedition={expedition} />
       )}
       {isExpeditionSectionVisible(expedition, "footerCta") && (
-        <ExpeditionDetailFooterCta expedition={expedition} />
+        <ExpeditionDetailFooterCta
+          expedition={expedition}
+          whatsappNumber={whatsappNumber}
+        />
       )}
       {isExpeditionSectionVisible(expedition, "related") && (
         <ExpeditionRelated expedition={expedition} />

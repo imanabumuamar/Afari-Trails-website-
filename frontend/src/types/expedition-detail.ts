@@ -22,6 +22,7 @@ export type ExpeditionItineraryDay = {
   description: string;
   image?: string;
   imageAlt?: string;
+  published?: boolean;
 };
 
 export type ExpeditionExperience = {
@@ -29,6 +30,7 @@ export type ExpeditionExperience = {
   body: string;
   image: string;
   imageAlt: string;
+  published?: boolean;
 };
 
 export type ExpeditionFaqItem = {

@@ -157,8 +157,11 @@
     "hospitalityPartnership": {
       "heading": "Partnership & Investment",
       "body": "Afari Trails welcomes aligned partnerships in hospitality, architecture, conservation, and destination development across Africa.",
-      "primaryCta": "Partner With Us",
-      "secondaryCta": "Discuss Opportunities"
+      "cta": "",
+      "secondaryCta": "Discuss Opportunities",
+      "ctaHref": "/contact",
+      "secondaryCtaHref": "/contact",
+      "image": "/images/ventures/hospitality/hospitalityPartnership-image.jpg?v=1781467559518"
     },
     "hospitalityEcosystem": {
       "label": "The Afari Ecosystem",
@@ -195,5 +198,5 @@
       "quote": "Hospitality is not only where people stay. It is how people feel remembered by a place."
     }
   },
-  "updatedAt": "2026-06-02T21:10:17.671Z"
+  "updatedAt": "2026-06-14T20:07:57.393Z"
 }

@@ -11,7 +11,7 @@ import { CONNECT_PAGE_SECTIONS } from "@/lib/connect/connect-page-sections";
 import type { ConnectContentData } from "@/types/connect-content";
 import type { ConnectPageConfig } from "@/types/connect-page";
 
-type ConnectPageKey = keyof ConnectContentData;
+type ConnectPageKey = "contact" | "expeditions";
 
 type ConnectPageEditorProps = {
   pageKey: ConnectPageKey;

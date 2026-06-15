@@ -52,9 +52,9 @@ export async function CommunityCraftsmanship() {
   const [first, second, third] = images;
 
   return (
-    <section className="grid lg:grid-cols-2">
+    <section className="grid bg-sand-light/30 lg:grid-cols-2">
       <div className="grid grid-cols-2 gap-2 p-4 lg:gap-3 lg:p-8">
-        <div className="hover-zoom relative aspect-square overflow-hidden bg-charcoal/10">
+        <div className="hover-zoom relative aspect-square overflow-hidden bg-sand-light/30">
           <Image
             src={first.src}
             alt={first.alt || "Craftsmanship"}
@@ -63,7 +63,7 @@ export async function CommunityCraftsmanship() {
             sizes="25vw"
           />
         </div>
-        <div className="hover-zoom relative aspect-square overflow-hidden bg-charcoal/10">
+        <div className="hover-zoom relative aspect-square overflow-hidden bg-sand-light/30">
           <Image
             src={second.src}
             alt={second.alt || "Craftsmanship"}
@@ -72,7 +72,7 @@ export async function CommunityCraftsmanship() {
             sizes="25vw"
           />
         </div>
-        <div className="hover-zoom relative col-span-2 aspect-[2/1] overflow-hidden bg-charcoal/10">
+        <div className="hover-zoom relative col-span-2 aspect-[2/1] overflow-hidden bg-sand-light/30">
           <Image
             src={third.src}
             alt={third.alt || "Craftsmanship"}
@@ -83,7 +83,7 @@ export async function CommunityCraftsmanship() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center bg-sand-light/30 px-6 py-20 lg:px-14 lg:py-28">
+      <div className="flex flex-col justify-center px-6 py-20 lg:px-14 lg:py-28">
         <SectionLabel>{label}</SectionLabel>
         <h2 className="mt-4 font-serif text-4xl font-light text-charcoal md:text-5xl">
           {heading}

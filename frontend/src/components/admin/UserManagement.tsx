@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
+import { AdminPasswordConfirmModal } from "@/components/admin/AdminPasswordConfirmModal";
 import { env } from "@/config/env";
 import type { ContentAccessLevel } from "@/lib/auth/content-areas";
 import { ROLE_DESCRIPTIONS, ROLE_LABELS, type Role } from "@/lib/auth/roles";
@@ -15,6 +16,8 @@ type AdminUser = {
   role: string;
   contentAreas?: string[];
   accessLevel?: ContentAccessLevel;
+  messageCategories?: string[];
+  messageAccessLevel?: ContentAccessLevel;
   createdAt: string;
 };
 
@@ -22,6 +25,7 @@ type UsersPayload = {
   users: AdminUser[];
   assignableRoles: Role[];
   contentAreas: ContentAreaOption[];
+  messageCategories: ContentAreaOption[];
 };
 
 const emptyForm = {
@@ -31,7 +35,23 @@ const emptyForm = {
   role: "editor" as Role,
   contentAreas: [] as string[],
   accessLevel: "edit" as ContentAccessLevel,
+  messageCategories: [] as string[],
+  messageAccessLevel: "edit" as ContentAccessLevel,
 };
+
+type PendingAction =
+  | { kind: "create"; form: typeof emptyForm }
+  | {
+      kind: "updateAccess";
+      user: AdminUser;
+      areas: string[];
+      access: ContentAccessLevel;
+      messageCategories: string[];
+      messageAccess: ContentAccessLevel;
+    }
+  | { kind: "updateRole"; userId: string; email: string; role: Role }
+  | { kind: "resetPassword"; userId: string; email: string; password: string }
+  | { kind: "delete"; userId: string; email: string };
 
 function apiUrl(path: string) {
   return `${env.apiUrl.replace(/\/$/, "")}${path}`;
@@ -62,6 +82,59 @@ function formatAreas(user: AdminUser, catalog: ContentAreaOption[]) {
   return `${labels} (${level})`;
 }
 
+function formatMessageAreas(user: AdminUser, catalog: ContentAreaOption[]) {
+  const ids = user.messageCategories ?? [];
+  if (user.role === "super_admin") return "All message types";
+  if (!ids.length) return "None";
+  const labels = ids
+    .map((id) => catalog.find((a) => a.id === id)?.label ?? id)
+    .join(", ");
+  const level =
+    user.messageAccessLevel === "view" || user.role === "viewer"
+      ? "view only"
+      : "can edit";
+  return `${labels} (${level})`;
+}
+
+function modalCopy(action: PendingAction): {
+  title: string;
+  description: string;
+  confirmLabel: string;
+} {
+  switch (action.kind) {
+    case "create":
+      return {
+        title: "Create staff member",
+        description: `Create ${ROLE_LABELS[action.form.role].toLowerCase()} account for ${action.form.email}?`,
+        confirmLabel: "Create user",
+      };
+    case "updateAccess":
+      return {
+        title: "Update access",
+        description: `Save content and message access for ${action.user.email}?`,
+        confirmLabel: "Save access",
+      };
+    case "updateRole":
+      return {
+        title: "Change role",
+        description: `Change ${action.email} to ${ROLE_LABELS[action.role]}?`,
+        confirmLabel: "Change role",
+      };
+    case "resetPassword":
+      return {
+        title: "Reset password",
+        description: `Set a new password for ${action.email}?`,
+        confirmLabel: "Reset password",
+      };
+    case "delete":
+      return {
+        title: "Delete user",
+        description: `Delete ${action.email}? This cannot be undone.`,
+        confirmLabel: "Delete user",
+      };
+  }
+}
+
 function ContentAreasPicker({
   areas,
   selected,
@@ -80,7 +153,7 @@ function ContentAreasPicker({
   if (role === "super_admin") {
     return (
       <p className="text-sm text-charcoal/60">
-        Super admins have full access to every CMS section and user management.
+        Super admins have full access to every CMS section.
       </p>
     );
   }
@@ -152,6 +225,98 @@ function ContentAreasPicker({
   );
 }
 
+function MessageCategoriesPicker({
+  categories,
+  selected,
+  accessLevel,
+  role,
+  onCategoriesChange,
+  onAccessChange,
+}: {
+  categories: ContentAreaOption[];
+  selected: string[];
+  accessLevel: ContentAccessLevel;
+  role: Role;
+  onCategoriesChange: (ids: string[]) => void;
+  onAccessChange: (level: ContentAccessLevel) => void;
+}) {
+  if (role === "super_admin") {
+    return (
+      <p className="text-sm text-charcoal/60">
+        Super admins can read and manage every message type.
+      </p>
+    );
+  }
+
+  function toggle(id: string) {
+    onCategoriesChange(
+      selected.includes(id)
+        ? selected.filter((x) => x !== id)
+        : [...selected, id],
+    );
+  }
+
+  const effectiveAccess: ContentAccessLevel =
+    role === "viewer" ? "view" : accessLevel;
+
+  const allSelected =
+    selected.length === categories.length && categories.length > 0;
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={() =>
+            onCategoriesChange(
+              allSelected ? [] : categories.map((category) => category.id),
+            )
+          }
+          className="border border-charcoal/30 px-3 py-1.5 text-xs uppercase tracking-[0.12em] text-charcoal/75 hover:border-charcoal/60"
+        >
+          {allSelected ? "Clear all" : "Select all message types"}
+        </button>
+        <span className="text-xs text-charcoal/50">
+          {selected.length} of {categories.length} selected
+        </span>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {(["view", "edit"] as ContentAccessLevel[]).map((level) => (
+          <button
+            key={level}
+            type="button"
+            disabled={role === "viewer"}
+            onClick={() => onAccessChange(level)}
+            className={`border px-3 py-1.5 text-xs uppercase tracking-[0.12em] disabled:opacity-40 ${
+              effectiveAccess === level
+                ? "border-charcoal bg-charcoal text-ivory"
+                : "border-charcoal/25 text-charcoal/70 hover:border-charcoal/50"
+            }`}
+          >
+            {level === "view" ? "View only" : "Can edit"}
+          </button>
+        ))}
+      </div>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {categories.map((category) => (
+          <label
+            key={category.id}
+            className="flex cursor-pointer items-center gap-2 rounded border border-charcoal/15 bg-beige px-3 py-2 text-sm"
+          >
+            <input
+              type="checkbox"
+              checked={selected.includes(category.id)}
+              onChange={() => toggle(category.id)}
+              className="accent-charcoal"
+            />
+            {category.label}
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function UserManagement() {
   const { data: session, status: sessionStatus } = useSession();
   const token = session?.accessToken;
@@ -161,9 +326,15 @@ export function UserManagement() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editAreas, setEditAreas] = useState<string[]>([]);
   const [editAccess, setEditAccess] = useState<ContentAccessLevel>("edit");
-  const [currentPassword, setCurrentPassword] = useState("");
+  const [editMessageCategories, setEditMessageCategories] = useState<string[]>([]);
+  const [editMessageAccess, setEditMessageAccess] =
+    useState<ContentAccessLevel>("edit");
+  const [pendingAction, setPendingAction] = useState<PendingAction | null>(null);
+  const [confirmBusy, setConfirmBusy] = useState(false);
+  const [confirmError, setConfirmError] = useState("");
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showAddStaff, setShowAddStaff] = useState(false);
 
   const load = useCallback(async () => {
     if (!token) {
@@ -193,54 +364,167 @@ export function UserManagement() {
     void load();
   }, [load, sessionStatus]);
 
-  function requireCurrentPassword() {
-    if (currentPassword.trim().length < 1) {
-      setStatus("Enter your current super admin password to continue.");
-      return false;
-    }
-    return true;
-  }
-
-  function validateAreas(role: Role, areas: string[]) {
+  function validateUserAccess(
+    role: Role,
+    areas: string[],
+    messageCategories: string[],
+  ) {
     if (role === "super_admin") return true;
-    if (!areas.length) {
-      setStatus("Select at least one content section for this user.");
+    if (!areas.length && !messageCategories.length) {
+      setStatus(
+        "Select at least one content section or message category for this user.",
+      );
       return false;
     }
     return true;
   }
 
-  async function handleCreate(e: React.FormEvent) {
+  function openConfirm(action: PendingAction) {
+    setConfirmError("");
+    setPendingAction(action);
+  }
+
+  function closeConfirm() {
+    if (confirmBusy) return;
+    setPendingAction(null);
+    setConfirmError("");
+  }
+
+  async function runConfirmedAction(currentPassword: string) {
+    if (!token || !pendingAction) return;
+
+    setConfirmBusy(true);
+    setConfirmError("");
+
+    try {
+      if (pendingAction.kind === "create") {
+        const { form: createForm } = pendingAction;
+        const res = await staffFetch("/staff/users", token, {
+          method: "POST",
+          body: JSON.stringify({
+            email: createForm.email,
+            password: createForm.password,
+            name: createForm.name,
+            role: createForm.role,
+            contentAreas: createForm.contentAreas,
+            accessLevel:
+              createForm.role === "viewer" ? "view" : createForm.accessLevel,
+            messageCategories: createForm.messageCategories,
+            messageAccessLevel:
+              createForm.role === "viewer"
+                ? "view"
+                : createForm.messageAccessLevel,
+            currentPassword,
+          }),
+        });
+
+        if (!res.ok) {
+          const err = (await res.json()) as { error?: string };
+          setConfirmError(err.error ?? "Could not create user.");
+          return;
+        }
+
+        const createdRole = createForm.role;
+        setForm(emptyForm);
+        setShowAddStaff(false);
+        setStatus(
+          `${ROLE_LABELS[createdRole]} created. They can sign in at /admin/login.`,
+        );
+      }
+
+      if (pendingAction.kind === "updateAccess") {
+        const { user, areas, access, messageCategories, messageAccess } =
+          pendingAction;
+        const res = await staffFetch("/staff/users", token, {
+          method: "PATCH",
+          body: JSON.stringify({
+            id: user.id,
+            contentAreas: areas,
+            accessLevel: user.role === "viewer" ? "view" : access,
+            messageCategories,
+            messageAccessLevel:
+              user.role === "viewer" ? "view" : messageAccess,
+            currentPassword,
+          }),
+        });
+
+        if (!res.ok) {
+          const err = (await res.json()) as { error?: string };
+          setConfirmError(err.error ?? "Could not update access.");
+          return;
+        }
+
+        setEditingId(null);
+        setStatus("Access updated. Ask them to sign out and back in.");
+      }
+
+      if (pendingAction.kind === "updateRole") {
+        const { userId, role } = pendingAction;
+        const res = await staffFetch("/staff/users", token, {
+          method: "PATCH",
+          body: JSON.stringify({ id: userId, role, currentPassword }),
+        });
+
+        if (!res.ok) {
+          const err = (await res.json()) as { error?: string };
+          setConfirmError(err.error ?? "Could not update user.");
+          return;
+        }
+
+        setStatus(`Role updated to ${ROLE_LABELS[role]}.`);
+      }
+
+      if (pendingAction.kind === "resetPassword") {
+        const { userId, email, password } = pendingAction;
+        const res = await staffFetch("/staff/users", token, {
+          method: "PATCH",
+          body: JSON.stringify({ id: userId, password, currentPassword }),
+        });
+
+        if (!res.ok) {
+          const err = (await res.json()) as { error?: string };
+          setConfirmError(err.error ?? "Could not reset password.");
+          return;
+        }
+
+        setStatus(`Password updated for ${email}.`);
+      }
+
+      if (pendingAction.kind === "delete") {
+        const { userId } = pendingAction;
+        const res = await staffFetch(`/staff/users/${userId}`, token, {
+          method: "DELETE",
+          body: JSON.stringify({ currentPassword }),
+        });
+
+        if (!res.ok) {
+          const err = (await res.json()) as { error?: string };
+          setConfirmError(err.error ?? "Could not delete user.");
+          return;
+        }
+
+        setStatus("User deleted.");
+      }
+
+      setPendingAction(null);
+      await load();
+    } finally {
+      setConfirmBusy(false);
+    }
+  }
+
+  function handleCreate(e: React.FormEvent) {
     e.preventDefault();
-    if (!token || !requireCurrentPassword()) return;
-    if (!validateAreas(form.role, form.contentAreas)) return;
-
-    setStatus("Creating user…");
-    const res = await staffFetch("/staff/users", token, {
-      method: "POST",
-      body: JSON.stringify({
-        email: form.email,
-        password: form.password,
-        name: form.name,
-        role: form.role,
-        contentAreas: form.contentAreas,
-        accessLevel: form.role === "viewer" ? "view" : form.accessLevel,
-        currentPassword,
-      }),
-    });
-
-    if (!res.ok) {
-      const err = (await res.json()) as { error?: string };
-      setStatus(err.error ?? "Could not create user.");
+    if (
+      !validateUserAccess(
+        form.role,
+        form.contentAreas,
+        form.messageCategories,
+      )
+    ) {
       return;
     }
-
-    const createdRole = form.role;
-    setForm(emptyForm);
-    setStatus(
-      `${ROLE_LABELS[createdRole]} created. They can sign in at /admin/login.`,
-    );
-    await load();
+    openConfirm({ kind: "create", form: { ...form } });
   }
 
   function startEditAccess(user: AdminUser) {
@@ -249,98 +533,57 @@ export function UserManagement() {
     setEditAccess(
       user.accessLevel === "view" || user.role === "viewer" ? "view" : "edit",
     );
+    setEditMessageCategories(user.messageCategories ?? []);
+    setEditMessageAccess(
+      user.messageAccessLevel === "view" || user.role === "viewer"
+        ? "view"
+        : "edit",
+    );
   }
 
-  async function saveEditAccess(user: AdminUser) {
-    if (!token || !requireCurrentPassword()) return;
-    if (user.role !== "super_admin" && !validateAreas(user.role as Role, editAreas)) {
+  function saveEditAccess(user: AdminUser) {
+    if (
+      user.role !== "super_admin" &&
+      !validateUserAccess(
+        user.role as Role,
+        editAreas,
+        editMessageCategories,
+      )
+    ) {
       return;
     }
-
-    setStatus("Updating access…");
-    const res = await staffFetch("/staff/users", token, {
-      method: "PATCH",
-      body: JSON.stringify({
-        id: user.id,
-        contentAreas: editAreas,
-        accessLevel: user.role === "viewer" ? "view" : editAccess,
-        currentPassword,
-      }),
+    openConfirm({
+      kind: "updateAccess",
+      user,
+      areas: editAreas,
+      access: editAccess,
+      messageCategories: editMessageCategories,
+      messageAccess: editMessageAccess,
     });
-
-    if (!res.ok) {
-      const err = (await res.json()) as { error?: string };
-      setStatus(err.error ?? "Could not update access.");
-      return;
-    }
-
-    setEditingId(null);
-    setStatus("Content access updated. Ask them to sign out and back in.");
-    await load();
   }
 
-  async function updateRole(userId: string, role: Role) {
-    if (!token || !requireCurrentPassword()) return;
-
-    setStatus("Updating role…");
-    const res = await staffFetch("/staff/users", token, {
-      method: "PATCH",
-      body: JSON.stringify({ id: userId, role, currentPassword }),
+  function requestRoleChange(user: AdminUser, role: Role) {
+    if (role === user.role) return;
+    openConfirm({
+      kind: "updateRole",
+      userId: user.id,
+      email: user.email,
+      role,
     });
-
-    if (!res.ok) {
-      const err = (await res.json()) as { error?: string };
-      setStatus(err.error ?? "Could not update user.");
-      return;
-    }
-
-    setStatus(`Role updated to ${ROLE_LABELS[role]}.`);
-    await load();
   }
 
-  async function resetPassword(userId: string, email: string) {
-    if (!token || !requireCurrentPassword()) return;
-
+  function requestPasswordReset(userId: string, email: string) {
     const password = window.prompt(`New password for ${email} (min 10 characters):`);
     if (!password) return;
     if (password.length < 10) {
       setStatus("Password must be at least 10 characters.");
       return;
     }
-
-    setStatus("Resetting password…");
-    const res = await staffFetch("/staff/users", token, {
-      method: "PATCH",
-      body: JSON.stringify({ id: userId, password, currentPassword }),
-    });
-
-    if (!res.ok) {
-      const err = (await res.json()) as { error?: string };
-      setStatus(err.error ?? "Could not reset password.");
-      return;
-    }
-
-    setStatus(`Password updated for ${email}.`);
+    openConfirm({ kind: "resetPassword", userId, email, password });
   }
 
-  async function removeUser(userId: string, email: string) {
-    if (!token || !requireCurrentPassword()) return;
-    if (!window.confirm(`Delete ${email}? This cannot be undone.`)) return;
-
-    setStatus("Deleting user…");
-    const res = await staffFetch(`/staff/users/${userId}`, token, {
-      method: "DELETE",
-      body: JSON.stringify({ currentPassword }),
-    });
-
-    if (!res.ok) {
-      const err = (await res.json()) as { error?: string };
-      setStatus(err.error ?? "Could not delete user.");
-      return;
-    }
-
-    setStatus("User deleted.");
-    await load();
+  function requestDelete(userId: string, email: string) {
+    openConfirm({ kind: "delete", userId, email });
   }
 
   if (sessionStatus === "loading" || loading) {
@@ -350,7 +593,11 @@ export function UserManagement() {
   if (!token) {
     return (
       <p className="text-sm text-charcoal/65">
-        Session expired. <a href="/admin/login" className="text-gold underline">Sign in again</a>.
+        Session expired.{" "}
+        <a href="/admin/login" className="text-gold underline">
+          Sign in again
+        </a>
+        .
       </p>
     );
   }
@@ -368,45 +615,52 @@ export function UserManagement() {
   }
 
   const catalog = data.contentAreas;
+  const messageCatalog = data.messageCategories ?? [];
 
   return (
     <div className="space-y-12">
+      <AdminPasswordConfirmModal
+        open={pendingAction !== null}
+        title={pendingAction ? modalCopy(pendingAction).title : ""}
+        description={pendingAction ? modalCopy(pendingAction).description : ""}
+        confirmLabel={pendingAction ? modalCopy(pendingAction).confirmLabel : "Confirm"}
+        busy={confirmBusy}
+        error={confirmError}
+        onCancel={closeConfirm}
+        onConfirm={(password) => void runConfirmedAction(password)}
+      />
+
       <div>
         <h2 className="font-serif text-3xl font-light">Users & access</h2>
         <p className="mt-3 max-w-xl text-sm text-charcoal/65">
-          Super admins only. Choose which CMS sections each person can open, and whether
-          they can edit or only view. Sensitive actions require your current password.
+          Super admins only. Choose CMS sections and message types for each
+          person, with separate view or edit access. Each action asks for your
+          password to confirm.
         </p>
       </div>
 
-      <section className="rounded border border-charcoal/15 bg-ivory p-6">
-        <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">
-          Security confirmation
-        </h3>
-        <p className="mt-2 text-sm text-charcoal/60">
-          Enter your current password before creating, editing, or deleting users.
-        </p>
-        <div className="mt-4 max-w-md">
-          <label className="block text-xs uppercase tracking-[0.15em] text-charcoal/55">
-            Your current password
-          </label>
-          <input
-            type="password"
-            required
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            className="mt-2 w-full border border-charcoal/20 bg-beige px-3 py-2 text-sm"
-          />
-        </div>
-      </section>
-
       <section className="overflow-x-auto rounded border border-charcoal/15">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-charcoal/10 bg-ivory px-4 py-3">
+          <p className="text-xs uppercase tracking-[0.15em] text-charcoal/55">
+            Staff accounts
+          </p>
+          {!showAddStaff && (
+            <button
+              type="button"
+              onClick={() => setShowAddStaff(true)}
+              className="bg-charcoal px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-charcoal/90"
+            >
+              Add more staff
+            </button>
+          )}
+        </div>
         <table className="w-full min-w-[720px] text-left text-sm">
           <thead className="bg-ivory text-xs uppercase tracking-[0.15em] text-charcoal/55">
             <tr>
               <th className="px-4 py-3 font-medium">Email</th>
               <th className="px-4 py-3 font-medium">Role</th>
               <th className="px-4 py-3 font-medium">CMS access</th>
+              <th className="px-4 py-3 font-medium">Messages</th>
               <th className="px-4 py-3 font-medium text-right">Actions</th>
             </tr>
           </thead>
@@ -420,21 +674,30 @@ export function UserManagement() {
                   )}
                 </td>
                 <td className="px-4 py-3">
-                  <select
-                    value={user.role}
-                    onChange={(e) => updateRole(user.id, e.target.value as Role)}
-                    className="border border-charcoal/20 bg-beige px-2 py-1.5 text-xs"
-                  >
-                    {data.assignableRoles.map((role) => (
-                      <option key={role} value={role}>
-                        {ROLE_LABELS[role]}
-                      </option>
-                    ))}
-                  </select>
+                  {user.role === "super_admin" ? (
+                    <span className="text-charcoal/75">{ROLE_LABELS.super_admin}</span>
+                  ) : (
+                    <select
+                      value={user.role}
+                      onChange={(e) =>
+                        requestRoleChange(user, e.target.value as Role)
+                      }
+                      className="border border-charcoal/20 bg-beige px-2 py-1.5 text-xs"
+                    >
+                      {data.assignableRoles.map((role) => (
+                        <option key={role} value={role}>
+                          {ROLE_LABELS[role]}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                 </td>
                 <td className="px-4 py-3">
                   {editingId === user.id && user.role !== "super_admin" ? (
                     <div className="space-y-3">
+                      <p className="text-[10px] uppercase tracking-[0.15em] text-charcoal/45">
+                        Content sections
+                      </p>
                       <ContentAreasPicker
                         areas={catalog}
                         selected={editAreas}
@@ -464,6 +727,27 @@ export function UserManagement() {
                     <p className="text-charcoal/75">{formatAreas(user, catalog)}</p>
                   )}
                 </td>
+                <td className="px-4 py-3">
+                  {editingId === user.id && user.role !== "super_admin" ? (
+                    <div className="space-y-3">
+                      <p className="text-[10px] uppercase tracking-[0.15em] text-charcoal/45">
+                        Message types
+                      </p>
+                      <MessageCategoriesPicker
+                        categories={messageCatalog}
+                        selected={editMessageCategories}
+                        accessLevel={editMessageAccess}
+                        role={user.role as Role}
+                        onCategoriesChange={setEditMessageCategories}
+                        onAccessChange={setEditMessageAccess}
+                      />
+                    </div>
+                  ) : (
+                    <p className="text-charcoal/75">
+                      {formatMessageAreas(user, messageCatalog)}
+                    </p>
+                  )}
+                </td>
                 <td className="space-x-3 px-4 py-3 text-right whitespace-nowrap">
                   {user.role !== "super_admin" && editingId !== user.id && (
                     <button
@@ -474,20 +758,24 @@ export function UserManagement() {
                       Edit access
                     </button>
                   )}
-                  <button
-                    type="button"
-                    onClick={() => resetPassword(user.id, user.email)}
-                    className="text-xs uppercase tracking-[0.12em] text-charcoal/70 hover:text-charcoal"
-                  >
-                    Reset password
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => removeUser(user.id, user.email)}
-                    className="text-xs uppercase tracking-[0.12em] text-red-900/70 hover:text-red-900"
-                  >
-                    Delete
-                  </button>
+                  {user.role !== "super_admin" && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => requestPasswordReset(user.id, user.email)}
+                        className="text-xs uppercase tracking-[0.12em] text-charcoal/70 hover:text-charcoal"
+                      >
+                        Reset password
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => requestDelete(user.id, user.email)}
+                        className="text-xs uppercase tracking-[0.12em] text-red-900/70 hover:text-red-900"
+                      >
+                        Delete
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
@@ -495,10 +783,23 @@ export function UserManagement() {
         </table>
       </section>
 
+      {showAddStaff && (
       <section className="rounded border border-charcoal/15 bg-ivory p-6">
-        <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">
-          Add staff member
-        </h3>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h3 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">
+            Add staff member
+          </h3>
+          <button
+            type="button"
+            onClick={() => {
+              setShowAddStaff(false);
+              setForm(emptyForm);
+            }}
+            className="text-xs uppercase tracking-[0.15em] text-charcoal/55 hover:text-charcoal"
+          >
+            Cancel
+          </button>
+        </div>
 
         <form onSubmit={handleCreate} className="mt-6 space-y-8">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -550,6 +851,8 @@ export function UserManagement() {
                     ...form,
                     role,
                     accessLevel: role === "viewer" ? "view" : form.accessLevel,
+                    messageAccessLevel:
+                      role === "viewer" ? "view" : form.messageAccessLevel,
                   });
                 }}
                 className="mt-2 w-full border border-charcoal/20 bg-beige px-3 py-2 text-sm"
@@ -579,6 +882,26 @@ export function UserManagement() {
             </div>
           </div>
 
+          <div>
+            <h4 className="text-xs uppercase tracking-[0.2em] text-charcoal/55">
+              Message types
+            </h4>
+            <div className="mt-4">
+              <MessageCategoriesPicker
+                categories={messageCatalog}
+                selected={form.messageCategories}
+                accessLevel={form.messageAccessLevel}
+                role={form.role}
+                onCategoriesChange={(messageCategories) =>
+                  setForm({ ...form, messageCategories })
+                }
+                onAccessChange={(messageAccessLevel) =>
+                  setForm({ ...form, messageAccessLevel })
+                }
+              />
+            </div>
+          </div>
+
           <button
             type="submit"
             className="bg-charcoal px-6 py-2.5 text-xs uppercase tracking-[0.2em] text-ivory"
@@ -587,6 +910,7 @@ export function UserManagement() {
           </button>
         </form>
       </section>
+      )}
 
       {status && (
         <p className="text-sm text-charcoal/70" role="status">
@@ -599,7 +923,7 @@ export function UserManagement() {
           Role notes
         </h3>
         <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-          {(Object.keys(ROLE_LABELS) as Role[]).map((role) => (
+          {data.assignableRoles.map((role) => (
             <div key={role}>
               <dt className="text-sm font-medium text-charcoal">{ROLE_LABELS[role]}</dt>
               <dd className="mt-1 text-sm text-charcoal/60">{ROLE_DESCRIPTIONS[role]}</dd>

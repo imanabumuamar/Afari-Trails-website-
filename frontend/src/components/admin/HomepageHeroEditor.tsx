@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import type {
+  HeroBackgroundMode,
   HeroHeight,
   HeroTextAlign,
   HeroTextColor,
@@ -80,14 +81,16 @@ export function HomepageHeroEditor({
     await persistHero(draft, "Saving…", "Hero saved. Refresh the homepage to see it.");
   }
 
-  async function removeVideo() {
-    if (readOnly || !draft.video) return;
-    const next = { ...draft, video: "" };
+  async function setBackgroundMode(mode: HeroBackgroundMode) {
+    if (readOnly || draft.backgroundMode === mode) return;
+    const next = { ...draft, backgroundMode: mode };
     setDraft(next);
     await persistHero(
       next,
-      "Removing video…",
-      "Video removed — the homepage now shows the photo.",
+      "Saving…",
+      mode === "video"
+        ? "Video background selected. Upload an MP4 below if needed."
+        : "Photo background selected.",
     );
   }
 
@@ -177,7 +180,7 @@ export function HomepageHeroEditor({
           sizes="(max-width: 768px) 100vw, 800px"
         />
         <span className="absolute left-3 top-3 rounded bg-matte-black/70 px-2 py-1 text-[10px] uppercase tracking-[0.15em] text-ivory">
-          Live now: {draft.video ? "Video background" : "Photo background"}
+          Live now: {draft.backgroundMode === "video" ? "Video background" : "Photo background"}
         </span>
       </div>
 
@@ -186,15 +189,36 @@ export function HomepageHeroEditor({
         <section className={sectionClass}>
           <h3 className={sectionTitle}>1. Background</h3>
           <p className="mt-1 text-sm text-charcoal/60">
-            {draft.video
-              ? "A video is currently the background. Upload a new one, or remove it to use a photo."
-              : "A photo is currently the background. Upload a new photo, or add a video for a moving background."}
+            Choose a still photo or a looping video for the hero banner.
           </p>
+
+          {!readOnly && (
+            <div className="mt-5">
+              <span className={labelClass}>Background type</span>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {(["photo", "video"] as HeroBackgroundMode[]).map((mode) => (
+                  <button
+                    key={mode}
+                    type="button"
+                    disabled={saving}
+                    onClick={() => void setBackgroundMode(mode)}
+                    className={chip(draft.backgroundMode === mode)}
+                  >
+                    {mode}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {!readOnly && (
             <>
               <form onSubmit={uploadPoster} className="mt-5 space-y-3">
-                <label className={labelClass}>Background photo</label>
+                <label className={labelClass}>
+                  {draft.backgroundMode === "video"
+                    ? "Poster image (shown before video loads)"
+                    : "Background photo"}
+                </label>
                 <input
                   name="image"
                   type="file"
@@ -219,17 +243,20 @@ export function HomepageHeroEditor({
                 </button>
               </form>
 
-              <form onSubmit={uploadVideo} className="mt-6 space-y-3 border-t border-charcoal/10 pt-5">
-                <label className={labelClass}>
-                  Background video <span className="text-charcoal/45">(optional, MP4)</span>
-                </label>
-                <input
-                  name="video"
-                  type="file"
-                  accept="video/mp4"
-                  className="block w-full text-sm"
-                />
-                <div className="flex flex-wrap items-center gap-3">
+              {draft.backgroundMode === "video" && (
+                <form onSubmit={uploadVideo} className="mt-6 space-y-3 border-t border-charcoal/10 pt-5">
+                  <label className={labelClass}>Background video (MP4)</label>
+                  <input
+                    name="video"
+                    type="file"
+                    accept="video/mp4"
+                    className="block w-full text-sm"
+                  />
+                  {draft.video && (
+                    <p className="text-xs text-charcoal/50">
+                      Current: {draft.video}
+                    </p>
+                  )}
                   <button
                     type="submit"
                     disabled={uploadingVideo}
@@ -237,18 +264,8 @@ export function HomepageHeroEditor({
                   >
                     {uploadingVideo ? "Uploading…" : "Upload video"}
                   </button>
-                  {draft.video && (
-                    <button
-                      type="button"
-                      onClick={removeVideo}
-                      disabled={saving}
-                      className="rounded border border-charcoal/30 px-5 py-2.5 text-xs uppercase tracking-[0.12em] text-charcoal/75 hover:border-charcoal/60 disabled:opacity-40"
-                    >
-                      Remove video
-                    </button>
-                  )}
-                </div>
-              </form>
+                </form>
+              )}
             </>
           )}
         </section>

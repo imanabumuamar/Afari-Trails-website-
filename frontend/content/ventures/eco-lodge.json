@@ -9,7 +9,7 @@
       "exploreCta": "Explore Our Vision",
       "exploreHref": "#who-we-are",
       "partnerCta": "Partner With Us",
-      "partnerHref": "/contact",
+      "partnerHref": "/ventures/partner",
       "imageAlt": "Luxury safari lodge overlooking African wilderness at sunset"
     },
     "ecoLodgeWhoWeAre": {
@@ -27,32 +27,38 @@
         {
           "id": "location",
           "title": "Location Sourcing & Destination Planning",
-          "description": "Identifying high-potential wilderness, safari, and eco tourism locations suitable for premium hospitality development."
+          "description": "Identifying high-potential wilderness, safari, and eco tourism locations suitable for premium hospitality development.",
+          "image": "/images/ventures/eco-lodge/ecoLodgeWhatWeDo-items-0-image.jpg?v=1781468921407"
         },
         {
           "id": "design",
           "title": "Luxury Eco Lodge Design",
-          "description": "Creating sustainable lodge concepts that blend modern comfort with authentic African environmental aesthetics."
+          "description": "Creating sustainable lodge concepts that blend modern comfort with authentic African environmental aesthetics.",
+          "image": "/images/ventures/eco-lodge/ecoLodgeWhatWeDo-items-1-image.jpg?v=1781468926594"
         },
         {
           "id": "experience",
           "title": "Hospitality Experience Development",
-          "description": "Designing immersive guest journeys, safari experiences, wellness retreats, and nature-driven activities."
+          "description": "Designing immersive guest journeys, safari experiences, wellness retreats, and nature-driven activities.",
+          "image": "/images/ventures/eco-lodge/ecoLodgeWhatWeDo-items-2-image.jpg?v=1781468930857"
         },
         {
           "id": "infrastructure",
           "title": "Sustainable Infrastructure Planning",
-          "description": "Integrating eco-conscious systems including renewable energy, low-impact construction, and environmental preservation strategies."
+          "description": "Integrating eco-conscious systems including renewable energy, low-impact construction, and environmental preservation strategies.",
+          "image": "/images/ventures/eco-lodge/ecoLodgeWhatWeDo-items-3-image.jpg?v=1781468936064"
         },
         {
           "id": "branding",
           "title": "Branding & Tourism Positioning",
-          "description": "Building distinctive hospitality brands positioned for the luxury eco tourism market."
+          "description": "Building distinctive hospitality brands positioned for the luxury eco tourism market.",
+          "image": "/images/ventures/eco-lodge/ecoLodgeWhatWeDo-items-4-image.jpg?v=1781468941553"
         },
         {
           "id": "conservation",
           "title": "Conservation & Community Integration",
-          "description": "Developing projects that support wildlife conservation and local economic empowerment."
+          "description": "Developing projects that support wildlife conservation and local economic empowerment.",
+          "image": "/images/ventures/eco-lodge/ecoLodgeWhatWeDo-items-5-image.jpg?v=1781468947472"
         }
       ]
     },
@@ -89,25 +95,64 @@
       ],
       "partnerCta": "Partner With Us",
       "deckCta": "Request Investment Deck",
-      "partnerHref": "/contact",
-      "deckHref": "/contact"
+      "partnerHref": "/ventures/partner",
+      "deckHref": "/ventures/connect"
     },
     "ecoLodgeWhyAfrica": {
       "label": "Why Africa",
       "heading": "Why Africa",
       "body": "Africa represents one of the world's most powerful opportunities for eco tourism and luxury nature-based hospitality.\n\nWith extraordinary landscapes, wildlife ecosystems, cultural richness, and rising demand for authentic travel experiences, the continent is positioned for the next generation of sustainable tourism investment.\n\nAfari Trails aims to contribute to that future by developing destinations that celebrate Africa while protecting its natural heritage.",
-      "image": "/images/ventures/eco-lodge/ecoLodgeWhyAfrica-image.jpg?v=1780264618099",
+      "image": "/images/ventures/eco-lodge/ecoLodgeWhyAfrica-image.jpg?v=1781437288671",
       "imageAlt": "African savanna at golden hour"
     },
+    "ecoLodgeGalleryIntro": {
+      "label": "Visual Gallery",
+      "heading": "Inspired by Nature",
+      "body": ""
+    },
+    "ecoLodgeGallery": [
+      {
+        "src": "/images/ventures/eco-lodge/ecoLodgeGallery-0-src.jpg?v=1780264807610",
+        "alt": "Luxury safari lodge architecture"
+      },
+      {
+        "src": "/images/ventures/eco-lodge/ecoLodgeGallery-1-src.jpg?v=1780264818376",
+        "alt": "Luxury tented camp in the wilderness"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Open-air lounge at sunset"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Sustainable lodge interior"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Wildlife encounter on safari"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Sunset dining experience"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Eco spa and wellness concept"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80",
+        "alt": "Wilderness expedition scene"
+      }
+    ],
     "ecoLodgeFinalCta": {
       "heading": "From Untouched Landscapes to World-Class Eco Destinations",
       "body": "Afari Trails is redefining sustainable luxury hospitality through visionary eco lodge development and immersive African travel experiences.\n\nJoin us in building the future of eco tourism.",
       "cta": "Connect With Us",
       "secondaryCta": "Become a Partner",
-      "ctaHref": "/contact",
-      "secondaryCtaHref": "/contact",
-      "image": "/images/ventures/eco-lodge/ecoLodgeFinalCta-image.jpg?v=1780264702177"
+      "ctaHref": "/ventures/connect",
+      "secondaryCtaHref": "/ventures/partner",
+      "image": "/images/ventures/eco-lodge/ecoLodgeFinalCta-image.jpg?v=1781437054030"
     }
   },
-  "updatedAt": "2026-06-08T21:48:50.727Z"
+  "updatedAt": "2026-06-14T20:29:10.685Z"
 }

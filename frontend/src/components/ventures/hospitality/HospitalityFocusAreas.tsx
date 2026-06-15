@@ -10,7 +10,7 @@ export async function HospitalityFocusAreas() {
   const hospitalityFocusAreas = content.hospitalityFocusAreas as typeof default_hospitalityFocusAreas;
 
   return (
-    <section className="bg-beige py-24 lg:py-36">
+    <section className="bg-beige pb-12 lg:pb-16">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="max-w-xl">
           <SectionLabel>{hospitalityFocusAreas.label}</SectionLabel>
@@ -19,7 +19,7 @@ export async function HospitalityFocusAreas() {
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {hospitalityFocusAreas.items.map((item) => {
             const href =
               "href" in item && item.href ? item.href : ROUTES.venturesPartner;
@@ -28,7 +28,7 @@ export async function HospitalityFocusAreas() {
               <Link
                 key={item.id}
                 href={href}
-                className="hover-zoom group relative block min-h-[380px] overflow-hidden bg-charcoal/10 lg:min-h-[420px]"
+                className="hover-zoom group relative block min-h-[320px] overflow-hidden bg-charcoal/10 lg:min-h-[360px]"
               >
                 <Image
                   src={item.image}

@@ -1,5 +1,3 @@
-import type { ConnectContentData } from "@/types/connect-content";
-
 export type ConnectPageSectionKey =
   | "hero"
   | "intro"
@@ -29,7 +27,7 @@ export const CONNECT_PAGE_SECTION_LABELS: Record<ConnectPageSectionKey, string> 
 
 /** Sections shown on each public connect page (and in admin). */
 export const CONNECT_PAGE_SECTIONS: Record<
-  keyof ConnectContentData,
+  "contact" | "expeditions",
   ConnectPageSectionVisibility
 > = {
   contact: {
@@ -55,7 +53,7 @@ export const CONNECT_PAGE_SECTIONS: Record<
 };
 
 export function visibleConnectSections(
-  pageKey: keyof ConnectContentData,
+  pageKey: "contact" | "expeditions",
 ): ConnectPageSectionKey[] {
   const visibility = CONNECT_PAGE_SECTIONS[pageKey];
   return (

@@ -7,6 +7,7 @@
       "alt": "Safari landscape at golden hour"
     },
     "video": "/videos/hero.mp4",
+    "backgroundMode": "video",
     "primaryCta": {
       "label": "Explore Expeditions",
       "href": "/expeditions"
@@ -18,11 +19,11 @@
   },
   "featureCards": {
     "expeditions": {
-      "src": "/images/home-expeditions-featured.png",
+      "src": "/images/home-expeditions-featured.png?v=1781360295968",
       "alt": "Lush gorge with a bridge spanning the valley and river below"
     },
     "ventures": {
-      "src": "/images/home-ventures-featured.png",
+      "src": "/images/home-ventures-featured.png?v=1781360761646",
       "alt": "Saddle-billed storks walking through sunlit grassland"
     },
     "store": {
@@ -34,5 +35,5 @@
     "src": "/images/home-our-essence.jpg",
     "alt": "Waterbuck standing between trees in sunlit African woodland"
   },
-  "updatedAt": "2026-05-31T17:45:57.664Z"
+  "updatedAt": "2026-06-13T14:26:01.655Z"
 }

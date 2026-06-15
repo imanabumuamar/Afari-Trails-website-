@@ -1,4 +1,5 @@
 import { JOURNAL_CONTENT_DEFAULTS } from "@/lib/data/journal-defaults";
+import { HOMEPAGE_JOURNAL_STORY_LIMIT, pruneStorySlugs } from "@/lib/journal/helpers";
 import type {
   JournalContentData,
   JournalStoryRecord,
@@ -24,7 +25,7 @@ function mergeStories(
     return {
       ...(base ?? {}),
       ...story,
-      published: story.published !== false,
+      published: story.published === false ? false : true,
     };
   });
 
@@ -32,7 +33,7 @@ function mergeStories(
     if (!merged.some((s) => s.slug === story.slug)) {
       merged.push({
         ...story,
-        published: story.published !== false,
+        published: story.published === false ? false : true,
       });
     }
   }
@@ -48,6 +49,7 @@ export function mergeJournalData(
   if (!remote) return defaults;
 
   const page = (remote.page ?? {}) as Partial<JournalContentData["page"]>;
+  const stories = mergeStories(defaults.stories, remote.stories);
   return {
     page: {
       hero: mergePage(defaults.page.hero, page.hero),
@@ -62,12 +64,19 @@ export function mergeJournalData(
           ? page.latestInitialCount
           : defaults.page.latestInitialCount,
     },
-    stories: mergeStories(defaults.stories, remote.stories),
-    latestStorySlugs: Array.isArray(remote.latestStorySlugs)
-      ? [...remote.latestStorySlugs]
-      : defaults.latestStorySlugs,
-    homepageStorySlugs: Array.isArray(remote.homepageStorySlugs)
-      ? [...remote.homepageStorySlugs]
-      : defaults.homepageStorySlugs,
+    stories,
+    latestStorySlugs: pruneStorySlugs(
+      stories,
+      Array.isArray(remote.latestStorySlugs)
+        ? remote.latestStorySlugs
+        : defaults.latestStorySlugs,
+    ),
+    homepageStorySlugs: pruneStorySlugs(
+      stories,
+      Array.isArray(remote.homepageStorySlugs)
+        ? remote.homepageStorySlugs
+        : defaults.homepageStorySlugs,
+      HOMEPAGE_JOURNAL_STORY_LIMIT,
+    ),
   };
 }

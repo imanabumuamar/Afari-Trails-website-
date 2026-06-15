@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { ConnectPageEditor } from "@/components/admin/connect/ConnectPageEditor";
+import { ConnectWhatsAppEditor } from "@/components/admin/connect/ConnectWhatsAppEditor";
 import { SaveButton } from "@/components/admin/ventures/AdminField";
 import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import { mergeConnectData } from "@/lib/connect/merge-connect-data";
@@ -13,7 +14,7 @@ import {
 import type { ConnectContentData } from "@/types/connect-content";
 import type { ConnectPageConfig } from "@/types/connect-page";
 
-type Tab = keyof ConnectContentData;
+type Tab = "contact" | "expeditions";
 
 const TABS: { id: Tab; label: string; preview: string }[] = [
   { id: "contact", label: "Partner & Get in Touch", preview: "/contact" },
@@ -165,6 +166,12 @@ export function ConnectContentEditor({ readOnly = false }: ConnectContentEditorP
       </p>
 
       <div className="space-y-8">
+        <ConnectWhatsAppEditor
+          settings={data.whatsapp}
+          readOnly={readOnly}
+          onChange={(whatsapp) => setData((prev) => (prev ? { ...prev, whatsapp } : prev))}
+        />
+
         <ConnectPageEditor
           pageKey={tab}
           config={pageConfig}

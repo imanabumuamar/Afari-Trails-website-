@@ -28,6 +28,7 @@ const DEFAULT_HOMEPAGE = {
       alt: "Safari landscape at golden hour",
     },
     video: "/videos/hero.mp4",
+    backgroundMode: "video",
     primaryCta: { label: "Explore Expeditions", href: "/expeditions" },
     secondaryCta: { label: "Discover Ventures", href: "/ventures" },
   },

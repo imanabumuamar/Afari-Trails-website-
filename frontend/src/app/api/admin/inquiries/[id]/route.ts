@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { backendFetch } from "@/lib/api/backend";
-import { hasPermission } from "@/lib/auth/rbac";
+import { hasAnyInboxRead } from "@/lib/auth/inbox-categories";
 import { AuthError, requireSession } from "@/lib/auth/require-session";
 
 function authResponse(error: unknown) {
@@ -13,9 +13,9 @@ function authResponse(error: unknown) {
   throw error;
 }
 
-async function requireMessagesAdmin() {
+async function requireMessagesRead() {
   const { role, permissions, token } = await requireSession();
-  if (!hasPermission(role, "inbox:write", permissions)) {
+  if (!hasAnyInboxRead(role, permissions)) {
     throw new AuthError("Forbidden", 403);
   }
   return { token };
@@ -25,7 +25,7 @@ type RouteContext = { params: Promise<{ id: string }> };
 
 export async function PATCH(request: Request, context: RouteContext) {
   try {
-    const { token } = await requireMessagesAdmin();
+    const { token } = await requireMessagesRead();
     const { id } = await context.params;
     const body = await request.json();
 
@@ -51,7 +51,7 @@ export async function PATCH(request: Request, context: RouteContext) {
 
 export async function DELETE(_request: Request, context: RouteContext) {
   try {
-    const { token } = await requireMessagesAdmin();
+    const { token } = await requireMessagesRead();
     const { id } = await context.params;
 
     const { ok, status } = await backendFetch(`/inquiries/${id}`, {

@@ -222,11 +222,14 @@ function archivedFilter() {
   return { archivedAt: { $ne: null } };
 }
 
-async function countBySource(match) {
-  const rows = await InquirySubmission.aggregate([
-    { $match: match },
-    { $group: { _id: "$source", count: { $sum: 1 } } },
-  ]);
+async function countBySource(match, allowedSources) {
+  const pipeline = [{ $match: match }];
+  if (allowedSources?.length) {
+    pipeline[0].$match.source = { $in: allowedSources };
+  }
+  pipeline.push({ $group: { _id: "$source", count: { $sum: 1 } } });
+
+  const rows = await InquirySubmission.aggregate(pipeline);
   const bySource = {};
   let total = 0;
   for (const row of rows) {
@@ -236,9 +239,32 @@ async function countBySource(match) {
   return { total, bySource };
 }
 
-export async function listInquirySubmissions({ source, limit, archived } = {}) {
+export async function listInquirySubmissions({
+  source,
+  limit,
+  archived,
+  allowedSources,
+} = {}) {
   const query = archived ? archivedFilter() : activeFilter();
-  if (source && SOURCES.has(source)) {
+
+  if (allowedSources?.length) {
+    if (source && SOURCES.has(source)) {
+      if (!allowedSources.includes(source)) {
+        return {
+          submissions: [],
+          counts: {
+            total: 0,
+            archived: 0,
+            bySource: {},
+            inboxTotal: 0,
+          },
+        };
+      }
+      query.source = source;
+    } else {
+      query.source = { $in: allowedSources };
+    }
+  } else if (source && SOURCES.has(source)) {
     query.source = source;
   }
 
@@ -246,8 +272,8 @@ export async function listInquirySubmissions({ source, limit, archived } = {}) {
 
   const [docs, activeCounts, archivedCounts] = await Promise.all([
     InquirySubmission.find(query).sort({ createdAt: -1 }).limit(safeLimit),
-    countBySource(activeFilter()),
-    countBySource(archivedFilter()),
+    countBySource(activeFilter(), allowedSources),
+    countBySource(archivedFilter(), allowedSources),
   ]);
 
   const counts = archived
@@ -270,12 +296,8 @@ export async function listInquirySubmissions({ source, limit, archived } = {}) {
   };
 }
 
-export async function setInquiryArchived(id, archived) {
-  const doc = await InquirySubmission.findByIdAndUpdate(
-    id,
-    { archivedAt: archived ? new Date() : null },
-    { new: true },
-  );
+export async function getInquirySubmission(id) {
+  const doc = await InquirySubmission.findById(id);
   if (!doc) {
     const err = new Error("Message not found");
     err.status = 404;
@@ -284,12 +306,27 @@ export async function setInquiryArchived(id, archived) {
   return toAdminClient(doc);
 }
 
-export async function deleteInquirySubmission(id) {
-  const doc = await InquirySubmission.findByIdAndDelete(id);
+export async function setInquiryArchived(id, archived) {
+  const doc = await InquirySubmission.findById(id);
   if (!doc) {
     const err = new Error("Message not found");
     err.status = 404;
     throw err;
   }
-  return { ok: true };
+
+  doc.archivedAt = archived ? new Date() : null;
+  await doc.save();
+  return toAdminClient(doc);
+}
+
+export async function deleteInquirySubmission(id) {
+  const doc = await InquirySubmission.findById(id);
+  if (!doc) {
+    const err = new Error("Message not found");
+    err.status = 404;
+    throw err;
+  }
+
+  await InquirySubmission.deleteOne({ _id: id });
+  return { ok: true, source: doc.source };
 }

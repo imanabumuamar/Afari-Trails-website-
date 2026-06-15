@@ -1,13 +1,16 @@
 import bcrypt from "bcryptjs";
 import {
   accessLevelFromPermissions,
+  buildUserPermissions,
   CMS_CONTENT_AREAS,
   contentAreasFromPermissions,
   getEffectivePermissions,
-  permissionsFromContentAreas,
+  INBOX_MESSAGE_CATEGORIES,
+  messageAccessLevelFromPermissions,
+  messageCategoriesFromPermissions,
   validateCustomPermissions,
 } from "../constants/permissions.js";
-import { hasPermission, isRole, ROLES } from "../constants/roles.js";
+import { isRole } from "../constants/roles.js";
 import { User } from "../models/User.model.js";
 
 function sanitizeUser(user) {
@@ -20,12 +23,14 @@ function sanitizeUser(user) {
     permissions: effective,
     contentAreas: contentAreasFromPermissions(effective),
     accessLevel: accessLevelFromPermissions(effective, user.role),
+    messageCategories: messageCategoriesFromPermissions(effective),
+    messageAccessLevel: messageAccessLevelFromPermissions(effective, user.role),
     createdAt: user.createdAt.toISOString(),
   };
 }
 
 function assignableRoles(actorRole) {
-  if (actorRole === "super_admin") return [...ROLES];
+  if (actorRole === "super_admin") return ["admin", "editor", "viewer"];
   return [];
 }
 
@@ -52,7 +57,14 @@ async function verifyActorPassword(actor, currentPassword) {
   }
 }
 
-function resolveStoredPermissions({ role, contentAreas, accessLevel, permissions }) {
+function resolveStoredPermissions({
+  role,
+  contentAreas,
+  accessLevel,
+  messageCategories,
+  messageAccessLevel,
+  permissions,
+}) {
   if (role === "super_admin") {
     return [];
   }
@@ -61,13 +73,29 @@ function resolveStoredPermissions({ role, contentAreas, accessLevel, permissions
     return validateCustomPermissions(permissions);
   }
 
-  if (Array.isArray(contentAreas)) {
-    const level =
-      accessLevel === "view" || role === "viewer" ? "view" : "edit";
-    return permissionsFromContentAreas(contentAreas, level);
+  if (Array.isArray(contentAreas) || Array.isArray(messageCategories)) {
+    return buildUserPermissions({
+      role,
+      contentAreas: contentAreas ?? [],
+      accessLevel,
+      messageCategories: messageCategories ?? [],
+      messageAccessLevel,
+    });
   }
 
   return null;
+}
+
+function validateAccessSelection(contentAreas, messageCategories) {
+  const areas = contentAreas ?? [];
+  const messages = messageCategories ?? [];
+  if (!areas.length && !messages.length) {
+    const err = new Error(
+      "Select at least one content section or message category for this user",
+    );
+    err.status = 400;
+    throw err;
+  }
 }
 
 export async function listUsers(actor) {
@@ -82,6 +110,7 @@ export async function listUsers(actor) {
     users: users.map(sanitizeUser),
     assignableRoles: assignableRoles(actor.role),
     contentAreas: CMS_CONTENT_AREAS,
+    messageCategories: INBOX_MESSAGE_CATEGORIES,
   };
 }
 
@@ -96,6 +125,8 @@ export async function updateUser(
     currentPassword,
     contentAreas,
     accessLevel,
+    messageCategories,
+    messageAccessLevel,
     permissions,
   },
 ) {
@@ -126,7 +157,7 @@ export async function updateUser(
       throw err;
     }
     if (!assignableRoles(actor.role).includes(role)) {
-      const err = new Error("Only super admins can manage users");
+      const err = new Error("Only admin, editor, and viewer roles can be assigned here");
       err.status = 403;
       throw err;
     }
@@ -143,17 +174,23 @@ export async function updateUser(
       role: nextRole,
       contentAreas,
       accessLevel,
+      messageCategories,
+      messageAccessLevel,
       permissions,
     });
 
-    if (contentAreas !== undefined || permissions !== undefined || accessLevel !== undefined) {
+    if (
+      contentAreas !== undefined ||
+      messageCategories !== undefined ||
+      permissions !== undefined ||
+      accessLevel !== undefined ||
+      messageAccessLevel !== undefined
+    ) {
       if (stored && stored.length > 0) {
-        const areas = contentAreasFromPermissions(stored);
-        if (!areas.length) {
-          const err = new Error("Select at least one content area for this user");
-          err.status = 400;
-          throw err;
-        }
+        validateAccessSelection(
+          contentAreasFromPermissions(stored),
+          messageCategoriesFromPermissions(stored),
+        );
         user.permissions = stored;
       }
     }

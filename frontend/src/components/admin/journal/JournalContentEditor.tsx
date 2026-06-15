@@ -11,6 +11,7 @@ import { JournalPageEditor } from "@/components/admin/journal/JournalPageEditor"
 import { JournalStoriesListManager } from "@/components/admin/journal/JournalStoriesListManager";
 import { JournalStoryEditor } from "@/components/admin/journal/JournalStoryEditor";
 import { mergeJournalData } from "@/lib/journal/merge-journal-data";
+import { pruneStorySlugs, HOMEPAGE_JOURNAL_STORY_LIMIT } from "@/lib/journal/helpers";
 
 type JournalContentEditorProps = {
   readOnly?: boolean;
@@ -82,7 +83,7 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
     if (!data) return;
     const normalized: JournalStoryRecord = {
       ...story,
-      published: story.published !== false,
+      published: story.published === false ? false : true,
     };
     let stories = data.stories.map((s) =>
       s.slug === normalized.slug ? normalized : s,
@@ -92,7 +93,18 @@ export function JournalContentEditor({ readOnly = false }: JournalContentEditorP
         s.slug === normalized.slug ? s : { ...s, featured: false },
       );
     }
-    patch({ stories });
+    const homepageStorySlugs =
+      normalized.published === false
+        ? data.homepageStorySlugs.filter((slug) => slug !== normalized.slug)
+        : data.homepageStorySlugs;
+    patch({
+      stories,
+      homepageStorySlugs: pruneStorySlugs(
+        stories,
+        homepageStorySlugs,
+        HOMEPAGE_JOURNAL_STORY_LIMIT,
+      ),
+    });
   }
 
   function addStory(story: JournalStoryRecord) {

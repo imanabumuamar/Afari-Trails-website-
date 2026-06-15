@@ -3,6 +3,12 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { getVenturePageContent } from "@/services/content/ventures";
 import { getArchiveContent, getPublishedImages } from "@/services/content/archive";
 import { communityStories as default_communityStories } from "@/lib/data/community";
+import {
+  isCommunityStoryVisible,
+  resolveCommunityArchiveItems,
+  resolveCommunityProfiles,
+  usesArchiveCommunityStories,
+} from "@/lib/ventures/community-stories-shared";
 
 type StoryCard = {
   key: string;
@@ -16,20 +22,20 @@ export async function CommunityStories() {
   const content = await getVenturePageContent("community");
   const communityStories =
     content.communityStories as typeof default_communityStories;
-
-  const archiveIds = Array.isArray(communityStories.archiveIds)
-    ? communityStories.archiveIds
-    : [];
+  const storiesData = communityStories as Record<string, unknown>;
 
   let cards: StoryCard[];
 
-  if (archiveIds.length > 0) {
+  if (usesArchiveCommunityStories(storiesData)) {
     const archive = await getArchiveContent();
     const published = getPublishedImages(archive.images);
     const byId = new Map(published.map((img) => [img.id, img]));
-    // Keep the admin-chosen order, skipping any that were removed/unpublished.
-    cards = archiveIds
-      .map((id) => byId.get(id))
+    const items = resolveCommunityArchiveItems(storiesData).filter(
+      isCommunityStoryVisible,
+    );
+
+    cards = items
+      .map((item) => byId.get(item.archiveId))
       .filter((img): img is NonNullable<typeof img> => Boolean(img))
       .map((img) => ({
         key: img.id,
@@ -39,14 +45,18 @@ export async function CommunityStories() {
         quote: img.caption,
       }));
   } else {
-    cards = communityStories.profiles.map((profile) => ({
-      key: profile.name,
-      image: profile.image,
-      role: profile.role,
-      name: profile.name,
-      quote: profile.quote,
-    }));
+    cards = resolveCommunityProfiles(storiesData)
+      .filter(isCommunityStoryVisible)
+      .map((profile) => ({
+        key: profile.name,
+        image: profile.image,
+        role: profile.role,
+        name: profile.name,
+        quote: profile.quote,
+      }));
   }
+
+  if (cards.length === 0) return null;
 
   return (
     <section className="bg-ivory py-24 lg:py-36">

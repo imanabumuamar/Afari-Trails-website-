@@ -3,6 +3,7 @@ import type { ExpeditionDetail } from "@/types/expedition-detail";
 export type ExpeditionPageSectionKey =
   | "hero"
   | "overview"
+  | "visualStrip"
   | "itinerary"
   | "experiences"
   | "gallery"
@@ -35,6 +36,11 @@ export const EXPEDITION_PAGE_SECTIONS: readonly ExpeditionPageSectionConfig[] = 
     key: "overview",
     label: "Overview",
     description: "Intro copy and highlights grid.",
+  },
+  {
+    key: "visualStrip",
+    label: "Visual strip",
+    description: "Horizontal scrolling image strip below the overview.",
   },
   {
     key: "itinerary",

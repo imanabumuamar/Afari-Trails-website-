@@ -4,7 +4,9 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { AppProviders } from "@/context/providers";
+import { resolveWhatsAppSettings } from "@/config/whatsapp";
 import { site } from "@/lib/data/site";
+import { getConnectContent } from "@/services/content/connect";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -27,11 +29,14 @@ export const metadata: Metadata = {
     "Luxury safari expeditions, sustainable development, and curated African experiences — rooted in Zambia, designed for the journey.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { whatsapp: cmsWhatsApp } = await getConnectContent();
+  const whatsapp = resolveWhatsAppSettings(cmsWhatsApp);
+
   return (
     <html
       lang="en"
@@ -42,7 +47,10 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
-          <WhatsAppWidget />
+          <WhatsAppWidget
+            number={whatsapp.number}
+            message={whatsapp.message}
+          />
         </AppProviders>
       </body>
     </html>

@@ -10,7 +10,7 @@ export async function FeaturedExpeditions() {
   if (featured.length === 0) return null;
 
   return (
-    <section className="bg-ivory pb-20 lg:pb-28">
+    <section className="bg-ivory pt-10 pb-20 lg:pt-14 lg:pb-28">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="mb-14 text-center">
           <SectionLabel>Featured Expeditions</SectionLabel>

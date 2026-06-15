@@ -263,8 +263,20 @@
         ],
         "image": "/images/archive/img-1781270137809/image.jpg?v=1781270179466",
         "published": true
+      },
+      {
+        "id": "img-1781355286353",
+        "title": "New photograph",
+        "location": "Zambia",
+        "photographer": "Afari Trails",
+        "caption": "",
+        "categories": [
+          "wildlife"
+        ],
+        "image": "https://images.unsplash.com/photo-1589552603490-efd4e1f2836b?w=1200&q=85",
+        "published": true
       }
     ]
   },
-  "updatedAt": "2026-06-12T13:49:33.052Z"
+  "updatedAt": "2026-06-13T12:54:46.441Z"
 }

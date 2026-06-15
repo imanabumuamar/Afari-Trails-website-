@@ -2,16 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { ExploreTopics } from "@/components/journal/ExploreTopics";
-import { FeaturedStories } from "@/components/journal/FeaturedStories";
 import { JournalHero } from "@/components/journal/JournalHero";
 import { JournalNewsletter } from "@/components/journal/JournalNewsletter";
 import { StoriesGrid } from "@/components/journal/StoriesGrid";
-import {
-  getFeaturedSideStories,
-  getFeaturedStory,
-  getLatestStoriesForGrid,
-  getPublishedStories,
-} from "@/lib/journal/helpers";
+import { getPublishedStories } from "@/lib/journal/helpers";
 import type { JournalCategoryId, JournalContentData } from "@/types/journal-content";
 
 type JournalPageContentProps = {
@@ -27,53 +21,31 @@ export function JournalPageContent({ content }: JournalPageContentProps) {
     [content.stories],
   );
 
-  const featuredStory = useMemo(
-    () => getFeaturedStory(content.stories),
-    [content.stories],
-  );
-
-  const featuredSideStories = useMemo(
-    () => getFeaturedSideStories(content.stories),
-    [content.stories],
-  );
-
-  const latestStories = useMemo(
-    () =>
-      getLatestStoriesForGrid(content.stories, content.latestStorySlugs),
-    [content.stories, content.latestStorySlugs],
-  );
-
   const isSearching = search.trim().length > 0;
 
-  const filteredLatest = useMemo(() => {
+  const filteredStories = useMemo(() => {
     const q = search.trim().toLowerCase();
+    let stories =
+      active === "all"
+        ? published
+        : published.filter((s) => s.category === active);
 
-    if (q) {
-      return published.filter((s) => {
-        if (active !== "all" && s.category !== active) return false;
-        return (
-          s.title.toLowerCase().includes(q) ||
-          s.excerpt.toLowerCase().includes(q) ||
-          s.categoryLabel.toLowerCase().includes(q) ||
-          (s.body?.toLowerCase().includes(q) ?? false)
-        );
-      });
-    }
+    if (!q) return stories;
 
-    if (active === "all") {
-      return latestStories;
-    }
-
-    return published.filter(
+    return stories.filter(
       (s) =>
-        !s.featured &&
-        !s.featuredSide &&
-        s.category === active,
+        s.title.toLowerCase().includes(q) ||
+        s.excerpt.toLowerCase().includes(q) ||
+        s.categoryLabel.toLowerCase().includes(q) ||
+        (s.body?.toLowerCase().includes(q) ?? false),
     );
-  }, [active, search, latestStories, published]);
+  }, [active, search, published]);
 
-  const showFeatured =
-    active === "all" && !isSearching && featuredStory;
+  const gridHeading =
+    active === "all"
+      ? "All Stories"
+      : (content.page.categories.find((c) => c.id === active)?.label ??
+        "Stories");
 
   return (
     <>
@@ -85,18 +57,13 @@ export function JournalPageContent({ content }: JournalPageContentProps) {
         search={search}
         onSearchChange={setSearch}
       />
-      {showFeatured && (
-        <FeaturedStories
-          featuredStory={featuredStory}
-          featuredSideStories={featuredSideStories}
-        />
-      )}
       <section id="stories" className="scroll-mt-24 bg-beige py-16 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
           <StoriesGrid
-            stories={filteredLatest}
-            showViewAll={active === "all" && !isSearching}
-            initialCount={content.page.latestInitialCount}
+            stories={filteredStories}
+            heading={gridHeading}
+            showViewAll={false}
+            initialCount={filteredStories.length}
             isSearchActive={isSearching}
           />
         </div>

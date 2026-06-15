@@ -34,6 +34,7 @@ export async function Hero() {
   const { hero } = await getHomepageAsync();
 
   const heightClass = HEIGHT_CLASS[hero.height];
+  const showVideo = hero.backgroundMode === "video" && !!hero.video?.trim();
   const isLight = hero.textColor === "light";
   const headingColor = isLight ? "text-ivory" : "text-charcoal";
   const subtextColor = isLight ? "text-ivory/80" : "text-charcoal/75";
@@ -50,7 +51,7 @@ export async function Hero() {
           className="object-cover"
           sizes="100vw"
         />
-        {hero.video && (
+        {showVideo && (
           <video
             autoPlay
             muted

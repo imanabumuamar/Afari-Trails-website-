@@ -5,6 +5,7 @@ import {
   AddRemoveButtons,
   AdminField,
 } from "@/components/admin/ventures/AdminField";
+import { ExpeditionItemStatusPicker } from "@/components/admin/expeditions/ExpeditionItemStatusPicker";
 import { ExpeditionDetailSectionsForm } from "@/components/admin/expeditions/ExpeditionDetailSectionsForm";
 import { ExpeditionSectionVisibilityEditor } from "@/components/admin/expeditions/ExpeditionSectionVisibilityEditor";
 import { ExpeditionImageField } from "@/components/admin/expeditions/ExpeditionImageField";
@@ -13,6 +14,11 @@ import {
   EXPEDITION_LISTING_STATUS_OPTIONS,
   getExpeditionListingStatus,
 } from "@/lib/expeditions/expedition-listing-status";
+import {
+  ACCOMMODATION_PHOTO_LIMIT,
+  normalizeAccommodationForEditor,
+  pruneAccommodationPhotos,
+} from "@/lib/expeditions/expedition-accommodation-photos";
 import { slugifyExpeditionId } from "@/lib/expeditions/expedition-slug";
 import type { ExpeditionRegion } from "@/lib/data/expeditions-all-page";
 import type {
@@ -58,7 +64,10 @@ export function ExpeditionDetailEditor({
   const [jsonError, setJsonError] = useState<string | null>(null);
 
   useEffect(() => {
-    setDraft(expedition);
+    setDraft({
+      ...expedition,
+      accommodation: normalizeAccommodationForEditor(expedition.accommodation),
+    });
   }, [expedition]);
 
   function syncFromDocument(data: ExpeditionsContentData) {
@@ -76,7 +85,11 @@ export function ExpeditionDetailEditor({
       onStatus("URL slug cannot be empty.");
       return;
     }
-    await onSave({ ...draft, id: slug });
+    await onSave({
+      ...draft,
+      id: slug,
+      accommodation: pruneAccommodationPhotos(draft.accommodation),
+    });
   }
 
   function openJsonMode() {
@@ -95,7 +108,11 @@ export function ExpeditionDetailEditor({
       }
       setJsonError(null);
       const slug = slugifyExpeditionId(parsed.id);
-      const normalized = { ...parsed, id: slug };
+      const normalized = {
+        ...parsed,
+        id: slug,
+        accommodation: pruneAccommodationPhotos(parsed.accommodation),
+      };
       setDraft(normalized);
       void onSave(normalized);
       setJsonMode(false);
@@ -452,6 +469,7 @@ export function ExpeditionDetailEditor({
                     day: draft.itinerary.length + 1,
                     title: "",
                     description: "",
+                    published: true,
                   },
                 ],
               })
@@ -486,6 +504,16 @@ export function ExpeditionDetailEditor({
                   </button>
                 )}
               </div>
+              <ExpeditionItemStatusPicker
+                item={day}
+                name={`expedition-itinerary-status-${i}`}
+                readOnly={readOnly}
+                onChange={(updated) => {
+                  const itinerary = [...draft.itinerary];
+                  itinerary[i] = updated;
+                  setDraft({ ...draft, itinerary });
+                }}
+              />
               <input
                 className={inputClass}
                 placeholder="Title"
@@ -598,82 +626,187 @@ export function ExpeditionDetailEditor({
               }
             />
           </AdminField>
-          <ExpeditionImageField
-            expeditionId={originalId}
-            fieldPath="accommodation.image"
-            label="Main accommodation image"
-            src={draft.accommodation.image}
-            alt={draft.accommodation.imageAlt}
-            readOnly={readOnly}
-            onUploaded={(src) =>
-              setDraft({
-                ...draft,
-                accommodation: { ...draft.accommodation, image: src },
-              })
-            }
-            onDocumentSynced={syncFromDocument}
-            onStatus={onStatus}
-          />
-          <div className="space-y-4">
-            <p className="text-xs text-charcoal/45">Side images (up to 3)</p>
-            {(draft.accommodation.sideImages ?? []).map((img, i) => (
-              <ExpeditionImageField
-                key={i}
-                expeditionId={originalId}
-                fieldPath={`accommodation.sideImages.${i}.src`}
-                label={`Side image ${i + 1}`}
-                src={img.src}
-                alt={img.alt}
+          <div className="space-y-4 border-t border-charcoal/10 pt-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-xs text-charcoal/45">Photos</p>
+                <p className="mt-1 text-xs text-charcoal/50">
+                  Add up to {ACCOMMODATION_PHOTO_LIMIT} photos. No defaults —
+                  upload only what you want to show.
+                </p>
+              </div>
+              <AddRemoveButtons
                 readOnly={readOnly}
-                onUploaded={(src) => {
-                  const sideImages = [...(draft.accommodation.sideImages ?? [])];
-                  sideImages[i] = { ...img, src };
+                canRemove={(draft.accommodation.sideImages ?? []).length > 0}
+                onAdd={() => {
+                  const sideImages = draft.accommodation.sideImages ?? [];
+                  if (sideImages.length >= ACCOMMODATION_PHOTO_LIMIT) return;
                   setDraft({
                     ...draft,
                     accommodation: {
                       ...draft.accommodation,
-                      sideImages,
+                      sideImages: [...sideImages, { src: "", alt: "" }],
                     },
                   });
                 }}
-                onDocumentSynced={syncFromDocument}
-                onStatus={onStatus}
-              />
-            ))}
-            {!readOnly && (draft.accommodation.sideImages ?? []).length < 3 && (
-              <button
-                type="button"
-                className="text-xs uppercase tracking-[0.2em] text-charcoal/55"
-                onClick={() =>
+                onRemove={() =>
                   setDraft({
                     ...draft,
                     accommodation: {
                       ...draft.accommodation,
-                      sideImages: [
-                        ...(draft.accommodation.sideImages ?? []),
-                        { src: "", alt: "" },
-                      ],
+                      sideImages: (draft.accommodation.sideImages ?? []).slice(
+                        0,
+                        -1,
+                      ),
                     },
                   })
                 }
-              >
-                + Add side image
-              </button>
+              />
+            </div>
+            {(draft.accommodation.sideImages ?? []).length === 0 && (
+              <p className="text-sm text-charcoal/55">
+                No photos yet. Use + to add up to {ACCOMMODATION_PHOTO_LIMIT}.
+              </p>
             )}
+            {(draft.accommodation.sideImages ?? []).map((img, i) => (
+              <div
+                key={i}
+                className="space-y-3 rounded border border-charcoal/10 p-4"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-xs text-charcoal/45">Photo {i + 1}</p>
+                  {!readOnly && (
+                    <button
+                      type="button"
+                      className="text-[10px] uppercase tracking-[0.12em] text-red-800/70"
+                      onClick={() => {
+                        const sideImages = [
+                          ...(draft.accommodation.sideImages ?? []),
+                        ];
+                        sideImages.splice(i, 1);
+                        setDraft({
+                          ...draft,
+                          accommodation: {
+                            ...draft.accommodation,
+                            sideImages,
+                          },
+                        });
+                      }}
+                    >
+                      Remove photo
+                    </button>
+                  )}
+                </div>
+                <ExpeditionImageField
+                  expeditionId={originalId}
+                  fieldPath={`accommodation.sideImages.${i}.src`}
+                  label={`Accommodation photo ${i + 1}`}
+                  src={img.src}
+                  alt={img.alt}
+                  readOnly={readOnly}
+                  onUploaded={(src) => {
+                    const sideImages = [...(draft.accommodation.sideImages ?? [])];
+                    sideImages[i] = { ...img, src };
+                    setDraft({
+                      ...draft,
+                      accommodation: {
+                        ...draft.accommodation,
+                        sideImages,
+                      },
+                    });
+                  }}
+                  onDocumentSynced={syncFromDocument}
+                  onStatus={onStatus}
+                />
+                <AdminField label="Alt text">
+                  <input
+                    className={inputClass}
+                    value={img.alt}
+                    disabled={readOnly}
+                    onChange={(e) => {
+                      const sideImages = [...(draft.accommodation.sideImages ?? [])];
+                      sideImages[i] = { ...img, alt: e.target.value };
+                      setDraft({
+                        ...draft,
+                        accommodation: {
+                          ...draft.accommodation,
+                          sideImages,
+                        },
+                      });
+                    }}
+                  />
+                </AdminField>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
       <div>
-        <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
-          Experiences
-        </h4>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+            Experiences
+          </h4>
+          <AddRemoveButtons
+            readOnly={readOnly}
+            canRemove={draft.experiences.length > 0}
+            onAdd={() =>
+              setDraft({
+                ...draft,
+                experiences: [
+                  ...draft.experiences,
+                  {
+                    title: "",
+                    body: "",
+                    image: "",
+                    imageAlt: "",
+                    published: true,
+                  },
+                ],
+              })
+            }
+            onRemove={() =>
+              setDraft({
+                ...draft,
+                experiences: draft.experiences.slice(0, -1),
+              })
+            }
+          />
+        </div>
         <div className="mt-4 space-y-8">
           {draft.experiences.map((exp, i) => (
             <div key={i} className="space-y-4 border-t border-charcoal/10 pt-6">
-              <p className="text-xs font-medium text-charcoal/50">
-                Experience {i + 1}
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs font-medium text-charcoal/50">
+                  Experience {i + 1}
+                </p>
+                {!readOnly && (
+                  <button
+                    type="button"
+                    className="text-[10px] uppercase tracking-[0.12em] text-red-800/70"
+                    onClick={() =>
+                      setDraft({
+                        ...draft,
+                        experiences: draft.experiences.filter(
+                          (_, idx) => idx !== i,
+                        ),
+                      })
+                    }
+                  >
+                    Remove experience
+                  </button>
+                )}
+              </div>
+              <ExpeditionItemStatusPicker
+                item={exp}
+                name={`expedition-experience-status-${i}`}
+                readOnly={readOnly}
+                onChange={(updated) => {
+                  const experiences = [...draft.experiences];
+                  experiences[i] = updated;
+                  setDraft({ ...draft, experiences });
+                }}
+              />
               <AdminField label="Title">
                 <input
                   className={inputClass}
@@ -716,38 +849,56 @@ export function ExpeditionDetailEditor({
               />
             </div>
           ))}
-          {!readOnly && (
-            <button
-              type="button"
-              className="text-xs uppercase tracking-[0.2em] text-charcoal/55"
-              onClick={() =>
-                setDraft({
-                  ...draft,
-                  experiences: [
-                    ...draft.experiences,
-                    {
-                      title: "",
-                      body: "",
-                      image: "",
-                      imageAlt: "",
-                    },
-                  ],
-                })
-              }
-            >
-              + Add experience
-            </button>
-          )}
         </div>
       </div>
 
       <div>
-        <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
-          Gallery
-        </h4>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50">
+            Gallery
+          </h4>
+          <AddRemoveButtons
+            readOnly={readOnly}
+            canRemove={draft.gallery.length > 0}
+            onAdd={() =>
+              setDraft({
+                ...draft,
+                gallery: [...draft.gallery, { src: "", alt: "" }],
+              })
+            }
+            onRemove={() =>
+              setDraft({
+                ...draft,
+                gallery: draft.gallery.slice(0, -1),
+              })
+            }
+          />
+        </div>
         <div className="mt-4 space-y-6">
+          {draft.gallery.length === 0 && (
+            <p className="text-sm text-charcoal/55">
+              No gallery images yet. Use + to add photos for this expedition.
+            </p>
+          )}
           {draft.gallery.map((frame, i) => (
-            <div key={i} className="rounded border border-charcoal/10 p-4">
+            <div key={i} className="space-y-3 rounded border border-charcoal/10 p-4">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs text-charcoal/45">Image {i + 1}</p>
+                {!readOnly && (
+                  <button
+                    type="button"
+                    className="text-[10px] uppercase tracking-[0.12em] text-red-800/70"
+                    onClick={() =>
+                      setDraft({
+                        ...draft,
+                        gallery: draft.gallery.filter((_, idx) => idx !== i),
+                      })
+                    }
+                  >
+                    Remove image
+                  </button>
+                )}
+              </div>
               <ExpeditionImageField
                 expeditionId={originalId}
                 fieldPath={`gallery.${i}.src`}
@@ -763,22 +914,36 @@ export function ExpeditionDetailEditor({
                 onDocumentSynced={syncFromDocument}
                 onStatus={onStatus}
               />
+              <AdminField label="Alt text">
+                <input
+                  className={inputClass}
+                  value={frame.alt}
+                  disabled={readOnly}
+                  onChange={(e) => {
+                    const gallery = [...draft.gallery];
+                    gallery[i] = { ...frame, alt: e.target.value };
+                    setDraft({ ...draft, gallery });
+                  }}
+                />
+              </AdminField>
+              <label className="flex items-center gap-2 text-sm text-charcoal/70">
+                <input
+                  type="checkbox"
+                  checked={frame.wide === true}
+                  disabled={readOnly}
+                  onChange={(e) => {
+                    const gallery = [...draft.gallery];
+                    gallery[i] = {
+                      ...frame,
+                      wide: e.target.checked ? true : undefined,
+                    };
+                    setDraft({ ...draft, gallery });
+                  }}
+                />
+                Wide layout (16:9)
+              </label>
             </div>
           ))}
-          {!readOnly && (
-            <button
-              type="button"
-              className="text-xs uppercase tracking-[0.2em] text-charcoal/55"
-              onClick={() =>
-                setDraft({
-                  ...draft,
-                  gallery: [...draft.gallery, { src: "", alt: "" }],
-                })
-              }
-            >
-              + Add gallery image
-            </button>
-          )}
         </div>
       </div>
 

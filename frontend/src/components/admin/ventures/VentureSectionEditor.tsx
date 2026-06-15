@@ -13,8 +13,13 @@ import {
 } from "@/components/admin/ventures/AdminField";
 import { VentureImageField } from "@/components/admin/ventures/VentureImageField";
 import { ArchiveStoryPicker } from "@/components/admin/ventures/ArchiveStoryPicker";
+import { CommunityProfileStoriesEditor } from "@/components/admin/ventures/CommunityProfileStoriesEditor";
 import { FeaturedProjectsEditor } from "@/components/admin/ventures/FeaturedProjectsEditor";
 import { PartnersCollaborationsEditor } from "@/components/admin/ventures/PartnersCollaborationsEditor";
+import {
+  resolveCommunityArchiveItems,
+  resolveCommunityProfiles,
+} from "@/lib/ventures/community-stories-shared";
 import {
   normalizeFeaturedProject,
   resolveFeaturedProjects,
@@ -306,9 +311,8 @@ function initializeDraft(type: VentureSectionConfig["type"], data: unknown): unk
         label: asString(d.label),
         heading: asString(d.heading),
         intro: asString(d.intro),
-        archiveIds: Array.isArray(d.archiveIds)
-          ? d.archiveIds.map((x) => asString(x)).filter(Boolean)
-          : [],
+        items: resolveCommunityArchiveItems(d),
+        profiles: resolveCommunityProfiles(d),
       };
     }
     case "string-list-block": {
@@ -2118,7 +2122,8 @@ export function VentureSectionEditor({
           label: string;
           heading: string;
           intro: string;
-          archiveIds: string[];
+          items: ReturnType<typeof resolveCommunityArchiveItems>;
+          profiles: ReturnType<typeof resolveCommunityProfiles>;
         };
         return (
           <div className="space-y-6">
@@ -2148,10 +2153,17 @@ export function VentureSectionEditor({
               />
             </AdminField>
             <ArchiveStoryPicker
-              value={d.archiveIds}
+              value={d.items}
               readOnly={readOnly}
-              onChange={(archiveIds) => setDraft({ ...d, archiveIds })}
+              onChange={(items) => setDraft({ ...d, items })}
             />
+            {d.items.length === 0 && (
+              <CommunityProfileStoriesEditor
+                profiles={d.profiles}
+                readOnly={readOnly}
+                onChange={(profiles) => setDraft({ ...d, profiles })}
+              />
+            )}
           </div>
         );
       }

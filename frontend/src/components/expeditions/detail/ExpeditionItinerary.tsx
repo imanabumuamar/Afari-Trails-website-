@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ExpeditionEyebrow } from "@/components/expeditions/detail/ExpeditionEyebrow";
+import { isExpeditionContentItemVisible } from "@/lib/expeditions/expedition-content-item-status";
 import {
   resolveItineraryDayLabel,
   resolveSectionCopy,
@@ -14,6 +15,9 @@ type ExpeditionItineraryProps = {
 
 export function ExpeditionItinerary({ expedition }: ExpeditionItineraryProps) {
   const sections = resolveSectionCopy(expedition);
+  const days = expedition.itinerary.filter(isExpeditionContentItemVisible);
+
+  if (days.length === 0) return null;
 
   return (
     <section id="itinerary" className="scroll-mt-24 bg-beige py-20 lg:py-28">
@@ -37,10 +41,13 @@ export function ExpeditionItinerary({ expedition }: ExpeditionItineraryProps) {
         </div>
 
         <div className="mt-12 flex gap-5 overflow-x-auto pb-4 lg:mt-16 lg:gap-6">
-          {expedition.itinerary.map((day, index) => {
+          {days.map((day, index) => {
+            const stripFrames = expedition.visualStrip.filter((frame) =>
+              frame.src?.trim(),
+            );
             const image =
               day.image ||
-              expedition.visualStrip[index % expedition.visualStrip.length]?.src ||
+              stripFrames[index % Math.max(stripFrames.length, 1)]?.src ||
               expedition.heroImage;
 
             return (

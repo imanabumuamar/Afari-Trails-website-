@@ -16,7 +16,14 @@ function applyMediaField(
   updated: HomepageContent,
 ): HomepageContent {
   if (field === "hero.video") {
-    return { ...base, hero: { ...base.hero, video: updated.hero.video } };
+    return {
+      ...base,
+      hero: {
+        ...base.hero,
+        video: updated.hero.video,
+        backgroundMode: "video",
+      },
+    };
   }
   if (field === "hero.poster") {
     return { ...base, hero: { ...base.hero, poster: updated.hero.poster } };

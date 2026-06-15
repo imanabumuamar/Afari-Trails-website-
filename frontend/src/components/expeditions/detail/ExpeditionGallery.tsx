@@ -8,7 +8,8 @@ type ExpeditionGalleryProps = {
 };
 
 export function ExpeditionGallery({ expedition }: ExpeditionGalleryProps) {
-  if (expedition.gallery.length === 0) return null;
+  const frames = expedition.gallery.filter((frame) => frame.src?.trim());
+  if (frames.length === 0) return null;
   const sections = resolveSectionCopy(expedition);
 
   return (
@@ -22,7 +23,7 @@ export function ExpeditionGallery({ expedition }: ExpeditionGalleryProps) {
 
       <div className="mx-auto mt-12 max-w-[1600px] px-3 lg:mt-16 lg:px-6">
         <div className="columns-1 gap-2 sm:columns-2 lg:columns-3 lg:gap-3">
-          {expedition.gallery.map((frame, index) => (
+          {frames.map((frame, index) => (
             <div
               key={`${frame.src}-${index}`}
               className="relative mb-2 break-inside-avoid overflow-hidden lg:mb-3"

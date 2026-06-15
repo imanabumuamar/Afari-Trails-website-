@@ -13,6 +13,7 @@ export type HeroTextAlign = "left" | "center";
 export type HeroVerticalPosition = "top" | "center" | "bottom";
 export type HeroTextColor = "light" | "dark";
 export type HeroHeight = "full" | "tall" | "medium";
+export type HeroBackgroundMode = "photo" | "video";
 
 export type HomepageHero = {
   /** Small label shown above the headline */
@@ -20,8 +21,10 @@ export type HomepageHero = {
   heading: string;
   subtext: string;
   poster: ContentImage;
-  /** A hero video URL means the homepage shows the video; empty means photo only */
+  /** MP4 path when backgroundMode is video */
   video: string;
+  /** Photo-only or video background (video falls back to poster if file missing). */
+  backgroundMode: HeroBackgroundMode;
   /** Darkness of the overlay over the background, 0–90 */
   overlayOpacity: number;
   textAlign: HeroTextAlign;

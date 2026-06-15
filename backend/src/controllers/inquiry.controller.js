@@ -1,4 +1,9 @@
 import * as inquiryService from "../services/inquiry.service.js";
+import {
+  canWriteInboxSource,
+  getReadableInboxSources,
+  hasAnyInboxRead,
+} from "../constants/permissions.js";
 
 function clientIp(req) {
   const forwarded = req.headers["x-forwarded-for"];
@@ -10,10 +15,15 @@ function clientIp(req) {
 
 export async function listInquiries(req, res, next) {
   try {
+    if (!hasAnyInboxRead(req.user)) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
     const data = await inquiryService.listInquirySubmissions({
       source: typeof req.query.source === "string" ? req.query.source : undefined,
       limit: req.query.limit,
       archived: req.query.archived === "true",
+      allowedSources: getReadableInboxSources(req.user),
     });
     res.json(data);
   } catch (err) {
@@ -27,6 +37,12 @@ export async function patchInquiry(req, res, next) {
     if (typeof archived !== "boolean") {
       return res.status(400).json({ error: "archived (boolean) is required" });
     }
+
+    const existing = await inquiryService.getInquirySubmission(req.params.id);
+    if (!canWriteInboxSource(req.user, existing.source)) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
     const data = await inquiryService.setInquiryArchived(req.params.id, archived);
     res.json(data);
   } catch (err) {
@@ -39,6 +55,11 @@ export async function patchInquiry(req, res, next) {
 
 export async function deleteInquiry(req, res, next) {
   try {
+    const existing = await inquiryService.getInquirySubmission(req.params.id);
+    if (!canWriteInboxSource(req.user, existing.source)) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
     await inquiryService.deleteInquirySubmission(req.params.id);
     res.status(204).send();
   } catch (err) {

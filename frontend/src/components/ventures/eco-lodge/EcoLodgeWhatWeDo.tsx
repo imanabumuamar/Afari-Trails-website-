@@ -21,7 +21,7 @@ export async function EcoLodgeWhatWeDo() {
   const defaultImages = default_ecoLodgeWhatWeDo.items;
 
   return (
-    <section id="what-we-do" className="scroll-mt-24 bg-beige py-24 lg:py-36">
+    <section id="what-we-do" className="scroll-mt-24 bg-beige pb-12 lg:pb-16">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10">
           <div className="lg:col-span-7">
@@ -37,7 +37,7 @@ export async function EcoLodgeWhatWeDo() {
           ) : null}
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {section.items.map((item, index) => {
             const fallbackImage =
               defaultImages.find((d) => d.id === item.id)?.image ??

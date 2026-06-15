@@ -37,14 +37,14 @@ export function createBlankExpedition(
         day: 1,
         title: "Arrival",
         description: "",
+        published: true,
       },
     ],
     accommodation: {
       heading: "Where you stay",
       body: "",
-      image:
-        "https://images.unsplash.com/photo-1475928296734-496f6edc8174?w=1600&q=85",
-      imageAlt: "Safari camp",
+      image: "",
+      imageAlt: "",
       features: [],
       sideImages: [],
     },

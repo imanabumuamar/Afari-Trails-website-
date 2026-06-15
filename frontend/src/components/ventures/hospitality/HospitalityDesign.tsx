@@ -44,24 +44,26 @@ export async function HospitalityDesign() {
   const image = resolveImage(raw);
 
   return (
-    <section className="grid lg:grid-cols-2">
-      <div className="flex flex-col justify-center bg-ivory px-6 py-20 lg:px-14 lg:py-28">
-        <SectionLabel>{label}</SectionLabel>
-        <h2 className="mt-4 font-serif text-4xl font-light text-charcoal md:text-5xl">
-          {heading}
-        </h2>
-        <p className="mt-8 max-w-md text-sm leading-[1.9] text-charcoal/70 md:text-base">
-          {body}
-        </p>
-      </div>
-      <div className="relative min-h-[360px] lg:min-h-[560px]">
-        <Image
-          src={image.src}
-          alt={image.alt || heading}
-          fill
-          className="object-cover"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-        />
+    <section className="bg-sand-light py-16 lg:py-20">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-start gap-8 px-6 sm:grid-cols-2 sm:items-center sm:gap-10 lg:px-10">
+        <div className="order-1">
+          <SectionLabel>{label}</SectionLabel>
+          <h2 className="mt-4 font-serif text-4xl font-light text-charcoal md:text-5xl">
+            {heading}
+          </h2>
+          <p className="mt-6 max-w-md text-sm leading-[1.9] text-charcoal/70 md:text-base">
+            {body}
+          </p>
+        </div>
+        <div className="relative order-2 aspect-[3/4] w-full overflow-hidden bg-sand-light sm:aspect-[4/5] sm:max-h-[520px] sm:self-center">
+          <Image
+            src={image.src}
+            alt={image.alt || heading}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 40vw"
+          />
+        </div>
       </div>
     </section>
   );
