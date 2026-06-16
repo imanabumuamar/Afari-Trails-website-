@@ -10,7 +10,7 @@ export async function HospitalityFocusAreas() {
   const hospitalityFocusAreas = content.hospitalityFocusAreas as typeof default_hospitalityFocusAreas;
 
   return (
-    <section className="bg-beige pb-12 lg:pb-16">
+    <section className="bg-sand pt-10 pb-12 lg:pt-14 lg:pb-16">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="max-w-xl">
           <SectionLabel>{hospitalityFocusAreas.label}</SectionLabel>

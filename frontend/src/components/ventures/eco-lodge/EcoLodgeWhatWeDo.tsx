@@ -21,7 +21,7 @@ export async function EcoLodgeWhatWeDo() {
   const defaultImages = default_ecoLodgeWhatWeDo.items;
 
   return (
-    <section id="what-we-do" className="scroll-mt-24 bg-beige pb-12 lg:pb-16">
+    <section id="what-we-do" className="scroll-mt-24 bg-sand pb-12 lg:pb-16">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10">
           <div className="lg:col-span-7">

@@ -6,7 +6,7 @@
         "label": "Stories From the Trail",
         "heading": "Journal",
         "description": "Thoughts, stories, and field notes from our journeys across Africa. Reflections on nature, culture, conservation, and the human experience.",
-        "image": "/images/journal/page/hero-image.png?v=1781183927123"
+        "image": "/images/journal/page/hero-image.jpg?v=1781650530407"
       },
       "newsletter": {
         "heading": "Stories. Inspiration. Africa.",
@@ -206,5 +206,5 @@
       "life-around-the-campfire"
     ]
   },
-  "updatedAt": "2026-06-14T11:07:20.196Z"
+  "updatedAt": "2026-06-16T22:55:30.427Z"
 }

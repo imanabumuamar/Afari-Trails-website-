@@ -2,6 +2,8 @@ import type { NextAuthConfig } from "next-auth";
 import type { Permission } from "@/lib/auth/roles";
 import { parseRole } from "@/lib/auth/roles";
 
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 3;
+
 const useSecureCookies = process.env.NODE_ENV === "production";
 
 /**
@@ -13,10 +15,11 @@ export const authConfig = {
   },
   session: {
     strategy: "jwt",
-    maxAge: 60 * 60 * 8,
+    maxAge: SESSION_MAX_AGE_SECONDS,
+    // Do not extend the session while browsing — hard cap from sign-in.
+    updateAge: SESSION_MAX_AGE_SECONDS,
   },
-  // Store the login as a browser-session cookie (no expiry date) so closing
-  // the browser clears it and the admin must sign in again on reopen.
+  // Browser-session cookie (no Max-Age) so closing the browser clears login.
   cookies: {
     sessionToken: {
       name: `${useSecureCookies ? "__Secure-" : ""}authjs.session-token`,
@@ -32,6 +35,8 @@ export const authConfig = {
   callbacks: {
     jwt({ token, user }) {
       if (user) {
+        const now = Math.floor(Date.now() / 1000);
+        token.authExpiresAt = now + SESSION_MAX_AGE_SECONDS;
         token.sub = user.id;
         token.email = user.email;
         token.role = parseRole(user.role);
@@ -48,9 +53,20 @@ export const authConfig = {
           token.permissions = withToken.permissions;
         }
       }
+
+      if (
+        typeof token.authExpiresAt === "number" &&
+        Math.floor(Date.now() / 1000) > token.authExpiresAt
+      ) {
+        return null;
+      }
+
       return token;
     },
     session({ session, token }) {
+      if (!token) {
+        return { ...session, expires: new Date(0).toISOString() };
+      }
       if (session.user) {
         session.user.id = token.sub as string;
         session.user.role = parseRole(token.role as string | undefined);

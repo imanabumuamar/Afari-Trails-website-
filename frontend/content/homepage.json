@@ -3,7 +3,7 @@
     "heading": "Every trail changes the person walking it.",
     "subtext": "Curated expeditions. Meaningful ventures. Timeless safari-inspired living.",
     "poster": {
-      "src": "/images/home-hero-poster.png",
+      "src": "/images/home-hero-poster.jpg?v=1781535786629",
       "alt": "Safari landscape at golden hour"
     },
     "video": "/videos/hero.mp4",
@@ -32,8 +32,8 @@
     }
   },
   "ourEssence": {
-    "src": "/images/home-our-essence.jpg",
+    "src": "/images/home-our-essence.jpg?v=1781535730320",
     "alt": "Waterbuck standing between trees in sunlit African woodland"
   },
-  "updatedAt": "2026-06-13T14:26:01.655Z"
+  "updatedAt": "2026-06-15T15:11:11.754Z"
 }

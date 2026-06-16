@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { readAdminApiError } from "@/lib/admin/cms-client-error";
 import {
   VENTURE_SLUGS,
@@ -14,10 +15,25 @@ type VenturesStructuredEditorProps = {
   readOnly?: boolean;
 };
 
-export function VenturesStructuredEditor({
+const PAGE_PARAM = "page";
+
+function isVentureSlug(value: string): value is VentureSlug {
+  return (VENTURE_SLUGS as readonly string[]).includes(value);
+}
+
+function resolveSlugFromParams(params: URLSearchParams): VentureSlug {
+  const page = params.get(PAGE_PARAM);
+  return page && isVentureSlug(page) ? page : "main";
+}
+
+function VenturesStructuredEditorInner({
   readOnly = false,
 }: VenturesStructuredEditorProps) {
-  const [slug, setSlug] = useState<VentureSlug>("main");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [slug, setSlug] = useState<VentureSlug>(() =>
+    resolveSlugFromParams(searchParams),
+  );
   const [data, setData] = useState<Record<string, unknown>>({});
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("");
@@ -41,8 +57,29 @@ export function VenturesStructuredEditor({
   }, []);
 
   useEffect(() => {
+    const fromUrl = resolveSlugFromParams(searchParams);
+    setSlug((current) => (current === fromUrl ? current : fromUrl));
+  }, [searchParams]);
+
+  useEffect(() => {
     void load(slug);
   }, [slug, load]);
+
+  function handleSlugChange(next: VentureSlug) {
+    setSlug(next);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (next === "main") {
+      params.delete(PAGE_PARAM);
+    } else {
+      params.set(PAGE_PARAM, next);
+    }
+
+    const query = params.toString();
+    router.replace(query ? `/admin/ventures?${query}` : "/admin/ventures", {
+      scroll: false,
+    });
+  }
 
   async function saveSection(key: string, value: unknown) {
     const merged = { ...data, [key]: value };
@@ -87,7 +124,7 @@ export function VenturesStructuredEditor({
           <select
             id="venture-slug"
             value={slug}
-            onChange={(e) => setSlug(e.target.value as VentureSlug)}
+            onChange={(e) => handleSlugChange(e.target.value as VentureSlug)}
             className="mt-2 w-full max-w-md border border-charcoal/20 bg-ivory px-3 py-2.5 text-sm text-charcoal sm:w-auto"
           >
             {VENTURE_SLUGS.map((s) => (
@@ -142,5 +179,13 @@ export function VenturesStructuredEditor({
         </p>
       )}
     </div>
+  );
+}
+
+export function VenturesStructuredEditor(props: VenturesStructuredEditorProps) {
+  return (
+    <Suspense fallback={<p className="text-sm text-charcoal/60">Loading…</p>}>
+      <VenturesStructuredEditorInner {...props} />
+    </Suspense>
   );
 }

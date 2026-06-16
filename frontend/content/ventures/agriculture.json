@@ -7,7 +7,7 @@
       "subheading": "Afari Trails supports agricultural initiatives that balance sustainability, community development, environmental stewardship, and long-term resilience.",
       "exploreCta": "Explore the Vision",
       "partnerCta": "Partner With Us",
-      "image": "/images/ventures/agriculture/agricultureHero-image.png?v=1780398979066",
+      "image": "/images/ventures/agriculture/agricultureHero-image.png?v=1781598153583",
       "imageAlt": "Golden fields at sunrise across African farmland"
     },
     "agricultureApproach": {
@@ -31,13 +31,13 @@
           "id": "regenerative",
           "title": "Regenerative Farming",
           "description": "Practices that restore soil health, biodiversity, and the living rhythm of the land.",
-          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-0-image.png?v=1780399699887"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-0-image.png?v=1781595625967"
         },
         {
           "id": "water",
           "title": "Water Stewardship",
           "description": "Responsible irrigation and protection of rivers, wetlands, and shared water sources.",
-          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-1-image.png?v=1780399706125"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-1-image.png?v=1781595880523"
         },
         {
           "id": "community",
@@ -55,7 +55,7 @@
           "id": "livestock",
           "title": "Sustainable Livestock",
           "description": "Ethical, environmentally balanced systems that coexist with wild landscapes.",
-          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-4-image.png?v=1780399725999"
+          "image": "/images/ventures/agriculture/agricultureFocusAreas-items-4-image.png?v=1781597995192"
         },
         {
           "id": "innovation",
@@ -158,5 +158,5 @@
       "quote": "The future grows from how we care for the land today."
     }
   },
-  "updatedAt": "2026-06-14T19:09:28.635Z"
+  "updatedAt": "2026-06-16T08:22:33.592Z"
 }

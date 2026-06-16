@@ -41,8 +41,8 @@ export async function Hero() {
   const eyebrowColor = isLight ? "text-ivory/70" : "text-charcoal/60";
 
   return (
-    <section className="relative bg-matte-black">
-      <div className={`relative ${heightClass}`}>
+    <section className="relative isolate overflow-hidden">
+      <div className="absolute inset-0">
         <Image
           src={hero.poster.src}
           alt={hero.poster.alt}
@@ -68,9 +68,11 @@ export async function Hero() {
           className="absolute inset-0 bg-matte-black"
           style={{ opacity: hero.overlayOpacity / 100 }}
         />
+      </div>
 
+      <div className={`relative z-10 ${heightClass}`}>
         <div
-          className={`relative z-10 mx-auto flex ${heightClass} max-w-[1400px] flex-col ${VERTICAL_CLASS[hero.verticalPosition]} px-6 py-28 lg:px-10`}
+          className={`mx-auto flex ${heightClass} max-w-[1400px] flex-col ${VERTICAL_CLASS[hero.verticalPosition]} px-6 py-28 lg:px-10`}
         >
           <div className={`flex w-full max-w-xl flex-col lg:max-w-2xl ${ALIGN_WRAP_CLASS[hero.textAlign]}`}>
             {hero.eyebrow && (
@@ -102,9 +104,7 @@ export async function Hero() {
         </div>
       </div>
 
-      <div className="relative pb-0">
-        <FeatureCards />
-      </div>
+      <FeatureCards />
     </section>
   );
 }

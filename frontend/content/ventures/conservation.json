@@ -15,14 +15,14 @@
     "conservationPhilosophy": {
       "label": "Our Philosophy",
       "statement": "We believe meaningful exploration must contribute to the protection of landscapes, wildlife, and cultural heritage for future generations.",
-      "image": "/images/ventures/conservation/conservationGallery-0-src.jpg?v=1780265118935",
-      "imageAlt": "African wilderness landscape at golden hour",
-      "themes": [
-        "Coexistence between people and wild places",
-        "Preservation rooted in respect, not performance",
-        "Ethical tourism shaped by local knowledge",
-        "Long-term collaboration with communities and ecosystems"
-      ]
+      "body": "",
+      "partnerCta": "",
+      "deckCta": "",
+      "partnerHref": "/ventures/partner",
+      "deckHref": "/ventures/connect",
+      "image": "/images/ventures/conservation/conservationPhilosophy-image.jpg?v=1781540437783",
+      "imageAlt": "",
+      "themes": []
     },
     "conservationFocusAreas": {
       "label": "Key Focus Areas",
@@ -33,25 +33,25 @@
           "id": "wildlife",
           "title": "Wildlife Protection",
           "description": "Supporting initiatives that safeguard species and the habitats they depend on.",
-          "image": "/images/ventures/conservation/conservationFocusAreas-items-0-image.jpg?v=1780265017851"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-0-image.png?v=1781649702191"
         },
         {
           "id": "habitat",
           "title": "Habitat Preservation",
           "description": "Protecting wetlands, savannas, and river corridors essential to African biodiversity.",
-          "image": "/images/ventures/conservation/conservationFocusAreas-items-1-image.jpg?v=1780265055005"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-1-image.png?v=1781644790862"
         },
         {
           "id": "community",
           "title": "Community Partnerships",
           "description": "Working alongside local people as collaborators — not subjects of a narrative.",
-          "image": "/images/ventures/conservation/conservationFocusAreas-items-2-image.jpg?v=1780265069966"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-2-image.png?v=1781646894570"
         },
         {
           "id": "tourism",
           "title": "Sustainable Tourism",
           "description": "Low-impact exploration designed to leave places stronger than we found them.",
-          "image": "/images/ventures/conservation/conservationFocusAreas-items-3-image.jpg?v=1780265080404"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-3-image.png?v=1781645056792"
         },
         {
           "id": "education",
@@ -63,7 +63,7 @@
           "id": "culture",
           "title": "Cultural Preservation",
           "description": "Honoring heritage, craft, and identity as inseparable from environmental stewardship.",
-          "image": "/images/ventures/conservation/conservationFocusAreas-items-5-image.jpg?v=1780265103717"
+          "image": "/images/ventures/conservation/conservationFocusAreas-items-5-image.png?v=1781650743101"
         }
       ]
     },
@@ -73,6 +73,19 @@
       "body": "Wild places endure when the people who live beside them thrive. Afari Trails supports local guides, artisans, and community-led initiatives — building ethical partnerships, fair employment, and cultural preservation that travel alongside every expedition and venture. We do not speak for communities. We listen, collaborate, and invest in shared outcomes.",
       "image": "/images/ventures/conservation/conservationCommunity-image.jpg?v=1780265546900",
       "imageAlt": "Community members in warm natural light"
+    },
+    "conservationInitiatives": {
+      "label": "Future Initiatives",
+      "heading": "A long horizon of intent.",
+      "intro": "Visionary today — foundational tomorrow. Initiatives we are building toward with aligned partners.",
+      "items": [
+        "Conservation Expeditions",
+        "Wildlife Photography Grants",
+        "Reforestation Partnerships",
+        "Eco-Lodge Sustainability Systems",
+        "Youth Nature Programs",
+        "Community Storytelling Projects"
+      ]
     },
     "conservationGallery": [
       {
@@ -145,5 +158,5 @@
       "quote": "The future of exploration depends on the future of the wilderness."
     }
   },
-  "updatedAt": "2026-06-11T20:44:52.398Z"
+  "updatedAt": "2026-06-16T22:59:03.120Z"
 }

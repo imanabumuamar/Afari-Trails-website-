@@ -8,7 +8,7 @@ export async function CommunityFocusAreas() {
   const communityFocusAreas = content.communityFocusAreas as typeof default_communityFocusAreas;
 
   return (
-    <section id="focus" className="scroll-mt-24 bg-beige pb-12 lg:pb-16">
+    <section id="focus" className="scroll-mt-24 bg-beige pt-2 pb-12 lg:pt-4 lg:pb-16">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="max-w-xl">
           <SectionLabel>{communityFocusAreas.label}</SectionLabel>

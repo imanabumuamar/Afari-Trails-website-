@@ -31,10 +31,9 @@ export default auth((req) => {
   const isAdminPage = pathname.startsWith("/admin");
   const isAdminApi = pathname.startsWith("/api/admin");
 
+  // Let the client decide: each tab must sign in separately (sessionStorage).
   if (req.auth && isLogin) {
-    return withNoStore(
-      NextResponse.redirect(new URL("/admin", req.nextUrl.origin)),
-    );
+    return withNoStore(NextResponse.next());
   }
 
   if (!req.auth) {

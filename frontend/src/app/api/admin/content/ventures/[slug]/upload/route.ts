@@ -6,7 +6,11 @@ import {
   VENTURE_SLUGS,
   type VentureSlug,
 } from "@/lib/data/venture-defaults";
-import { updateVentureImageField } from "@/services/content/venture-upload";
+import { writeVentureImageFile } from "@/services/content/venture-upload";
+import {
+  getVentureContentLocal,
+  saveVentureContentLocal,
+} from "@/services/content/ventures";
 import type { VentureContentDocument } from "@/types/ventures-content";
 
 type RouteContext = { params: Promise<{ slug: string }> };
@@ -49,7 +53,7 @@ export async function POST(request: Request, context: RouteContext) {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const { src } = updateVentureImageField(slug, field, buffer, file.type);
+  const src = writeVentureImageFile(slug, field, buffer, file.type);
 
   // Merge the new image onto the LIVE database content (not the local
   // fallback) so we never wipe other text/image edits already saved.
@@ -70,6 +74,8 @@ export async function POST(request: Request, context: RouteContext) {
   );
 
   if (!ok || !synced) {
+    const local = setNestedValue(getVentureContentLocal(slug), field, src);
+    saveVentureContentLocal(slug, local);
     return NextResponse.json(
       { error: "Image saved locally but API sync failed." },
       { status: 502 },

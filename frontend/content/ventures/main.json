@@ -40,7 +40,7 @@
         "id": "eco-lodges",
         "title": "Eco-Lodges",
         "description": "Boutique safari camps and wilderness stays immersed in the landscape.",
-        "image": "/images/ventures/main/focusAreas-0-image.jpg?v=1781209708914",
+        "image": "/images/ventures/main/focusAreas-0-image.png?v=1781537208954",
         "icon": "lodge",
         "href": "/ventures/eco-lodge"
       },
@@ -48,7 +48,7 @@
         "id": "conservation",
         "title": "Conservation",
         "description": "Wildlife preservation and eco-conscious operations across wild places.",
-        "image": "/images/ventures/main/focusAreas-1-image.jpg?v=1781435779375",
+        "image": "/images/ventures/main/focusAreas-1-image.png?v=1781537215246",
         "icon": "leaf",
         "href": "/ventures/conservation"
       },
@@ -56,7 +56,7 @@
         "id": "community",
         "title": "Community Empowerment",
         "description": "Local employment, education, and artisan collaborations that endure.",
-        "image": "/images/ventures/main/focusAreas-2-image.jpg?v=1781435842227",
+        "image": "/images/ventures/main/focusAreas-2-image.png?v=1781537222419",
         "icon": "people",
         "href": "/ventures/community"
       },
@@ -64,7 +64,7 @@
         "id": "agriculture",
         "title": "Sustainable Agriculture",
         "description": "Regenerative land stewardship and agricultural partnerships.",
-        "image": "/images/ventures/main/focusAreas-3-image.png?v=1781435920082",
+        "image": "/images/ventures/main/focusAreas-3-image.jpg?v=1781538037102",
         "icon": "crop",
         "href": "/ventures/agriculture"
       },
@@ -72,7 +72,7 @@
         "id": "hospitality",
         "title": "Hospitality Development",
         "description": "Safari retreats, wellness camps, and boutique properties.",
-        "image": "/images/ventures/main/focusAreas-4-image.png?v=1781210145044",
+        "image": "/images/ventures/main/focusAreas-4-image.png?v=1781539052071",
         "icon": "home",
         "href": "/ventures/hospitality"
       }
@@ -212,5 +212,5 @@
       "ctaHref": "/contact"
     }
   },
-  "updatedAt": "2026-06-14T19:53:23.879Z"
+  "updatedAt": "2026-06-15T15:57:32.391Z"
 }

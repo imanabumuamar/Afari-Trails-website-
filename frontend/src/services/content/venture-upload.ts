@@ -7,12 +7,13 @@ import {
   saveVentureContentLocal,
 } from "@/services/content/ventures";
 
-export function updateVentureImageField(
+/** Writes the image file to public/ and returns its src (no JSON write). */
+export function writeVentureImageFile(
   slug: VentureSlug,
   fieldPath: string,
   file: Buffer,
   mimeType: string,
-): { src: string; data: Record<string, unknown> } {
+): string {
   const ext =
     mimeType === "image/png"
       ? "png"
@@ -29,7 +30,16 @@ export function updateVentureImageField(
 
   // The filename stays the same on re-upload, so add a version query to bust
   // the browser cache — otherwise the new photo looks like it "didn't save".
-  const src = `/images/ventures/${slug}/${filename}?v=${Date.now()}`;
+  return `/images/ventures/${slug}/${filename}?v=${Date.now()}`;
+}
+
+export function updateVentureImageField(
+  slug: VentureSlug,
+  fieldPath: string,
+  file: Buffer,
+  mimeType: string,
+): { src: string; data: Record<string, unknown> } {
+  const src = writeVentureImageFile(slug, fieldPath, file, mimeType);
   const current = getVentureContentLocal(slug);
   const nextData = setNestedValue(current, fieldPath, src);
 

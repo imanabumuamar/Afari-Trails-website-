@@ -11,9 +11,9 @@ export async function EcoLodgeWhoWeAre() {
   const imageAlt = section.imageAlt || default_ecoLodgeWhoWeAre.imageAlt;
 
   return (
-    <section id="who-we-are" className="scroll-mt-24 bg-ivory pt-12 pb-8 lg:pt-16 lg:pb-10">
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
-        <div className="lg:col-span-7">
+    <section id="who-we-are" className="scroll-mt-24 bg-sand pt-12 pb-8 lg:pt-16 lg:pb-10">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-6 lg:grid-cols-12 lg:items-stretch lg:gap-12 lg:px-10">
+        <div className="flex flex-col justify-center lg:col-span-7">
           <SectionLabel>{section.label}</SectionLabel>
           <h2 className="font-serif text-4xl font-light leading-tight text-charcoal md:text-5xl lg:text-[3.25rem]">
             {section.heading}
@@ -29,12 +29,12 @@ export async function EcoLodgeWhoWeAre() {
             ))}
           </div>
         </div>
-        <div className="relative aspect-[4/5] overflow-hidden bg-charcoal/10 lg:col-span-5">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-charcoal/10 lg:col-span-5 lg:aspect-auto lg:h-full lg:min-h-0">
           <Image
             src={image}
             alt={imageAlt}
             fill
-            className="object-cover"
+            className="object-cover object-center"
             sizes="(max-width: 1024px) 100vw, 40vw"
           />
         </div>

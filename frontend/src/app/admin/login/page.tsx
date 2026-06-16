@@ -1,12 +1,16 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import {
+  isAdminTabAuthenticated,
+  markAdminTabAuthenticated,
+} from "@/lib/auth/admin-tab-session";
 
 function AdminLoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
+  const { status } = useSession();
   const callbackUrl = searchParams.get("callbackUrl") ?? "/admin";
   const authError = searchParams.get("error");
 
@@ -20,6 +24,13 @@ function AdminLoginForm() {
         : "",
   );
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated" && isAdminTabAuthenticated()) {
+      window.location.href = callbackUrl;
+    }
+  }, [status, callbackUrl]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -44,7 +55,7 @@ function AdminLoginForm() {
       return;
     }
 
-    // Full navigation so middleware picks up the new session cookie
+    markAdminTabAuthenticated();
     window.location.href = callbackUrl;
   }
 
@@ -74,14 +85,24 @@ function AdminLoginForm() {
           <label className="block text-xs uppercase tracking-[0.2em] text-charcoal/55">
             Password
           </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            autoComplete="current-password"
-            className="mt-2 w-full border border-charcoal/20 bg-ivory px-4 py-3 text-sm"
-          />
+          <div className="relative mt-2">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+              className="w-full border border-charcoal/20 bg-ivory py-3 pl-4 pr-20 text-sm"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((value) => !value)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-medium uppercase tracking-[0.15em] text-charcoal/55 transition-colors hover:text-charcoal"
+              aria-pressed={showPassword}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
         </div>
         {error && (
           <p className="text-sm text-red-800/80" role="alert">
@@ -102,7 +123,8 @@ function AdminLoginForm() {
           Dev default (if you ran <code className="text-[10px]">npm run db:seed</code>
           ): <span className="text-charcoal/60">admin@afaritrails.com</span> — password
           from <code className="text-[10px]">ADMIN_PASSWORD</code> in{" "}
-          <code className="text-[10px]">.env.local</code> (often changeme123).
+          <code className="text-[10px]">backend/.env</code> (must be 10+ characters
+          for admin panel resets).
         </p>
       )}
     </div>

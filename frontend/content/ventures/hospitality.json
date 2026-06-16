@@ -7,7 +7,7 @@
       "subheading": "Afari Trails envisions hospitality experiences that blend architecture, wilderness, sustainability, and immersive storytelling across Africa.",
       "exploreCta": "Explore the Vision",
       "partnerCta": "Partner With Us",
-      "image": "/images/ventures/hospitality/hospitalityHero-image.png?v=1780402542827",
+      "image": "/images/ventures/hospitality/hospitalityHero-image.png?v=1781550133826",
       "imageAlt": "Luxury safari lodge architecture overlooking wilderness at dusk"
     },
     "hospitalityPhilosophy": {
@@ -32,37 +32,37 @@
           "id": "eco-lodge",
           "title": "Eco Lodges",
           "description": "Low-impact wilderness retreats immersed in landscape and story.",
-          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-0-image.png?v=1780433478272"
+          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-0-image.png?v=1781550615378"
         },
         {
           "id": "safari-camps",
           "title": "Safari Camps",
           "description": "Immersive expedition-based hospitality shaped by the rhythm of the wild.",
-          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-1-image.png?v=1780433687340"
+          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-1-image.png?v=1781550953241"
         },
         {
           "id": "wellness",
           "title": "Wellness Retreats",
           "description": "Stillness, nature, and restoration — paced for presence, not performance.",
-          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-2-image.png?v=1780433822359"
+          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-2-image.png?v=1781549988422"
         },
         {
           "id": "cultural",
           "title": "Cultural Hospitality Experiences",
           "description": "Locally rooted storytelling and cultural immersion at the heart of every stay.",
-          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-3-image.png?v=1780433876515"
+          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-3-image.png?v=1781552260323"
         },
         {
           "id": "destination",
           "title": "Sustainable Destination Development",
           "description": "Long-term hospitality ecosystems built responsibly across regions and communities.",
-          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-4-image.png?v=1780434205968"
+          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-4-image.png?v=1781559535478"
         },
         {
           "id": "boutique",
           "title": "Boutique Wilderness Escapes",
           "description": "Private, intimate experiences designed for deep connection to place.",
-          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-5-image.png?v=1780434235707"
+          "image": "/images/ventures/hospitality/hospitalityFocusAreas-items-5-image.png?v=1781560179022"
         }
       ]
     },
@@ -70,7 +70,7 @@
       "label": "Architecture & Design",
       "heading": "Built to belong.",
       "body": "Natural materials, open-air architecture, earthy textures, and handcrafted interiors — structures that blend into landscape through local craftsmanship and sustainable design. Every space is considered: light, air, silence, and the view beyond the deck.",
-      "image": "/images/ventures/hospitality/hospitalityDesign-image.png?v=1780434608075",
+      "image": "/images/ventures/hospitality/hospitalityDesign-image.png?v=1781560507527",
       "imageAlt": ""
     },
     "hospitalityExperience": {
@@ -198,5 +198,5 @@
       "quote": "Hospitality is not only where people stay. It is how people feel remembered by a place."
     }
   },
-  "updatedAt": "2026-06-14T20:07:57.393Z"
+  "updatedAt": "2026-06-15T21:55:07.663Z"
 }

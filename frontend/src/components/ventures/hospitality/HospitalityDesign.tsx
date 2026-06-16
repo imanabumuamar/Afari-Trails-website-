@@ -45,8 +45,8 @@ export async function HospitalityDesign() {
 
   return (
     <section className="bg-sand-light py-16 lg:py-20">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-start gap-8 px-6 sm:grid-cols-2 sm:items-center sm:gap-10 lg:px-10">
-        <div className="order-1">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-6 sm:grid-cols-2 sm:items-stretch sm:gap-10 lg:px-10">
+        <div className="order-1 flex flex-col justify-center">
           <SectionLabel>{label}</SectionLabel>
           <h2 className="mt-4 font-serif text-4xl font-light text-charcoal md:text-5xl">
             {heading}
@@ -55,12 +55,12 @@ export async function HospitalityDesign() {
             {body}
           </p>
         </div>
-        <div className="relative order-2 aspect-[3/4] w-full overflow-hidden bg-sand-light sm:aspect-[4/5] sm:max-h-[520px] sm:self-center">
+        <div className="relative order-2 aspect-[3/4] w-full overflow-hidden bg-sand-light sm:aspect-auto sm:h-full sm:min-h-0">
           <Image
             src={image.src}
             alt={image.alt || heading}
             fill
-            className="object-cover"
+            className="object-cover object-center"
             sizes="(max-width: 768px) 100vw, 40vw"
           />
         </div>

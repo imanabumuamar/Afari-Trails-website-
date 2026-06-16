@@ -487,7 +487,7 @@ export function UserManagement() {
           return;
         }
 
-        setStatus(`Password updated for ${email}.`);
+        setStatus(`Password updated for ${email}. Sign in again with the new password.`);
       }
 
       if (pendingAction.kind === "delete") {
@@ -573,13 +573,16 @@ export function UserManagement() {
   }
 
   function requestPasswordReset(userId: string, email: string) {
-    const password = window.prompt(`New password for ${email} (min 10 characters):`);
+    const password = window.prompt(
+      `New password for ${email} (minimum 10 characters):`,
+    );
     if (!password) return;
-    if (password.length < 10) {
+    const trimmed = password.trim();
+    if (trimmed.length < 10) {
       setStatus("Password must be at least 10 characters.");
       return;
     }
-    openConfirm({ kind: "resetPassword", userId, email, password });
+    openConfirm({ kind: "resetPassword", userId, email, password: trimmed });
   }
 
   function requestDelete(userId: string, email: string) {
@@ -635,7 +638,9 @@ export function UserManagement() {
         <p className="mt-3 max-w-xl text-sm text-charcoal/65">
           Super admins only. Choose CMS sections and message types for each
           person, with separate view or edit access. Each action asks for your
-          password to confirm.
+          password to confirm. To change a super admin password, use{" "}
+          <strong className="font-normal">Reset password</strong> on that row
+          (minimum 10 characters).
         </p>
       </div>
 
@@ -758,23 +763,21 @@ export function UserManagement() {
                       Edit access
                     </button>
                   )}
+                  <button
+                    type="button"
+                    onClick={() => requestPasswordReset(user.id, user.email)}
+                    className="text-xs uppercase tracking-[0.12em] text-charcoal/70 hover:text-charcoal"
+                  >
+                    Reset password
+                  </button>
                   {user.role !== "super_admin" && (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => requestPasswordReset(user.id, user.email)}
-                        className="text-xs uppercase tracking-[0.12em] text-charcoal/70 hover:text-charcoal"
-                      >
-                        Reset password
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => requestDelete(user.id, user.email)}
-                        className="text-xs uppercase tracking-[0.12em] text-red-900/70 hover:text-red-900"
-                      >
-                        Delete
-                      </button>
-                    </>
+                    <button
+                      type="button"
+                      onClick={() => requestDelete(user.id, user.email)}
+                      className="text-xs uppercase tracking-[0.12em] text-red-900/70 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
                   )}
                 </td>
               </tr>

@@ -4,7 +4,7 @@
     "communityHero": {
       "label": "Community Empowerment",
       "heading": "Building Growth Through Culture, Collaboration, and Opportunity.",
-      "image": "/images/ventures/community/communityHero-image.jpg?v=1780393514961",
+      "image": "/images/ventures/community/communityHero-image.png?v=1781650006951",
       "subheading": "Afari Trails believes meaningful experiences should uplift local communities, preserve cultural identity, and create long-term impact rooted in partnership and respect.",
       "exploreCta": "Explore Our Focus",
       "exploreHref": "#who-we-are",
@@ -33,37 +33,37 @@
           "id": "employment",
           "title": "Local Employment",
           "description": "Supporting guides, hospitality teams, creatives, and local expertise across every venture.",
-          "image": "/images/ventures/community/communityFocusAreas-items-0-image.jpg?v=1780393390053"
+          "image": "/images/ventures/community/communityFocusAreas-items-0-image.png?v=1781599988293"
         },
         {
           "id": "culture",
           "title": "Cultural Preservation",
           "description": "Protecting stories, traditions, languages, and craftsmanship for generations to come.",
-          "image": "/images/ventures/community/communityFocusAreas-items-1-image.jpg?v=1780393402375"
+          "image": "/images/ventures/community/communityFocusAreas-items-1-image.png?v=1781599191389"
         },
         {
           "id": "artisan",
           "title": "Artisan Collaborations",
           "description": "Working with local makers and designers to create goods rooted in place and identity.",
-          "image": "/images/ventures/community/communityFocusAreas-items-2-image.jpg?v=1780393445553"
+          "image": "/images/ventures/community/communityFocusAreas-items-2-image.png?v=1781599544236"
         },
         {
           "id": "youth",
           "title": "Youth Opportunities",
           "description": "Future mentorship in storytelling, tourism, conservation, and creative education.",
-          "image": "/images/ventures/community/communityFocusAreas-items-3-image.jpg?v=1780394771885"
+          "image": "/images/ventures/community/communityFocusAreas-items-3-image.png?v=1781601399437"
         },
         {
           "id": "women",
           "title": "Women-Led Initiatives",
           "description": "Supporting women entrepreneurs, artisans, and local leadership across our ecosystem.",
-          "image": "/images/ventures/community/communityFocusAreas-items-4-image.png?v=1780394788586"
+          "image": "/images/ventures/community/communityFocusAreas-items-4-image.png?v=1781599753057"
         },
         {
           "id": "growth",
           "title": "Sustainable Economic Growth",
           "description": "Creating enduring value through ethical partnerships — not one-time charity.",
-          "image": "/images/ventures/community/communityFocusAreas-items-5-image.jpg?v=1780394947460"
+          "image": "/images/ventures/community/communityFocusAreas-items-5-image.png?v=1781599630815"
         }
       ]
     },
@@ -105,15 +105,15 @@
       ],
       "images": [
         {
-          "src": "/images/ventures/community/communityCraftsmanship-moodboard-0-src.jpg?v=1780394967378",
+          "src": "/images/ventures/community/communityCraftsmanship-images-0-src.png?v=1781601426930",
           "alt": ""
         },
         {
-          "src": "/images/ventures/community/communityCraftsmanship-moodboard-1-src.jpg?v=1780396555268",
+          "src": "/images/ventures/community/communityCraftsmanship-images-1-src.jpg?v=1781602815389",
           "alt": ""
         },
         {
-          "src": "/images/ventures/community/communityCraftsmanship-images-2-src.jpg?v=1780398771720",
+          "src": "/images/ventures/community/communityCraftsmanship-images-2-src.jpg?v=1781602862211",
           "alt": ""
         }
       ]
@@ -181,5 +181,5 @@
       "quote": "Strong communities shape meaningful journeys."
     }
   },
-  "updatedAt": "2026-06-14T11:54:57.336Z"
+  "updatedAt": "2026-06-16T22:46:47.257Z"
 }
